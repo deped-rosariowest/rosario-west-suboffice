@@ -1096,26 +1096,90 @@
     };
 
     const SBM_DIMENSIONS = [
-      { id: '1', title: 'Curriculum and Teaching', description: 'Enhancing learning standards for improved learning outcomes.', indicators: [
-        { num: 1, text: 'Grade 3 learners achieve proficiency in early language, literacy, and numeracy' },
-        { num: 2, text: 'Grade 6 learners achieve proficiency in 21st century skills and core areas in NAT' },
-        { num: 3, text: 'Teachers prepare contextualized learning materials responsive to learners' },
-        { num: 4, text: 'Teachers conduct remediation activities in reading, science, and math' },
-        { num: 5, text: 'The school conducts test item analysis to inform teaching and learning' }
-      ]},
-      { id: '2', title: 'Learning Environment', description: 'Safe, inclusive, resilient, and enabling learning environment.', indicators: [
-        { num: 6, text: 'The school has zero bullying and zero child abuse incidence' },
-        { num: 7, text: 'The school has reduced its drop-out incidence' },
-        { num: 8, text: 'The school has a functional child-protection committee and DRRM plan' }
-      ]},
-      { id: '3', title: 'Leadership, Governance & Accountability', description: 'Empowered school leadership and transparent governance.', indicators: [
-        { num: 9, text: 'The school develops and operationalizes its strategic plan (SIP/AIP)' },
-        { num: 10, text: 'The school has functional SGC, PTA, and SPG' }
-      ]},
-      { id: '4', title: 'Human Resource & Finance Mobilization', description: 'Personnel development and judicious MOOE utilization.', indicators: [
-        { num: 11, text: 'The school conducts needs-based LAC sessions and equitable workload' },
-        { num: 12, text: 'The school achieves 75-100% MOOE utilization and 100% liquidation' }
-      ]}
+      {
+        id: '1',
+        title: 'Curriculum and Teaching',
+        description: 'School personnel and stakeholders work collaboratively to enhance learning standards to continually build a relevant and inclusive learning community and achieve improved learning outcomes.',
+        indicators: [
+          { num: 1, text: 'Grade 3 learners achieve the proficiency level for each cluster of early language, literacy, and numeracy skills', defaultRemark: '' },
+          { num: 2, text: 'Grade 6, 10, and 12 learners achieve the proficiency level in all 21st century skills and core learning areas in the National Achievement Test (NAT)', defaultRemark: '' },
+          { num: 3, text: 'School-based ALS learners attain certification as elementary and junior high school completers', defaultRemark: 'N/A' },
+          { num: 4, text: 'Teachers prepare contextualized learning materials responsive to the needs of learners', defaultRemark: '' },
+          { num: 5, text: 'Teachers conduct remediation activities to address learning gaps in reading and comprehension, science and technology, and mathematics', defaultRemark: '' },
+          { num: 6, text: 'Teachers integrate topics promoting peace and DepEd core values', defaultRemark: '' },
+          { num: 7, text: 'The school conducts test item analysis to inform its teaching and learning process', defaultRemark: '' },
+          { num: 8, text: 'The school engages local industries to strengthen its TLE-TVL course offerings', defaultRemark: 'N/A' }
+        ]
+      },
+      {
+        id: '2',
+        title: 'Learning Environment',
+        description: 'The school and its community work collaboratively to ensure equitable access to a learner-centered, motivating, healthy, safe, secure, inclusive, resilient, and enabling learning environment and to achieve improved learning outcomes.',
+        indicators: [
+          { num: 9, text: 'The school has zero bullying incidence', defaultRemark: '' },
+          { num: 10, text: 'The school has zero child abuse incidence', defaultRemark: '' },
+          { num: 11, text: 'The school has reduced its drop-out incidence', defaultRemark: '' },
+          { num: 12, text: 'The school conducts culture-sensitive activities', defaultRemark: '' },
+          { num: 13, text: 'The school provides access to learning experiences for the disadvantaged, OSYs, and adult learners', defaultRemark: '' },
+          { num: 14, text: 'The school has a functional school-based ALS program', defaultRemark: 'N/A' },
+          { num: 15, text: 'The school has a functional child-protection committee', defaultRemark: '' },
+          { num: 16, text: 'The school has a functional DRRM plan', defaultRemark: '' },
+          { num: 17, text: 'The school has a functional support mechanism for mental wellness', defaultRemark: '' },
+          { num: 18, text: 'The school has special education- and PWD-friendly facilities', defaultRemark: 'N/A' }
+        ]
+      },
+      {
+        id: '3',
+        title: 'Leadership',
+        description: 'School personnel and stakeholders are empowered and actively engaged in taking on appropriate leadership roles and responsibilities to continuously improve the school for improved learning outcomes.',
+        indicators: [
+          { num: 19, text: 'The school develops a strategic plan', defaultRemark: '' },
+          { num: 20, text: 'The school has a functional school-community planning team', defaultRemark: '' },
+          { num: 21, text: 'The school has a functional Supreme Student Government/ Supreme Pupil Government', defaultRemark: '' },
+          { num: 22, text: 'The school innovates in its provision of frontline services to stakeholders', defaultRemark: '' }
+        ]
+      },
+      {
+        id: '4',
+        title: 'Governance and Accountability',
+        description: 'The school and its community come together to take responsibility for ensuring participation, transparency, and accountability, as well as the implementation of a plan to continuously improve the delivery of basic education services, organizational health, and performance for improved learning outcomes.',
+        indicators: [
+          { num: 23, text: "The school's strategic plan is operationalized through an implementation plan", defaultRemark: '' },
+          { num: 24, text: 'The school has a functional School Governance Council (SGC)', defaultRemark: '' },
+          { num: 25, text: 'The school has a functional Parent-Teacher Association (PTA)', defaultRemark: '' },
+          { num: 26, text: 'The school collaborates with stakeholders and other schools in strengthening partnerships', defaultRemark: '' },
+          { num: 27, text: 'The school monitors and evaluates its programs, projects, and activities', defaultRemark: '' },
+          { num: 28, text: 'The school maintains an average rating of satisfactory from its internal and external stakeholders', defaultRemark: '' }
+        ]
+      },
+      {
+        id: '5',
+        title: 'Human Resource and Team Development',
+        description: 'School personnel collaborate to continuously improve individual capabilities and team capacity to create an environment that shall yield high performance for improved learning outcomes.',
+        indicators: [
+          { num: 29, text: 'School personnel achieve an average rating of very satisfactory in the individual performance commitment and review', defaultRemark: '' },
+          { num: 30, text: 'The school achieves an average rating of very satisfactory in the office performance commitment and review', defaultRemark: '' },
+          { num: 31, text: 'The school conducts needs-based Learning Action Cells and Learning & Development activities', defaultRemark: '' },
+          { num: 32, text: 'The school facilitates the promotion and continuous professional development of its personnel', defaultRemark: '' },
+          { num: 33, text: 'The school recognizes and rewards milestone achievements of its personnel', defaultRemark: '' },
+          { num: 34, text: 'The school facilitates receipt of correct salaries, allowances, and other additional compensation in a timely manner', defaultRemark: '' },
+          { num: 35, text: 'Teacher workload is distributed fairly and equitably', defaultRemark: '' }
+        ]
+      },
+      {
+        id: '6',
+        title: 'Finance and Resource Management and Mobilization',
+        description: 'The school judiciously manages and mobilizes resources to support programs, projects, and activities that contribute to the improvement of learning outcomes.',
+        indicators: [
+          { num: 36, text: 'The school inspects its infrastructure and facilities', defaultRemark: '' },
+          { num: 37, text: 'The school initiates improvement of its infrastructure and facilities', defaultRemark: '' },
+          { num: 38, text: 'The school has a functional library', defaultRemark: '' },
+          { num: 39, text: 'The school has functional water, electric, and internet facilities', defaultRemark: '' },
+          { num: 40, text: 'The school has a functional computer laboratory/ classroom', defaultRemark: '' },
+          { num: 41, text: 'The school achieves a 75-100% utilization rate of its Maintenance and Other Operating Expenses (MOOE)', defaultRemark: '' },
+          { num: 42, text: 'The school liquidates 100% of its utilized MOOE', defaultRemark: '' }
+        ]
+      }
     ];
 
     function createEmptySchoolRecord(schoolId, schoolName, headName) {
@@ -2573,18 +2637,45 @@
     }
 
     // =========================================================================
-    // TAB 8: SBM CHECKLIST
+    // TAB 8: SBM CHECKLIST (ANNEX A • 6 DIMENSIONS & 42 INDICATORS)
     // =========================================================================
     function renderSBMTab() {
       const target = getTargetSchoolRecord();
       const canEdit = Boolean(target && isEditMode);
+      const isConsolidated = !target;
       const wrapper = document.getElementById('sbmDimensionsWrapper');
       wrapper.innerHTML = '';
       let c1 = 0, c2 = 0, c3 = 0, c4 = 0;
 
       SBM_DIMENSIONS.forEach(dim => {
         const rowsHtml = dim.indicators.map(ind => {
-          const saved = (target && target.sbm?.[ind.num]) || { level: '', remark: '' };
+          const defRem = ind.defaultRemark || '';
+          const existing = target && target.sbm?.[ind.num];
+          const saved = existing
+            ? { level: existing.level || '', remark: existing.remark !== undefined ? existing.remark : defRem }
+            : { level: '', remark: defRem };
+
+          if (isConsolidated) {
+            let sc1 = 0, sc2 = 0, sc3 = 0, sc4 = 0;
+            getAllSchoolRecordsList().forEach(sc => {
+              const lvl = sc.sbm?.[ind.num]?.level;
+              if (lvl === '1') sc1++;
+              else if (lvl === '2') sc2++;
+              else if (lvl === '3') sc3++;
+              else if (lvl === '4') sc4++;
+            });
+            c1 += sc1; c2 += sc2; c3 += sc3; c4 += sc4;
+
+            return `<tr class="hover:bg-slate-50">
+              <td class="p-3 border border-slate-200"><span class="font-extrabold">${ind.num}.</span> ${ind.text}</td>
+              <td class="p-3 border border-slate-200 text-center font-extrabold text-red-800 bg-red-50/40">${sc1}</td>
+              <td class="p-3 border border-slate-200 text-center font-extrabold text-orange-800 bg-orange-50/40">${sc2}</td>
+              <td class="p-3 border border-slate-200 text-center font-extrabold text-blue-800 bg-blue-50/40">${sc3}</td>
+              <td class="p-3 border border-slate-200 text-center font-extrabold text-slate-900 bg-slate-100">${sc4}</td>
+              <td class="p-2 border border-slate-200 text-xs text-slate-500">${defRem || 'District Tally'}</td>
+            </tr>`;
+          }
+
           if (saved.level === '1') c1++; else if (saved.level === '2') c2++; else if (saved.level === '3') c3++; else if (saved.level === '4') c4++;
 
           return `<tr class="hover:bg-slate-50">
