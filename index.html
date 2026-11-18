@@ -515,8 +515,8 @@
           </div>
           <select id="litToolFilter" onchange="renderLiteracyTab()" class="px-4 py-2.5 rounded-xl bg-slate-950 text-orange-400 text-xs sm:text-sm font-extrabold">
             <option value="ALL">Ipakita Lahat (CRLA, Phil-IRI, RMA & Reading)</option>
-            <option value="crla">1. CRLA Only (Grade 1 – Grade 3 • 3 SY)</option>
-            <option value="philiri">2. Phil-IRI Only (Grade 3 – Grade 6)</option>
+            <option value="crla">1. CRLA Only (Grade 1–3 • Tagalog, Filipino, English)</option>
+            <option value="philiri">2. Phil-IRI Only (Grade 4–6 • Filipino & English)</option>
             <option value="rma">3. RMA Numeracy Only (Grade 1 – Grade 6 • 3 SY)</option>
             <option value="reading">4. Reading Assessment Results (Grade 1–6 • 3 SY)</option>
           </select>
@@ -527,13 +527,21 @@
           <div class="bg-blue-950 text-white px-4 py-3 flex flex-wrap justify-between items-center gap-2">
             <div>
               <span class="text-xs sm:text-sm font-extrabold block">📖 1. Comprehensive Rapid Literacy Assessment (CRLA) — Grade 1 to Grade 3</span>
-              <span class="text-[10px] text-blue-200">Low Emerging, High Emerging, Developing Reader, Transitioning Reader & Reading at Grade Level</span>
+              <span class="text-[10px] text-blue-200">Grade 1: Tagalog • Grade 2: Tagalog & Filipino • Grade 3: Tagalog, Filipino & English</span>
             </div>
-            <select id="crlaSySel" onchange="renderLiteracyTab()" class="bg-orange-500 text-slate-950 text-xs font-extrabold px-3 py-1.5 rounded-xl">
-              <option value="y1">SY 2024–2025</option>
-              <option value="y2">SY 2025–2026</option>
-              <option value="y3" selected>SY 2026–2027</option>
-            </select>
+            <div class="flex flex-wrap items-center gap-2">
+              <select id="crlaLangSel" onchange="renderLiteracyTab()" class="bg-slate-900 text-white border border-blue-400 text-xs font-extrabold px-3 py-1.5 rounded-xl">
+                <option value="ALL">All Languages (G1–G3 Coverage)</option>
+                <option value="tagalog">Tagalog (Grade 1–3)</option>
+                <option value="filipino">Filipino (Grade 2–3)</option>
+                <option value="english">English (Grade 3)</option>
+              </select>
+              <select id="crlaSySel" onchange="renderLiteracyTab()" class="bg-orange-500 text-slate-950 text-xs font-extrabold px-3 py-1.5 rounded-xl">
+                <option value="y1">SY 2024–2025</option>
+                <option value="y2">SY 2025–2026</option>
+                <option value="y3" selected>SY 2026–2027</option>
+              </select>
+            </div>
           </div>
           <div class="bg-slate-100 px-4 py-2 border-b flex flex-wrap items-center justify-between gap-2">
             <span class="text-[11px] font-extrabold text-slate-600">3 School Years (CRLA):</span>
@@ -547,7 +555,7 @@
             <table class="w-full text-xs border-collapse">
               <thead>
                 <tr class="bg-slate-950 text-white">
-                  <th rowspan="2" class="p-3 text-left min-w-[110px]">Grade Level</th>
+                  <th rowspan="2" class="p-3 text-left min-w-[165px]">Grade Level & Language</th>
                   <th colspan="3" class="p-2 text-center bg-red-800 border-l border-white/20">Low Emerging</th>
                   <th colspan="3" class="p-2 text-center bg-orange-700 border-l border-white/20">High Emerging</th>
                   <th colspan="3" class="p-2 text-center bg-blue-800 border-l border-white/20">Developing Reader</th>
@@ -572,15 +580,22 @@
 
         <!-- 2. PHIL-IRI -->
         <div id="box_philiri" class="rounded-2xl overflow-hidden border border-slate-300">
-          <div class="bg-slate-900 text-white px-4 py-3 flex justify-between items-center">
-            <span class="text-xs sm:text-sm font-extrabold">📚 2. Philippine Informal Reading Inventory (Phil-IRI) — Grade 3 to Grade 6</span>
-            <span class="bg-orange-500 text-slate-950 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">Grade 3 to Grade 6</span>
+          <div class="bg-slate-900 text-white px-4 py-3 flex flex-wrap justify-between items-center gap-2">
+            <div>
+              <span class="text-xs sm:text-sm font-extrabold block">📚 2. Philippine Informal Reading Inventory (Phil-IRI) — Grade 4 to Grade 6</span>
+              <span class="text-[10px] text-orange-300">Filipino & English Assessment Coverage (Grade 4 – Grade 6)</span>
+            </div>
+            <select id="philiriLangSel" onchange="renderLiteracyTab()" class="bg-orange-500 text-slate-950 text-xs font-extrabold px-3 py-1.5 rounded-xl">
+              <option value="ALL">All Languages (Filipino & English)</option>
+              <option value="filipino">Filipino (Grade 4–6)</option>
+              <option value="english">English (Grade 4–6)</option>
+            </select>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-xs border-collapse">
               <thead>
                 <tr class="bg-slate-950 text-white">
-                  <th rowspan="2" class="p-3 text-left">Grade Level</th>
+                  <th rowspan="2" class="p-3 text-left min-w-[165px]">Grade Level & Language</th>
                   <th colspan="3" class="p-2 text-center bg-blue-900 border-l border-white/20">Independent</th>
                   <th colspan="3" class="p-2 text-center bg-orange-700 border-l border-white/20">Instructional</th>
                   <th colspan="3" class="p-2 text-center bg-red-800 border-l border-white/20">Frustration</th>
@@ -1059,6 +1074,22 @@
     const G1_TO_G6 = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
     const G1_TO_G3 = ['Grade 1', 'Grade 2', 'Grade 3'];
     const G3_TO_G6 = ['Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
+    const CRLA_COVERAGE = [
+      { key: 'g1_tag', grade: 'Grade 1', lang: 'tagalog', langLabel: 'Tagalog' },
+      { key: 'g2_tag', grade: 'Grade 2', lang: 'tagalog', langLabel: 'Tagalog' },
+      { key: 'g2_fil', grade: 'Grade 2', lang: 'filipino', langLabel: 'Filipino' },
+      { key: 'g3_tag', grade: 'Grade 3', lang: 'tagalog', langLabel: 'Tagalog' },
+      { key: 'g3_fil', grade: 'Grade 3', lang: 'filipino', langLabel: 'Filipino' },
+      { key: 'g3_eng', grade: 'Grade 3', lang: 'english', langLabel: 'English' }
+    ];
+    const PHILIRI_COVERAGE = [
+      { key: 'g4_fil', grade: 'Grade 4', lang: 'filipino', langLabel: 'Filipino' },
+      { key: 'g4_eng', grade: 'Grade 4', lang: 'english', langLabel: 'English' },
+      { key: 'g5_fil', grade: 'Grade 5', lang: 'filipino', langLabel: 'Filipino' },
+      { key: 'g5_eng', grade: 'Grade 5', lang: 'english', langLabel: 'English' },
+      { key: 'g6_fil', grade: 'Grade 6', lang: 'filipino', langLabel: 'Filipino' },
+      { key: 'g6_eng', grade: 'Grade 6', lang: 'english', langLabel: 'English' }
+    ];
     const G4_TO_G6 = ['Grade 4', 'Grade 5', 'Grade 6'];
 
     const ALL_MPS_SUBJECTS = ['all_avg', 'gmrc', 'filipino', 'english', 'math', 'makabansa', 'science', 'epp_tle', 'music_arts', 'pe_health'];
@@ -1214,7 +1245,7 @@
       });
 
       ['y1', 'y2', 'y3'].forEach(sy => {
-        G1_TO_G3.forEach(g => { rec.crlaV2[sy][g] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; });
+        CRLA_COVERAGE.forEach(c => { rec.crlaV2[sy][c.key] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; });
         G1_TO_G6.forEach(g => { rec.rmaV2[sy][g] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; });
         rec.readingV2[sy] = G1_TO_G6.map(g => ({
           id: 'rd_' + sy + '_' + g.replace(/\s+/g, ''),
@@ -1223,7 +1254,7 @@
         }));
       });
 
-      G3_TO_G6.forEach(g => { rec.philiri[g] = [0, 0, 0, 0, 0, 0, 0, 0]; });
+      PHILIRI_COVERAGE.forEach(p => { rec.philiri[p.key] = [0, 0, 0, 0, 0, 0, 0, 0]; });
       GRADES.forEach(g => { rec.nutrition[g] = { nm: 0, nf: 0, wm: 0, wf: 0, swm: 0, swf: 0, om: 0, of: 0, obm: 0, obf: 0 }; });
 
       return rec;
@@ -2347,35 +2378,48 @@
         });
       });
 
-      // 1. CRLA
+      // 1. CRLA (G1: Tagalog | G2: Tagalog, Filipino | G3: Tagalog, Filipino, English)
       const crlaSy = document.getElementById('crlaSySel').value || 'y3';
+      const crlaLang = document.getElementById('crlaLangSel')?.value || 'ALL';
+      const filteredCrla = CRLA_COVERAGE.filter(c => crlaLang === 'ALL' || c.lang === crlaLang);
       const cTot = Array(10).fill(0);
-      document.getElementById('tbodyCRLA').innerHTML = G1_TO_G3.map(g => {
+
+      document.getElementById('tbodyCRLA').innerHTML = filteredCrla.map(c => {
         const a = Array(10).fill(0);
         if (target) {
-          (target.crlaV2?.[crlaSy]?.[g] || []).forEach((v, i) => a[i] = Number(v) || 0);
+          const arr = target.crlaV2?.[crlaSy]?.[c.key] || (c.lang === 'tagalog' ? target.crlaV2?.[crlaSy]?.[c.grade] : null) || [];
+          arr.forEach((v, i) => a[i] = Number(v) || 0);
         } else {
-          getAllSchoolRecordsList().forEach(sc => (sc.crlaV2?.[crlaSy]?.[g] || []).forEach((v, i) => a[i] += Number(v) || 0));
+          getAllSchoolRecordsList().forEach(sc => {
+            const arr = sc.crlaV2?.[crlaSy]?.[c.key] || (c.lang === 'tagalog' ? sc.crlaV2?.[crlaSy]?.[c.grade] : null) || [];
+            arr.forEach((v, i) => a[i] += Number(v) || 0);
+          });
         }
         a.forEach((v, i) => cTot[i] += v);
         const rowSum = a.reduce((x, y) => x + y, 0);
+        const langBadge = c.lang === 'tagalog'
+          ? '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-blue-900">Tagalog</span>'
+          : c.lang === 'filipino'
+          ? '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-orange-100 text-orange-900">Filipino</span>'
+          : '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-red-100 text-red-900">English</span>';
+
         let cells = '';
         for (let p = 0; p < 5; p++) {
           const m = a[p * 2], fem = a[p * 2 + 1];
           cells += canEdit
-            ? `<td class="p-1 text-center border-l"><input type="number" min="0" value="${m}" onchange="updTriPair('crlaV2','${crlaSy}','${g}',${p*2},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
-               <td class="p-1 text-center"><input type="number" min="0" value="${fem}" onchange="updTriPair('crlaV2','${crlaSy}','${g}',${p*2+1},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+            ? `<td class="p-1 text-center border-l"><input type="number" min="0" value="${m}" onchange="updTriPair('crlaV2','${crlaSy}','${c.key}',${p*2},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+               <td class="p-1 text-center"><input type="number" min="0" value="${fem}" onchange="updTriPair('crlaV2','${crlaSy}','${c.key}',${p*2+1},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
                <td class="p-2 text-center font-extrabold bg-slate-50">${m + fem}</td>`
             : `<td class="p-2.5 text-center border-l">${m}</td><td class="p-2.5 text-center">${fem}</td><td class="p-2.5 text-center font-extrabold bg-slate-50">${m + fem}</td>`;
         }
-        return `<tr class="hover:bg-slate-50"><td class="p-2.5 font-extrabold">${g}</td>${cells}<td class="p-2.5 text-center font-extrabold bg-orange-50 border-l">${rowSum}</td></tr>`;
+        return `<tr class="hover:bg-slate-50"><td class="p-2.5 font-extrabold whitespace-nowrap">${c.grade} ${langBadge}</td>${cells}<td class="p-2.5 text-center font-extrabold bg-orange-50 border-l">${rowSum}</td></tr>`;
       }).join('');
-      document.getElementById('tfootCRLA').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL (Grade 1–3)</td>${[0,1,2,3,4].map(p => `
+      document.getElementById('tfootCRLA').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL (${crlaLang === 'ALL' ? 'Grade 1–3 All Languages' : crlaLang.toUpperCase()})</td>${[0,1,2,3,4].map(p => `
         <td class="p-2.5 text-center border-l border-slate-700">${cTot[p*2]}</td><td class="p-2.5 text-center">${cTot[p*2+1]}</td><td class="p-2.5 text-center text-orange-400">${cTot[p*2]+cTot[p*2+1]}</td>
       `).join('')}<td class="p-2.5 text-center text-orange-400 border-l border-slate-700">${cTot.reduce((a,b)=>a+b,0)}</td></tr>`;
 
       render3DGlassBarChart('inlineGraph_crla', {
-        title: '3D Glass Bar Graph: CRLA Results (Grade 1–3)',
+        title: `3D Glass Bar Graph: CRLA Results (${crlaLang === 'ALL' ? 'G1 Tagalog • G2 Tag/Fil • G3 Tag/Fil/Eng' : crlaLang.toUpperCase()})`,
         items: [
           { label: 'Low Emerging', value: cTot[0] + cTot[1], color: '#dc2626', topColor: '#f87171', sideColor: '#991b1b' },
           { label: 'High Emerging', value: cTot[2] + cTot[3], color: '#ea580c', topColor: '#fb923c', sideColor: '#9a3412' },
@@ -2385,34 +2429,45 @@
         ]
       });
 
-      // 2. Phil-IRI
+      // 2. Phil-IRI (Grade 4 to Grade 6 • Filipino & English)
+      const philiriLang = document.getElementById('philiriLangSel')?.value || 'ALL';
+      const filteredPhiliri = PHILIRI_COVERAGE.filter(p => philiriLang === 'ALL' || p.lang === philiriLang);
       const pTot = Array(8).fill(0);
-      document.getElementById('tbodyPhilIRI').innerHTML = G3_TO_G6.map(g => {
+
+      document.getElementById('tbodyPhilIRI').innerHTML = filteredPhiliri.map(pObj => {
         const a = Array(8).fill(0);
         if (target) {
-          (target.philiri?.[g] || []).forEach((v, i) => a[i] = Number(v) || 0);
+          const arr = target.philiri?.[pObj.key] || (pObj.lang === 'filipino' ? target.philiri?.[pObj.grade] : null) || [];
+          arr.forEach((v, i) => a[i] = Number(v) || 0);
         } else {
-          getAllSchoolRecordsList().forEach(sc => (sc.philiri?.[g] || []).forEach((v, i) => a[i] += Number(v) || 0));
+          getAllSchoolRecordsList().forEach(sc => {
+            const arr = sc.philiri?.[pObj.key] || (pObj.lang === 'filipino' ? sc.philiri?.[pObj.grade] : null) || [];
+            arr.forEach((v, i) => a[i] += Number(v) || 0);
+          });
         }
         a.forEach((v, i) => pTot[i] += v);
         const rowSum = a.reduce((x, y) => x + y, 0);
+        const langBadge = pObj.lang === 'filipino'
+          ? '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-orange-100 text-orange-900">Filipino</span>'
+          : '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-blue-900">English</span>';
+
         let cells = '';
         for (let p = 0; p < 4; p++) {
           const m = a[p * 2], fem = a[p * 2 + 1];
           cells += canEdit
-            ? `<td class="p-1 text-center border-l"><input type="number" min="0" value="${m}" onchange="updLitPair('philiri','${g}',${p*2},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
-               <td class="p-1 text-center"><input type="number" min="0" value="${fem}" onchange="updLitPair('philiri','${g}',${p*2+1},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+            ? `<td class="p-1 text-center border-l"><input type="number" min="0" value="${m}" onchange="updLitPair('philiri','${pObj.key}',${p*2},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+               <td class="p-1 text-center"><input type="number" min="0" value="${fem}" onchange="updLitPair('philiri','${pObj.key}',${p*2+1},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
                <td class="p-2 text-center font-extrabold bg-slate-50">${m + fem}</td>`
             : `<td class="p-2.5 text-center border-l">${m}</td><td class="p-2.5 text-center">${fem}</td><td class="p-2.5 text-center font-extrabold bg-slate-50">${m + fem}</td>`;
         }
-        return `<tr class="hover:bg-slate-50"><td class="p-2.5 font-extrabold">${g}</td>${cells}<td class="p-2.5 text-center font-extrabold bg-orange-50 border-l">${rowSum}</td></tr>`;
+        return `<tr class="hover:bg-slate-50"><td class="p-2.5 font-extrabold whitespace-nowrap">${pObj.grade} ${langBadge}</td>${cells}<td class="p-2.5 text-center font-extrabold bg-orange-50 border-l">${rowSum}</td></tr>`;
       }).join('');
-      document.getElementById('tfootPhilIRI').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL</td>${[0,1,2,3].map(p => `
+      document.getElementById('tfootPhilIRI').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL (${philiriLang === 'ALL' ? 'Grade 4–6 Filipino & English' : philiriLang.toUpperCase()})</td>${[0,1,2,3].map(p => `
         <td class="p-2.5 text-center border-l border-slate-700">${pTot[p*2]}</td><td class="p-2.5 text-center">${pTot[p*2+1]}</td><td class="p-2.5 text-center text-orange-400">${pTot[p*2]+pTot[p*2+1]}</td>
       `).join('')}<td class="p-2.5 text-center text-orange-400 border-l border-slate-700">${pTot.reduce((a,b)=>a+b,0)}</td></tr>`;
 
       render3DGlassBarChart('inlineGraph_philiri', {
-        title: '3D Glass Bar Graph: Phil-IRI Results (Grade 3–6)',
+        title: `3D Glass Bar Graph: Phil-IRI Results (Grade 4–6 • ${philiriLang === 'ALL' ? 'Filipino & English' : philiriLang.toUpperCase()})`,
         items: [
           { label: 'Independent', value: pTot[0] + pTot[1], color: '#2563eb', topColor: '#60a5fa', sideColor: '#1e3a8a' },
           { label: 'Instructional', value: pTot[2] + pTot[3], color: '#ea580c', topColor: '#fb923c', sideColor: '#9a3412' },
@@ -2519,6 +2574,9 @@
     function updTriPair(domainKey, sy, g, idx, val) {
       const target = getTargetSchoolRecord();
       if (!target) return;
+      if (!target[domainKey]) target[domainKey] = {};
+      if (!target[domainKey][sy]) target[domainKey][sy] = {};
+      if (!Array.isArray(target[domainKey][sy][g])) target[domainKey][sy][g] = Array(10).fill(0);
       target[domainKey][sy][g][idx] = Number(val) || 0;
       saveDistrictDB();
       renderLiteracyTab();
@@ -2527,6 +2585,8 @@
     function updLitPair(type, g, idx, val) {
       const target = getTargetSchoolRecord();
       if (!target) return;
+      if (!target[type]) target[type] = {};
+      if (!Array.isArray(target[type][g])) target[type][g] = Array(8).fill(0);
       target[type][g][idx] = Number(val) || 0;
       saveDistrictDB();
       renderLiteracyTab();
@@ -3057,8 +3117,8 @@
       const sec = (sc.sectionsList || []).length > 0;
       const mps = G1_TO_G6.some(g => (sc.mpsMatrix?.y4?.all_avg?.[g] || []).some(p => (Number(p.m) || 0) + (Number(p.f) || 0) > 0));
       const enr = GRADES.some(g => (sc.enrMatrix?.y4?.enrollment?.[g] || []).some(p => (Number(p.m) || 0) + (Number(p.f) || 0) > 0));
-      const lit = G1_TO_G3.some(g => (sc.crlaV2?.y3?.[g] || []).some(v => Number(v) > 0)) ||
-                  G3_TO_G6.some(g => (sc.philiri?.[g] || []).some(v => Number(v) > 0)) ||
+      const lit = CRLA_COVERAGE.some(c => (sc.crlaV2?.y3?.[c.key] || []).some(v => Number(v) > 0)) ||
+                  PHILIRI_COVERAGE.some(p => (sc.philiri?.[p.key] || []).some(v => Number(v) > 0)) ||
                   G1_TO_G6.some(g => (sc.rmaV2?.y3?.[g] || []).some(v => Number(v) > 0));
       const nat = (sc.nat || []).some(r => (Number(r.y1m) + Number(r.y1f) + Number(r.y2m) + Number(r.y2f) + Number(r.y3m) + Number(r.y3f)) > 0);
       const nutr = GRADES.some(g => {
