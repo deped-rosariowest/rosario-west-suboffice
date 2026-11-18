@@ -288,29 +288,8 @@
           </div>
         </div>
 
-        <!-- SUMMARY CARDS BY CATEGORY (5 CARDS INCLUDING NON-TEACHING) -->
-        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
-          <div class="bg-blue-950 text-white rounded-2xl p-4 border-b-4 border-blue-500">
-            <span class="text-[10px] font-extrabold text-blue-300 uppercase block">Teachers (T-I to T-VII)</span>
-            <span id="persCardTeachers" class="text-2xl font-extrabold mt-1 block">0</span>
-          </div>
-          <div class="bg-orange-600 text-white rounded-2xl p-4 border-b-4 border-orange-300">
-            <span class="text-[10px] font-extrabold text-orange-100 uppercase block">Master Teachers (MT-I–III)</span>
-            <span id="persCardMT" class="text-2xl font-extrabold mt-1 block">0</span>
-          </div>
-          <div class="bg-red-800 text-white rounded-2xl p-4 border-b-4 border-red-400">
-            <span class="text-[10px] font-extrabold text-red-200 uppercase block">Head Teachers (HT-I–IV)</span>
-            <span id="persCardHT" class="text-2xl font-extrabold mt-1 block">0</span>
-          </div>
-          <div class="bg-slate-950 text-white rounded-2xl p-4 border-b-4 border-orange-500">
-            <span class="text-[10px] font-extrabold text-orange-400 uppercase block">Principals (P-I to P-IV)</span>
-            <span id="persCardPrincipals" class="text-2xl font-extrabold mt-1 block">0</span>
-          </div>
-          <div class="bg-emerald-900 text-white rounded-2xl p-4 border-b-4 border-emerald-400 col-span-2 lg:col-span-1">
-            <span class="text-[10px] font-extrabold text-emerald-200 uppercase block">Non-Teaching & JO Staff</span>
-            <span id="persCardNonTeaching" class="text-2xl font-extrabold mt-1 block">0</span>
-          </div>
-        </div>
+        <!-- INDIVIDUALIZED SUMMARY CARDS PER POSITION (T-I..T-VII, MT-I..IV, HT-I..IV, P-I..IV & NON-TEACHING) -->
+        <div id="persIndividualSummaryGrid" class="space-y-3"></div>
 
         <div class="overflow-x-auto rounded-2xl border border-slate-300">
           <table class="w-full text-xs border-collapse">
@@ -1059,6 +1038,7 @@
       { key: 'mt1', title: 'Master Teacher I', cat: 'Master Teacher' },
       { key: 'mt2', title: 'Master Teacher II', cat: 'Master Teacher' },
       { key: 'mt3', title: 'Master Teacher III', cat: 'Master Teacher' },
+      { key: 'mt4', title: 'Master Teacher IV', cat: 'Master Teacher' },
       { key: 'ht1', title: 'Head Teacher I', cat: 'Head Teacher' },
       { key: 'ht2', title: 'Head Teacher II', cat: 'Head Teacher' },
       { key: 'ht3', title: 'Head Teacher III', cat: 'Head Teacher' },
@@ -1828,12 +1808,75 @@
         </tr>`;
       }).join('');
 
-      document.getElementById('persCardTeachers').innerText = cTeachers;
-      document.getElementById('persCardMT').innerText = cMT;
-      document.getElementById('persCardHT').innerText = cHT;
-      document.getElementById('persCardPrincipals').innerText = cPrin;
-      document.getElementById('persCardNonTeaching').innerText = cNonTeach;
       document.getElementById('persGrandTotalBadge').innerText = totM + totF;
+
+      const makeMiniCards = (keys, bgCls, borderCls, labelCls, subLabelCls) => keys.map(k => {
+        const pos = PERSONNEL_POSITIONS.find(x => x.key === k);
+        const mVal = data[k]?.m || 0;
+        const fVal = data[k]?.f || 0;
+        const tVal = mVal + fVal;
+        return `
+          <div class="${bgCls} text-white rounded-xl p-2.5 border-b-4 ${borderCls} shadow-sm">
+            <span class="text-[10px] font-extrabold ${labelCls} uppercase block truncate" title="${pos.title}">${pos.title}</span>
+            <span class="text-xl font-extrabold mt-0.5 block leading-tight">${tVal}</span>
+            <span class="text-[9px] font-bold ${subLabelCls} block">M: ${mVal} • F: ${fVal}</span>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('persIndividualSummaryGrid').innerHTML = `
+        <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-3 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-extrabold uppercase text-blue-950">👩‍🏫 Teaching Positions (Individual Summary: Teacher I – VII)</span>
+            <span class="text-[11px] font-extrabold bg-blue-900 text-white px-2.5 py-0.5 rounded-full">Sub-Total: ${cTeachers}</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
+            ${makeMiniCards(['t1','t2','t3','t4','t5','t6','t7'], 'bg-blue-950', 'border-blue-500', 'text-blue-200', 'text-blue-300/80')}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
+          <div class="bg-orange-50/70 border border-orange-200 rounded-2xl p-3 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-extrabold uppercase text-orange-950">⭐ Master Teachers (MT-I – IV)</span>
+              <span class="text-[11px] font-extrabold bg-orange-600 text-white px-2 py-0.5 rounded-full">Sub-Total: ${cMT}</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              ${makeMiniCards(['mt1','mt2','mt3','mt4'], 'bg-orange-700', 'border-orange-300', 'text-orange-100', 'text-orange-200')}
+            </div>
+          </div>
+
+          <div class="bg-red-50/70 border border-red-200 rounded-2xl p-3 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-extrabold uppercase text-red-950">🏫 Head Teachers (HT-I – IV)</span>
+              <span class="text-[11px] font-extrabold bg-red-800 text-white px-2 py-0.5 rounded-full">Sub-Total: ${cHT}</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              ${makeMiniCards(['ht1','ht2','ht3','ht4'], 'bg-red-900', 'border-red-400', 'text-red-100', 'text-red-200')}
+            </div>
+          </div>
+
+          <div class="bg-slate-100 border border-slate-300 rounded-2xl p-3 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-extrabold uppercase text-slate-950">🎓 School Principals (P-I – IV)</span>
+              <span class="text-[11px] font-extrabold bg-slate-900 text-orange-400 px-2 py-0.5 rounded-full">Sub-Total: ${cPrin}</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              ${makeMiniCards(['p1','p2','p3','p4'], 'bg-slate-950', 'border-orange-500', 'text-orange-300', 'text-slate-400')}
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-3 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-extrabold uppercase text-emerald-950">🏢 Non-Teaching & Support Staff (Individual Breakdown)</span>
+            <span class="text-[11px] font-extrabold bg-emerald-800 text-white px-2.5 py-0.5 rounded-full">Sub-Total: ${cNonTeach}</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+            ${makeMiniCards(['nt_ao2','nt_adas','nt_nurse','nt_utility','nt_guard','nt_jo'], 'bg-emerald-950', 'border-emerald-400', 'text-emerald-200', 'text-emerald-300/80')}
+          </div>
+        </div>
+      `;
 
       document.getElementById('tfootPersonnel').innerHTML = `
         <tr>
@@ -1845,14 +1888,30 @@
       `;
 
       render3DGlassBarChart('inlineGraph_personnel', {
-        title: '3D Personnel Distribution Summary (Rosario West Sub-Office)',
-        subtitle: 'Kabuuang bilang ng Teachers, Master Teachers, Head Teachers, Principals at Non-Teaching Personnel.',
+        title: '3D Personnel Distribution per Individual Position (T-I–VII, MT-I–IV, HT-I–IV, P-I–IV & Non-Teaching)',
+        subtitle: 'Indibidwal na kabuuang bilang bawat plantilla position.',
         items: [
-          { label: 'Teachers (T-I–VII)', value: cTeachers, color: '#2563eb', topColor: '#60a5fa', sideColor: '#1e3a8a' },
-          { label: 'Master Teachers', value: cMT, color: '#ea580c', topColor: '#fb923c', sideColor: '#9a3412' },
-          { label: 'Head Teachers', value: cHT, color: '#dc2626', topColor: '#f87171', sideColor: '#991b1b' },
-          { label: 'Principals', value: cPrin, color: '#475569', topColor: '#94a3b8', sideColor: '#1e293b' },
-          { label: 'Non-Teaching & JO', value: cNonTeach, color: '#059669', topColor: '#34d399', sideColor: '#065f46' }
+          ...['t1','t2','t3','t4','t5','t6','t7'].map(k => ({
+            label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Teacher ', 'T-'),
+            value: (data[k]?.m || 0) + (data[k]?.f || 0),
+            color: '#2563eb', topColor: '#60a5fa', sideColor: '#1e3a8a'
+          })),
+          ...['mt1','mt2','mt3','mt4'].map(k => ({
+            label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Master Teacher ', 'MT-'),
+            value: (data[k]?.m || 0) + (data[k]?.f || 0),
+            color: '#ea580c', topColor: '#fb923c', sideColor: '#9a3412'
+          })),
+          ...['ht1','ht2','ht3','ht4'].map(k => ({
+            label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Head Teacher ', 'HT-'),
+            value: (data[k]?.m || 0) + (data[k]?.f || 0),
+            color: '#dc2626', topColor: '#f87171', sideColor: '#991b1b'
+          })),
+          ...['p1','p2','p3','p4'].map(k => ({
+            label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Principal ', 'P-'),
+            value: (data[k]?.m || 0) + (data[k]?.f || 0),
+            color: '#475569', topColor: '#94a3b8', sideColor: '#1e293b'
+          })),
+          { label: 'Non-Teaching', value: cNonTeach, color: '#059669', topColor: '#34d399', sideColor: '#065f46' }
         ]
       });
     }
@@ -2938,16 +2997,16 @@
         ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">👩‍🏫 Teaching, School Head & Non-Teaching Personnel Breakdown</span>`;
 
         render3DGlassBarChart('analyticsMainChartBox', {
-          title: '3D Glass Bar Graph: Teaching Positions (Teacher I to Teacher VII & Master Teachers)',
-          items: PERSONNEL_POSITIONS.slice(0, 10).map(p => ({
-            label: p.title.replace('Teacher ', 'T-').replace('Master T-', 'MT-'),
+          title: '3D Glass Bar Graph: Teaching Positions (Teacher I–VII & Master Teacher I–IV)',
+          items: PERSONNEL_POSITIONS.slice(0, 11).map(p => ({
+            label: p.title.replace('Master Teacher ', 'MT-').replace('Teacher ', 'T-'),
             value: pData[p.key].m + pData[p.key].f
           }))
         });
 
         render3DGlassBarChart('analyticsSubChartBox', {
-          title: '3D Glass Bar Graph: School Heads & Non-Teaching Personnel',
-          items: PERSONNEL_POSITIONS.slice(10).map(p => ({
+          title: '3D Glass Bar Graph: Head Teachers (HT-I–IV), Principals (P-I–IV) & Non-Teaching',
+          items: PERSONNEL_POSITIONS.slice(11).map(p => ({
             label: p.title.replace('Head Teacher ', 'HT-').replace('Principal ', 'P-').replace('Administrative Officer II (AO II)', 'AO II').replace('Administrative Assistant (ADAS I–III)', 'ADAS').replace('School Nurse / Health Personnel', 'Nurse').replace('Utility / Janitorial Staff', 'Utility').replace('Security Guard', 'Guard').replace('Job Order / LGU-Paid Personnel', 'JO/LGU'),
             value: pData[p.key].m + pData[p.key].f
           }))
@@ -3204,15 +3263,24 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="border border-slate-300 rounded-xl overflow-hidden">
-            <div class="bg-slate-900 text-white px-3 py-1.5 font-extrabold">I. PERSONNEL SUMMARY BREAKDOWN</div>
-            <table class="w-full text-xs">
+            <div class="bg-slate-900 text-white px-3 py-1.5 font-extrabold">I. INDIVIDUAL PERSONNEL SUMMARY BREAKDOWN</div>
+            <table class="w-full text-[11px]">
+              <thead>
+                <tr class="bg-slate-100 border-b font-extrabold">
+                  <th class="px-2.5 py-1 text-left">Position</th>
+                  <th class="px-2 py-1 text-center">M</th>
+                  <th class="px-2 py-1 text-center">F</th>
+                  <th class="px-2.5 py-1 text-right">Total</th>
+                </tr>
+              </thead>
               <tbody class="divide-y">
-                <tr><td class="p-2 font-bold">Teachers (Teacher I – Teacher VII)</td><td class="p-2 text-right font-extrabold">${cTeach}</td></tr>
-                <tr><td class="p-2 font-bold">Master Teachers (MT-I – MT-III)</td><td class="p-2 text-right font-extrabold">${cMT}</td></tr>
-                <tr><td class="p-2 font-bold">Head Teachers (HT-I – HT-IV)</td><td class="p-2 text-right font-extrabold">${cHT}</td></tr>
-                <tr><td class="p-2 font-bold">School Principals (P-I – P-IV)</td><td class="p-2 text-right font-extrabold">${cPrin}</td></tr>
-                <tr><td class="p-2 font-bold">Non-Teaching & Job Order Personnel</td><td class="p-2 text-right font-extrabold">${cNT}</td></tr>
-                <tr class="bg-slate-100 font-extrabold"><td class="p-2">GRAND TOTAL PERSONNEL</td><td class="p-2 text-right">${grandPers}</td></tr>
+                ${PERSONNEL_POSITIONS.filter(p => p.cat !== 'Non-Teaching').map(p => {
+                  const m = pData[p.key]?.m || 0;
+                  const f = pData[p.key]?.f || 0;
+                  return `<tr><td class="px-2.5 py-1 font-bold">${p.title}</td><td class="px-2 py-1 text-center">${m}</td><td class="px-2 py-1 text-center">${f}</td><td class="px-2.5 py-1 text-right font-extrabold">${m + f}</td></tr>`;
+                }).join('')}
+                <tr><td class="px-2.5 py-1 font-bold">Non-Teaching & JO Personnel</td><td class="px-2 py-1 text-center">${PERSONNEL_POSITIONS.filter(p => p.cat === 'Non-Teaching').reduce((s,p)=>s+(pData[p.key]?.m||0),0)}</td><td class="px-2 py-1 text-center">${PERSONNEL_POSITIONS.filter(p => p.cat === 'Non-Teaching').reduce((s,p)=>s+(pData[p.key]?.f||0),0)}</td><td class="px-2.5 py-1 text-right font-extrabold">${cNT}</td></tr>
+                <tr class="bg-slate-100 font-extrabold"><td class="px-2.5 py-1.5" colspan="3">GRAND TOTAL PERSONNEL</td><td class="px-2.5 py-1.5 text-right">${grandPers}</td></tr>
               </tbody>
             </table>
           </div>
