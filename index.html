@@ -1,4 +1,4 @@
-html_code = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tl">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +12,21 @@ html_code = r'''<!DOCTYPE html>
     @media print {
       .no-print { display: none !important; }
       .print-only { display: flex !important; }
-      body { background: white; }
+      body { background: white !important; }
+      body.exec-print-mode #mainPortalContent > *:not(#execSummaryPrintModal) { display: none !important; }
+      body.exec-print-mode #execSummaryPrintModal {
+        position: static !important;
+        inset: auto !important;
+        background: white !important;
+        padding: 0 !important;
+        display: block !important;
+      }
+      body.exec-print-mode #execSummaryPaper {
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
     }
   </style>
 </head>
@@ -172,6 +186,7 @@ html_code = r'''<!DOCTYPE html>
               <span>DEPED BATANGAS</span>
               <span class="text-blue-300">• ROSARIO WEST SUB-OFFICE</span>
               <span id="cloudSyncBadge" class="bg-slate-900/90 border border-blue-400/40 text-blue-200 px-2 py-0.5 rounded-full text-[9px] tracking-normal">☁️ Cloud Sync Ready</span>
+              <span id="globalLockBadge" class="hidden bg-red-700 border border-red-400 text-white px-2 py-0.5 rounded-full text-[9px] tracking-normal">🔒 LOCKED BY ADMIN</span>
             </div>
             <h1 id="headerMainTitle" class="text-base sm:text-lg font-extrabold tracking-tight leading-tight">ROSARIO WEST SUB-OFFICE</h1>
             <p id="headerSubRoleBadge" class="text-[11px] text-slate-300 font-semibold">District Consolidated DataHub</p>
@@ -181,13 +196,13 @@ html_code = r'''<!DOCTYPE html>
         <div class="flex flex-wrap items-center gap-2">
           <!-- ADMIN-ONLY LOGO UPLOAD BUTTON -->
           <label id="btnUploadDistrictLogo" class="hidden cursor-pointer bg-orange-600 hover:bg-orange-500 text-white text-xs font-extrabold px-3 py-2 rounded-xl shadow transition">
-            🖼️ Palitan District Logo
+            🖼️ Palitan Logo
             <input type="file" accept="image/*" onchange="handleDistrictLogoUpload(event)" class="hidden">
           </label>
 
           <!-- ADMIN SCHOOL FILTER SELECTOR -->
           <div id="adminSchoolScopeBox" class="hidden flex items-center gap-1.5 bg-slate-900 border border-orange-500/60 px-2.5 py-1.5 rounded-xl">
-            <span class="text-[10px] font-extrabold text-orange-400 uppercase">View Scope:</span>
+            <span class="text-[10px] font-extrabold text-orange-400 uppercase">Scope:</span>
             <select id="adminSchoolFilter" onchange="onAdminScopeChange()" class="bg-slate-950 text-white text-xs font-extrabold px-2 py-1 rounded-lg border border-slate-700">
               <option value="ALL">📊 ALL SCHOOLS (District Consolidated)</option>
             </select>
@@ -195,6 +210,10 @@ html_code = r'''<!DOCTYPE html>
 
           <button type="button" id="barEditBtn" onclick="toggleEditMode()" class="bg-orange-500 hover:bg-orange-400 text-slate-950 text-xs font-extrabold px-3.5 py-2 rounded-xl shadow transition">
             ✏️ Click to Edit Data
+          </button>
+
+          <button type="button" onclick="openExecutiveSummaryModal()" class="bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-extrabold px-3 py-2 rounded-xl shadow transition">
+            🖨️ Executive Summary
           </button>
 
           <button type="button" onclick="exportCurrentCSV()" class="bg-blue-700 hover:bg-blue-600 text-white text-xs font-extrabold px-3 py-2 rounded-xl shadow transition">
@@ -208,11 +227,16 @@ html_code = r'''<!DOCTYPE html>
       </div>
     </header>
 
-    <!-- NAVIGATION TABS BAR (10 TABS INCLUDING TEACHING & NON-TEACHING PERSONNEL + ADMIN SCHOOLS) -->
+    <!-- SUBMISSION LOCK NOTICE BANNER FOR SCHOOLS -->
+    <div id="schoolLockedBanner" class="hidden no-print bg-red-900 text-white text-center py-2 px-4 text-xs font-extrabold border-b border-red-600">
+      🔒 PAALALA: Kasalukuyang naka-LOCK ang pag-edit ng datos ng Rosario West Sub-Office Admin para sa District Consolidation.
+    </div>
+
+    <!-- NAVIGATION TABS BAR (11 TABS) -->
     <div class="no-print bg-slate-900 border-b border-slate-800 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-2">
         <button type="button" id="tabBtn_personnel" onclick="switchPortalTab('personnel')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
-          👩‍🏫 1. Personnel (T-I to P-IV)
+          👩‍🏫 1. Personnel (Teaching & Non-Teaching)
         </button>
         <button type="button" id="tabBtn_masterlist" onclick="switchPortalTab('masterlist')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
           🧑‍🎓 2. Sections & Masterlist
@@ -242,7 +266,7 @@ html_code = r'''<!DOCTYPE html>
           📊 10. 3D Graphical Analytics
         </button>
         <button type="button" id="tabBtn_admin" onclick="switchPortalTab('admin')" class="hidden px-3 py-2 rounded-xl text-xs font-extrabold transition">
-          🛡️ 11. Registered Schools (Admin)
+          🛡️ 11. Admin & Submission Tracker
         </button>
       </div>
     </div>
@@ -250,12 +274,12 @@ html_code = r'''<!DOCTYPE html>
     <!-- MAIN CONTENT CONTAINER -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 space-y-6">
 
-      <!-- ==================== TAB 1: TEACHING & SCHOOL HEAD PERSONNEL (T-I TO P-IV) ==================== -->
+      <!-- ==================== TAB 1: TEACHING, SCHOOL HEAD & NON-TEACHING PERSONNEL ==================== -->
       <section id="sec_personnel" class="bg-white rounded-3xl shadow-md border border-slate-200 p-6 space-y-6">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
           <div>
             <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">DEPED PLANTILLA & PERSONNEL INVENTORY • ROSARIO WEST SUB-OFFICE</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">👩‍🏫 Bilang ng Guro at School Heads (Teacher I–VII, Master Teacher I–III, Head Teacher I–IV, Principal I–IV)</h2>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">👩‍🏫 Bilang ng Guro, School Heads at Non-Teaching Personnel</h2>
             <p id="persScopeSubtitle" class="text-xs text-slate-500">Ilagay ang bilang ng Male at Female personnel bawat posisyon.</p>
           </div>
           <div class="bg-slate-950 text-white px-4 py-2.5 rounded-2xl border-l-4 border-orange-500 text-right">
@@ -264,23 +288,27 @@ html_code = r'''<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- SUMMARY CARDS BY CATEGORY -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <!-- SUMMARY CARDS BY CATEGORY (5 CARDS INCLUDING NON-TEACHING) -->
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
           <div class="bg-blue-950 text-white rounded-2xl p-4 border-b-4 border-blue-500">
-            <span class="text-[11px] font-extrabold text-blue-300 uppercase block">Teachers (T-I to T-VII)</span>
+            <span class="text-[10px] font-extrabold text-blue-300 uppercase block">Teachers (T-I to T-VII)</span>
             <span id="persCardTeachers" class="text-2xl font-extrabold mt-1 block">0</span>
           </div>
           <div class="bg-orange-600 text-white rounded-2xl p-4 border-b-4 border-orange-300">
-            <span class="text-[11px] font-extrabold text-orange-100 uppercase block">Master Teachers (MT-I to MT-III)</span>
+            <span class="text-[10px] font-extrabold text-orange-100 uppercase block">Master Teachers (MT-I–III)</span>
             <span id="persCardMT" class="text-2xl font-extrabold mt-1 block">0</span>
           </div>
           <div class="bg-red-800 text-white rounded-2xl p-4 border-b-4 border-red-400">
-            <span class="text-[11px] font-extrabold text-red-200 uppercase block">Head Teachers (HT-I to HT-IV)</span>
+            <span class="text-[10px] font-extrabold text-red-200 uppercase block">Head Teachers (HT-I–IV)</span>
             <span id="persCardHT" class="text-2xl font-extrabold mt-1 block">0</span>
           </div>
           <div class="bg-slate-950 text-white rounded-2xl p-4 border-b-4 border-orange-500">
-            <span class="text-[11px] font-extrabold text-orange-400 uppercase block">Principals (P-I to P-IV)</span>
+            <span class="text-[10px] font-extrabold text-orange-400 uppercase block">Principals (P-I to P-IV)</span>
             <span id="persCardPrincipals" class="text-2xl font-extrabold mt-1 block">0</span>
+          </div>
+          <div class="bg-emerald-900 text-white rounded-2xl p-4 border-b-4 border-emerald-400 col-span-2 lg:col-span-1">
+            <span class="text-[10px] font-extrabold text-emerald-200 uppercase block">Non-Teaching & JO Staff</span>
+            <span id="persCardNonTeaching" class="text-2xl font-extrabold mt-1 block">0</span>
           </div>
         </div>
 
@@ -515,7 +543,7 @@ html_code = r'''<!DOCTYPE html>
           </select>
         </div>
 
-        <!-- 1. CRLA (GRADE 1 TO GRADE 3 ONLY, 3 EDITABLE SY) -->
+        <!-- 1. CRLA -->
         <div id="box_crla" class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-blue-950 text-white px-4 py-3 flex flex-wrap justify-between items-center gap-2">
             <div>
@@ -563,7 +591,7 @@ html_code = r'''<!DOCTYPE html>
           <div id="inlineGraph_crla" class="p-4 bg-slate-950 border-t border-slate-800 text-white"></div>
         </div>
 
-        <!-- 2. PHIL-IRI (GRADE 3 TO GRADE 6) -->
+        <!-- 2. PHIL-IRI -->
         <div id="box_philiri" class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-slate-900 text-white px-4 py-3 flex justify-between items-center">
             <span class="text-xs sm:text-sm font-extrabold">📚 2. Philippine Informal Reading Inventory (Phil-IRI) — Grade 3 to Grade 6</span>
@@ -594,7 +622,7 @@ html_code = r'''<!DOCTYPE html>
           <div id="inlineGraph_philiri" class="p-4 bg-slate-950 border-t border-slate-800 text-white"></div>
         </div>
 
-        <!-- 3. RMA (GRADE 1 TO GRADE 6, 3 EDITABLE SY) -->
+        <!-- 3. RMA -->
         <div id="box_rma" class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-red-950 text-white px-4 py-3 flex flex-wrap justify-between items-center gap-2">
             <div>
@@ -642,7 +670,7 @@ html_code = r'''<!DOCTYPE html>
           <div id="inlineGraph_rma" class="p-4 bg-slate-950 border-t border-slate-800 text-white"></div>
         </div>
 
-        <!-- 4. READING ASSESSMENT RESULTS (NO KINDER, ADD/DELETE ROWS, 3 EDITABLE SY) -->
+        <!-- 4. READING ASSESSMENT RESULTS -->
         <div id="box_reading" class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-orange-700 text-white px-4 py-3 flex flex-wrap justify-between items-center gap-2">
             <div>
@@ -846,84 +874,168 @@ html_code = r'''<!DOCTYPE html>
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
           <div>
             <span class="text-[11px] font-extrabold uppercase tracking-wider text-orange-400 block">ROSARIO WEST SUB-OFFICE • TRANSLUCENT 3D GLASS BAR CHARTS</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-white">📊 3D Graphical Presentation with Opacity & Data Labels</h2>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white">📊 3D Graphical Presentation & School-by-School Comparison</h2>
             <p class="text-xs text-slate-400">I-click ang bawat kategorya upang makita ang 3D glass bar graph na may opacity at data labels.</p>
           </div>
           <button type="button" onclick="window.print()" class="no-print bg-orange-600 hover:bg-orange-500 text-white text-xs font-extrabold px-4 py-2 rounded-xl">🖨️ Print Graphs</button>
         </div>
 
         <div class="flex flex-wrap gap-2 bg-slate-900 p-3 rounded-2xl border border-slate-800">
-          <button type="button" id="gCatBtn_personnel" onclick="selectAnalyticsCat('personnel')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">👩‍🏫 Personnel (T-I to P-IV)</button>
+          <button type="button" id="gCatBtn_school_compare" onclick="selectAnalyticsCat('school_compare')" class="hidden px-3 py-2 rounded-xl text-xs font-extrabold transition">🏫 School-by-School Comparison (Admin)</button>
+          <button type="button" id="gCatBtn_personnel" onclick="selectAnalyticsCat('personnel')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">👩‍🏫 Personnel</button>
           <button type="button" id="gCatBtn_mps" onclick="selectAnalyticsCat('mps')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">📈 MPS (MATATAG)</button>
-          <button type="button" id="gCatBtn_enr" onclick="selectAnalyticsCat('enr')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">👥 Enrollment & Drop-out</button>
+          <button type="button" id="gCatBtn_enr" onclick="selectAnalyticsCat('enr')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">👥 Enrollment</button>
           <button type="button" id="gCatBtn_crla" onclick="selectAnalyticsCat('crla')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">📖 CRLA (3 SY)</button>
           <button type="button" id="gCatBtn_philiri" onclick="selectAnalyticsCat('philiri')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">📚 Phil-IRI</button>
           <button type="button" id="gCatBtn_rma" onclick="selectAnalyticsCat('rma')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">🔢 RMA (3 SY)</button>
-          <button type="button" id="gCatBtn_reading" onclick="selectAnalyticsCat('reading')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">📘 Reading Assessment (3 SY)</button>
+          <button type="button" id="gCatBtn_reading" onclick="selectAnalyticsCat('reading')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">📘 Reading (3 SY)</button>
           <button type="button" id="gCatBtn_nat" onclick="selectAnalyticsCat('nat')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">🏆 NAT & ELLNA</button>
-          <button type="button" id="gCatBtn_nutrition" onclick="selectAnalyticsCat('nutrition')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">🥗 Nutritional Status</button>
-          <button type="button" id="gCatBtn_sbm" onclick="selectAnalyticsCat('sbm')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">☑️ SBM Tally</button>
         </div>
 
-        <div id="analyticsControlsBar" class="flex flex-wrap items-center gap-3 bg-blue-950/60 p-3.5 rounded-2xl border border-blue-800/60"></div>
+        <div id="analyticsControlsBar" class="flex flex-wrap items-center justify-between gap-3 bg-blue-950/60 p-3.5 rounded-2xl border border-blue-800/60"></div>
         <div id="analyticsMainChartBox" class="bg-slate-900/90 rounded-2xl border border-slate-800 p-4 sm:p-6"></div>
         <div id="analyticsSubChartBox" class="bg-slate-900/70 rounded-2xl border border-slate-800 p-4 sm:p-6"></div>
       </section>
 
-      <!-- ==================== TAB 11: ADMIN REGISTERED SCHOOLS MANAGEMENT ==================== -->
+      <!-- ==================== TAB 11: ADMIN CONTROL PANEL, SUBMISSION TRACKER & SECURITY ==================== -->
       <section id="sec_admin" class="hidden bg-white rounded-3xl shadow-md border-2 border-red-600 p-6 space-y-6">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
           <div>
-            <span class="text-[11px] font-extrabold uppercase tracking-wider text-red-700 block">SUB-OFFICE ADMIN CONTROL PANEL • ACCOUNT MANAGEMENT</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">🛡️ Registered Schools sa Rosario West Sub-Office</h2>
-            <p class="text-xs text-slate-500">Maaaring i-reset ng Admin ang password ng nakalimot na paaralan (ibabalik sa <code class="bg-slate-100 px-1.5 py-0.5 rounded font-bold text-red-700">DepEd2026</code>) o i-delete ang account.</p>
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-red-700 block">SUB-OFFICE ADMIN CONTROL PANEL • MONITORING, SECURITY & BACKUP</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">🛡️ Submission Status Tracker, Security & Registered Schools</h2>
+            <p class="text-xs text-slate-500">I-monitor kung aling mga paaralan na ang nakapag-encode ng data, i-lock ang submissions pagkatapos ng deadline, at mag-download ng full backup.</p>
           </div>
           <span id="adminTotalSchoolsBadge" class="bg-slate-950 text-orange-400 text-xs font-extrabold px-4 py-2 rounded-xl">0 Registered Schools</span>
         </div>
 
-        <div class="overflow-x-auto rounded-2xl border border-slate-300">
-          <table class="w-full text-xs border-collapse">
-            <thead>
-              <tr class="bg-slate-950 text-white">
-                <th class="p-3 text-left">DepEd School ID</th>
-                <th class="p-3 text-left">School Name</th>
-                <th class="p-3 text-left">School Head / Coordinator</th>
-                <th class="p-3 text-center">Recovery PIN</th>
-                <th class="p-3 text-center">Total Personnel</th>
-                <th class="p-3 text-center">Admin Actions</th>
-              </tr>
-            </thead>
-            <tbody id="tbodyAdminSchools" class="divide-y divide-slate-200 bg-white"></tbody>
-          </table>
+        <!-- SECURITY, SUBMISSION LOCK & BACKUP CARDS -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <!-- 1. CHANGE ADMIN PASSWORD -->
+          <div class="bg-slate-50 border border-slate-300 rounded-2xl p-4 space-y-2.5">
+            <h3 class="text-xs font-extrabold uppercase text-blue-950">🔐 Change Sub-Office Admin Password</h3>
+            <p class="text-[11px] text-slate-600">Palitan ang default password (<code class="font-bold">rwest2026</code>) para mas secure ang Admin account.</p>
+            <div class="flex gap-2">
+              <input type="password" id="newAdminPassInput" minlength="4" placeholder="Bagong Admin Password" class="flex-1 px-3 py-2 rounded-xl border text-xs font-bold bg-white">
+              <button type="button" onclick="changeAdminPassword()" class="bg-blue-900 hover:bg-blue-800 text-white text-xs font-extrabold px-3.5 py-2 rounded-xl">Save</button>
+            </div>
+          </div>
+
+          <!-- 2. SUBMISSION LOCK / FREEZE TOGGLE -->
+          <div class="bg-slate-50 border border-slate-300 rounded-2xl p-4 space-y-2.5">
+            <h3 class="text-xs font-extrabold uppercase text-red-900">🔒 District Submission Lock / Freeze</h3>
+            <p id="lockStatusDesc" class="text-[11px] text-slate-600">Bukas ang pag-encode at pag-edit ng mga paaralan.</p>
+            <button type="button" id="btnToggleGlobalLock" onclick="toggleGlobalSubmissionLock()" class="w-full bg-red-700 hover:bg-red-600 text-white text-xs font-extrabold py-2.5 rounded-xl shadow transition">
+              🔒 Lock All School Submissions
+            </button>
+          </div>
+
+          <!-- 3. ONE-CLICK JSON BACKUP -->
+          <div class="bg-slate-50 border border-slate-300 rounded-2xl p-4 space-y-2.5">
+            <h3 class="text-xs font-extrabold uppercase text-emerald-900">💾 District Cloud Data Backup</h3>
+            <p class="text-[11px] text-slate-600">Mag-download ng kumpletong offline backup file (<code class="font-bold">.json</code>) ng lahat ng paaralan.</p>
+            <button type="button" onclick="downloadFullDistrictJSONBackup()" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-extrabold py-2.5 rounded-xl shadow transition">
+              📥 Download Full District Backup (.json)
+            </button>
+          </div>
+        </div>
+
+        <!-- SUBMISSION STATUS TRACKER TABLE -->
+        <div class="space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="text-sm font-extrabold text-slate-950">📋 Real-Time Submission Status Tracker & Registered Schools</h3>
+            <span class="text-[11px] font-bold text-slate-500">✅ = May Na-encode na Data | ⏳ = Pending / Wala Pang Entry</span>
+          </div>
+
+          <div class="overflow-x-auto rounded-2xl border border-slate-300">
+            <table class="w-full text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-950 text-white">
+                  <th class="p-3 text-left">School ID & Name</th>
+                  <th class="p-3 text-left">Head / PIN</th>
+                  <th class="p-2 text-center bg-blue-950">Pers.</th>
+                  <th class="p-2 text-center bg-blue-950">Sec.</th>
+                  <th class="p-2 text-center bg-blue-950">MPS</th>
+                  <th class="p-2 text-center bg-blue-950">Enr.</th>
+                  <th class="p-2 text-center bg-blue-950">Lit.</th>
+                  <th class="p-2 text-center bg-blue-950">NAT</th>
+                  <th class="p-2 text-center bg-blue-950">Nutr.</th>
+                  <th class="p-2 text-center bg-blue-950">SBM</th>
+                  <th class="p-2 text-center bg-blue-950">NSBI</th>
+                  <th class="p-3 text-center bg-orange-700">Completion</th>
+                  <th class="p-3 text-center">Admin Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyAdminSchools" class="divide-y divide-slate-200 bg-white"></tbody>
+            </table>
+          </div>
         </div>
       </section>
 
     </main>
+
+    <!-- ==================== PRINT-READY 1-PAGE EXECUTIVE SUMMARY MODAL ==================== -->
+    <div id="execSummaryPrintModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 overflow-y-auto p-4 sm:p-6">
+      <div id="execSummaryPaper" class="bg-white max-w-4xl mx-auto rounded-2xl shadow-2xl border border-slate-300 p-6 sm:p-8 space-y-5 text-slate-900">
+        <div class="no-print flex flex-wrap items-center justify-between gap-2 border-b pb-3">
+          <span class="text-xs font-extrabold text-blue-900">📄 Print-Ready 1-Page Executive Summary Report</span>
+          <div class="flex gap-2">
+            <button type="button" onclick="printExecutiveSummary()" class="bg-slate-950 hover:bg-slate-800 text-white text-xs font-extrabold px-4 py-2 rounded-xl">🖨️ Print / Save as PDF</button>
+            <button type="button" onclick="closeExecutiveSummaryModal()" class="bg-red-700 hover:bg-red-600 text-white text-xs font-extrabold px-3.5 py-2 rounded-xl">✖ Isara</button>
+          </div>
+        </div>
+
+        <!-- OFFICIAL DEPED LETTERHEAD -->
+        <div class="flex items-center justify-center gap-4 border-b-2 border-slate-900 pb-4">
+          <img src="district-logo.jpg" alt="Logo" class="district-logo-img w-16 h-16 rounded-full object-cover" onerror="this.onerror=null; this.src=FALLBACK_DISTRICT_SEAL;">
+          <div class="text-center">
+            <p class="text-[10px] font-bold uppercase tracking-wider">Republic of the Philippines • Department of Education</p>
+            <p class="text-xs font-bold">Region IV-A CALABARZON • Schools Division of Batangas</p>
+            <h1 class="text-lg font-extrabold uppercase tracking-tight">ROSARIO WEST SUB-OFFICE</h1>
+            <p id="execReportScopeTitle" class="text-xs font-extrabold text-blue-900">EXECUTIVE CONSOLIDATED DATA SUMMARY REPORT</p>
+          </div>
+        </div>
+
+        <div id="execSummaryBody" class="space-y-4 text-xs"></div>
+
+        <!-- SIGNATORY BLOCK -->
+        <div class="grid grid-cols-2 gap-8 pt-8 border-t border-slate-300 text-xs">
+          <div>
+            <p class="text-slate-600 mb-8">Prepared by:</p>
+            <input type="text" id="execPreparedBy" value="DISTRICT ICT COORDINATOR / PLANNING OFFICER" class="w-full font-extrabold uppercase border-b border-slate-900 pb-0.5 focus:outline-none">
+            <p class="text-[11px] text-slate-600 mt-0.5">Rosario West Sub-Office DataHub Focal Person</p>
+          </div>
+          <div>
+            <p class="text-slate-600 mb-8">Noted & Approved by:</p>
+            <input type="text" id="execNotedBy" value="PUBLIC SCHOOLS DISTRICT SUPERVISOR" class="w-full font-extrabold uppercase border-b border-slate-900 pb-0.5 focus:outline-none">
+            <p class="text-[11px] text-slate-600 mt-0.5">Public Schools District Supervisor • Rosario West Sub-Office</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script>
     // =========================================================================
     // HIWALAY NA FIREBASE NODE PARA SA ROSARIO WEST SUB-OFFICE
-    // (Hindi maghahalo sa /schoolData ng Tubahan ES)
     // =========================================================================
     const FIREBASE_DB_URL = "https://tubahanes-datahub-default-rtdb.asia-southeast1.firebasedatabase.app";
     const SUBOFFICE_NODE = "rosarioWestSubOffice";
 
-    // Default Sub-Office Admin Credentials
     const ADMIN_USERNAME = "admin";
     const ADMIN_DEFAULT_PASS = "rwest2026";
 
-    let currentSession = null; // { role: 'admin' | 'school', schoolId: '...', schoolName: '...' }
+    let currentSession = null;
     let isEditMode = false;
     let activeTab = 'personnel';
     let activeAnalyticsCat = 'personnel';
-    let adminViewScope = 'ALL'; // 'ALL' or specific schoolId
+    let adminViewScope = 'ALL';
+    let schoolCompareMetric = 'enrollment';
 
     function safeGetStorage(type, key) { try { return window[type].getItem(key); } catch (e) { return null; } }
     function safeSetStorage(type, key, val) { try { window[type].setItem(key, val); } catch (e) {} }
     function safeRemoveStorage(type, key) { try { window[type].removeItem(key); } catch (e) {} }
 
-    // Default Seal in Blue, Red, Black & Orange
     const FALLBACK_DISTRICT_SEAL = "data:image/svg+xml;utf8," + encodeURIComponent(`
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
         <circle cx="100" cy="100" r="96" fill="#090d16" stroke="#f97316" stroke-width="6"/>
@@ -954,7 +1066,13 @@ html_code = r'''<!DOCTYPE html>
       { key: 'p1', title: 'Principal I', cat: 'School Principal' },
       { key: 'p2', title: 'Principal II', cat: 'School Principal' },
       { key: 'p3', title: 'Principal III', cat: 'School Principal' },
-      { key: 'p4', title: 'Principal IV', cat: 'School Principal' }
+      { key: 'p4', title: 'Principal IV', cat: 'School Principal' },
+      { key: 'nt_ao2', title: 'Administrative Officer II (AO II)', cat: 'Non-Teaching' },
+      { key: 'nt_adas', title: 'Administrative Assistant (ADAS I–III)', cat: 'Non-Teaching' },
+      { key: 'nt_nurse', title: 'School Nurse / Health Personnel', cat: 'Non-Teaching' },
+      { key: 'nt_utility', title: 'Utility / Janitorial Staff', cat: 'Non-Teaching' },
+      { key: 'nt_guard', title: 'Security Guard', cat: 'Non-Teaching' },
+      { key: 'nt_jo', title: 'Job Order / LGU-Paid Personnel', cat: 'Non-Teaching' }
     ];
 
     const GRADES = ['Kinder', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
@@ -1067,16 +1185,12 @@ html_code = r'''<!DOCTYPE html>
       return rec;
     }
 
-    // Master District Database Structure
     let districtDB = {
       districtLogo: '',
       adminPass: ADMIN_DEFAULT_PASS,
-      accounts: {
-        // schoolId: { schoolId, schoolName, headName, password, pin, createdAt }
-      },
-      schoolsData: {
-        // schoolId: createEmptySchoolRecord(...)
-      }
+      submissionsLocked: false,
+      accounts: {},
+      schoolsData: {}
     };
 
     try {
@@ -1096,6 +1210,32 @@ html_code = r'''<!DOCTYPE html>
     function applySavedDistrictLogo() {
       const logo = districtDB.districtLogo || safeGetStorage('localStorage', 'rwest_district_logo');
       if (logo) document.querySelectorAll('.district-logo-img').forEach(img => { img.src = logo; });
+    }
+
+    function applyGlobalLockUI() {
+      const locked = Boolean(districtDB.submissionsLocked);
+      const isSchool = currentSession && currentSession.role === 'school';
+      document.getElementById('globalLockBadge').classList.toggle('hidden', !locked);
+      document.getElementById('schoolLockedBanner').classList.toggle('hidden', !(locked && isSchool));
+
+      if (locked && isSchool && isEditMode) {
+        isEditMode = false;
+      }
+      updateEditBtnUI();
+
+      const lockBtn = document.getElementById('btnToggleGlobalLock');
+      const lockDesc = document.getElementById('lockStatusDesc');
+      if (lockBtn && lockDesc) {
+        if (locked) {
+          lockBtn.innerText = '🔓 Unlock School Submissions';
+          lockBtn.className = 'w-full bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-extrabold py-2.5 rounded-xl shadow transition';
+          lockDesc.innerText = '🔒 Naka-LOCK ngayon. Hindi maaaring mag-edit ang mga paaralan.';
+        } else {
+          lockBtn.innerText = '🔒 Lock All School Submissions';
+          lockBtn.className = 'w-full bg-red-700 hover:bg-red-600 text-white text-xs font-extrabold py-2.5 rounded-xl shadow transition';
+          lockDesc.innerText = '🟢 Bukas ang pag-encode at pag-edit ng mga paaralan.';
+        }
+      }
     }
 
     function handleDistrictLogoUpload(e) {
@@ -1126,6 +1266,7 @@ html_code = r'''<!DOCTYPE html>
           safeSetStorage('localStorage', 'rwest_suboffice_v1', JSON.stringify(districtDB));
           applySavedDistrictLogo();
           if (currentSession) {
+            applyGlobalLockUI();
             refreshAdminSchoolDropdown();
             renderActiveTab();
           }
@@ -1161,7 +1302,7 @@ html_code = r'''<!DOCTYPE html>
     }, 12000);
 
     // =========================================================================
-    // AUTHENTICATION: LOGIN, SELF-REGISTER SCHOOL, SELF/ADMIN PASSWORD RESET
+    // AUTHENTICATION
     // =========================================================================
     function toggleInputVis(id) {
       const el = document.getElementById(id);
@@ -1189,10 +1330,8 @@ html_code = r'''<!DOCTYPE html>
         return;
       }
 
-      // Sync latest accounts first
       await loadDistrictCloudDB();
 
-      // Check Sub-Office Admin Login
       if (uid.toLowerCase() === ADMIN_USERNAME && pass === (districtDB.adminPass || ADMIN_DEFAULT_PASS)) {
         currentSession = { role: 'admin', schoolId: 'ADMIN', schoolName: 'Rosario West Sub-Office (Admin)' };
         safeSetStorage('sessionStorage', 'rwest_session', JSON.stringify(currentSession));
@@ -1200,7 +1339,6 @@ html_code = r'''<!DOCTYPE html>
         return;
       }
 
-      // Check Registered School Account
       const acc = districtDB.accounts[uid];
       if (acc && acc.password === pass) {
         if (!districtDB.schoolsData[uid]) {
@@ -1286,20 +1424,23 @@ html_code = r'''<!DOCTYPE html>
       document.getElementById('btnUploadDistrictLogo').classList.toggle('hidden', !isAdmin);
       document.getElementById('adminSchoolScopeBox').classList.toggle('hidden', !isAdmin);
       document.getElementById('tabBtn_admin').classList.toggle('hidden', !isAdmin);
+      document.getElementById('gCatBtn_school_compare').classList.toggle('hidden', !isAdmin);
 
       if (isAdmin) {
         document.getElementById('headerMainTitle').innerText = 'ROSARIO WEST SUB-OFFICE';
         document.getElementById('headerSubRoleBadge').innerText = '🛡️ Sub-Office Administrator • Full District Access';
         adminViewScope = 'ALL';
+        activeAnalyticsCat = 'school_compare';
         refreshAdminSchoolDropdown();
       } else {
         document.getElementById('headerMainTitle').innerText = currentSession.schoolName.toUpperCase();
         document.getElementById('headerSubRoleBadge').innerText = `🏫 Rosario West Sub-Office • School ID: ${currentSession.schoolId}`;
         adminViewScope = currentSession.schoolId;
+        activeAnalyticsCat = 'personnel';
       }
 
       isEditMode = false;
-      updateEditBtnUI();
+      applyGlobalLockUI();
       switchPortalTab('personnel');
     }
 
@@ -1327,7 +1468,7 @@ html_code = r'''<!DOCTYPE html>
       if (!sel) return;
       const cur = sel.value || 'ALL';
       const schoolIds = Object.keys(districtDB.accounts || {});
-      sel.innerHTML = `<option value="ALL">📊 ALL SCHOOLS (${schoolIds.length} Schools Consolidated)</option>` +
+      sel.innerHTML = `<option value="ALL">📊 ALL SCHOOLS (${schoolIds.length} Consolidated)</option>` +
         schoolIds.map(id => `<option value="${id}">🏫 ${districtDB.accounts[id].schoolName} (${id})</option>`).join('');
       if ([...sel.options].some(o => o.value === cur)) sel.value = cur;
       adminViewScope = sel.value;
@@ -1337,12 +1478,11 @@ html_code = r'''<!DOCTYPE html>
       adminViewScope = document.getElementById('adminSchoolFilter').value;
       if (adminViewScope === 'ALL' && isEditMode) {
         isEditMode = false;
-        updateEditBtnUI();
       }
+      updateEditBtnUI();
       renderActiveTab();
     }
 
-    // Returns the active school object for editing/single-school view, or null if Admin is viewing ALL schools
     function getTargetSchoolRecord() {
       if (!currentSession) return null;
       if (currentSession.role === 'school') {
@@ -1362,8 +1502,12 @@ html_code = r'''<!DOCTYPE html>
     }
 
     function toggleEditMode() {
+      if (currentSession.role === 'school' && districtDB.submissionsLocked) {
+        alert('🔒 Naka-LOCK na ang pag-edit ng datos ng Sub-Office Admin. Makipag-ugnayan sa Sub-Office kung kailangang magpa-unlock.');
+        return;
+      }
       if (currentSession.role === 'admin' && adminViewScope === 'ALL') {
-        alert('ℹ️ Pumili muna ng isang partikular na paaralan sa "View Scope" dropdown sa itaas kung nais mong mag-edit ng datos ng paaralang iyon.');
+        alert('ℹ️ Pumili muna ng isang partikular na paaralan sa "Scope" dropdown sa itaas kung nais mong mag-edit ng datos ng paaralang iyon.');
         return;
       }
       isEditMode = !isEditMode;
@@ -1374,6 +1518,12 @@ html_code = r'''<!DOCTYPE html>
 
     function updateEditBtnUI() {
       const btn = document.getElementById('barEditBtn');
+      if (!btn) return;
+      if (currentSession && currentSession.role === 'school' && districtDB.submissionsLocked) {
+        btn.innerHTML = '🔒 Submissions Locked';
+        btn.className = 'bg-slate-700 text-slate-300 text-xs font-extrabold px-3.5 py-2 rounded-xl cursor-not-allowed';
+        return;
+      }
       if (currentSession && currentSession.role === 'admin' && adminViewScope === 'ALL') {
         btn.innerHTML = '📊 District Consolidated View';
         btn.className = 'bg-blue-900 text-blue-200 text-xs font-extrabold px-3.5 py-2 rounded-xl border border-blue-700';
@@ -1389,7 +1539,7 @@ html_code = r'''<!DOCTYPE html>
     }
 
     // =========================================================================
-    // 3D TRANSLUCENT GLASS BAR CHART ENGINE (WITH OPACITY & DATA LABELS)
+    // 3D TRANSLUCENT GLASS BAR CHART ENGINE
     // =========================================================================
     function render3DGlassBarChart(containerId, opts) {
       const container = document.getElementById(containerId);
@@ -1408,23 +1558,22 @@ html_code = r'''<!DOCTYPE html>
         return;
       }
 
-      // Blue, Red, Orange, Slate-Dark Glass Palette
       const glassPalette = [
-        { front: '#2563eb', top: '#60a5fa', side: '#1e3a8a' }, // Royal Blue
-        { front: '#dc2626', top: '#f87171', side: '#991b1b' }, // Crimson Red
-        { front: '#ea580c', top: '#fb923c', side: '#9a3412' }, // Vivid Orange
-        { front: '#0284c7', top: '#38bdf8', side: '#075985' }, // Sky Blue
-        { front: '#e11d48', top: '#fb7185', side: '#881337' }, // Rose Red
-        { front: '#d97706', top: '#fbbf24', side: '#92400e' }, // Amber Orange
-        { front: '#334155', top: '#64748b', side: '#0f172a' }  // Obsidian Slate
+        { front: '#2563eb', top: '#60a5fa', side: '#1e3a8a' },
+        { front: '#dc2626', top: '#f87171', side: '#991b1b' },
+        { front: '#ea580c', top: '#fb923c', side: '#9a3412' },
+        { front: '#059669', top: '#34d399', side: '#065f46' },
+        { front: '#0284c7', top: '#38bdf8', side: '#075985' },
+        { front: '#e11d48', top: '#fb7185', side: '#881337' },
+        { front: '#d97706', top: '#fbbf24', side: '#92400e' }
       ];
 
       const rawMax = Math.max(...items.map(i => Number(i.value) || 0), 1);
       const yMax = maxVal !== null ? maxVal : (suffix === '%' ? 100 : Math.ceil(rawMax * 1.2));
 
-      const svgW = Math.max(700, items.length * 105 + 120);
-      const svgH = 320;
-      const padL = 56, padR = 36, padT = 48, padB = 66;
+      const svgW = Math.max(700, items.length * 110 + 120);
+      const svgH = 325;
+      const padL = 56, padR = 36, padT = 48, padB = 72;
       const plotW = svgW - padL - padR;
       const plotH = svgH - padT - padB;
       const depthX = 16, depthY = 11;
@@ -1461,7 +1610,6 @@ html_code = r'''<!DOCTYPE html>
           ? { front: item.color, top: item.topColor || item.color, side: item.sideColor || item.color }
           : glassPalette[idx % glassPalette.length];
 
-        // Translucent 3D Faces with Opacity + Crisp Glass Edge Highlights
         const backEdge = `<line x1="${x + depthX}" y1="${y - depthY}" x2="${x + depthX}" y2="${padT + plotH - depthY}" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1"/>`;
         const sideFace = `<polygon points="${x + barW},${y} ${x + barW + depthX},${y - depthY} ${x + barW + depthX},${y + barH - depthY} ${x + barW},${y + barH}" fill="${pal.side}" fill-opacity="0.72" stroke="#ffffff" stroke-opacity="0.25" stroke-width="0.8"/>`;
         const frontFace = `<rect x="${x}" y="${y}" width="${barW}" height="${barH}" fill="${pal.front}" fill-opacity="0.78" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1" rx="2"/>`;
@@ -1481,11 +1629,11 @@ html_code = r'''<!DOCTYPE html>
         if (words.length > 2 && String(item.label).length > 13) {
           const mid = Math.ceil(words.length / 2);
           xLabelSvg = `
-            <text x="${cx}" y="${padT + plotH + 17}" text-anchor="middle" font-size="10" font-weight="800" fill="#f8fafc">${words.slice(0, mid).join(' ')}</text>
-            <text x="${cx}" y="${padT + plotH + 29}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#94a3b8">${words.slice(mid).join(' ')}</text>
+            <text x="${cx}" y="${padT + plotH + 17}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#f8fafc">${words.slice(0, mid).join(' ')}</text>
+            <text x="${cx}" y="${padT + plotH + 29}" text-anchor="middle" font-size="9" font-weight="700" fill="#94a3b8">${words.slice(mid).join(' ')}</text>
           `;
         } else {
-          xLabelSvg = `<text x="${cx}" y="${padT + plotH + 18}" text-anchor="middle" font-size="10.5" font-weight="800" fill="#f8fafc">${item.label}</text>`;
+          xLabelSvg = `<text x="${cx}" y="${padT + plotH + 18}" text-anchor="middle" font-size="10" font-weight="800" fill="#f8fafc">${item.label}</text>`;
         }
 
         barsSvg += `<g>${backEdge}${sideFace}${frontFace}${topFace}${dataLabel}${xLabelSvg}</g>`;
@@ -1543,10 +1691,10 @@ html_code = r'''<!DOCTYPE html>
     }
 
     // =========================================================================
-    // TAB 1: TEACHING & SCHOOL HEAD PERSONNEL (T-I TO P-IV)
+    // TAB 1: TEACHING, SCHOOL HEAD & NON-TEACHING PERSONNEL
     // =========================================================================
-    function getAggregatedPersonnel() {
-      const target = getTargetSchoolRecord();
+    function getAggregatedPersonnel(specificSchool = null) {
+      const target = specificSchool || getTargetSchoolRecord();
       const res = {};
       PERSONNEL_POSITIONS.forEach(p => { res[p.key] = { m: 0, f: 0 }; });
 
@@ -1556,7 +1704,6 @@ html_code = r'''<!DOCTYPE html>
           res[p.key].f = Number(target.personnel?.[p.key]?.f) || 0;
         });
       } else {
-        // Consolidated across all schools
         getAllSchoolRecordsList().forEach(sc => {
           PERSONNEL_POSITIONS.forEach(p => {
             res[p.key].m += Number(sc.personnel?.[p.key]?.m) || 0;
@@ -1577,7 +1724,7 @@ html_code = r'''<!DOCTYPE html>
         : `Consolidated Personnel sa buong Rosario West Sub-Office (${getAllSchoolRecordsList().length} Registered Schools)`;
 
       let totM = 0, totF = 0;
-      let cTeachers = 0, cMT = 0, cHT = 0, cPrin = 0;
+      let cTeachers = 0, cMT = 0, cHT = 0, cPrin = 0, cNonTeach = 0;
 
       document.getElementById('tbodyPersonnel').innerHTML = PERSONNEL_POSITIONS.map(p => {
         const m = data[p.key].m;
@@ -1590,10 +1737,12 @@ html_code = r'''<!DOCTYPE html>
         else if (p.cat === 'Master Teacher') cMT += rowTot;
         else if (p.cat === 'Head Teacher') cHT += rowTot;
         else if (p.cat === 'School Principal') cPrin += rowTot;
+        else if (p.cat === 'Non-Teaching') cNonTeach += rowTot;
 
         const badgeColor = p.cat === 'Teaching' ? 'bg-blue-100 text-blue-900'
           : p.cat === 'Master Teacher' ? 'bg-orange-100 text-orange-900'
           : p.cat === 'Head Teacher' ? 'bg-red-100 text-red-900'
+          : p.cat === 'Non-Teaching' ? 'bg-emerald-100 text-emerald-900'
           : 'bg-slate-900 text-orange-400';
 
         if (canEdit) {
@@ -1619,11 +1768,12 @@ html_code = r'''<!DOCTYPE html>
       document.getElementById('persCardMT').innerText = cMT;
       document.getElementById('persCardHT').innerText = cHT;
       document.getElementById('persCardPrincipals').innerText = cPrin;
+      document.getElementById('persCardNonTeaching').innerText = cNonTeach;
       document.getElementById('persGrandTotalBadge').innerText = totM + totF;
 
       document.getElementById('tfootPersonnel').innerHTML = `
         <tr>
-          <td colspan="2" class="p-3 text-left">GRAND TOTAL PERSONNEL</td>
+          <td colspan="2" class="p-3 text-left">GRAND TOTAL PERSONNEL (TEACHING & NON-TEACHING)</td>
           <td class="p-3 text-center text-blue-300">${totM}</td>
           <td class="p-3 text-center text-red-300">${totF}</td>
           <td class="p-3 text-center text-orange-400 text-sm">${totM + totF}</td>
@@ -1632,12 +1782,13 @@ html_code = r'''<!DOCTYPE html>
 
       render3DGlassBarChart('inlineGraph_personnel', {
         title: '3D Personnel Distribution Summary (Rosario West Sub-Office)',
-        subtitle: 'Kabuuang bilang ng Teachers (T-I–VII), Master Teachers (MT-I–III), Head Teachers (HT-I–IV) at Principals (P-I–IV).',
+        subtitle: 'Kabuuang bilang ng Teachers, Master Teachers, Head Teachers, Principals at Non-Teaching Personnel.',
         items: [
-          { label: 'Teachers (T-I to T-VII)', value: cTeachers, color: '#2563eb', topColor: '#60a5fa', sideColor: '#1e3a8a' },
-          { label: 'Master Teachers (MT-I to III)', value: cMT, color: '#ea580c', topColor: '#fb923c', sideColor: '#9a3412' },
-          { label: 'Head Teachers (HT-I to IV)', value: cHT, color: '#dc2626', topColor: '#f87171', sideColor: '#991b1b' },
-          { label: 'Principals (P-I to P-IV)', value: cPrin, color: '#475569', topColor: '#94a3b8', sideColor: '#1e293b' }
+          { label: 'Teachers (T-I–VII)', value: cTeachers, color: '#2563eb', topColor: '#60a5fa', sideColor: '#1e3a8a' },
+          { label: 'Master Teachers', value: cMT, color: '#ea580c', topColor: '#fb923c', sideColor: '#9a3412' },
+          { label: 'Head Teachers', value: cHT, color: '#dc2626', topColor: '#f87171', sideColor: '#991b1b' },
+          { label: 'Principals', value: cPrin, color: '#475569', topColor: '#94a3b8', sideColor: '#1e293b' },
+          { label: 'Non-Teaching & JO', value: cNonTeach, color: '#059669', topColor: '#34d399', sideColor: '#065f46' }
         ]
       });
     }
@@ -1714,7 +1865,6 @@ html_code = r'''<!DOCTYPE html>
         </tr>
       `;
 
-      // Masterlist section dropdowns & rows
       const filterSel = document.getElementById('mlFilterSection');
       const curF = filterSel.value;
       filterSel.innerHTML = `<option value="ALL">All Grade Levels & Sections</option>` +
@@ -1826,10 +1976,10 @@ html_code = r'''<!DOCTYPE html>
     }
 
     // =========================================================================
-    // TAB 3: MPS (MATATAG) — SINGLE SCHOOL OR DISTRICT AVERAGE
+    // TAB 3: MPS (MATATAG)
     // =========================================================================
-    function getMPSData(sy, subj) {
-      const target = getTargetSchoolRecord();
+    function getMPSData(sy, subj, specificSchool = null) {
+      const target = specificSchool || getTargetSchoolRecord();
       const pCount = sy === 'y4' ? 3 : 4;
       const res = {};
       G1_TO_G6.forEach(g => {
@@ -1946,8 +2096,8 @@ html_code = r'''<!DOCTYPE html>
     // =========================================================================
     // TAB 4: ENROLLMENT, DROP-OUT, TRANS IN/OUT
     // =========================================================================
-    function getEnrData(sy, cat) {
-      const target = getTargetSchoolRecord();
+    function getEnrData(sy, cat, specificSchool = null) {
+      const target = specificSchool || getTargetSchoolRecord();
       const pCount = sy === 'y4' ? 3 : 4;
       const res = {};
       GRADES.forEach(g => { res[g] = Array.from({ length: pCount }, () => ({ m: 0, f: 0 })); });
@@ -2074,7 +2224,7 @@ html_code = r'''<!DOCTYPE html>
         });
       });
 
-      // 1. CRLA (Grade 1-3 Only)
+      // 1. CRLA
       const crlaSy = document.getElementById('crlaSySel').value || 'y3';
       const cTot = Array(10).fill(0);
       document.getElementById('tbodyCRLA').innerHTML = G1_TO_G3.map(g => {
@@ -2112,7 +2262,7 @@ html_code = r'''<!DOCTYPE html>
         ]
       });
 
-      // 2. Phil-IRI (Grade 3-6)
+      // 2. Phil-IRI
       const pTot = Array(8).fill(0);
       document.getElementById('tbodyPhilIRI').innerHTML = G3_TO_G6.map(g => {
         const a = Array(8).fill(0);
@@ -2148,7 +2298,7 @@ html_code = r'''<!DOCTYPE html>
         ]
       });
 
-      // 3. RMA (Grade 1-6)
+      // 3. RMA
       const rmaSy = document.getElementById('rmaSySel').value || 'y3';
       const rTot = Array(10).fill(0);
       document.getElementById('tbodyRMA').innerHTML = G1_TO_G6.map(g => {
@@ -2186,7 +2336,7 @@ html_code = r'''<!DOCTYPE html>
         ]
       });
 
-      // 4. Reading Assessment Results (No Kinder, Add/Delete rows)
+      // 4. Reading Assessment Results
       document.getElementById('formAddReadGrade').classList.toggle('hidden', !canEdit);
       document.getElementById('thDelReadGrade').classList.toggle('hidden', !canEdit);
 
@@ -2195,7 +2345,6 @@ html_code = r'''<!DOCTYPE html>
       if (target) {
         rdRows = target.readingV2?.[readSy] || [];
       } else {
-        // Group by grade across all schools
         const gMap = {};
         getAllSchoolRecordsList().forEach(sc => {
           (sc.readingV2?.[readSy] || []).forEach(r => {
@@ -2593,30 +2742,109 @@ html_code = r'''<!DOCTYPE html>
     }
 
     // =========================================================================
-    // TAB 10: 3D GRAPHICAL ANALYTICS DASHBOARD
+    // TAB 10: 3D GRAPHICAL ANALYTICS & SCHOOL-BY-SCHOOL COMPARISON
     // =========================================================================
     function selectAnalyticsCat(cat) {
       activeAnalyticsCat = cat;
       renderAnalyticsTab();
     }
 
+    function changeSchoolCompareMetric(val) {
+      schoolCompareMetric = val;
+      renderAnalyticsTab();
+    }
+
+    function getSchoolMetricsSummary(sc) {
+      let totPers = 0;
+      PERSONNEL_POSITIONS.forEach(p => {
+        totPers += (Number(sc.personnel?.[p.key]?.m) || 0) + (Number(sc.personnel?.[p.key]?.f) || 0);
+      });
+
+      let totEnr = 0;
+      GRADES.forEach(g => {
+        const arr = sc.enrMatrix?.y4?.enrollment?.[g] || [];
+        let latest = 0;
+        for (let i = arr.length - 1; i >= 0; i--) {
+          const sum = (Number(arr[i]?.m) || 0) + (Number(arr[i]?.f) || 0);
+          if (sum > 0 || i === 0) { latest = sum; break; }
+        }
+        totEnr += latest;
+      });
+
+      let mpsSum = 0, mpsCnt = 0;
+      G1_TO_G6.forEach(g => {
+        const arr = sc.mpsMatrix?.y4?.all_avg?.[g] || [];
+        arr.forEach(p => {
+          const avg = ((Number(p?.m) || 0) + (Number(p?.f) || 0)) / 2;
+          if (avg > 0) { mpsSum += avg; mpsCnt++; }
+        });
+      });
+      const avgMPS = mpsCnt ? Number((mpsSum / mpsCnt).toFixed(2)) : 0;
+
+      let totRooms = 0;
+      (sc.nsbi || []).forEach(b => { totRooms += Number(b.rooms) || 0; });
+
+      return { totPers, totEnr, avgMPS, totRooms };
+    }
+
     function renderAnalyticsTab() {
-      const cats = ['personnel', 'mps', 'enr', 'crla', 'philiri', 'rma', 'reading', 'nat', 'nutrition', 'sbm'];
+      const cats = ['school_compare', 'personnel', 'mps', 'enr', 'crla', 'philiri', 'rma', 'reading', 'nat'];
       cats.forEach(c => {
         const btn = document.getElementById('gCatBtn_' + c);
         if (!btn) return;
-        btn.className = c === activeAnalyticsCat
+        const baseCls = c === 'school_compare' && (!currentSession || currentSession.role !== 'admin') ? 'hidden ' : '';
+        btn.className = baseCls + (c === activeAnalyticsCat
           ? 'px-3 py-2 rounded-xl text-xs font-extrabold bg-orange-600 text-white shadow transition'
-          : 'px-3 py-2 rounded-xl text-xs font-extrabold bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+          : 'px-3 py-2 rounded-xl text-xs font-extrabold bg-slate-800 text-slate-300 hover:bg-slate-700 transition');
       });
 
       const ctrl = document.getElementById('analyticsControlsBar');
       const subBox = document.getElementById('analyticsSubChartBox');
       subBox.classList.remove('hidden');
 
-      if (activeAnalyticsCat === 'personnel') {
+      if (activeAnalyticsCat === 'school_compare' && currentSession && currentSession.role === 'admin') {
+        ctrl.innerHTML = `
+          <span class="text-xs font-extrabold text-orange-300">🏫 School-by-School 3D Comparison (Rosario West Sub-Office)</span>
+          <select onchange="changeSchoolCompareMetric(this.value)" class="bg-slate-950 text-white border border-orange-500 rounded-xl px-3 py-1.5 text-xs font-extrabold">
+            <option value="enrollment" ${schoolCompareMetric === 'enrollment' ? 'selected' : ''}>1. Total Enrollment per School (SY 2026–2027)</option>
+            <option value="personnel" ${schoolCompareMetric === 'personnel' ? 'selected' : ''}>2. Total Personnel per School</option>
+            <option value="mps" ${schoolCompareMetric === 'mps' ? 'selected' : ''}>3. General Average MPS (%) per School</option>
+            <option value="rooms" ${schoolCompareMetric === 'rooms' ? 'selected' : ''}>4. Total Classrooms (NSBI) per School</option>
+          </select>
+        `;
+
+        const accounts = Object.values(districtDB.accounts || {});
+        const items = accounts.map(acc => {
+          const sc = districtDB.schoolsData?.[acc.schoolId] || createEmptySchoolRecord(acc.schoolId, acc.schoolName, acc.headName);
+          const m = getSchoolMetricsSummary(sc);
+          let val = m.totEnr;
+          if (schoolCompareMetric === 'personnel') val = m.totPers;
+          else if (schoolCompareMetric === 'mps') val = m.avgMPS;
+          else if (schoolCompareMetric === 'rooms') val = m.totRooms;
+          return {
+            label: acc.schoolName.replace(/Elementary School/gi, 'ES').replace(/National High School/gi, 'NHS'),
+            value: val
+          };
+        });
+
+        const metricTitles = {
+          enrollment: 'School-by-School 3D Comparison: Total Enrollment (SY 2026–2027)',
+          personnel: 'School-by-School 3D Comparison: Total Teaching & Non-Teaching Personnel',
+          mps: 'School-by-School 3D Comparison: General Average MPS (%)',
+          rooms: 'School-by-School 3D Comparison: Total Classrooms (NSBI)'
+        };
+
+        render3DGlassBarChart('analyticsMainChartBox', {
+          title: metricTitles[schoolCompareMetric],
+          subtitle: 'Paghahambing ng bawat rehistradong paaralan sa Rosario West Sub-Office.',
+          items,
+          suffix: schoolCompareMetric === 'mps' ? '%' : '',
+          maxVal: schoolCompareMetric === 'mps' ? 100 : null
+        });
+        subBox.classList.add('hidden');
+      } else if (activeAnalyticsCat === 'personnel') {
         const pData = getAggregatedPersonnel();
-        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">👩‍🏫 Teaching & School Head Personnel Breakdown (Teacher I to Principal IV)</span>`;
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">👩‍🏫 Teaching, School Head & Non-Teaching Personnel Breakdown</span>`;
 
         render3DGlassBarChart('analyticsMainChartBox', {
           title: '3D Glass Bar Graph: Teaching Positions (Teacher I to Teacher VII & Master Teachers)',
@@ -2627,9 +2855,9 @@ html_code = r'''<!DOCTYPE html>
         });
 
         render3DGlassBarChart('analyticsSubChartBox', {
-          title: '3D Glass Bar Graph: School Heads (Head Teacher I–IV & Principal I–IV)',
+          title: '3D Glass Bar Graph: School Heads & Non-Teaching Personnel',
           items: PERSONNEL_POSITIONS.slice(10).map(p => ({
-            label: p.title.replace('Head Teacher ', 'HT-').replace('Principal ', 'P-'),
+            label: p.title.replace('Head Teacher ', 'HT-').replace('Principal ', 'P-').replace('Administrative Officer II (AO II)', 'AO II').replace('Administrative Assistant (ADAS I–III)', 'ADAS').replace('School Nurse / Health Personnel', 'Nurse').replace('Utility / Janitorial Staff', 'Utility').replace('Security Guard', 'Guard').replace('Job Order / LGU-Paid Personnel', 'JO/LGU'),
             value: pData[p.key].m + pData[p.key].f
           }))
         });
@@ -2655,9 +2883,8 @@ html_code = r'''<!DOCTYPE html>
         });
         subBox.classList.add('hidden');
       } else {
-        // Trigger literacy/nat/nutrition/sbm summary graphs
         ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">📊 Live 3D Summary Chart (${activeAnalyticsCat.toUpperCase()})</span>`;
-        if (activeAnalyticsCat === 'crla' || activeAnalyticsCat === 'philiri' || activeAnalyticsCat === 'rma' || activeAnalyticsCat === 'reading') {
+        if (['crla', 'philiri', 'rma', 'reading'].includes(activeAnalyticsCat)) {
           renderLiteracyTab();
           document.getElementById('analyticsMainChartBox').innerHTML = document.getElementById('inlineGraph_' + activeAnalyticsCat).innerHTML;
           subBox.classList.add('hidden');
@@ -2672,37 +2899,110 @@ html_code = r'''<!DOCTYPE html>
     }
 
     // =========================================================================
-    // TAB 11: ADMIN REGISTERED SCHOOLS MANAGEMENT
+    // TAB 11: ADMIN SUBMISSION TRACKER, SECURITY & BACKUP
     // =========================================================================
+    function getSchoolSubmissionChecklist(sc) {
+      if (!sc) return { pers: false, sec: false, mps: false, enr: false, lit: false, nat: false, nutr: false, sbm: false, nsbi: false, count: 0 };
+      const pers = Object.values(sc.personnel || {}).some(p => (Number(p.m) || 0) + (Number(p.f) || 0) > 0);
+      const sec = (sc.sectionsList || []).length > 0;
+      const mps = G1_TO_G6.some(g => (sc.mpsMatrix?.y4?.all_avg?.[g] || []).some(p => (Number(p.m) || 0) + (Number(p.f) || 0) > 0));
+      const enr = GRADES.some(g => (sc.enrMatrix?.y4?.enrollment?.[g] || []).some(p => (Number(p.m) || 0) + (Number(p.f) || 0) > 0));
+      const lit = G1_TO_G3.some(g => (sc.crlaV2?.y3?.[g] || []).some(v => Number(v) > 0)) ||
+                  G3_TO_G6.some(g => (sc.philiri?.[g] || []).some(v => Number(v) > 0)) ||
+                  G1_TO_G6.some(g => (sc.rmaV2?.y3?.[g] || []).some(v => Number(v) > 0));
+      const nat = (sc.nat || []).some(r => (Number(r.y1m) + Number(r.y1f) + Number(r.y2m) + Number(r.y2f) + Number(r.y3m) + Number(r.y3f)) > 0);
+      const nutr = GRADES.some(g => {
+        const d = sc.nutrition?.[g] || {};
+        return Object.values(d).some(v => Number(v) > 0);
+      });
+      const sbm = Object.values(sc.sbm || {}).some(v => Boolean(v.level));
+      const nsbi = (sc.nsbi || []).length > 0;
+
+      const flags = [pers, sec, mps, enr, lit, nat, nutr, sbm, nsbi];
+      const count = flags.filter(Boolean).length;
+      return { pers, sec, mps, enr, lit, nat, nutr, sbm, nsbi, count };
+    }
+
     function renderAdminSchoolsTab() {
       if (!currentSession || currentSession.role !== 'admin') return;
+      applyGlobalLockUI();
+
       const accounts = Object.values(districtDB.accounts || {});
       document.getElementById('adminTotalSchoolsBadge').innerText = `${accounts.length} Registered School${accounts.length !== 1 ? 's' : ''}`;
 
       const tbody = document.getElementById('tbodyAdminSchools');
       if (!accounts.length) {
-        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400 font-bold">Wala pang naka-register na paaralan. Maaari na silang mag-register gamit ang "Register School" tab sa Login screen.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="13" class="p-6 text-center text-slate-400 font-bold">Wala pang naka-register na paaralan. Maaari na silang mag-register gamit ang "Register School" tab sa Login screen.</td></tr>`;
         return;
       }
 
+      const badge = (ok) => ok ? `<span class="text-emerald-600 font-extrabold text-sm" title="Submitted">✅</span>` : `<span class="text-slate-300 font-bold text-sm" title="Pending">⏳</span>`;
+
       tbody.innerHTML = accounts.map(acc => {
         const scData = districtDB.schoolsData?.[acc.schoolId];
-        let totPers = 0;
-        if (scData && scData.personnel) {
-          Object.values(scData.personnel).forEach(p => { totPers += (Number(p.m) || 0) + (Number(p.f) || 0); });
-        }
+        const chk = getSchoolSubmissionChecklist(scData);
+        const pct = Math.round((chk.count / 9) * 100);
+
         return `<tr class="hover:bg-slate-50">
-          <td class="p-3 font-mono font-extrabold text-blue-900">${acc.schoolId}</td>
-          <td class="p-3 font-extrabold text-slate-950">${acc.schoolName}</td>
-          <td class="p-3 font-semibold">${acc.headName}</td>
-          <td class="p-3 text-center font-mono font-bold text-orange-700">${acc.pin}</td>
-          <td class="p-3 text-center font-extrabold">${totPers}</td>
-          <td class="p-3 text-center space-x-1.5">
-            <button type="button" onclick="adminResetSchoolPass('${acc.schoolId}')" class="bg-blue-800 hover:bg-blue-700 text-white px-2.5 py-1.5 rounded-lg text-[11px] font-extrabold">🔑 Reset Pass</button>
-            <button type="button" onclick="adminDeleteSchool('${acc.schoolId}')" class="bg-red-700 hover:bg-red-600 text-white px-2.5 py-1.5 rounded-lg text-[11px] font-extrabold">🗑️ Delete</button>
+          <td class="p-3">
+            <span class="font-mono font-extrabold text-blue-900 block">${acc.schoolId}</span>
+            <span class="font-extrabold text-slate-950">${acc.schoolName}</span>
+          </td>
+          <td class="p-3">
+            <span class="font-semibold block">${acc.headName}</span>
+            <span class="text-[10px] font-mono font-bold text-orange-700">PIN: ${acc.pin}</span>
+          </td>
+          <td class="p-2 text-center">${badge(chk.pers)}</td>
+          <td class="p-2 text-center">${badge(chk.sec)}</td>
+          <td class="p-2 text-center">${badge(chk.mps)}</td>
+          <td class="p-2 text-center">${badge(chk.enr)}</td>
+          <td class="p-2 text-center">${badge(chk.lit)}</td>
+          <td class="p-2 text-center">${badge(chk.nat)}</td>
+          <td class="p-2 text-center">${badge(chk.nutr)}</td>
+          <td class="p-2 text-center">${badge(chk.sbm)}</td>
+          <td class="p-2 text-center">${badge(chk.nsbi)}</td>
+          <td class="p-2 text-center font-extrabold">
+            <span class="px-2 py-1 rounded-full text-[10px] ${pct === 100 ? 'bg-emerald-100 text-emerald-900' : pct > 0 ? 'bg-orange-100 text-orange-900' : 'bg-slate-100 text-slate-600'}">
+              ${chk.count}/9 (${pct}%)
+            </span>
+          </td>
+          <td class="p-2 text-center space-x-1">
+            <button type="button" onclick="adminResetSchoolPass('${acc.schoolId}')" class="bg-blue-800 hover:bg-blue-700 text-white px-2 py-1 rounded-lg text-[10px] font-extrabold">🔑 Reset</button>
+            <button type="button" onclick="adminDeleteSchool('${acc.schoolId}')" class="bg-red-700 hover:bg-red-600 text-white px-2 py-1 rounded-lg text-[10px] font-extrabold">🗑️</button>
           </td>
         </tr>`;
       }).join('');
+    }
+
+    function changeAdminPassword() {
+      if (!currentSession || currentSession.role !== 'admin') return;
+      const newPass = document.getElementById('newAdminPassInput').value.trim();
+      if (newPass.length < 4) {
+        alert('❌ Maglagay ng hindi bababa sa 4 characters para sa bagong Admin Password.');
+        return;
+      }
+      districtDB.adminPass = newPass;
+      saveDistrictDB();
+      document.getElementById('newAdminPassInput').value = '';
+      alert('✅ Matagumpay na napalitan ang Sub-Office Admin Password!');
+    }
+
+    function toggleGlobalSubmissionLock() {
+      if (!currentSession || currentSession.role !== 'admin') return;
+      districtDB.submissionsLocked = !districtDB.submissionsLocked;
+      saveDistrictDB();
+      applyGlobalLockUI();
+      alert(districtDB.submissionsLocked
+        ? '🔒 Naka-LOCK na ang lahat ng school submissions. Hindi na maaaring mag-edit ang mga paaralan.'
+        : '🔓 Naka-UNLOCK na muli ang submissions. Maaari nang mag-encode ang mga paaralan.');
+    }
+
+    function downloadFullDistrictJSONBackup() {
+      const blob = new Blob([JSON.stringify(districtDB, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `RosarioWest_SubOffice_FullBackup_${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
     }
 
     function adminResetSchoolPass(schoolId) {
@@ -2728,6 +3028,134 @@ html_code = r'''<!DOCTYPE html>
     }
 
     // =========================================================================
+    // PRINT-READY 1-PAGE EXECUTIVE SUMMARY REPORT
+    // =========================================================================
+    function openExecutiveSummaryModal() {
+      const target = getTargetSchoolRecord();
+      const scopeName = target ? `${target.schoolName.toUpperCase()} (${target.schoolId})` : `DISTRICT CONSOLIDATED (${Object.keys(districtDB.accounts || {}).length} SCHOOLS)`;
+      document.getElementById('execReportScopeTitle').innerText = `EXECUTIVE SUMMARY REPORT • ${scopeName} • ${new Date().toLocaleDateString()}`;
+
+      // 1. Personnel Summary
+      const pData = getAggregatedPersonnel();
+      let cTeach = 0, cMT = 0, cHT = 0, cPrin = 0, cNT = 0;
+      PERSONNEL_POSITIONS.forEach(p => {
+        const tot = pData[p.key].m + pData[p.key].f;
+        if (p.cat === 'Teaching') cTeach += tot;
+        else if (p.cat === 'Master Teacher') cMT += tot;
+        else if (p.cat === 'Head Teacher') cHT += tot;
+        else if (p.cat === 'School Principal') cPrin += tot;
+        else if (p.cat === 'Non-Teaching') cNT += tot;
+      });
+      const grandPers = cTeach + cMT + cHT + cPrin + cNT;
+
+      // 2. Enrollment Summary (SY 2026-2027)
+      const enrData = getEnrData('y4', 'enrollment');
+      let enrM = 0, enrF = 0;
+      GRADES.forEach(g => {
+        const arr = enrData[g];
+        for (let i = arr.length - 1; i >= 0; i--) {
+          if (arr[i].m + arr[i].f > 0 || i === 0) {
+            enrM += arr[i].m;
+            enrF += arr[i].f;
+            break;
+          }
+        }
+      });
+
+      // 3. MPS General Average (SY 2026-2027)
+      const mpsData = getMPSData('y4', 'all_avg');
+      let mpsSum = 0, mpsCnt = 0;
+      G1_TO_G6.forEach(g => {
+        mpsData[g].forEach(p => {
+          const avg = (p.m + p.f) / 2;
+          if (avg > 0) { mpsSum += avg; mpsCnt++; }
+        });
+      });
+      const overallMPS = mpsCnt ? (mpsSum / mpsCnt).toFixed(2) + '%' : '0.00%';
+
+      // 4. NSBI Summary
+      const scList = target ? [target] : getAllSchoolRecordsList();
+      let bldgCnt = 0, rmCnt = 0, silyaCnt = 0, lamesaCnt = 0, crCnt = 0, gripoCnt = 0;
+      scList.forEach(sc => {
+        (sc.nsbi || []).forEach(b => {
+          bldgCnt++;
+          rmCnt += Number(b.rooms) || 0;
+          silyaCnt += Number(b.silya) || 0;
+          lamesaCnt += Number(b.lamesa) || 0;
+          crCnt += Number(b.cr) || 0;
+          gripoCnt += Number(b.gripo) || 0;
+        });
+      });
+
+      document.getElementById('execSummaryBody').innerHTML = `
+        <div class="grid grid-cols-4 gap-3 text-center">
+          <div class="border border-slate-300 rounded-xl p-3 bg-slate-50">
+            <span class="text-[10px] font-bold uppercase text-slate-500 block">Total Enrollment</span>
+            <span class="text-xl font-extrabold text-blue-950">${enrM + enrF}</span>
+            <span class="text-[10px] text-slate-600 block">M: ${enrM} | F: ${enrF}</span>
+          </div>
+          <div class="border border-slate-300 rounded-xl p-3 bg-slate-50">
+            <span class="text-[10px] font-bold uppercase text-slate-500 block">Total Personnel</span>
+            <span class="text-xl font-extrabold text-slate-950">${grandPers}</span>
+            <span class="text-[10px] text-slate-600 block">Teach/Heads: ${grandPers - cNT} | Non-Teach: ${cNT}</span>
+          </div>
+          <div class="border border-slate-300 rounded-xl p-3 bg-slate-50">
+            <span class="text-[10px] font-bold uppercase text-slate-500 block">MATATAG Gen. MPS</span>
+            <span class="text-xl font-extrabold text-orange-700">${overallMPS}</span>
+            <span class="text-[10px] text-slate-600 block">SY 2026–2027 Average</span>
+          </div>
+          <div class="border border-slate-300 rounded-xl p-3 bg-slate-50">
+            <span class="text-[10px] font-bold uppercase text-slate-500 block">Classrooms (NSBI)</span>
+            <span class="text-xl font-extrabold text-emerald-800">${rmCnt}</span>
+            <span class="text-[10px] text-slate-600 block">${bldgCnt} School Buildings</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="border border-slate-300 rounded-xl overflow-hidden">
+            <div class="bg-slate-900 text-white px-3 py-1.5 font-extrabold">I. PERSONNEL SUMMARY BREAKDOWN</div>
+            <table class="w-full text-xs">
+              <tbody class="divide-y">
+                <tr><td class="p-2 font-bold">Teachers (Teacher I – Teacher VII)</td><td class="p-2 text-right font-extrabold">${cTeach}</td></tr>
+                <tr><td class="p-2 font-bold">Master Teachers (MT-I – MT-III)</td><td class="p-2 text-right font-extrabold">${cMT}</td></tr>
+                <tr><td class="p-2 font-bold">Head Teachers (HT-I – HT-IV)</td><td class="p-2 text-right font-extrabold">${cHT}</td></tr>
+                <tr><td class="p-2 font-bold">School Principals (P-I – P-IV)</td><td class="p-2 text-right font-extrabold">${cPrin}</td></tr>
+                <tr><td class="p-2 font-bold">Non-Teaching & Job Order Personnel</td><td class="p-2 text-right font-extrabold">${cNT}</td></tr>
+                <tr class="bg-slate-100 font-extrabold"><td class="p-2">GRAND TOTAL PERSONNEL</td><td class="p-2 text-right">${grandPers}</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="border border-slate-300 rounded-xl overflow-hidden">
+            <div class="bg-slate-900 text-white px-3 py-1.5 font-extrabold">II. PHYSICAL FACILITIES (NSBI INVENTORY)</div>
+            <table class="w-full text-xs">
+              <tbody class="divide-y">
+                <tr><td class="p-2 font-bold">Total School Buildings</td><td class="p-2 text-right font-extrabold">${bldgCnt}</td></tr>
+                <tr><td class="p-2 font-bold">Total Instructional Classrooms</td><td class="p-2 text-right font-extrabold">${rmCnt}</td></tr>
+                <tr><td class="p-2 font-bold">Functional Comfort Rooms (CR)</td><td class="p-2 text-right font-extrabold">${crCnt}</td></tr>
+                <tr><td class="p-2 font-bold">Water Faucets / Gripo</td><td class="p-2 text-right font-extrabold">${gripoCnt}</td></tr>
+                <tr><td class="p-2 font-bold">Learner Chairs (Silya) / Desks (Lamesa)</td><td class="p-2 text-right font-extrabold">${silyaCnt} / ${lamesaCnt}</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('execSummaryPrintModal').classList.remove('hidden');
+    }
+
+    function closeExecutiveSummaryModal() {
+      document.body.classList.remove('exec-print-mode');
+      document.getElementById('execSummaryPrintModal').classList.add('hidden');
+    }
+
+    function printExecutiveSummary() {
+      document.body.classList.add('exec-print-mode');
+      window.print();
+      setTimeout(() => document.body.classList.remove('exec-print-mode'), 500);
+    }
+
+    // =========================================================================
     // EXPORT CSV
     // =========================================================================
     function exportCurrentCSV() {
@@ -2745,10 +3173,3 @@ html_code = r'''<!DOCTYPE html>
   </script>
 </body>
 </html>
-'''
-
-out_path = "/mnt/data/RosarioWest_SubOffice_DataHub.html"
-with open(out_path, "w", encoding="utf-8") as f:
-    f.write(html_code)
-
-print("Saved:", out_path, "Bytes:", len(html_code))
