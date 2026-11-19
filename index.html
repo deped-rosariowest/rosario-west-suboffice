@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tubahan School Information & SMEA System • Elementary, Junior High & Senior High School</title>
+  <title>Rosario West District • Official School Information, K–12 MPS & SMEA System</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -23,16 +23,16 @@
     <div class="bg-white rounded-3xl max-w-md w-full p-7 sm:p-8 shadow-2xl border-2 border-amber-400/60">
       <div class="text-center mb-6">
         <div class="w-28 h-28 rounded-full mx-auto p-1 bg-gradient-to-tr from-amber-400 via-yellow-200 to-amber-500 shadow-lg flex items-center justify-center overflow-hidden">
-          <img src="logo.jpg" alt="Tubahan Elementary School Logo"
+          <img src="logo.jpg" alt="School Logo"
             class="school-logo-img w-full h-full object-cover rounded-full bg-white"
             onerror="this.onerror=null; this.src=FALLBACK_SCHOOL_SEAL;">
         </div>
         <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700 block mt-3">
           Department of Education • Region IV-A CALABARZON
         </span>
-        <h1 class="text-xl font-extrabold text-slate-900 mt-0.5">TUBAHAN ELEMENTARY SCHOOL</h1>
-        <p class="text-xs font-bold text-amber-700">Rosario, Batangas • Est. 1965</p>
-        <p class="text-[11px] text-slate-500 mt-1">Official School Information, SMEA, SBM & NSBI System</p>
+        <h1 id="loginSchoolNameDisplay" class="text-xl font-extrabold text-slate-900 mt-0.5 uppercase">ROSARIO WEST DISTRICT SCHOOL</h1>
+        <p id="loginDistrictDisplay" class="text-xs font-bold text-amber-700">Rosario West District • Schools Division of Batangas</p>
+        <p class="text-[11px] text-slate-500 mt-1">Official K–12 School Information, SMEA, SBM & NSBI System</p>
       </div>
 
       <div class="space-y-4">
@@ -73,7 +73,7 @@
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center border border-amber-200">
       <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl mx-auto mb-2">🔐</div>
       <h3 class="text-base font-extrabold text-slate-900">Unlock Edit Mode</h3>
-      <p class="text-xs text-slate-500 mt-1">Ilagay ang opisyal na passcode upang makapag-edit ng datos sa portal.</p>
+      <p class="text-xs text-slate-500 mt-1">Ilagay ang opisyal na passcode upang makapag-edit ng datos at pangalan ng paaralan.</p>
       <input type="password" id="editPassInput" onkeydown="if(event.key==='Enter') confirmEditMode()" placeholder="Ilagay ang passcode..."
         class="w-full mt-3 px-4 py-2.5 rounded-xl border border-slate-300 text-sm text-center font-bold focus:outline-none focus:border-emerald-700">
       <p id="editPassError" class="hidden text-xs text-rose-600 font-bold mt-2">❌ Mali ang passcode.</p>
@@ -89,13 +89,13 @@
 
     <!-- OFFICIAL PRINT HEADER -->
     <div class="hidden print-only items-center justify-center gap-4 border-b-2 border-slate-800 pb-4 mb-5 pt-2">
-      <img src="logo.jpg" alt="Tubahan ES Logo" class="school-logo-img w-16 h-16 rounded-full object-cover"
+      <img src="logo.jpg" alt="School Logo" class="school-logo-img w-16 h-16 rounded-full object-cover"
         onerror="this.onerror=null; this.src=FALLBACK_SCHOOL_SEAL;">
       <div class="text-center">
         <p class="text-[11px] font-bold uppercase tracking-wider">Republic of the Philippines • Department of Education</p>
-        <p class="text-xs font-bold">Region IV-A CALABARZON • Schools Division of Batangas • Rosario East District</p>
-        <h1 class="text-lg font-extrabold uppercase">TUBAHAN ELEMENTARY SCHOOL</h1>
-        <p class="text-[11px] text-slate-600">Tubahan, Rosario, Batangas • Official School Information & SMEA Report</p>
+        <p id="printSubHeaderText" class="text-xs font-bold">Region IV-A CALABARZON • Schools Division of Batangas • Rosario West District</p>
+        <h1 id="printSchoolNameText" class="text-lg font-extrabold uppercase">ROSARIO WEST DISTRICT SCHOOL</h1>
+        <p id="printAddressText" class="text-[11px] text-slate-600">Rosario, Batangas • Official K–12 School Information & SMEA Report</p>
       </div>
     </div>
 
@@ -104,18 +104,18 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-3.5">
           <div class="w-12 h-12 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 to-yellow-200 shadow-md shrink-0 overflow-hidden">
-            <img src="logo.jpg" alt="Tubahan Elementary School Logo"
+            <img src="logo.jpg" alt="School Logo"
               class="school-logo-img w-full h-full object-cover rounded-full bg-white"
               onerror="this.onerror=null; this.src=FALLBACK_SCHOOL_SEAL;">
           </div>
           <div>
             <div class="flex flex-wrap items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-wider text-amber-300">
               <span>DEPARTMENT OF EDUCATION</span>
-              <span class="text-emerald-400">• Rosario, Batangas (Est. 1965)</span>
+              <span id="hdrDistrictSub" class="text-emerald-300">• Rosario West District • Batangas</span>
               <span id="cloudSyncBadge" class="bg-emerald-900/90 border border-emerald-500/40 text-emerald-200 px-2 py-0.5 rounded-full text-[9px] tracking-normal">☁️ Cloud Sync Ready</span>
             </div>
-            <h1 class="text-base sm:text-lg font-extrabold tracking-tight leading-tight">TUBAHAN ELEMENTARY SCHOOL</h1>
-            <p class="text-[11px] text-emerald-200/90">Elementary (K–6), Junior High School (G7–10) & Senior High School (G11–12 • Strands & Core Subjects) SMEA System</p>
+            <h1 id="hdrSchoolTitle" class="text-base sm:text-lg font-extrabold tracking-tight leading-tight uppercase">ROSARIO WEST DISTRICT SCHOOL</h1>
+            <p id="hdrSchoolTagline" class="text-[11px] text-emerald-200/90">K–12 MATATAG & SHS Core MPS, Learner Masterlist, NAT, ELLNA, SBM & NSBI System</p>
           </div>
         </div>
 
@@ -129,16 +129,60 @@
             <span>🔒 View Mode (Locked)</span>
           </button>
 
-          <button type="button" onclick="exportCurrentCSV()" class="bg-amber-400 hover:bg-amber-300 text-emerald-950 text-xs font-extrabold px-3.5 py-2 rounded-xl shadow-sm transition">
-            📥 Export Excel/CSV
+          <button type="button" onclick="downloadJSONBackup()" title="I-download ang buong database backup bago mag-update ng HTML" class="bg-sky-600 hover:bg-sky-500 text-white text-xs font-extrabold px-3 py-2 rounded-xl shadow-sm transition">
+            💾 Backup JSON
           </button>
 
-          <a href="index.html" class="bg-white/15 hover:bg-white/25 text-white text-xs font-extrabold px-3 py-2 rounded-xl transition">🏠 Portal</a>
+          <label id="btnRestoreBackup" class="hidden cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-extrabold px-3 py-2 rounded-xl shadow-sm transition">
+            📂 Restore JSON
+            <input type="file" accept=".json" onchange="restoreJSONBackup(event)" class="hidden">
+          </label>
+
+          <button type="button" onclick="exportCurrentCSV()" class="bg-amber-400 hover:bg-amber-300 text-emerald-950 text-xs font-extrabold px-3.5 py-2 rounded-xl shadow-sm transition">
+            📥 Export CSV
+          </button>
 
           <button type="button" onclick="lockPortal()" class="bg-rose-600 hover:bg-rose-500 text-white text-xs font-extrabold px-3.5 py-2 rounded-xl shadow-sm transition">Logout</button>
         </div>
       </div>
     </header>
+
+    <!-- PERSISTENT SCHOOL IDENTITY BAR (EDITABLE WHEN UNLOCKED — SAVED PERMANENTLY IN CLOUD) -->
+    <div id="schoolProfileEditorBar" class="hidden no-print bg-amber-50 border-b-2 border-amber-400 shadow-xs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 space-y-2">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="text-xs font-extrabold text-amber-950">🏫 School Profile Settings (Permanenteng naka-save sa Cloud — hindi mabubura kahit mag-reupload ka ng bagong HTML):</span>
+          <span class="text-[11px] font-bold text-emerald-800">✅ Auto-Saved on Change</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+          <div>
+            <label class="text-[10px] font-extrabold text-slate-600 block">School Name *</label>
+            <input type="text" id="profSchoolName" oninput="updSchoolProfile('schoolName', this.value)"
+              class="w-full px-3 py-1.5 rounded-lg border border-amber-400 bg-white text-xs font-extrabold text-slate-900">
+          </div>
+          <div>
+            <label class="text-[10px] font-extrabold text-slate-600 block">School ID</label>
+            <input type="text" id="profSchoolId" placeholder="hal. 107582 o 301145" oninput="updSchoolProfile('schoolId', this.value)"
+              class="w-full px-3 py-1.5 rounded-lg border border-amber-400 bg-white text-xs font-bold text-slate-900">
+          </div>
+          <div>
+            <label class="text-[10px] font-extrabold text-slate-600 block">District</label>
+            <input type="text" id="profDistrict" oninput="updSchoolProfile('district', this.value)"
+              class="w-full px-3 py-1.5 rounded-lg border border-amber-400 bg-white text-xs font-bold text-slate-900">
+          </div>
+          <div>
+            <label class="text-[10px] font-extrabold text-slate-600 block">Municipality / Province</label>
+            <input type="text" id="profAddress" oninput="updSchoolProfile('address', this.value)"
+              class="w-full px-3 py-1.5 rounded-lg border border-amber-400 bg-white text-xs font-bold text-slate-900">
+          </div>
+          <div>
+            <label class="text-[10px] font-extrabold text-slate-600 block">School Head / Principal</label>
+            <input type="text" id="profPrincipal" placeholder="hal. Dr. Juan Dela Cruz, Principal II" oninput="updSchoolProfile('principal', this.value)"
+              class="w-full px-3 py-1.5 rounded-lg border border-amber-400 bg-white text-xs font-bold text-slate-900">
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- WHITE PILL-TABS BAR (ALL 9 TABS) -->
     <div class="no-print bg-white border-b border-slate-200 shadow-xs">
@@ -148,10 +192,7 @@
             🧑‍🎓 1. Masterlist & Advisers
           </button>
           <button type="button" id="tabBtn_mps" onclick="switchPortalTab('mps')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
-            📈 2. MPS (Elem & JHS)
-          </button>
-          <button type="button" id="tabBtn_shs" onclick="switchPortalTab('shs')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
-            🎓 2B. Senior High (Strands & Core Subjects)
+            📈 2. MPS (K–12 & SHS Core)
           </button>
           <button type="button" id="tabBtn_enrollment" onclick="switchPortalTab('enrollment')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
             👥 3. Enrollment (Terms / Quarters)
@@ -163,7 +204,7 @@
             🏆 5. NAT & ELLNA (3 Yrs)
           </button>
           <button type="button" id="tabBtn_nutrition" onclick="switchPortalTab('nutrition')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
-            🥗 6. Nutritional Status (SF8)
+            🥗 6. Nutritional Status (SF8 / SBFP)
           </button>
           <button type="button" id="tabBtn_sbm" onclick="switchPortalTab('sbm')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
             ☑️ 7. SBM Checklist
@@ -189,24 +230,24 @@
       <!-- ==================== TAB 1: MASTERLIST & ADVISERS ==================== -->
       <section id="sec_masterlist" class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-6">
         <div>
-          <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">OFFICIAL SCHOOL FORM 1 (SF1) • SECTIONS, ADVISERS & LEARNERS</span>
-          <h2 class="text-xl font-extrabold text-slate-900">🧑‍🎓 Grade Levels, Sections, Class Advisers & Learner Masterlist</h2>
-          <p class="text-xs text-slate-500">Magdagdag ng Grade Level at Section, itakda ang Class Adviser bawat section, at pamahalaan ang opisyal na Masterlist.</p>
+          <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">OFFICIAL SCHOOL FORM 1 (SF1) • K–12 SECTIONS, ADVISERS & LEARNERS</span>
+          <h2 class="text-xl font-extrabold text-slate-900">🧑‍🎓 Grade Levels (Kinder – Grade 12), Sections, Class Advisers & Masterlist</h2>
+          <p class="text-xs text-slate-500">Pwede magdagdag ng Kinder, Grade 1–6, Grade 7–10 (JHS), o Grade 11–12 (SHS Track/Strand) at itakda ang Class Adviser bawat section.</p>
         </div>
 
         <div class="bg-[#f4f7f5] rounded-2xl p-4 sm:p-5 border border-slate-200 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div>
-              <h3 class="text-xs sm:text-sm font-extrabold text-[#063b2c]">👩‍🏫 Talaan ng mga Grade Level, Section at Class Adviser</h3>
+              <h3 class="text-xs sm:text-sm font-extrabold text-[#063b2c]">👩‍🏫 Talaan ng mga Grade Level, Section / Strand at Class Adviser</h3>
               <p class="text-[11px] text-slate-500">Pindutin ang <strong>Click to Edit Data</strong> upang magdagdag ng bagong Grade Level/Section o palitan ang Class Adviser.</p>
             </div>
-            <span id="totalSectionsBadge" class="bg-[#094635] text-amber-300 text-[11px] font-extrabold px-3 py-1 rounded-full">7 Sections</span>
+            <span id="totalSectionsBadge" class="bg-[#094635] text-amber-300 text-[11px] font-extrabold px-3 py-1 rounded-full">0 Sections</span>
           </div>
 
           <form id="formAddSection" onsubmit="addGradeSection(event)" class="hidden bg-white p-4 rounded-xl border-2 border-emerald-500 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2.5">
             <div>
               <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Grade Level *</label>
-              <input type="text" id="newSecGrade" list="gradeOptionsList" required placeholder="hal. Grade 1 o SNED" class="w-full px-3 py-2 rounded-lg border text-xs font-bold">
+              <input type="text" id="newSecGrade" list="gradeOptionsList" required placeholder="hal. Grade 11 o Grade 7" class="w-full px-3 py-2 rounded-lg border text-xs font-bold">
               <datalist id="gradeOptionsList">
                 <option value="Kinder">
                 <option value="Grade 1">
@@ -215,30 +256,22 @@
                 <option value="Grade 4">
                 <option value="Grade 5">
                 <option value="Grade 6">
-                <option value="Grade 7 (JHS)">
-                <option value="Grade 8 (JHS)">
-                <option value="Grade 9 (JHS)">
-                <option value="Grade 10 (JHS)">
-                <option value="Grade 11 - ABM (SHS)">
-                <option value="Grade 11 - HUMSS (SHS)">
-                <option value="Grade 11 - STEM (SHS)">
-                <option value="Grade 11 - GAS (SHS)">
-                <option value="Grade 11 - TVL (SHS)">
-                <option value="Grade 12 - ABM (SHS)">
-                <option value="Grade 12 - HUMSS (SHS)">
-                <option value="Grade 12 - STEM (SHS)">
-                <option value="Grade 12 - GAS (SHS)">
-                <option value="Grade 12 - TVL (SHS)">
-                <option value="SNED / Multi-grade">
+                <option value="Grade 7">
+                <option value="Grade 8">
+                <option value="Grade 9">
+                <option value="Grade 10">
+                <option value="Grade 11">
+                <option value="Grade 12">
+                <option value="SNED / ALS">
               </datalist>
             </div>
             <div>
-              <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Section Name *</label>
-              <input type="text" id="newSecName" required placeholder="hal. Sampaguita / Mabini" class="w-full px-3 py-2 rounded-lg border text-xs font-bold">
+              <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Section / Strand *</label>
+              <input type="text" id="newSecName" required placeholder="hal. STEM-A / Rizal" class="w-full px-3 py-2 rounded-lg border text-xs font-bold">
             </div>
             <div class="lg:col-span-2">
               <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Class Adviser (Buong Pangalan) *</label>
-              <input type="text" id="newSecAdviser" required placeholder="hal. Ma'am Elena R. Cruz, T-III" class="w-full px-3 py-2 rounded-lg border text-xs font-bold">
+              <input type="text" id="newSecAdviser" required placeholder="hal. Sir Mark Anthony Reyes, T-III" class="w-full px-3 py-2 rounded-lg border text-xs font-bold">
             </div>
             <div>
               <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Male / Female</label>
@@ -257,7 +290,7 @@
               <thead>
                 <tr class="bg-[#094635] text-white">
                   <th class="p-2.5 text-left w-36">Grade Level</th>
-                  <th class="p-2.5 text-left">Section Name</th>
+                  <th class="p-2.5 text-left">Section / Strand</th>
                   <th class="p-2.5 text-left">Class Adviser (Buong Pangalan)</th>
                   <th class="p-2.5 text-center w-20">Male</th>
                   <th class="p-2.5 text-center w-20">Female</th>
@@ -297,7 +330,7 @@
                   <th class="p-3">LRN</th>
                   <th class="p-3">Buong Pangalan</th>
                   <th class="p-3">Grade Level</th>
-                  <th class="p-3">Section</th>
+                  <th class="p-3">Section / Strand</th>
                   <th class="p-3">Class Adviser</th>
                   <th class="p-3">Sex</th>
                   <th class="p-3">Status</th>
@@ -310,39 +343,29 @@
         </div>
       </section>
 
-      <!-- ==================== TAB 2: MPS (MATATAG) ==================== -->
+      <!-- ==================== TAB 2: MPS (K-12: ELEM, JHS & SHS CORE/APPLIED/SPECIALIZED) ==================== -->
       <section id="sec_mps" class="hidden bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-6">
         <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
           <div class="space-y-1">
             <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">
-              ELEMENTARY (G1–6) & JUNIOR HIGH SCHOOL (G7–10) • MEAN PERCENTAGE SCORE (MPS %)
+              K–12 CURRICULUM • ELEMENTARY, JUNIOR HIGH & SENIOR HIGH CORE SUBJECTS MPS (%)
             </span>
             <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
-              📈 Quarterly & Term MPS Summary (Elementary & Junior High School)
+              📈 Quarterly & Term MPS Summary (Elementary, JHS & SHS Core Subjects)
             </h2>
             <p class="text-xs text-slate-500">
-              <strong class="text-slate-700">Sakop:</strong> Elementary (Grade 1–6) at Junior High School (Grade 7–10). Para sa Grade 11–12 Strands & Core Subjects, gamitin ang <strong>Tab 2B: Senior High</strong>.
+              Piliin ang <strong>School Level</strong> (Elementary G1–6, Junior High G7–10, o Senior High G11–12 Core/Applied/Specialized Subjects) at maaari ring magdagdag o mag-edit ng mga Grade Level rows at Custom Subjects.
             </p>
           </div>
 
           <div class="flex flex-col gap-2 min-w-[290px]">
-            <select id="mpsLevelFilter" onchange="renderMPSTab()" class="px-4 py-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-extrabold">
-              <option value="ALL">All Levels (Elementary G1–6 & Junior High G7–10)</option>
-              <option value="ELEM">Elementary Only (Grade 1 – Grade 6)</option>
-              <option value="JHS">Junior High School Only (Grade 7 – Grade 10)</option>
+            <select id="mpsLevelSel" onchange="onMpsLevelChange()" class="px-4 py-2.5 rounded-xl bg-amber-400 text-slate-950 text-xs sm:text-sm font-extrabold shadow-xs">
+              <option value="elem">Elementary (Grade 1 – Grade 6 • MATATAG)</option>
+              <option value="jhs">Junior High School (Grade 7 – Grade 10)</option>
+              <option value="shs">Senior High School (Grade 11 – Grade 12 • Core/Applied/Spec.)</option>
             </select>
-            <select id="mpsSubjectSel" onchange="renderMPSTab()" class="px-4 py-2.5 rounded-xl border-2 border-slate-200 text-xs sm:text-sm font-extrabold text-slate-800">
-              <option value="all_avg">General Average MPS (All Subjects)</option>
-              <option value="gmrc">GMRC / Values Education / EsP (G1–G10)</option>
-              <option value="filipino">Language / Filipino (G1–G10)</option>
-              <option value="english">Reading & Literacy / English (G1–G10)</option>
-              <option value="math">Mathematics (G1–G10)</option>
-              <option value="makabansa">Makabansa / Araling Panlipunan (G1–G10)</option>
-              <option value="science">Science (Grade 3–10)</option>
-              <option value="epp_tle">EPP / TLE (Grade 4–10)</option>
-              <option value="music_arts">Music & Arts / MAPEH (Grade 4–10)</option>
-              <option value="pe_health">PE & Health (Grade 4–10)</option>
-            </select>
+
+            <select id="mpsSubjectSel" onchange="renderMPSTab()" class="px-4 py-2.5 rounded-xl border-2 border-slate-200 text-xs sm:text-sm font-extrabold text-slate-800"></select>
 
             <select id="mpsSySel" onchange="renderMPSTab()" class="px-4 py-2.5 rounded-xl bg-[#094635] text-white text-xs sm:text-sm font-extrabold">
               <option value="y4">SY 2026–2027 (Present — 3 Terms)</option>
@@ -350,6 +373,23 @@
               <option value="y2">SY 2024–2025 (Past — 4 Quarters)</option>
               <option value="y1">SY 2023–2024 (Past — 4 Quarters)</option>
             </select>
+          </div>
+        </div>
+
+        <!-- EDITABLE TOOLS FOR MPS: ADD CUSTOM SUBJECT & ADD GRADE LEVEL ROW -->
+        <div id="mpsEditToolsBox" class="hidden bg-emerald-50/80 border-2 border-emerald-400 rounded-2xl p-4 space-y-3">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+            <form onsubmit="addCustomMpsSubject(event)" class="bg-white p-3 rounded-xl border border-emerald-300 flex flex-wrap items-center gap-2">
+              <span class="text-xs font-extrabold text-emerald-950">➕ Add Subject sa Level na ito:</span>
+              <input type="text" id="newMpsSubjName" required placeholder="hal. SHS Core: Earth & Life Science" class="flex-1 min-w-[170px] px-3 py-1.5 rounded-lg border text-xs font-bold">
+              <button type="submit" class="bg-[#094635] hover:bg-emerald-800 text-white font-extrabold px-3.5 py-1.5 rounded-lg text-xs">➕ Idagdag Subject</button>
+            </form>
+
+            <form onsubmit="addCustomMpsGrade(event)" class="bg-white p-3 rounded-xl border border-emerald-300 flex flex-wrap items-center gap-2">
+              <span class="text-xs font-extrabold text-emerald-950">➕ Add Grade / Strand Row:</span>
+              <input type="text" id="newMpsGradeName" required placeholder="hal. Grade 11 - STEM o Grade 12 - TVL" class="flex-1 min-w-[170px] px-3 py-1.5 rounded-lg border text-xs font-bold">
+              <button type="submit" class="bg-indigo-800 hover:bg-indigo-700 text-white font-extrabold px-3.5 py-1.5 rounded-lg text-xs">➕ Idagdag Grade</button>
+            </form>
           </div>
         </div>
 
@@ -377,7 +417,7 @@
 
         <div class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-[#0f172a] text-white px-4 py-3 flex flex-wrap items-center justify-between gap-2">
-            <span id="mpsBannerTitle" class="text-xs sm:text-sm font-extrabold">📌 SY 2026–2027 — MATATAG MPS SUMMARY</span>
+            <span id="mpsBannerTitle" class="text-xs sm:text-sm font-extrabold">📌 SY 2026–2027 — MPS SUMMARY</span>
             <span id="mpsBannerBadge" class="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">PRESENT SY: 3 TERMS</span>
           </div>
           <div class="overflow-x-auto">
@@ -390,180 +430,25 @@
         </div>
 
         <!-- LIVE 3D TRANSPARENT CYLINDER GRAPH FOR MPS -->
-        <div id="inlineGraph_mps" class="bg-transparent rounded-2xl border border-slate-200/80 p-4"></div>
+        <div id="inlineGraph_mps" class="bg-slate-50 rounded-2xl border border-slate-200 p-4"></div>
       </section>
 
-
-      <!-- ==================== TAB 2B: SENIOR HIGH SCHOOL (STRANDS & CORE SUBJECTS) ==================== -->
-      <section id="sec_shs" class="hidden bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-6">
-        <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4 border-b pb-4">
-          <div class="space-y-1">
-            <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">
-              SENIOR HIGH SCHOOL (GRADE 11 & GRADE 12) • TRACKS / STRANDS & CORE SUBJECTS
-            </span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
-              🎓 Senior High School (SHS) Strand Enrollment & Core Subjects MPS
-            </h2>
-            <p class="text-xs text-slate-500">
-              Pamahalaan ang iba't ibang gusto i-enroll na <strong>SHS Strands</strong> (STEM, ABM, HUMSS, GAS, TVL-HE, TVL-ICT, atbp.) at subaybayan ang <strong>SHS Core Subjects</strong> (1st Sem & 2nd Sem • Male, Female & Auto-Average) na may live <strong>Transparent 3D Cylinder Graph</strong>.
-            </p>
-          </div>
-          <div class="flex flex-col gap-2 min-w-[260px]">
-            <select id="shsSySel" onchange="renderSHSTab()" class="px-4 py-2.5 rounded-xl bg-[#094635] text-white text-xs sm:text-sm font-extrabold">
-              <option value="y4">SY 2026–2027 (Present SY)</option>
-              <option value="y3">SY 2025–2026</option>
-              <option value="y2">SY 2024–2025</option>
-              <option value="y1">SY 2023–2024</option>
-            </select>
-            <select id="shsGradeFilter" onchange="renderSHSTab()" class="px-4 py-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-extrabold">
-              <option value="ALL">All SHS Levels (Grade 11 & Grade 12)</option>
-              <option value="Grade 11">Grade 11 Only</option>
-              <option value="Grade 12">Grade 12 Only</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- PART A: SHS ENROLLMENT PER STRAND / TRACK -->
-        <div class="bg-[#f4f7f5] rounded-2xl p-4 sm:p-5 border border-slate-200 space-y-4">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <h3 class="text-sm font-extrabold text-[#063b2c]">📋 A. Senior High School Enrollment per Strand / Track (Male, Female & Total)</h3>
-              <p class="text-[11px] text-slate-500">Pindutin ang <strong>Click to Edit Data</strong> upang magdagdag ng bagong Strand / Track o i-update ang bilang ng nag-enroll.</p>
-            </div>
-            <span id="shsTotalEnrolledBadge" class="bg-[#094635] text-amber-300 text-xs font-extrabold px-3.5 py-1.5 rounded-full">Total SHS: 0</span>
-          </div>
-
-          <form id="formAddShsStrand" onsubmit="addShsStrand(event)" class="hidden bg-white p-4 rounded-xl border-2 border-emerald-500 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2.5">
-            <div>
-              <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">SHS Grade Level *</label>
-              <select id="newShsGrade" class="w-full px-3 py-2 rounded-lg border text-xs font-extrabold bg-slate-50">
-                <option value="Grade 11">Grade 11</option>
-                <option value="Grade 12">Grade 12</option>
-              </select>
-            </div>
-            <div class="lg:col-span-2">
-              <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Track / Strand Name *</label>
-              <input type="text" id="newShsStrandName" list="shsStrandSuggestions" required placeholder="hal. STEM, ABM, HUMSS, GAS, TVL-ICT" class="w-full px-3 py-2 rounded-lg border text-xs font-bold">
-              <datalist id="shsStrandSuggestions">
-                <option value="STEM (Science, Technology, Engineering & Math)">
-                <option value="ABM (Accountancy, Business & Management)">
-                <option value="HUMSS (Humanities & Social Sciences)">
-                <option value="GAS (General Academic Strand)">
-                <option value="TVL - ICT (Information & Communications Tech)">
-                <option value="TVL - HE (Home Economics)">
-                <option value="TVL - IA (Industrial Arts)">
-                <option value="Arts & Design Track">
-                <option value="Sports Track">
-              </datalist>
-            </div>
-            <div>
-              <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Male Enrolled</label>
-              <input type="number" min="0" id="newShsM" value="0" class="w-full px-3 py-2 rounded-lg border text-xs font-bold text-center">
-            </div>
-            <div>
-              <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Female Enrolled</label>
-              <input type="number" min="0" id="newShsF" value="0" class="w-full px-3 py-2 rounded-lg border text-xs font-bold text-center">
-            </div>
-            <div class="flex items-end">
-              <button type="submit" class="w-full bg-[#094635] hover:bg-emerald-800 text-white font-extrabold rounded-lg text-xs py-2.5">➕ Idagdag Strand</button>
-            </div>
-          </form>
-
-          <div class="overflow-x-auto rounded-xl border border-slate-300 bg-white">
-            <table class="w-full text-xs border-collapse">
-              <thead>
-                <tr class="bg-[#094635] text-white">
-                  <th class="p-2.5 text-left w-28">Grade Level</th>
-                  <th class="p-2.5 text-left">Track / Strand (Gusto I-enroll)</th>
-                  <th class="p-2.5 text-center w-24">Male</th>
-                  <th class="p-2.5 text-center w-24">Female</th>
-                  <th class="p-2.5 text-center w-24 bg-[#063b2c] text-amber-300">Total</th>
-                  <th id="thDelShsStrand" class="hidden p-2.5 text-center w-20">Action</th>
-                </tr>
-              </thead>
-              <tbody id="tbodyShsStrands" class="divide-y"></tbody>
-              <tfoot id="tfootShsStrands" class="bg-[#0f172a] text-white font-extrabold"></tfoot>
-            </table>
-          </div>
-
-          <!-- Transparent 3D Cylinder Graph for SHS Strand Enrollment -->
-          <div id="inlineGraph_shs_strands" class="bg-transparent rounded-2xl border border-slate-200/80 p-4"></div>
-        </div>
-
-        <!-- PART B: SHS CORE SUBJECTS (MPS %) -->
-        <div class="rounded-2xl overflow-hidden border border-slate-300">
-          <div class="bg-[#0f172a] text-white px-4 py-3 flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <span class="text-xs sm:text-sm font-extrabold block">📚 B. Senior High School Core Subjects — Mean Percentage Score (MPS %)</span>
-              <span class="text-[10px] text-amber-300">1st Semester & 2nd Semester Core Subjects (Pindutin ang Click to Edit Data upang magdagdag ng Core/Applied/Specialized Subject o mag-edit ng MPS)</span>
-            </div>
-            <span class="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-3 py-1 rounded-full">SHS Core Subjects</span>
-          </div>
-
-          <form id="formAddShsSubj" onsubmit="addShsCoreSubject(event)" class="hidden bg-emerald-50 p-3.5 border-b border-emerald-200 flex flex-wrap items-center gap-2">
-            <span class="text-xs font-extrabold text-emerald-950">➕ Magdagdag ng SHS Subject:</span>
-            <select id="newShsSubjGrade" class="px-3 py-1.5 rounded-lg border bg-white text-xs font-extrabold">
-              <option value="Grade 11">Grade 11</option>
-              <option value="Grade 12">Grade 12</option>
-            </select>
-            <select id="newShsSubjType" class="px-3 py-1.5 rounded-lg border bg-white text-xs font-extrabold">
-              <option value="Core Subject">Core Subject</option>
-              <option value="Applied Subject">Applied Subject</option>
-              <option value="Specialized Subject">Specialized Subject</option>
-            </select>
-            <input type="text" id="newShsSubjName" required placeholder="Pangalan ng Subject (hal. Oral Communication / General Mathematics)" class="flex-1 min-w-[220px] px-3 py-1.5 rounded-lg border bg-white text-xs font-bold">
-            <button type="submit" class="bg-[#094635] hover:bg-emerald-800 text-white font-extrabold px-4 py-1.5 rounded-lg text-xs">➕ Idagdag Subject</button>
-          </form>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-xs border-collapse">
-              <thead>
-                <tr class="bg-[#0f172a] text-white">
-                  <th rowspan="2" class="p-3 text-left w-24">Grade</th>
-                  <th rowspan="2" class="p-3 text-left w-32 bg-slate-800">Category</th>
-                  <th rowspan="2" class="p-3 text-left min-w-[210px]">SHS Core / Strand Subject</th>
-                  <th colspan="3" class="p-2 text-center bg-[#094635] border-l border-white/20">1st Semester MPS (%)</th>
-                  <th colspan="3" class="p-2 text-center bg-sky-900 border-l border-white/20">2nd Semester MPS (%)</th>
-                  <th rowspan="2" class="p-3 text-center bg-[#063b2c] text-amber-300 border-l border-white/20">Final Ave %</th>
-                  <th id="thDelShsSubj" rowspan="2" class="hidden p-2 text-center bg-rose-950 border-l border-white/20">Action</th>
-                </tr>
-                <tr class="bg-slate-100 text-slate-800 font-extrabold text-[10px]">
-                  <th class="p-1.5 text-center border-l">Male %</th><th class="p-1.5 text-center">Female %</th><th class="p-1.5 text-center bg-emerald-50">Ave %</th>
-                  <th class="p-1.5 text-center border-l">Male %</th><th class="p-1.5 text-center">Female %</th><th class="p-1.5 text-center bg-sky-50">Ave %</th>
-                </tr>
-              </thead>
-              <tbody id="tbodyShsSubjects" class="divide-y bg-white"></tbody>
-              <tfoot id="tfootShsSubjects" class="bg-[#0f172a] text-white font-extrabold"></tfoot>
-            </table>
-          </div>
-
-          <!-- Transparent 3D Cylinder Graph for SHS Core Subjects MPS -->
-          <div id="inlineGraph_shs_subjects" class="p-4 bg-transparent border-t border-slate-200/80"></div>
-        </div>
-      </section>
-
-      <!-- ==================== TAB 3: ENROLLMENT, DROP-OUT, TRANS IN/OUT ==================== -->
+      <!-- ==================== TAB 3: ENROLLMENT, DROP-OUT, TRANS IN/OUT (K-12 EDITABLE GRADES) ==================== -->
       <section id="sec_enrollment" class="hidden bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-6">
         <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
           <div class="space-y-1">
             <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">
-              KINDER TO GRADE 12 (ELEMENTARY, JUNIOR HIGH & SENIOR HIGH) • MALE, FEMALE & TOTAL
+              KINDER TO GRADE 12 • EDITABLE GRADE LEVELS • MALE, FEMALE & AUTO-TOTAL
             </span>
             <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
-              👥 Enrollment, Drop-out, Transferred In & Transferred Out (K–12)
+              👥 Enrollment, Drop-out, Transferred In & Transferred Out
             </h2>
             <p class="text-xs text-slate-500">
-              Sakop ang <strong>Kinder–Grade 6</strong>, <strong>Junior High (Grade 7–10)</strong>, at <strong>Senior High (Grade 11–12 Strands)</strong>. Ang kasalukuyang data ay napanatili at nadagdagan para sa JHS at SHS.
+              Editable ang mga Grade Levels (pwedeng magdagdag o magbura ng Kinder, Grade 1–6, Grade 7–10, o Grade 11–12).
             </p>
           </div>
 
-          <div class="flex flex-col gap-2 min-w-[290px]">
-            <select id="enrLevelFilter" onchange="renderEnrollmentTab()" class="px-4 py-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-extrabold">
-              <option value="ALL">All K–12 Levels (Kinder – Grade 12)</option>
-              <option value="ELEM">Elementary Only (Kinder – Grade 6)</option>
-              <option value="JHS">Junior High School Only (Grade 7 – Grade 10)</option>
-              <option value="SHS">Senior High School Only (Grade 11 – Grade 12)</option>
-            </select>
+          <div class="flex flex-col gap-2 min-w-[270px]">
             <select id="enrCategorySel" onchange="renderEnrollmentTab()" class="px-4 py-2.5 rounded-xl border-2 border-slate-200 text-xs sm:text-sm font-extrabold text-slate-800">
               <option value="enrollment">1. Enrollment (Nagpatala)</option>
               <option value="dropout">2. Drop-out (Huminto sa Pag-aaral)</option>
@@ -577,6 +462,22 @@
               <option value="y2">SY 2024–2025 (Past — 4 Quarters)</option>
               <option value="y1">SY 2023–2024 (Past — 4 Quarters)</option>
             </select>
+          </div>
+        </div>
+
+        <!-- ADD / PRESET GRADE LEVELS FOR ENROLLMENT & NUTRITION (K-12) -->
+        <div id="enrGradeEditorBar" class="hidden bg-emerald-50/80 border-2 border-emerald-400 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
+          <form onsubmit="addK12GradeRow(event)" class="flex flex-wrap items-center gap-2">
+            <span class="text-xs font-extrabold text-emerald-950">➕ Magdagdag ng Grade Level (K–12):</span>
+            <input type="text" id="newK12GradeInput" list="gradeOptionsList" required placeholder="hal. Grade 7, Grade 11, Grade 12" class="px-3 py-1.5 rounded-lg border bg-white text-xs font-bold">
+            <button type="submit" class="bg-[#094635] hover:bg-emerald-800 text-white font-extrabold px-4 py-1.5 rounded-lg text-xs">➕ Idagdag Grade</button>
+          </form>
+          <div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+            <span class="font-bold text-slate-600">Quick Preset:</span>
+            <button type="button" onclick="applyGradePreset('elem')" class="bg-white border border-slate-300 hover:bg-emerald-100 px-2.5 py-1 rounded-lg font-extrabold">Elem (K–6)</button>
+            <button type="button" onclick="applyGradePreset('jhs')" class="bg-white border border-slate-300 hover:bg-emerald-100 px-2.5 py-1 rounded-lg font-extrabold">JHS (G7–10)</button>
+            <button type="button" onclick="applyGradePreset('shs')" class="bg-white border border-slate-300 hover:bg-emerald-100 px-2.5 py-1 rounded-lg font-extrabold">SHS (G11–12)</button>
+            <button type="button" onclick="applyGradePreset('k12')" class="bg-white border border-slate-300 hover:bg-emerald-100 px-2.5 py-1 rounded-lg font-extrabold">Full K–12</button>
           </div>
         </div>
 
@@ -604,7 +505,7 @@
 
         <div class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-[#0f172a] text-white px-4 py-3 flex flex-wrap items-center justify-between gap-2">
-            <span id="enrBannerTitle" class="text-xs sm:text-sm font-extrabold">📌 SY 2026–2027 — ENROLLMENT (Kinder to Grade 6)</span>
+            <span id="enrBannerTitle" class="text-xs sm:text-sm font-extrabold">📌 SY 2026–2027 — ENROLLMENT</span>
             <span id="enrBannerBadge" class="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">PRESENT SY: 3 TERMS</span>
           </div>
           <div class="overflow-x-auto">
@@ -616,8 +517,8 @@
           </div>
         </div>
 
-        <!-- LIVE 3D TRANSPARENT CYLINDER GRAPH FOR ENROLLMENT / DROPOUT / TRANS IN / TRANS OUT -->
-        <div id="inlineGraph_enr" class="bg-transparent rounded-2xl border border-slate-200/80 p-4"></div>
+        <!-- LIVE 3D TRANSPARENT CYLINDER GRAPH FOR ENROLLMENT -->
+        <div id="inlineGraph_enr" class="bg-slate-50 rounded-2xl border border-slate-200 p-4"></div>
       </section>
 
       <!-- ==================== TAB 4: CRLA, PHIL-IRI, RMA & READING ASSESSMENT ==================== -->
@@ -626,18 +527,18 @@
           <div>
             <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">COMPREHENSIVE LITERACY, READING & NUMERACY PROFILE (MALE, FEMALE & TOTAL)</span>
             <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">📚 CRLA, Phil-IRI, RMA & Reading Assessment Results</h2>
-            <p class="text-xs text-slate-500">Naka-hiwalay na ayon sa wika (Tagalog, Filipino, at English) ang CRLA, Phil-IRI, at Reading Assessment Results—at awtomatikong nag-uupdate ang 3D Transparent Cylinder Graph bawat kategorya.</p>
+            <p class="text-xs text-slate-500">Naka-hiwalay na ayon sa wika (Tagalog, Filipino, at English) ang CRLA, Phil-IRI, at Reading Assessment Results—at awtomatikong nag-uupdate ang 3D Transparent Cylinder Graph.</p>
           </div>
           <select id="litToolFilter" onchange="renderLiteracyTab()" class="px-4 py-2.5 rounded-xl bg-[#094635] text-white text-xs sm:text-sm font-extrabold">
             <option value="ALL">Ipakita Lahat (CRLA, Phil-IRI, RMA & Reading)</option>
             <option value="crla">1. CRLA Only (G1 Tagalog • G2 Tag/Fil • G3 Tag/Fil/Eng)</option>
-            <option value="philiri">2. Phil-IRI Only (Grade 4 – Grade 6 • Filipino & English)</option>
-            <option value="rma">3. RMA Numeracy Only (Grade 1 – Grade 6 • 3 SY)</option>
-            <option value="reading">4. Reading Assessment Results (G1–G6 • Filipino & English)</option>
+            <option value="philiri">2. Phil-IRI Only (Grade 4–10 • Filipino & English)</option>
+            <option value="rma">3. RMA Numeracy Only (Grade 1 – Grade 10 • 3 SY)</option>
+            <option value="reading">4. Reading Assessment Results (Filipino & English)</option>
           </select>
         </div>
 
-        <!-- 1. CRLA (GRADE 1 TO GRADE 3 BY LANGUAGE: G1 TAGALOG, G2 TAG/FIL, G3 TAG/FIL/ENG) -->
+        <!-- 1. CRLA -->
         <div id="box_crla" class="rounded-2xl overflow-hidden border border-slate-300 space-y-0">
           <div class="bg-[#094635] text-white px-4 py-3 flex flex-wrap justify-between items-center gap-2">
             <div>
@@ -659,7 +560,6 @@
             </div>
           </div>
 
-          <!-- Editable 3 School Years Bar for CRLA -->
           <div class="bg-[#f4f7f5] px-4 py-2.5 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
             <span class="text-[11px] font-extrabold text-slate-600">3 School Years (CRLA):</span>
             <div class="grid grid-cols-3 gap-2">
@@ -694,15 +594,15 @@
               <tfoot id="tfootCRLA" class="bg-[#0f172a] text-white font-extrabold"></tfoot>
             </table>
           </div>
-          <div id="inlineGraph_crla" class="p-4 bg-transparent border-t border-slate-200/80"></div>
+          <div id="inlineGraph_crla" class="p-4 bg-slate-50 border-t border-slate-200"></div>
         </div>
 
-        <!-- 2. PHIL-IRI (GRADE 4 TO GRADE 6 ONLY • FILIPINO & ENGLISH) -->
+        <!-- 2. PHIL-IRI -->
         <div id="box_philiri" class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-sky-950 text-white px-4 py-3 flex flex-wrap justify-between items-center gap-2">
             <div>
-              <span class="text-xs sm:text-sm font-extrabold block">📚 2. Philippine Informal Reading Inventory (Phil-IRI) — Grade 4 to Grade 6</span>
-              <span class="text-[10px] text-sky-200">Sakop ang Grade 4, Grade 5, at Grade 6 (Hiwalay na Filipino at English Assessment • Male, Female & Total)</span>
+              <span class="text-xs sm:text-sm font-extrabold block">📚 2. Philippine Informal Reading Inventory (Phil-IRI) — Filipino & English</span>
+              <span class="text-[10px] text-sky-200">Hiwalay na Filipino at English Assessment (Grade 4–6 & JHS Grade 7–10 • Male, Female & Total)</span>
             </div>
             <div class="flex items-center gap-2">
               <select id="philiriLangFilter" onchange="renderLiteracyTab()" class="bg-white text-slate-900 text-xs font-extrabold px-3 py-1.5 rounded-xl">
@@ -710,7 +610,7 @@
                 <option value="Filipino">Filipino Only</option>
                 <option value="English">English Only</option>
               </select>
-              <span class="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-2.5 py-1 rounded-full">Grade 4 – Grade 6</span>
+              <span class="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-2.5 py-1 rounded-full">Grade 4 – Grade 10</span>
             </div>
           </div>
           <div class="overflow-x-auto">
@@ -736,14 +636,14 @@
               <tfoot id="tfootPhilIRI" class="bg-[#0f172a] text-white font-extrabold"></tfoot>
             </table>
           </div>
-          <div id="inlineGraph_philiri" class="p-4 bg-transparent border-t border-slate-200/80"></div>
+          <div id="inlineGraph_philiri" class="p-4 bg-slate-50 border-t border-slate-200"></div>
         </div>
 
-        <!-- 3. RMA (GRADE 1 TO GRADE 6 — 3 EDITABLE SCHOOL YEARS, 5 UPDATED COLUMNS) -->
+        <!-- 3. RMA -->
         <div id="box_rma" class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-amber-900 text-white px-4 py-3 flex flex-wrap justify-between items-center gap-2">
             <div>
-              <span class="text-xs sm:text-sm font-extrabold block">🔢 3. Rapid Mathematics Assessment (RMA) — Grade 1 to Grade 6</span>
+              <span class="text-xs sm:text-sm font-extrabold block">🔢 3. Rapid Mathematics Assessment (RMA) — Grade 1 to Grade 10</span>
               <span class="text-[10px] text-amber-200">Emerging (Not Proficient), Emerging (Low Proficient), Developing (Nearly Proficient), Transitioning (Proficient) & At Grade Level (Highly Proficient)</span>
             </div>
             <div class="flex flex-wrap items-center gap-2">
@@ -755,7 +655,6 @@
             </div>
           </div>
 
-          <!-- Editable 3 School Years Bar for RMA -->
           <div class="bg-[#f4f7f5] px-4 py-2.5 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
             <span class="text-[11px] font-extrabold text-slate-600">3 School Years (RMA):</span>
             <div class="grid grid-cols-3 gap-2">
@@ -789,14 +688,14 @@
               <tfoot id="tfootRMA" class="bg-[#0f172a] text-white font-extrabold"></tfoot>
             </table>
           </div>
-          <div id="inlineGraph_rma" class="p-4 bg-transparent border-t border-slate-200/80"></div>
+          <div id="inlineGraph_rma" class="p-4 bg-slate-50 border-t border-slate-200"></div>
         </div>
 
-        <!-- 4. READING ASSESSMENT RESULTS (GRADE 1–6 • FILIPINO & ENGLISH • ADD/DELETE ROWS • 3 EDITABLE SY) -->
+        <!-- 4. READING ASSESSMENT RESULTS -->
         <div id="box_reading" class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-indigo-950 text-white px-4 py-3 flex flex-wrap justify-between items-center gap-2">
             <div>
-              <span class="text-xs sm:text-sm font-extrabold block">📘 4. School Reading Assessment Results (Filipino & English • Grade 1 to Grade 6)</span>
+              <span class="text-xs sm:text-sm font-extrabold block">📘 4. School Reading Assessment Results (Filipino & English • K–12)</span>
               <span class="text-[10px] text-indigo-200">Non-Reader, Struggling Reader, Slow Reader, Average Reader & Fast Reader (Male, Female & Auto-Total)</span>
             </div>
             <div class="flex flex-wrap items-center gap-2">
@@ -813,7 +712,6 @@
             </div>
           </div>
 
-          <!-- Editable 3 School Years + Add Grade Level Form for Reading Assessment -->
           <div class="bg-[#f4f7f5] px-4 py-3 border-b border-slate-200 space-y-3">
             <div class="flex flex-wrap items-center justify-between gap-2">
               <span class="text-[11px] font-extrabold text-slate-600">3 School Years (Reading Assessment — Editable kapag Edit Mode):</span>
@@ -824,10 +722,9 @@
               </div>
             </div>
 
-            <!-- Add Grade Level Form (Visible when Edit Mode is Unlocked) -->
             <form id="formAddReadGrade" onsubmit="addReadingGradeRow(event)" class="hidden bg-white p-3 rounded-xl border-2 border-indigo-400 flex flex-wrap items-center gap-2">
               <span class="text-xs font-extrabold text-indigo-950">➕ Magdagdag ng Grade Level / Section:</span>
-              <input type="text" id="newReadGradeName" required placeholder="hal. Grade 1 - Sampaguita o Grade 6" class="flex-1 min-w-[180px] px-3 py-1.5 rounded-lg border text-xs font-bold">
+              <input type="text" id="newReadGradeName" required placeholder="hal. Grade 7 - Rizal o Grade 11" class="flex-1 min-w-[180px] px-3 py-1.5 rounded-lg border text-xs font-bold">
               <select id="newReadLang" class="px-3 py-1.5 rounded-lg border text-xs font-extrabold bg-slate-50">
                 <option value="Filipino">Filipino</option>
                 <option value="English">English</option>
@@ -862,27 +759,37 @@
               <tfoot id="tfootReading" class="bg-[#0f172a] text-white font-extrabold"></tfoot>
             </table>
           </div>
-          <div id="inlineGraph_reading" class="p-4 bg-transparent border-t border-slate-200/80"></div>
+          <div id="inlineGraph_reading" class="p-4 bg-slate-50 border-t border-slate-200"></div>
         </div>
       </section>
 
-      <!-- ==================== TAB 5: NAT & ELLNA ==================== -->
+      <!-- ==================== TAB 5: NAT & ELLNA (K-12: G3, G6, G10 & G12) ==================== -->
       <section id="sec_nat" class="hidden bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-6">
-        <div>
-          <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">NATIONAL ASSESSMENT RESULTS • 3-YEAR COMPARATIVE TREND</span>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">🏆 ELLNA (Grade 3) & NAT (Grade 6) — Male, Female & Overall MPS (%)</h2>
-          <p class="text-xs text-slate-500">Detalyadong Mean Percentage Score (Male, Female, at Overall Average) sa nakalipas na tatlong School Years.</p>
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">NATIONAL ASSESSMENT RESULTS • 3-YEAR COMPARATIVE TREND</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">🏆 ELLNA (G3) & NAT (Grade 6, Grade 10 & Grade 12) — MPS (%)</h2>
+            <p class="text-xs text-slate-500">Detalyadong Mean Percentage Score (Male, Female, at Overall Average) sa nakalipas na tatlong School Years.</p>
+          </div>
         </div>
+
+        <!-- ADD ASSESSMENT AREA FOR JHS / SHS NAT -->
+        <form id="formAddNatArea" onsubmit="addNatAreaRow(event)" class="hidden bg-emerald-50/80 p-3.5 rounded-2xl border-2 border-emerald-400 flex flex-wrap items-center gap-2">
+          <span class="text-xs font-extrabold text-emerald-950">➕ Magdagdag ng NAT / Assessment Area (hal. NAT Grade 10 / Grade 12):</span>
+          <input type="text" id="newNatAreaName" required placeholder="hal. NAT (Grade 12) — Media & Info Literacy" class="flex-1 min-w-[220px] px-3 py-1.5 rounded-lg border bg-white text-xs font-bold">
+          <button type="submit" class="bg-[#094635] hover:bg-emerald-800 text-white font-extrabold px-4 py-1.5 rounded-lg text-xs">➕ Idagdag Area</button>
+        </form>
 
         <div class="overflow-x-auto rounded-2xl border border-slate-300">
           <table class="w-full text-xs border-collapse">
             <thead>
               <tr class="bg-[#0f172a] text-white">
-                <th rowspan="2" class="p-3 text-left min-w-[210px]">Assessment & Learning Area</th>
+                <th rowspan="2" class="p-3 text-left min-w-[220px]">Assessment & Learning Area</th>
                 <th colspan="3" class="p-2.5 text-center bg-[#094635] border-l border-white/20">SY 2023–2024 (%)</th>
                 <th colspan="3" class="p-2.5 text-center bg-sky-900 border-l border-white/20">SY 2024–2025 (%)</th>
                 <th colspan="3" class="p-2.5 text-center bg-amber-700 border-l border-white/20">SY 2025–2026 (%)</th>
                 <th rowspan="2" class="p-3 text-center bg-[#063b2c] text-amber-300 border-l border-white/20">3-Yr Ave (%)</th>
+                <th id="thDelNat" rowspan="2" class="hidden p-2 text-center bg-rose-950 border-l border-white/20">Action</th>
               </tr>
               <tr class="bg-slate-100 text-slate-800 font-extrabold text-[10px]">
                 <th class="p-1.5 text-center border-l">Male</th><th class="p-1.5 text-center">Female</th><th class="p-1.5 text-center bg-emerald-50">Ave</th>
@@ -896,15 +803,37 @@
         </div>
 
         <!-- LIVE 3D TRANSPARENT CYLINDER GRAPH FOR NAT & ELLNA -->
-        <div id="inlineGraph_nat" class="bg-transparent rounded-2xl border border-slate-200/80 p-4"></div>
+        <div id="inlineGraph_nat" class="bg-slate-50 rounded-2xl border border-slate-200 p-4"></div>
       </section>
 
-      <!-- ==================== TAB 6: NUTRITIONAL STATUS ==================== -->
+      <!-- ==================== TAB 6: NUTRITIONAL STATUS (SF8 & SBFP WITH N/A OPTION FOR HIGH SCHOOL) ==================== -->
       <section id="sec_nutrition" class="hidden bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-6">
-        <div>
-          <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">DEPED SCHOOL FORM 8 (SF8) & SBFP SUMMARY</span>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">🥗 Nutritional Status per Grade Level (Male, Female & Total)</h2>
-          <p class="text-xs text-slate-500">Pindutin ang <strong>Click to Edit Data</strong> upang ilagay ang bilang ng Male at Female mula Kinder hanggang Grade 6.</p>
+        <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+          <div>
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">DEPED SCHOOL FORM 8 (SF8) & SBFP / FEEDING PROGRAM STATUS</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">🥗 Nutritional Status (SF8) & School-Based Feeding Program (SBFP)</h2>
+            <p class="text-xs text-slate-500">Para sa High School (Grade 7–12) na walang Feeding Program, maaaring itakda ang SBFP Status sa <strong>Not Applicable (N/A)</strong> o markahan ng N/A ang mga baitang na walang feeding.</p>
+          </div>
+
+          <div class="bg-[#f4f7f5] p-3.5 rounded-2xl border border-slate-300 min-w-[290px] space-y-1.5">
+            <label class="text-[11px] font-extrabold text-slate-700 block">🍲 SBFP / Feeding Program Status:</label>
+            <select id="sbfpStatusSel" onchange="updSbfpStatus(this.value)" disabled
+              class="w-full px-3 py-2 rounded-xl border border-emerald-500 bg-white text-xs font-extrabold text-slate-900">
+              <option value="active">✅ Active — With School-Based Feeding Program (SBFP)</option>
+              <option value="na_hs">🚫 Not Applicable (N/A) — High School / No Feeding Program</option>
+              <option value="sf8_only">📋 SF8 BMI Monitoring Only (No Feeding Beneficiaries)</option>
+            </select>
+            <span id="sbfpStatusHint" class="text-[10px] text-slate-500 block">I-unlock ang Edit Mode upang palitan ang status.</span>
+          </div>
+        </div>
+
+        <!-- BANNER WHEN SET TO N/A (HIGH SCHOOL / NO FEEDING) -->
+        <div id="sbfpNaBanner" class="hidden bg-amber-50 border-2 border-amber-400 rounded-2xl p-4 flex items-center gap-3">
+          <span class="text-2xl">ℹ️</span>
+          <div>
+            <h4 class="text-xs sm:text-sm font-extrabold text-amber-950">Not Applicable (N/A) — Walang School-Based Feeding Program (SBFP)</h4>
+            <p class="text-xs text-amber-900">Ang paaralan o antas na ito (hal. Junior High / Senior High School) ay nakamarka bilang <strong>N/A sa Feeding Program</strong>. Maaari pa ring mag-encode ng SF8 BMI baseline/endline kung kinakailangan o iwanang 0 / N/A.</p>
+          </div>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -939,6 +868,7 @@
             <thead>
               <tr class="bg-[#0f172a] text-white">
                 <th rowspan="2" class="p-3 text-left">Grade Level</th>
+                <th rowspan="2" class="p-3 text-center bg-amber-900 text-amber-200 border-l border-white/20">Feeding Status</th>
                 <th colspan="3" class="p-2 text-center bg-emerald-900 border-l border-white/20">Normal</th>
                 <th colspan="3" class="p-2 text-center bg-amber-700 border-l border-white/20">Wasted</th>
                 <th colspan="3" class="p-2 text-center bg-rose-800 border-l border-white/20">Severely Wasted</th>
@@ -994,9 +924,10 @@
         <form id="nsbiAddForm" onsubmit="addNSBIBuilding(event)" class="hidden no-print bg-[#f4f7f5] p-5 rounded-2xl border-2 border-emerald-400 space-y-3">
           <h3 class="text-sm font-extrabold text-emerald-950">➕ Magdagdag ng School Building & Pasilidad</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
-            <input type="text" id="nsbiName" required placeholder="Building Name (hal. Building 1 - Marcos Type) *" class="px-3 py-2 rounded-xl border bg-white text-xs font-bold">
+            <input type="text" id="nsbiName" required placeholder="Building Name (hal. Building 1 - SHS Bldg) *" class="px-3 py-2 rounded-xl border bg-white text-xs font-bold">
             <select id="nsbiType" class="px-3 py-2 rounded-xl border bg-white text-xs font-bold">
               <option>DepEd Standard Building</option>
+              <option>SHS Multi-Storey Building</option>
               <option>Marcos Pre-Fab Building</option>
               <option>Bagong Lipunan Building</option>
               <option>LGU / SEF Funded Building</option>
@@ -1073,20 +1004,16 @@
       <section id="sec_analytics" class="hidden bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-6">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
           <div>
-            <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">LIVE INTERACTIVE 3D TRANSPARENT CYLINDER CHARTS WITH DATA LABELS</span>
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">LIVE INTERACTIVE 3D TRANSPARENT GLASS CYLINDER CHARTS</span>
             <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">📊 3D Transparent Cylinder Graphical Presentation</h2>
-            <p class="text-xs text-slate-500">I-click ang bawat kategorya sa ibaba upang makita ang 3D Transparent Cylinder Graph na may data labels. Awtomatikong nagbabago habang naglalagay o nag-e-edit ng data sa portal.</p>
+            <p class="text-xs text-slate-500">I-click ang bawat kategorya sa ibaba upang makita ang 3D Transparent Cylinder Graph na may floating data labels.</p>
           </div>
           <button type="button" onclick="window.print()" class="no-print bg-slate-800 text-white text-xs font-extrabold px-4 py-2 rounded-xl">🖨️ Print Graphs</button>
         </div>
 
-        <!-- CLICKABLE CATEGORY PILLS FOR SEPARATE 3D GRAPHS -->
         <div class="flex flex-wrap gap-2 bg-[#f4f7f5] p-3 rounded-2xl border border-slate-200">
           <button type="button" id="gCatBtn_mps" onclick="selectAnalyticsCat('mps')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition">
-            📈 MPS (Elem & JHS)
-          </button>
-          <button type="button" id="gCatBtn_shs" onclick="selectAnalyticsCat('shs')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition">
-            🎓 Senior High (Strands & Core Subjects)
+            📈 MPS (K–12 & SHS Core)
           </button>
           <button type="button" id="gCatBtn_enr" onclick="selectAnalyticsCat('enr')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition">
             👥 Enrollment, Drop-out & Trans In/Out
@@ -1095,7 +1022,7 @@
             📖 CRLA (Tagalog / Filipino / English)
           </button>
           <button type="button" id="gCatBtn_philiri" onclick="selectAnalyticsCat('philiri')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition">
-            📚 Phil-IRI (Grade 4–6 • Fil & Eng)
+            📚 Phil-IRI (Fil & Eng)
           </button>
           <button type="button" id="gCatBtn_rma" onclick="selectAnalyticsCat('rma')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition">
             🔢 RMA Numeracy (3 School Years)
@@ -1114,14 +1041,9 @@
           </button>
         </div>
 
-        <!-- SUB-FILTERS FOR SELECTED GRAPH CATEGORY -->
         <div id="analyticsControlsBar" class="flex flex-wrap items-center gap-3 bg-emerald-50/70 p-3.5 rounded-2xl border border-emerald-200"></div>
-
-        <!-- MAIN 3D TRANSPARENT CYLINDER GRAPH CANVAS CONTAINER -->
-        <div id="analyticsMainChartBox" class="bg-transparent rounded-2xl border-2 border-slate-200/80 p-4 sm:p-6"></div>
-
-        <!-- SECONDARY GRADE-BY-GRADE BREAKDOWN 3D TRANSPARENT CYLINDER GRAPH -->
-        <div id="analyticsSubChartBox" class="bg-transparent rounded-2xl border border-slate-200/80 p-4 sm:p-6"></div>
+        <div id="analyticsMainChartBox" class="bg-white rounded-2xl border-2 border-slate-200 p-4 sm:p-6 shadow-xs"></div>
+        <div id="analyticsSubChartBox" class="bg-slate-50 rounded-2xl border border-slate-200 p-4 sm:p-6"></div>
       </section>
 
     </main>
@@ -1129,11 +1051,12 @@
 
   <script>
     // =========================================================================
-    // NAKAKONEKTA NA SA FIREBASE REALTIME DATABASE NG TUBAHAN ES DATAHUB
+    // FIREBASE REALTIME DATABASE — NON-DESTRUCTIVE CLOUD SYNC (ROSARIO WEST)
     // =========================================================================
     const FIREBASE_DB_URL = "https://tubahanes-datahub-default-rtdb.asia-southeast1.firebasedatabase.app";
+    const CLOUD_NODE = "rosarioWestSchoolData";
 
-    const OFFICIAL_PASSCODE = 'tubahan2026';
+    const OFFICIAL_PASSCODE = 'rosariowest2026';
     let isEditMode = false;
     let activeTab = 'masterlist';
     let activeAnalyticsCat = 'mps';
@@ -1150,17 +1073,17 @@
 
     const FALLBACK_SCHOOL_SEAL = "data:image/svg+xml;utf8," + encodeURIComponent(`
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-        <circle cx="100" cy="100" r="96" fill="#173f63" stroke="#d4af37" stroke-width="6"/>
-        <circle cx="100" cy="100" r="68" fill="#89bdd3" stroke="#d4af37" stroke-width="3"/>
+        <circle cx="100" cy="100" r="96" fill="#063b2c" stroke="#d4af37" stroke-width="6"/>
+        <circle cx="100" cy="100" r="68" fill="#0d5440" stroke="#d4af37" stroke-width="3"/>
         <path d="M55 112 L95 104 L95 142 L55 148 Z" fill="#ffffff" stroke="#334155" stroke-width="2"/>
         <path d="M145 112 L105 104 L105 142 L145 148 Z" fill="#ffffff" stroke="#334155" stroke-width="2"/>
         <rect x="93" y="88" width="14" height="58" rx="3" fill="#b45309"/>
         <path d="M100 45 C112 62 115 78 100 88 C85 78 88 62 100 45 Z" fill="#f97316"/>
         <path d="M100 56 C106 66 108 76 100 84 C92 76 94 66 100 56 Z" fill="#fde047"/>
-        <rect x="65" y="148" width="70" height="18" rx="4" fill="#991b1b" stroke="#fbbf24" stroke-width="1.5"/>
-        <text x="100" y="161" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#fde047" text-anchor="middle">1965</text>
-        <text x="100" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">TUBAHAN ELEM. SCHOOL</text>
-        <text x="100" y="186" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fde047" text-anchor="middle">ROSARIO, BATANGAS</text>
+        <rect x="52" y="148" width="96" height="18" rx="4" fill="#991b1b" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="100" y="161" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#fde047" text-anchor="middle">ROSARIO WEST</text>
+        <text x="100" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">DEPED • BATANGAS</text>
+        <text x="100" y="186" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#fde047" text-anchor="middle">K-12 DATAHUB</text>
       </svg>
     `);
 
@@ -1173,8 +1096,53 @@
         : 'bg-emerald-900/90 border border-emerald-500/40 text-emerald-200 px-2 py-0.5 rounded-full text-[9px] tracking-normal';
     }
 
+    function applySchoolProfileUI() {
+      const p = (db && db.schoolProfile) || DEFAULT_DB.schoolProfile;
+      const sName = p.schoolName || 'ROSARIO WEST DISTRICT SCHOOL';
+      const sIdTxt = p.schoolId ? ` • School ID: ${p.schoolId}` : '';
+      const dist = p.district || 'Rosario West District';
+      const addr = p.address || 'Rosario, Batangas';
+      const prin = p.principal ? ` • Principal: ${p.principal}` : '';
+
+      document.title = `${sName} • ${dist} | Official School Information & SMEA System`;
+      const loginTitle = document.getElementById('loginSchoolNameDisplay');
+      if (loginTitle) loginTitle.innerText = sName;
+      const loginDist = document.getElementById('loginDistrictDisplay');
+      if (loginDist) loginDist.innerText = `${dist} • ${addr}${sIdTxt}`;
+
+      const hdrTitle = document.getElementById('hdrSchoolTitle');
+      if (hdrTitle) hdrTitle.innerText = sName;
+      const hdrSub = document.getElementById('hdrDistrictSub');
+      if (hdrSub) hdrSub.innerText = `• ${dist} • ${addr}${sIdTxt}`;
+
+      const prName = document.getElementById('printSchoolNameText');
+      if (prName) prName.innerText = sName;
+      const prSub = document.getElementById('printSubHeaderText');
+      if (prSub) prSub.innerText = `Region IV-A CALABARZON • Schools Division of Batangas • ${dist}`;
+      const prAddr = document.getElementById('printAddressText');
+      if (prAddr) prAddr.innerText = `${addr}${sIdTxt}${prin} • Official K–12 School Information & SMEA Report`;
+
+      const inName = document.getElementById('profSchoolName');
+      if (inName && document.activeElement !== inName) inName.value = p.schoolName || '';
+      const inId = document.getElementById('profSchoolId');
+      if (inId && document.activeElement !== inId) inId.value = p.schoolId || '';
+      const inDist = document.getElementById('profDistrict');
+      if (inDist && document.activeElement !== inDist) inDist.value = p.district || '';
+      const inAddr = document.getElementById('profAddress');
+      if (inAddr && document.activeElement !== inAddr) inAddr.value = p.address || '';
+      const inPrin = document.getElementById('profPrincipal');
+      if (inPrin && document.activeElement !== inPrin) inPrin.value = p.principal || '';
+    }
+
+    function updSchoolProfile(field, val) {
+      if (!db.schoolProfile) db.schoolProfile = {};
+      db.schoolProfile[field] = val;
+      applySchoolProfileUI();
+      saveDB();
+    }
+
     function applySavedSchoolLogo() {
-      const savedLogo = (db && db.customLogo) || safeGetStorage('localStorage', 'tubahan_custom_logo_data');
+      const savedLogo = (db && db.customLogo) || safeGetStorage('localStorage', 'rosario_west_custom_logo');
       if (savedLogo) document.querySelectorAll('.school-logo-img').forEach(img => { img.src = savedLogo; });
     }
 
@@ -1184,24 +1152,77 @@
       const reader = new FileReader();
       reader.onload = function(evt) {
         db.customLogo = evt.target.result;
-        safeSetStorage('localStorage', 'tubahan_custom_logo_data', evt.target.result);
+        safeSetStorage('localStorage', 'rosario_west_custom_logo', evt.target.result);
         applySavedSchoolLogo();
         saveDB();
-        alert('✅ Na-update at na-sync na sa cloud ang School Logo!');
+        alert('✅ Na-update at na-save na sa cloud ang School Logo!');
       };
       reader.readAsDataURL(file);
     }
 
-    const ELEM_GRADES = ['Kinder', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
-    const JHS_GRADES = ['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'];
-    const SHS_GRADES = ['Grade 11', 'Grade 12'];
-    const GRADES = [...ELEM_GRADES, ...JHS_GRADES, ...SHS_GRADES];
-    const G1_TO_G6 = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
-    const G1_TO_G10 = [...G1_TO_G6, ...JHS_GRADES];
-    const G1_TO_G3 = ['Grade 1', 'Grade 2', 'Grade 3'];
-    const G3_TO_G10 = ['Grade 3', 'Grade 4', 'Grade 5', 'Grade 6', ...JHS_GRADES];
-    const G4_TO_G10 = ['Grade 4', 'Grade 5', 'Grade 6', ...JHS_GRADES];
-    const G4_TO_G6 = ['Grade 4', 'Grade 5', 'Grade 6'];
+    // ==================== K-12 SUBJECTS & GRADE DEFINITIONS ====================
+    const DEFAULT_K12_GRADES = [
+      'Kinder', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6',
+      'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10', 'Grade 11', 'Grade 12'
+    ];
+
+    const DEFAULT_MPS_CATALOG = {
+      elem: {
+        label: 'Elementary (Grade 1 – Grade 6)',
+        grades: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'],
+        subjects: [
+          { id: 'elem_avg', name: 'General Average MPS (All Elem Subjects)' },
+          { id: 'elem_gmrc', name: 'GMRC / Values Education (Grade 1–6)' },
+          { id: 'elem_filipino', name: 'Language / Filipino (Grade 1–6)' },
+          { id: 'elem_english', name: 'Reading & Literacy / English (Grade 1–6)' },
+          { id: 'elem_math', name: 'Mathematics (Grade 1–6)' },
+          { id: 'elem_makabansa', name: 'Makabansa / Araling Panlipunan (Grade 1–6)' },
+          { id: 'elem_science', name: 'Science (Grade 3–6)' },
+          { id: 'elem_epp', name: 'EPP / TLE (Intermediate • Grade 4–6)' },
+          { id: 'elem_music_arts', name: 'Music & Arts (Intermediate • Grade 4–6)' },
+          { id: 'elem_pe_health', name: 'PE & Health (Intermediate • Grade 4–6)' }
+        ]
+      },
+      jhs: {
+        label: 'Junior High School (Grade 7 – Grade 10)',
+        grades: ['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'],
+        subjects: [
+          { id: 'jhs_avg', name: 'General Average MPS (All JHS Subjects)' },
+          { id: 'jhs_filipino', name: 'Filipino (Grade 7–10)' },
+          { id: 'jhs_english', name: 'English (Grade 7–10)' },
+          { id: 'jhs_math', name: 'Mathematics (Grade 7–10)' },
+          { id: 'jhs_science', name: 'Science (Grade 7–10)' },
+          { id: 'jhs_ap', name: 'Araling Panlipunan (Grade 7–10)' },
+          { id: 'jhs_esp', name: 'Values Education / EsP (Grade 7–10)' },
+          { id: 'jhs_tle', name: 'Technology & Livelihood Education / TLE (Grade 7–10)' },
+          { id: 'jhs_mapeh', name: 'MAPEH — Music, Arts, PE & Health (Grade 7–10)' }
+        ]
+      },
+      shs: {
+        label: 'Senior High School (Grade 11 – Grade 12)',
+        grades: ['Grade 11', 'Grade 12'],
+        subjects: [
+          { id: 'shs_avg', name: 'General Average MPS (All SHS Subjects)' },
+          { id: 'shs_oral_comm', name: 'Core: Oral Communication in Context' },
+          { id: 'shs_read_write', name: 'Core: Reading and Writing Skills' },
+          { id: 'shs_komunikasyon', name: 'Core: Komunikasyon at Pananaliksik sa Wika at Kulturang Pilipino' },
+          { id: 'shs_pagbasa', name: 'Core: Pagbasa at Pagsusuri ng Iba’t Ibang Teksto' },
+          { id: 'shs_21st_lit', name: 'Core: 21st Century Literature from the Philippines & the World' },
+          { id: 'shs_contemp_arts', name: 'Core: Contemporary Philippine Arts from the Regions' },
+          { id: 'shs_mil', name: 'Core: Media and Information Literacy' },
+          { id: 'shs_gen_math', name: 'Core: General Mathematics' },
+          { id: 'shs_stat_prob', name: 'Core: Statistics and Probability' },
+          { id: 'shs_earth_life', name: 'Core: Earth and Life Science / Earth Science' },
+          { id: 'shs_phys_sci', name: 'Core: Physical Science / DRRR' },
+          { id: 'shs_perdev', name: 'Core: Personal Development' },
+          { id: 'shs_ucsp', name: 'Core: Understanding Culture, Society and Politics' },
+          { id: 'shs_philo', name: 'Core: Introduction to the Philosophy of the Human Person' },
+          { id: 'shs_pe_health', name: 'Core: Physical Education and Health (HOPE 1–4)' },
+          { id: 'shs_applied', name: 'Applied Track Subjects (Empowerment Tech, Practical Research, EAPP, etc.)' },
+          { id: 'shs_specialized', name: 'Specialized Track / Strand Subjects (STEM / ABM / HUMSS / GAS / TVL)' }
+        ]
+      }
+    };
 
     const CRLA_LANG_ROWS = [
       { key: 'g1_tagalog', grade: 'Grade 1', lang: 'Tagalog' },
@@ -1218,8 +1239,18 @@
       { key: 'g5_filipino', grade: 'Grade 5', lang: 'Filipino' },
       { key: 'g5_english', grade: 'Grade 5', lang: 'English' },
       { key: 'g6_filipino', grade: 'Grade 6', lang: 'Filipino' },
-      { key: 'g6_english', grade: 'Grade 6', lang: 'English' }
+      { key: 'g6_english', grade: 'Grade 6', lang: 'English' },
+      { key: 'g7_filipino', grade: 'Grade 7', lang: 'Filipino' },
+      { key: 'g7_english', grade: 'Grade 7', lang: 'English' },
+      { key: 'g8_filipino', grade: 'Grade 8', lang: 'Filipino' },
+      { key: 'g8_english', grade: 'Grade 8', lang: 'English' },
+      { key: 'g9_filipino', grade: 'Grade 9', lang: 'Filipino' },
+      { key: 'g9_english', grade: 'Grade 9', lang: 'English' },
+      { key: 'g10_filipino', grade: 'Grade 10', lang: 'Filipino' },
+      { key: 'g10_english', grade: 'Grade 10', lang: 'English' }
     ];
+
+    const RMA_GRADES = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'];
 
     const SBM_DIMENSIONS = [
       {
@@ -1233,7 +1264,7 @@
           { num: 5, text: 'Teachers conduct remediation activities to address learning gaps in reading and comprehension, science and technology, and mathematics', defaultRemark: '' },
           { num: 6, text: 'Teachers integrate topics promoting peace and DepEd core values', defaultRemark: '' },
           { num: 7, text: 'The school conducts test item analysis to inform its teaching and learning process', defaultRemark: '' },
-          { num: 8, text: 'The school engages local industries to strengthen its TLE-TVL course offerings', defaultRemark: 'N/A' }
+          { num: 8, text: 'The school engages local industries to strengthen its TLE-TVL course offerings', defaultRemark: '' }
         ]
       },
       {
@@ -1302,26 +1333,19 @@
       }
     ];
 
-    const ALL_MPS_SUBJECTS = [
-      'all_avg', 'gmrc', 'filipino', 'english', 'math',
-      'makabansa', 'science', 'epp_tle', 'music_arts', 'pe_health'
-    ];
-
-    const MPS_SUBJECT_LABELS = {
-      all_avg: 'General Average MPS (All Subjects)',
-      gmrc: 'GMRC / Values Education (Grade 1–6)',
-      filipino: 'Language / Filipino (Grade 1–6)',
-      english: 'Reading & Literacy / English (Grade 1–6)',
-      math: 'Mathematics (Grade 1–6)',
-      makabansa: 'Makabansa / Araling Panlipunan (Grade 1–6)',
-      science: 'Science (Grade 3–6)',
-      epp_tle: 'EPP / TLE (Intermediate • Grade 4–6)',
-      music_arts: 'Music & Arts (Intermediate • Grade 4–6)',
-      pe_health: 'PE & Health (Intermediate • Grade 4–6)'
-    };
-
     const DEFAULT_DB = {
+      schemaVersion: 9,
+      schoolProfile: {
+        schoolName: 'ROSARIO WEST DISTRICT SCHOOL',
+        schoolId: '',
+        district: 'Rosario West District',
+        address: 'Rosario, Batangas',
+        principal: ''
+      },
       customLogo: '',
+      sbfpStatus: 'active',
+      k12Grades: [...DEFAULT_K12_GRADES],
+      mpsCatalog: JSON.parse(JSON.stringify(DEFAULT_MPS_CATALOG)),
       syLabels: { y1: 'SY 2023–2024', y2: 'SY 2024–2025', y3: 'SY 2025–2026', y4: 'SY 2026–2027' },
       triSyLabels: {
         crla: { y1: 'SY 2024–2025', y2: 'SY 2025–2026', y3: 'SY 2026–2027' },
@@ -1329,13 +1353,12 @@
         reading: { y1: 'SY 2024–2025', y2: 'SY 2025–2026', y3: 'SY 2026–2027' }
       },
       sectionsList: [
-        { id: 'sec_k', grade: 'Kinder', section: 'Sampaguita', adviser: 'Teacher I — Kinder Adviser', m: 20, f: 19 },
-        { id: 'sec_1', grade: 'Grade 1', section: 'Rosal', adviser: 'Teacher II — Grade 1 Adviser', m: 20, f: 19 },
-        { id: 'sec_2', grade: 'Grade 2', section: 'Gumamela', adviser: 'Teacher III — Grade 2 Adviser', m: 20, f: 19 },
-        { id: 'sec_3', grade: 'Grade 3', section: 'Camia', adviser: 'Teacher III — Grade 3 Adviser', m: 20, f: 19 },
-        { id: 'sec_4', grade: 'Grade 4', section: 'Ilang-Ilang', adviser: 'Teacher III — Grade 4 Adviser', m: 20, f: 19 },
-        { id: 'sec_5', grade: 'Grade 5', section: 'Orchid', adviser: 'Master Teacher I — Grade 5 Adviser', m: 20, f: 19 },
-        { id: 'sec_6', grade: 'Grade 6', section: 'Narra', adviser: 'Master Teacher II — Grade 6 Adviser', m: 20, f: 19 }
+        { id: 'sec_1', grade: 'Grade 7', section: 'Rizal', adviser: 'Teacher III — Grade 7 Adviser', m: 22, f: 21 },
+        { id: 'sec_2', grade: 'Grade 8', section: 'Bonifacio', adviser: 'Teacher III — Grade 8 Adviser', m: 21, f: 22 },
+        { id: 'sec_3', grade: 'Grade 9', section: 'Mabini', adviser: 'Teacher III — Grade 9 Adviser', m: 20, f: 21 },
+        { id: 'sec_4', grade: 'Grade 10', section: 'Del Pilar', adviser: 'Master Teacher I — Grade 10 Adviser', m: 20, f: 20 },
+        { id: 'sec_5', grade: 'Grade 11', section: 'STEM / GAS - A', adviser: 'Teacher II — Grade 11 Adviser', m: 19, f: 21 },
+        { id: 'sec_6', grade: 'Grade 12', section: 'HUMSS / TVL - A', adviser: 'Teacher III — Grade 12 Adviser', m: 18, f: 20 }
       ],
       masterlist: [],
       mpsMatrix: {},
@@ -1343,151 +1366,87 @@
       crlaV3: { y1: {}, y2: {}, y3: {} },
       philiriV2: {},
       rmaV2: { y1: {}, y2: {}, y3: {} },
-      readingV3: {
-        y1: [],
-        y2: [],
-        y3: []
-      },
-      shsStrands: {
-        y1: [
-          { id: 'shs11_stem', grade: 'Grade 11', strand: 'STEM (Science, Technology, Engineering & Math)', m: 18, f: 22 },
-          { id: 'shs11_abm', grade: 'Grade 11', strand: 'ABM (Accountancy, Business & Management)', m: 15, f: 24 },
-          { id: 'shs11_humss', grade: 'Grade 11', strand: 'HUMSS (Humanities & Social Sciences)', m: 21, f: 25 },
-          { id: 'shs11_gas', grade: 'Grade 11', strand: 'GAS (General Academic Strand)', m: 16, f: 18 },
-          { id: 'shs11_tvl', grade: 'Grade 11', strand: 'TVL - ICT / Home Economics', m: 22, f: 19 },
-          { id: 'shs12_stem', grade: 'Grade 12', strand: 'STEM (Science, Technology, Engineering & Math)', m: 17, f: 20 },
-          { id: 'shs12_abm', grade: 'Grade 12', strand: 'ABM (Accountancy, Business & Management)', m: 14, f: 23 },
-          { id: 'shs12_humss', grade: 'Grade 12', strand: 'HUMSS (Humanities & Social Sciences)', m: 20, f: 24 },
-          { id: 'shs12_gas', grade: 'Grade 12', strand: 'GAS (General Academic Strand)', m: 15, f: 17 },
-          { id: 'shs12_tvl', grade: 'Grade 12', strand: 'TVL - ICT / Home Economics', m: 20, f: 18 }
-        ],
-        y2: [],
-        y3: [],
-        y4: []
-      },
-      shsCoreSubjects: {
-        y1: [
-          { id: 'c1', grade: 'Grade 11', category: 'Core Subject', name: 'Oral Communication in Context', s1m: 83.0, s1f: 85.5, s2m: 84.0, s2f: 86.2 },
-          { id: 'c2', grade: 'Grade 11', category: 'Core Subject', name: 'Reading and Writing Skills', s1m: 82.5, s1f: 85.0, s2m: 83.8, s2f: 86.0 },
-          { id: 'c3', grade: 'Grade 11', category: 'Core Subject', name: 'Komunikasyon at Pananaliksik sa Wika at Kulturang Pilipino', s1m: 84.2, s1f: 86.8, s2m: 85.0, s2f: 87.5 },
-          { id: 'c4', grade: 'Grade 11', category: 'Core Subject', name: 'General Mathematics', s1m: 80.5, s1f: 82.0, s2m: 81.8, s2f: 83.4 },
-          { id: 'c5', grade: 'Grade 11', category: 'Core Subject', name: 'Statistics and Probability', s1m: 81.0, s1f: 82.8, s2m: 82.2, s2f: 84.0 },
-          { id: 'c6', grade: 'Grade 11', category: 'Core Subject', name: 'Earth and Life Science / Earth Science', s1m: 82.0, s1f: 84.0, s2m: 83.1, s2f: 85.2 },
-          { id: 'c7', grade: 'Grade 11', category: 'Core Subject', name: 'Personal Development / Pansariling Kaunlaran', s1m: 85.0, s1f: 87.2, s2m: 85.8, s2f: 88.0 },
-          { id: 'c8', grade: 'Grade 11', category: 'Core Subject', name: 'Physical Education and Health (Grade 11)', s1m: 86.5, s1f: 87.5, s2m: 87.0, s2f: 88.2 },
-          { id: 'c9', grade: 'Grade 12', category: 'Core Subject', name: '21st Century Literature from the Philippines and the World', s1m: 83.5, s1f: 86.0, s2m: 84.6, s2f: 86.8 },
-          { id: 'c10', grade: 'Grade 12', category: 'Core Subject', name: 'Contemporary Philippine Arts from the Regions', s1m: 84.8, s1f: 86.5, s2m: 85.5, s2f: 87.4 },
-          { id: 'c11', grade: 'Grade 12', category: 'Core Subject', name: 'Media and Information Literacy (MIL)', s1m: 84.0, s1f: 85.8, s2m: 85.2, s2f: 86.9 },
-          { id: 'c12', grade: 'Grade 12', category: 'Core Subject', name: 'Introduction to the Philosophy of the Human Person', s1m: 83.2, s1f: 85.4, s2m: 84.1, s2f: 86.3 },
-          { id: 'c13', grade: 'Grade 12', category: 'Core Subject', name: 'Understanding Culture, Society and Politics (UCSP)', s1m: 83.8, s1f: 85.9, s2m: 84.9, s2f: 86.7 },
-          { id: 'c14', grade: 'Grade 12', category: 'Core Subject', name: 'Physical Science / Disaster Readiness & Risk Reduction', s1m: 81.6, s1f: 83.5, s2m: 82.9, s2f: 84.6 },
-          { id: 'c15', grade: 'Grade 12', category: 'Core Subject', name: 'Physical Education and Health (Grade 12)', s1m: 87.0, s1f: 88.0, s2m: 87.8, s2f: 88.6 }
-        ],
-        y2: [],
-        y3: [],
-        y4: []
-      },
+      readingV3: { y1: [], y2: [], y3: [] },
       nat: [
         { area: 'ELLNA (Grade 3) — English', y1m: 75.2, y1f: 77.8, y2m: 78.0, y2f: 80.4, y3m: 81.2, y3f: 83.6 },
         { area: 'ELLNA (Grade 3) — Filipino', y1m: 79.5, y1f: 82.5, y2m: 82.1, y2f: 84.9, y3m: 84.5, y3f: 87.1 },
-        { area: 'ELLNA (Grade 3) — Numeracy', y1m: 74.8, y1f: 76.0, y2m: 78.2, y2f: 79.6, y3m: 81.0, y3f: 82.2 },
         { area: 'NAT (Grade 6) — Problem Solving', y1m: 71.9, y1f: 73.7, y2m: 74.2, y2f: 76.0, y3m: 77.5, y3f: 79.3 },
-        { area: 'NAT (Grade 6) — Information Literacy', y1m: 73.0, y1f: 75.4, y2m: 75.8, y2f: 78.2, y3m: 79.0, y3f: 81.2 },
-        { area: 'NAT (Grade 6) — Critical Thinking', y1m: 70.4, y1f: 72.6, y2m: 73.5, y2f: 75.7, y3m: 76.8, y3f: 79.0 }
+        { area: 'NAT (Grade 10) — Critical Thinking & Literacy', y1m: 72.5, y1f: 74.8, y2m: 75.0, y2f: 77.2, y3m: 78.1, y3f: 80.4 },
+        { area: 'NAT (Grade 12) — Core 21st Century Skills', y1m: 73.4, y1f: 75.6, y2m: 76.1, y2f: 78.4, y3m: 79.2, y3f: 81.5 }
       ],
       nutrition: {},
       sbm: {},
       nsbi: [
-        { name: 'Building 1 (Marcos Type)', type: 'Marcos Pre-Fab Building', condition: 'Good Condition', rooms: 3, gripo: 3, cr: 3, silya: 105, lamesa: 6, board: 3, fans: 6, remarks: 'Kinder, Grade 1 & Grade 2' },
-        { name: 'Building 2 (DepEd Standard)', type: 'DepEd Standard Building', condition: 'Good Condition', rooms: 4, gripo: 4, cr: 4, silya: 140, lamesa: 8, board: 4, fans: 8, remarks: 'Grade 3, Grade 4, Grade 5 & Grade 6' }
+        { name: 'Building 1 (DepEd Standard)', type: 'DepEd Standard Building', condition: 'Good Condition', rooms: 4, gripo: 4, cr: 4, silya: 160, lamesa: 8, board: 4, fans: 8, remarks: 'Junior High Classrooms' },
+        { name: 'Building 2 (SHS 2-Storey Bldg)', type: 'SHS Multi-Storey Building', condition: 'Good Condition', rooms: 4, gripo: 4, cr: 4, silya: 160, lamesa: 8, board: 4, fans: 8, remarks: 'Grade 11 & Grade 12 Classrooms' }
       ]
     };
 
-    ['y1', 'y2', 'y3', 'y4'].forEach(sy => {
-      if (sy !== 'y1') {
-        DEFAULT_DB.shsStrands[sy] = JSON.parse(JSON.stringify(DEFAULT_DB.shsStrands.y1));
-        DEFAULT_DB.shsCoreSubjects[sy] = JSON.parse(JSON.stringify(DEFAULT_DB.shsCoreSubjects.y1));
-      }
-      const pCount = sy === 'y4' ? 3 : 4;
-      DEFAULT_DB.mpsMatrix[sy] = {};
-      ALL_MPS_SUBJECTS.forEach(s => {
-        DEFAULT_DB.mpsMatrix[sy][s] = {};
-        G1_TO_G10.forEach(g => {
-          DEFAULT_DB.mpsMatrix[sy][s][g] = Array.from({ length: pCount }, () => ({ m: 82.5, f: 84.5 }));
-        });
-      });
-
-      DEFAULT_DB.enrMatrix[sy] = { enrollment: {}, dropout: {}, trans_in: {}, trans_out: {} };
-      GRADES.forEach(g => {
-        DEFAULT_DB.enrMatrix[sy].enrollment[g] = Array.from({ length: pCount }, () => ({ m: 20, f: 19 }));
-        DEFAULT_DB.enrMatrix[sy].dropout[g] = Array.from({ length: pCount }, () => ({ m: 0, f: 0 }));
-        DEFAULT_DB.enrMatrix[sy].trans_in[g] = Array.from({ length: pCount }, () => ({ m: 0, f: 0 }));
-        DEFAULT_DB.enrMatrix[sy].trans_out[g] = Array.from({ length: pCount }, () => ({ m: 0, f: 0 }));
-      });
-    });
-
-    ['y1', 'y2', 'y3'].forEach(sy => {
-      CRLA_LANG_ROWS.forEach(r => {
-        DEFAULT_DB.crlaV3[sy][r.key] = [1, 1, 2, 1, 3, 3, 4, 4, 10, 10];
-      });
-      G1_TO_G6.forEach(g => {
-        DEFAULT_DB.rmaV2[sy][g] = [1, 1, 2, 1, 4, 3, 5, 5, 8, 9];
-      });
-      DEFAULT_DB.readingV3[sy] = [];
-      G1_TO_G6.forEach(g => {
-        ['Filipino', 'English'].forEach(lang => {
-          DEFAULT_DB.readingV3[sy].push({
-            id: 'rd_' + sy + '_' + g.replace(/\s+/g, '') + '_' + lang.toLowerCase(),
-            grade: g,
-            lang: lang,
-            vals: [0, 0, 2, 1, 3, 2, 10, 10, 5, 6]
-          });
-        });
-      });
-    });
-
-    PHILIRI_LANG_ROWS.forEach(r => {
-      DEFAULT_DB.philiriV2[r.key] = [13, 14, 5, 4, 2, 1, 0, 0];
-    });
-    GRADES.forEach(g => { DEFAULT_DB.nutrition[g] = { nm: 18, nf: 17, wm: 1, wf: 1, swm: 0, swf: 0, om: 1, of: 1, obm: 0, obf: 0 }; });
-
     let db = null;
-    try { db = JSON.parse(safeGetStorage('localStorage', 'tubahan_complete_v8') || 'null'); } catch (e) { db = null; }
-    if (!db) {
-      let oldV7 = null;
-      try { oldV7 = JSON.parse(safeGetStorage('localStorage', 'tubahan_complete_v7') || 'null'); } catch (e) {}
-      db = oldV7 ? { ...JSON.parse(JSON.stringify(DEFAULT_DB)), ...oldV7 } : JSON.parse(JSON.stringify(DEFAULT_DB));
-    }
+    try { db = JSON.parse(safeGetStorage('localStorage', 'rosario_west_db_v9') || 'null'); } catch (e) { db = null; }
+    if (!db) db = JSON.parse(JSON.stringify(DEFAULT_DB));
 
+    // NON-DESTRUCTIVE MERGE & INTEGRITY CHECK (PRESERVES ALL ENCODED DATA & SCHOOL NAME)
     function ensureMatrixIntegrity() {
+      if (!db.schoolProfile) db.schoolProfile = JSON.parse(JSON.stringify(DEFAULT_DB.schoolProfile));
+      if (!db.sbfpStatus) db.sbfpStatus = 'active';
+      if (!Array.isArray(db.k12Grades) || db.k12Grades.length === 0) db.k12Grades = [...DEFAULT_K12_GRADES];
+      if (!db.mpsCatalog) db.mpsCatalog = JSON.parse(JSON.stringify(DEFAULT_MPS_CATALOG));
+
+      ['elem', 'jhs', 'shs'].forEach(lvl => {
+        if (!db.mpsCatalog[lvl]) db.mpsCatalog[lvl] = JSON.parse(JSON.stringify(DEFAULT_MPS_CATALOG[lvl]));
+        if (!Array.isArray(db.mpsCatalog[lvl].grades) || db.mpsCatalog[lvl].grades.length === 0) {
+          db.mpsCatalog[lvl].grades = [...DEFAULT_MPS_CATALOG[lvl].grades];
+        }
+        if (!Array.isArray(db.mpsCatalog[lvl].subjects) || db.mpsCatalog[lvl].subjects.length === 0) {
+          db.mpsCatalog[lvl].subjects = [...DEFAULT_MPS_CATALOG[lvl].subjects];
+        }
+      });
+
       ['y1', 'y2', 'y3', 'y4'].forEach(sy => {
         const pCount = sy === 'y4' ? 3 : 4;
         if (!db.mpsMatrix) db.mpsMatrix = {};
         if (!db.mpsMatrix[sy]) db.mpsMatrix[sy] = {};
-        ALL_MPS_SUBJECTS.forEach(s => {
-          if (!db.mpsMatrix[sy][s]) db.mpsMatrix[sy][s] = {};
-          G1_TO_G10.forEach(g => {
-            if (!Array.isArray(db.mpsMatrix[sy][s][g]) || db.mpsMatrix[sy][s][g].length !== pCount) {
-              db.mpsMatrix[sy][s][g] = Array.from({ length: pCount }, () => ({ m: 82.5, f: 84.5 }));
-            }
+
+        ['elem', 'jhs', 'shs'].forEach(lvl => {
+          const grades = db.mpsCatalog[lvl].grades;
+          db.mpsCatalog[lvl].subjects.forEach(subjObj => {
+            const sid = subjObj.id;
+            if (!db.mpsMatrix[sy][sid]) db.mpsMatrix[sy][sid] = {};
+            grades.forEach(g => {
+              if (!Array.isArray(db.mpsMatrix[sy][sid][g]) || db.mpsMatrix[sy][sid][g].length !== pCount) {
+                db.mpsMatrix[sy][sid][g] = Array.from({ length: pCount }, () => ({ m: 82.5, f: 84.5 }));
+              }
+            });
           });
         });
+
         if (!db.enrMatrix) db.enrMatrix = {};
         if (!db.enrMatrix[sy]) db.enrMatrix[sy] = { enrollment: {}, dropout: {}, trans_in: {}, trans_out: {} };
         ['enrollment', 'dropout', 'trans_in', 'trans_out'].forEach(cat => {
           if (!db.enrMatrix[sy][cat]) db.enrMatrix[sy][cat] = {};
-          GRADES.forEach(g => {
+          db.k12Grades.forEach(g => {
             if (!Array.isArray(db.enrMatrix[sy][cat][g]) || db.enrMatrix[sy][cat][g].length !== pCount) {
               const defVal = cat === 'enrollment' ? 20 : 0;
-              const defValF = cat === 'enrollment' ? 19 : 0;
-              db.enrMatrix[sy][cat][g] = Array.from({ length: pCount }, () => ({ m: defVal, f: defValF }));
+              db.enrMatrix[sy][cat][g] = Array.from({ length: pCount }, () => ({ m: defVal, f: defVal }));
             }
           });
         });
-        if (!db.shsStrands) db.shsStrands = JSON.parse(JSON.stringify(DEFAULT_DB.shsStrands));
-        if (!Array.isArray(db.shsStrands[sy])) db.shsStrands[sy] = JSON.parse(JSON.stringify(DEFAULT_DB.shsStrands.y1));
-        if (!db.shsCoreSubjects) db.shsCoreSubjects = JSON.parse(JSON.stringify(DEFAULT_DB.shsCoreSubjects));
-        if (!Array.isArray(db.shsCoreSubjects[sy])) db.shsCoreSubjects[sy] = JSON.parse(JSON.stringify(DEFAULT_DB.shsCoreSubjects.y1));
+      });
+
+      if (!db.nutrition) db.nutrition = {};
+      db.k12Grades.forEach(g => {
+        if (!db.nutrition[g]) {
+          const isHS = /grade\s*(7|8|9|10|11|12)/i.test(g);
+          db.nutrition[g] = {
+            feeding: isHS ? 'N/A' : 'Active',
+            nm: isHS ? 0 : 18, nf: isHS ? 0 : 17,
+            wm: 0, wf: 0, swm: 0, swf: 0, om: 0, of: 0, obm: 0, obf: 0
+          };
+        } else if (!db.nutrition[g].feeding) {
+          const isHS = /grade\s*(7|8|9|10|11|12)/i.test(g);
+          db.nutrition[g].feeding = isHS ? 'N/A' : 'Active';
+        }
       });
 
       if (!db.triSyLabels) db.triSyLabels = JSON.parse(JSON.stringify(DEFAULT_DB.triSyLabels));
@@ -1495,15 +1454,12 @@
         if (!db.triSyLabels[k]) db.triSyLabels[k] = { y1: 'SY 2024–2025', y2: 'SY 2025–2026', y3: 'SY 2026–2027' };
       });
 
-      if (!db.crlaV3) db.crlaV3 = JSON.parse(JSON.stringify(DEFAULT_DB.crlaV3));
+      if (!db.crlaV3) db.crlaV3 = { y1: {}, y2: {}, y3: {} };
       ['y1', 'y2', 'y3'].forEach(sy => {
         if (!db.crlaV3[sy]) db.crlaV3[sy] = {};
         CRLA_LANG_ROWS.forEach(r => {
           if (!Array.isArray(db.crlaV3[sy][r.key]) || db.crlaV3[sy][r.key].length !== 10) {
-            const legacy = db.crlaV2 && db.crlaV2[sy] && Array.isArray(db.crlaV2[sy][r.grade]) && db.crlaV2[sy][r.grade].length === 10
-              ? [...db.crlaV2[sy][r.grade]]
-              : [1, 1, 2, 1, 3, 3, 4, 4, 10, 10];
-            db.crlaV3[sy][r.key] = legacy;
+            db.crlaV3[sy][r.key] = [1, 1, 2, 1, 3, 3, 4, 4, 10, 10];
           }
         });
       });
@@ -1511,17 +1467,14 @@
       if (!db.philiriV2) db.philiriV2 = {};
       PHILIRI_LANG_ROWS.forEach(r => {
         if (!Array.isArray(db.philiriV2[r.key]) || db.philiriV2[r.key].length !== 8) {
-          const legacy = db.philiri && Array.isArray(db.philiri[r.grade]) && db.philiri[r.grade].length === 8
-            ? [...db.philiri[r.grade]]
-            : [13, 14, 5, 4, 2, 1, 0, 0];
-          db.philiriV2[r.key] = legacy;
+          db.philiriV2[r.key] = [14, 15, 5, 4, 2, 1, 0, 0];
         }
       });
 
-      if (!db.rmaV2) db.rmaV2 = JSON.parse(JSON.stringify(DEFAULT_DB.rmaV2));
+      if (!db.rmaV2) db.rmaV2 = { y1: {}, y2: {}, y3: {} };
       ['y1', 'y2', 'y3'].forEach(sy => {
         if (!db.rmaV2[sy]) db.rmaV2[sy] = {};
-        G1_TO_G6.forEach(g => {
+        RMA_GRADES.forEach(g => {
           if (!Array.isArray(db.rmaV2[sy][g]) || db.rmaV2[sy][g].length !== 10) {
             db.rmaV2[sy][g] = [1, 1, 2, 1, 4, 3, 5, 5, 8, 9];
           }
@@ -1531,48 +1484,44 @@
       if (!db.readingV3) db.readingV3 = { y1: [], y2: [], y3: [] };
       ['y1', 'y2', 'y3'].forEach(sy => {
         if (!Array.isArray(db.readingV3[sy]) || db.readingV3[sy].length === 0) {
-          if (db.readingV2 && Array.isArray(db.readingV2[sy]) && db.readingV2[sy].length > 0) {
-            const migrated = [];
-            db.readingV2[sy].forEach(oldRow => {
-              migrated.push({
-                id: oldRow.id + '_fil',
-                grade: oldRow.grade,
-                lang: 'Filipino',
-                vals: Array.isArray(oldRow.vals) && oldRow.vals.length === 10 ? [...oldRow.vals] : [0, 0, 2, 1, 3, 2, 10, 10, 5, 6]
-              });
-              migrated.push({
-                id: oldRow.id + '_eng',
-                grade: oldRow.grade,
-                lang: 'English',
+          db.readingV3[sy] = [];
+          ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'].forEach(g => {
+            ['Filipino', 'English'].forEach(lang => {
+              db.readingV3[sy].push({
+                id: 'rd_' + sy + '_' + g.replace(/\s+/g, '') + '_' + lang.toLowerCase(),
+                grade: g,
+                lang: lang,
                 vals: [0, 0, 2, 1, 3, 2, 10, 10, 5, 6]
               });
             });
-            db.readingV3[sy] = migrated;
-          } else {
-            db.readingV3[sy] = JSON.parse(JSON.stringify(DEFAULT_DB.readingV3[sy]));
-          }
+          });
         }
       });
     }
-    GRADES.forEach(g => { if (!db.nutrition[g]) db.nutrition[g] = { nm: 18, nf: 17, wm: 1, wf: 1, swm: 0, swf: 0, om: 1, of: 1, obm: 0, obf: 0 }; });
     ensureMatrixIntegrity();
 
     async function loadCloudDB() {
       try {
         setSyncStatus("🔄 Syncing...");
-        const res = await fetch(`${FIREBASE_DB_URL}/schoolData.json`);
+        const res = await fetch(`${FIREBASE_DB_URL}/${CLOUD_NODE}.json`);
         if (!res.ok) throw new Error("HTTP " + res.status);
         const cloudData = await res.json();
         if (cloudData) {
-          db = { ...JSON.parse(JSON.stringify(DEFAULT_DB)), ...cloudData };
+          // Deep merge so existing encoded data & schoolProfile are never overwritten
+          db = {
+            ...JSON.parse(JSON.stringify(DEFAULT_DB)),
+            ...cloudData,
+            schoolProfile: { ...DEFAULT_DB.schoolProfile, ...(cloudData.schoolProfile || {}) }
+          };
           if (!db.sbm) db.sbm = {};
           if (!db.masterlist) db.masterlist = [];
           if (!db.nsbi) db.nsbi = [];
-          GRADES.forEach(g => { if (!db.nutrition[g]) db.nutrition[g] = { nm: 18, nf: 17, wm: 1, wf: 1, swm: 0, swf: 0, om: 1, of: 1, obm: 0, obf: 0 }; });
           ensureMatrixIntegrity();
-          safeSetStorage('localStorage', 'tubahan_complete_v8', JSON.stringify(db));
+          safeSetStorage('localStorage', 'rosario_west_db_v9', JSON.stringify(db));
+          applySchoolProfileUI();
           applySavedSchoolLogo();
           syncAllSYInputsFromDB();
+          populateMpsSubjectsDropdown();
           renderActiveTab();
         } else {
           await saveDB();
@@ -1586,10 +1535,10 @@
     }
 
     async function saveDB() {
-      safeSetStorage('localStorage', 'tubahan_complete_v8', JSON.stringify(db));
+      safeSetStorage('localStorage', 'rosario_west_db_v9', JSON.stringify(db));
       try {
         setSyncStatus("💾 Saving to Cloud...");
-        const res = await fetch(`${FIREBASE_DB_URL}/schoolData.json`, {
+        const res = await fetch(`${FIREBASE_DB_URL}/${CLOUD_NODE}.json`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(db)
@@ -1604,20 +1553,54 @@
     }
 
     setInterval(() => {
-      if (!isEditMode && safeGetStorage('sessionStorage', 'tubahan_sd_user')) {
+      if (!isEditMode && safeGetStorage('sessionStorage', 'rosario_west_user')) {
         loadCloudDB();
       }
-    }, 10000);
+    }, 12000);
+
+    // ==================== 1-CLICK JSON BACKUP & RESTORE ====================
+    function downloadJSONBackup() {
+      const sName = (db.schoolProfile?.schoolName || 'RosarioWest').replace(/[^a-zA-Z0-9]/g, '_');
+      const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${sName}_Backup_${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+    }
+
+    function restoreJSONBackup(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const parsed = JSON.parse(evt.target.result);
+          if (!parsed || typeof parsed !== 'object') throw new Error("Invalid file");
+          db = { ...JSON.parse(JSON.stringify(DEFAULT_DB)), ...parsed };
+          ensureMatrixIntegrity();
+          applySchoolProfileUI();
+          applySavedSchoolLogo();
+          syncAllSYInputsFromDB();
+          populateMpsSubjectsDropdown();
+          saveDB();
+          renderActiveTab();
+          alert('✅ Matagumpay na na-restore at na-sync sa cloud ang backup data!');
+        } catch (err) {
+          alert('❌ Hindi valid na JSON backup file.');
+        }
+      };
+      reader.readAsText(file);
+    }
 
     // =========================================================================
-    // TRUE 3D TRANSPARENT GLASS CYLINDER GRAPH ENGINE WITH DATA LABELS
+    // 3D TRANSPARENT GLASS CYLINDER BAR CHART ENGINE WITH FLOATING DATA LABELS
     // =========================================================================
     function render3DBarChart(containerId, opts) {
       const container = document.getElementById(containerId);
       if (!container) return;
 
       const {
-        title = '3D Transparent Cylinder Presentation',
+        title = '3D Transparent Cylinder Graphical Presentation',
         subtitle = '',
         items = [],
         suffix = '',
@@ -1631,168 +1614,168 @@
 
       const uid = containerId.replace(/[^a-zA-Z0-9]/g, '') + '_' + Math.floor(Math.random() * 100000);
 
-      const glassPalette = [
-        { c1: '#10b981', c2: '#047857', glow: '#a7f3d0' },
-        { c1: '#0ea5e9', c2: '#0369a1', glow: '#bae6fd' },
-        { c1: '#f59e0b', c2: '#b45309', glow: '#fde68a' },
-        { c1: '#6366f1', c2: '#3730a3', glow: '#c7d2fe' },
-        { c1: '#f43f5e', c2: '#be123c', glow: '#fecdd3' },
-        { c1: '#14b8a6', c2: '#0f766e', glow: '#99f6e4' },
-        { c1: '#8b5cf6', c2: '#5b21b6', glow: '#ddd6fe' }
+      const cylinderPalette = [
+        { c1: '#10b981', c2: '#047857', rim: '#a7f3d0', core: '#34d399' },
+        { c1: '#0ea5e9', c2: '#0369a1', rim: '#bae6fd', core: '#38bdf8' },
+        { c1: '#f59e0b', c2: '#b45309', rim: '#fde68a', core: '#fbbf24' },
+        { c1: '#6366f1', c2: '#3730a3', rim: '#c7d2fe', core: '#818cf8' },
+        { c1: '#f43f5e', c2: '#be123c', rim: '#fecdd3', core: '#fb7185' },
+        { c1: '#14b8a6', c2: '#0f766e', rim: '#99f6e4', core: '#2dd4bf' },
+        { c1: '#8b5cf6', c2: '#5b21b6', rim: '#ddd6fe', core: '#a78bfa' }
       ];
 
       const rawMax = Math.max(...items.map(i => Number(i.value) || 0), 1);
-      const yMax = maxVal !== null ? maxVal : (suffix === '%' ? 100 : Math.ceil(rawMax * 1.22));
+      const yMax = maxVal !== null ? maxVal : (suffix === '%' ? 100 : Math.ceil(rawMax * 1.2));
 
-      const svgW = Math.max(700, items.length * 108 + 130);
-      const svgH = 350;
-      const padL = 58, padR = 36, padT = 58, padB = 72;
+      const svgW = Math.max(720, items.length * 106 + 130);
+      const svgH = 340;
+      const padL = 58, padR = 40, padT = 54, padB = 70;
       const plotW = svgW - padL - padR;
       const plotH = svgH - padT - padB;
+      const depthX = 16, depthY = 11;
 
       let defsSvg = `
         <defs>
-          <!-- Cylindrical specular vertical sheen -->
-          <linearGradient id="cylSheen_${uid}" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+          <linearGradient id="bgGlass_${uid}" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f8fafc" stop-opacity="0.96"/>
+            <stop offset="100%" stop-color="#ecfdf5" stop-opacity="0.72"/>
+          </linearGradient>
+          <linearGradient id="floorGlass_${uid}" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#cbd5e1" stop-opacity="0.72"/>
+            <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.45"/>
+          </linearGradient>
+          <!-- Vertical specular highlight along left side of cylinder -->
+          <linearGradient id="cylHighlight_${uid}" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.05"/>
             <stop offset="22%" stop-color="#ffffff" stop-opacity="0.72"/>
-            <stop offset="42%" stop-color="#ffffff" stop-opacity="0.12"/>
-            <stop offset="78%" stop-color="#ffffff" stop-opacity="0.04"/>
-            <stop offset="94%" stop-color="#ffffff" stop-opacity="0.32"/>
-            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.10"/>
+            <stop offset="42%" stop-color="#ffffff" stop-opacity="0.14"/>
+            <stop offset="82%" stop-color="#ffffff" stop-opacity="0.02"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.32"/>
           </linearGradient>
-
-          <!-- Top glass ellipse gradient -->
-          <radialGradient id="cylTopGlass_${uid}" cx="38%" cy="35%" r="65%">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
-            <stop offset="65%" stop-color="#ffffff" stop-opacity="0.32"/>
-            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.12"/>
-          </radialGradient>
-
-          <!-- Transparent frosted stage base -->
-          <linearGradient id="stageGlass_${uid}" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#94a3b8" stop-opacity="0.16"/>
-            <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.05"/>
-          </linearGradient>
-
           <filter id="cylShadow_${uid}" x="-20%" y="-20%" width="150%" height="150%">
-            <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.15"/>
+            <feDropShadow dx="3" dy="8" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.18"/>
           </filter>
       `;
 
       items.forEach((item, idx) => {
         const pal = item.color
-          ? { c1: item.topColor || item.color, c2: item.sideColor || item.color, glow: '#ffffff' }
-          : glassPalette[idx % glassPalette.length];
+          ? { c1: item.topColor || item.color, c2: item.sideColor || item.color, rim: '#ffffff', core: item.topColor || item.color }
+          : cylinderPalette[idx % cylinderPalette.length];
 
-        // Cylindrical horizontal wrap gradient (translucent 0.24 - 0.56 so back gridlines shine right through!)
+        // Horizontal cylindrical shading (edges slightly richer, center translucent glass)
         defsSvg += `
           <linearGradient id="cylBody_${uid}_${idx}" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="${pal.c2}" stop-opacity="0.54"/>
-            <stop offset="25%" stop-color="${pal.c1}" stop-opacity="0.26"/>
-            <stop offset="55%" stop-color="${pal.c1}" stop-opacity="0.34"/>
-            <stop offset="85%" stop-color="${pal.c2}" stop-opacity="0.52"/>
-            <stop offset="100%" stop-color="${pal.c2}" stop-opacity="0.60"/>
+            <stop offset="0%" stop-color="${pal.c2}" stop-opacity="0.68"/>
+            <stop offset="30%" stop-color="${pal.c1}" stop-opacity="0.38"/>
+            <stop offset="68%" stop-color="${pal.c1}" stop-opacity="0.46"/>
+            <stop offset="100%" stop-color="${pal.c2}" stop-opacity="0.74"/>
           </linearGradient>
-
-          <linearGradient id="cylCap_${uid}_${idx}" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="${pal.c1}" stop-opacity="0.52"/>
-            <stop offset="100%" stop-color="${pal.c2}" stop-opacity="0.34"/>
+          <linearGradient id="cylVert_${uid}_${idx}" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="${pal.c1}" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="${pal.c2}" stop-opacity="0.62"/>
           </linearGradient>
+          <radialGradient id="cylCap_${uid}_${idx}" cx="38%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+            <stop offset="55%" stop-color="${pal.c1}" stop-opacity="0.48"/>
+            <stop offset="100%" stop-color="${pal.c2}" stop-opacity="0.75"/>
+          </radialGradient>
         `;
       });
       defsSvg += `</defs>`;
 
-      // Transparent Gridlines (visible right through the clear glass cylinders)
+      const backdropSvg = `
+        <rect x="${padL + depthX}" y="${padT - depthY}" width="${plotW}" height="${plotH}" rx="12"
+          fill="url(#bgGlass_${uid})" stroke="#cbd5e1" stroke-width="1"/>
+      `;
+
       let gridSvg = '';
       for (let step = 0; step <= 4; step++) {
         const val = (yMax * step) / 4;
         const y = padT + plotH - (plotH * step) / 4;
         const labelTxt = suffix === '%' ? val.toFixed(0) + '%' : Math.round(val);
         gridSvg += `
-          <line x1="${padL}" y1="${y}" x2="${svgW - padR}" y2="${y}"
-            stroke="#94a3b8" stroke-opacity="0.48" stroke-dasharray="4 4" stroke-width="1"/>
-          <text x="${padL - 10}" y="${y + 4}" text-anchor="end" font-size="10.5" font-weight="800" fill="#334155">${labelTxt}</text>
+          <line x1="${padL}" y1="${y}" x2="${padL + depthX}" y2="${y - depthY}" stroke="#cbd5e1" stroke-width="1"/>
+          <line x1="${padL + depthX}" y1="${y - depthY}" x2="${svgW - padR + depthX}" y2="${y - depthY}" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/>
+          <text x="${padL - 9}" y="${y + 4}" text-anchor="end" font-size="10.5" font-weight="800" fill="#475569">${labelTxt}</text>
         `;
       }
 
-      // Transparent Glass Floor Platform
       const floorSvg = `
-        <polygon points="${padL + 10},${padT + plotH - 8} ${svgW - padR - 10},${padT + plotH - 8} ${svgW - padR},${padT + plotH + 8} ${padL},${padT + plotH + 8}"
-          fill="url(#stageGlass_${uid})" stroke="#94a3b8" stroke-opacity="0.45" stroke-width="1"/>
+        <polygon points="${padL},${padT + plotH} ${padL + depthX},${padT + plotH - depthY} ${svgW - padR + depthX},${padT + plotH - depthY} ${svgW - padR},${padT + plotH}"
+          fill="url(#floorGlass_${uid})" stroke="#94a3b8" stroke-width="1"/>
+        <rect x="${padL}" y="${padT + plotH}" width="${plotW}" height="6" rx="2" fill="#64748b" opacity="0.35"/>
       `;
 
       const slotW = plotW / items.length;
-      const cylW = Math.min(56, Math.max(32, slotW * 0.52));
+      const cylW = Math.min(54, Math.max(30, slotW * 0.50));
       const rx = cylW / 2;
-      const ry = Math.max(6, Math.min(10, cylW * 0.19));
+      const ry = Math.max(6.5, rx * 0.34);
 
-      let cylindersSvg = '';
+      let cylsSvg = '';
       items.forEach((item, idx) => {
         const val = Number(item.value) || 0;
         const ratio = Math.min(1, Math.max(0, val / yMax));
-        const cylH = Math.max(8, ratio * plotH);
-        const cx = padL + slotW * idx + slotW / 2;
-        const xLeft = cx - rx;
-        const xRight = cx + rx;
-        const yBottom = padT + plotH;
-        const yTop = yBottom - cylH;
+        const barH = Math.max(8, ratio * plotH);
+        const cx = padL + slotW * idx + slotW / 2 + 5;
+        const x = cx - rx;
+        const yBottom = padT + plotH - 3;
+        const yTop = yBottom - barH;
 
         const pal = item.color
-          ? { c1: item.topColor || item.color, c2: item.sideColor || item.color, glow: '#ffffff' }
-          : glassPalette[idx % glassPalette.length];
+          ? { c1: item.topColor || item.color, c2: item.sideColor || item.color, rim: '#ffffff' }
+          : cylinderPalette[idx % cylinderPalette.length];
 
-        // 1. Back rim of the bottom base ellipse (visible through transparent glass cylinder!)
-        const bottomBackRim = `
-          <path d="M ${xLeft} ${yBottom} A ${rx} ${ry} 0 0 1 ${xRight} ${yBottom}"
-            fill="none" stroke="${pal.glow}" stroke-opacity="0.65" stroke-width="1.1" stroke-dasharray="2.5 2"/>
-        `;
-
-        // 2. Bottom base ellipse fill & front rim
-        const bottomBase = `
+        // 1. Back half of bottom glass base ellipse (visible through transparent cylinder!)
+        const bottomBackArc = `
           <ellipse cx="${cx}" cy="${yBottom}" rx="${rx}" ry="${ry}"
-            fill="url(#cylCap_${uid}_${idx})" stroke="#ffffff" stroke-opacity="0.88" stroke-width="1.2"/>
+            fill="${pal.c2}" fill-opacity="0.32" stroke="${pal.rim}" stroke-opacity="0.65" stroke-width="1.1"/>
         `;
 
-        // 3. Curved Transparent Cylinder Wall (Path with top & bottom elliptical arcs)
-        const bodyPath = `
-          M ${xLeft} ${yTop}
-          L ${xLeft} ${yBottom}
-          A ${rx} ${ry} 0 0 0 ${xRight} ${yBottom}
-          L ${xRight} ${yTop}
-          A ${rx} ${ry} 0 0 1 ${xLeft} ${yTop}
+        // 2. Back half of top glass rim (seen through front glass wall)
+        const topBackArc = `
+          <path d="M ${x} ${yTop} A ${rx} ${ry} 0 0 1 ${x + cylW} ${yTop}"
+            fill="none" stroke="${pal.rim}" stroke-opacity="0.55" stroke-width="1" stroke-dasharray="2.5 2"/>
+        `;
+
+        // 3. Transparent Cylinder Body (curved bottom & top paths)
+        const cylPath = `
+          M ${x} ${yTop}
+          L ${x} ${yBottom}
+          A ${rx} ${ry} 0 0 0 ${x + cylW} ${yBottom}
+          L ${x + cylW} ${yTop}
+          A ${rx} ${ry} 0 0 1 ${x} ${yTop}
           Z
         `;
-
-        const cylinderBody = `
-          <path d="${bodyPath}" fill="url(#cylBody_${uid}_${idx})"/>
-          <path d="${bodyPath}" fill="url(#cylSheen_${uid})"/>
-          <!-- Left & Right glass rim highlights -->
-          <line x1="${xLeft}" y1="${yTop}" x2="${xLeft}" y2="${yBottom}" stroke="#ffffff" stroke-opacity="0.92" stroke-width="1.3"/>
-          <line x1="${xRight}" y1="${yTop}" x2="${xRight}" y2="${yBottom}" stroke="#ffffff" stroke-opacity="0.80" stroke-width="1.1"/>
+        const cylinderWall = `
+          <path d="${cylPath}" fill="url(#cylBody_${uid}_${idx})" stroke="${pal.rim}" stroke-opacity="0.85" stroke-width="1.2"/>
+          <path d="${cylPath}" fill="url(#cylVert_${uid}_${idx})"/>
+          <path d="${cylPath}" fill="url(#cylHighlight_${uid})"/>
         `;
 
-        // 4. Top Transparent 3D Elliptical Glass Cap + Specular Glint
-        const topCap = `
+        // 4. Front bottom glass meniscus rim
+        const bottomFrontArc = `
+          <path d="M ${x} ${yBottom} A ${rx} ${ry} 0 0 0 ${x + cylW} ${yBottom}"
+            fill="none" stroke="#ffffff" stroke-opacity="0.88" stroke-width="1.4"/>
+        `;
+
+        // 5. Top 3D Glass Lid Ellipse + Inner Glass Ring
+        const topLid = `
           <ellipse cx="${cx}" cy="${yTop}" rx="${rx}" ry="${ry}"
             fill="url(#cylCap_${uid}_${idx})" stroke="#ffffff" stroke-opacity="0.95" stroke-width="1.4"/>
-          <ellipse cx="${cx}" cy="${yTop}" rx="${rx - 1}" ry="${ry - 0.8}"
-            fill="url(#cylTopGlass_${uid})"/>
-          <ellipse cx="${cx - rx * 0.36}" cy="${yTop - ry * 0.15}" rx="${rx * 0.24}" ry="${ry * 0.28}"
-            fill="#ffffff" opacity="0.85"/>
+          <ellipse cx="${cx}" cy="${yTop}" rx="${rx * 0.78}" ry="${ry * 0.72}"
+            fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="0.9"/>
         `;
 
-        // 5. Floating Frosted Data Label Pill above cylinder top
+        // 6. Floating Pill Data Label above Cylinder
         const displayVal = suffix === '%' ? `${val.toFixed(1)}%` : `${val}${suffix}`;
-        const labelY = yTop - ry - 9;
-
+        const labelY = yTop - ry - 8;
         const dataLabel = `
-          <rect x="${cx - 26}" y="${labelY - 13}" width="52" height="17" rx="8.5"
-            fill="#0f172a" fill-opacity="0.88" stroke="#ffffff" stroke-opacity="0.9" stroke-width="1"/>
+          <rect x="${cx - 25}" y="${labelY - 13}" width="50" height="17" rx="8.5"
+            fill="#0f172a" fill-opacity="0.92" stroke="${pal.rim}" stroke-width="1"/>
           <text x="${cx}" y="${labelY - 1}" text-anchor="middle" font-size="10" font-weight="800" fill="#fde047">${displayVal}</text>
         `;
 
-        // 6. X-Axis Label
+        // 7. X-Axis Label
         const words = String(item.label).split(' ');
         let xLabelSvg = '';
         if (words.length > 2 && String(item.label).length > 14) {
@@ -1800,16 +1783,16 @@
           const l1 = words.slice(0, mid).join(' ');
           const l2 = words.slice(mid).join(' ');
           xLabelSvg = `
-            <text x="${cx}" y="${padT + plotH + 22}" text-anchor="middle" font-size="10" font-weight="800" fill="#0f172a">${l1}</text>
-            <text x="${cx}" y="${padT + plotH + 34}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#475569">${l2}</text>
+            <text x="${cx}" y="${padT + plotH + 20}" text-anchor="middle" font-size="10" font-weight="800" fill="#0f172a">${l1}</text>
+            <text x="${cx}" y="${padT + plotH + 32}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#475569">${l2}</text>
           `;
         } else {
           xLabelSvg = `
-            <text x="${cx}" y="${padT + plotH + 23}" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0f172a">${item.label}</text>
+            <text x="${cx}" y="${padT + plotH + 21}" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0f172a">${item.label}</text>
           `;
         }
 
-        cylindersSvg += `<g filter="url(#cylShadow_${uid})">${bottomBase}${bottomBackRim}${cylinderBody}${topCap}${dataLabel}</g><g>${xLabelSvg}</g>`;
+        cylsSvg += `<g filter="url(#cylShadow_${uid})">${bottomBackArc}${topBackArc}${cylinderWall}${bottomFrontArc}${topLid}${dataLabel}</g><g>${xLabelSvg}</g>`;
       });
 
       container.innerHTML = `
@@ -1818,14 +1801,15 @@
             <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">📊 ${title}</h4>
             ${subtitle ? `<p class="text-[11px] text-slate-500">${subtitle}</p>` : ''}
           </div>
-          <span class="bg-emerald-950/90 text-amber-300 border border-emerald-400/50 text-[10px] font-extrabold px-3 py-1 rounded-full shadow-xs">🧪 3D Transparent Cylinder Graph</span>
+          <span class="bg-gradient-to-r from-emerald-900 to-teal-800 text-amber-300 border border-emerald-500/40 text-[10px] font-extrabold px-3 py-1 rounded-full shadow-xs">🧪 3D Transparent Cylinder Chart</span>
         </div>
-        <div class="overflow-x-auto rounded-xl bg-transparent border border-slate-300/60 p-2">
-          <svg viewBox="0 0 ${svgW} ${svgH}" class="w-full min-w-[620px] h-auto select-none bg-transparent">
+        <div class="overflow-x-auto rounded-xl bg-gradient-to-b from-white to-slate-100/80 border border-slate-200/80 p-2">
+          <svg viewBox="0 0 ${svgW} ${svgH}" class="w-full min-w-[620px] h-auto select-none">
             ${defsSvg}
+            ${backdropSvg}
             ${gridSvg}
             ${floorSvg}
-            ${cylindersSvg}
+            ${cylsSvg}
           </svg>
         </div>
       `;
@@ -1840,11 +1824,11 @@
     function unlockSchoolPortal() {
       const nameInput = document.getElementById('loginUserName');
       const passInput = document.getElementById('loginPassInput');
-      const name = (nameInput ? nameInput.value : '').trim() || 'Tubahan ES Personnel';
+      const name = (nameInput ? nameInput.value : '').trim() || 'Rosario West Personnel';
       const pass = (passInput ? passInput.value : '').replace(/\s+/g, '').toLowerCase();
 
       if (pass === OFFICIAL_PASSCODE) {
-        safeSetStorage('sessionStorage', 'tubahan_sd_user', name);
+        safeSetStorage('sessionStorage', 'rosario_west_user', name);
         document.getElementById('loginErrorMsg').classList.add('hidden');
         initPortal();
       } else {
@@ -1855,29 +1839,38 @@
     function initPortal() {
       document.getElementById('loginGateScreen').classList.add('hidden');
       document.getElementById('mainPortalContent').classList.remove('hidden');
+      applySchoolProfileUI();
       applySavedSchoolLogo();
       syncAllSYInputsFromDB();
+      populateMpsSubjectsDropdown();
       updateLockUI();
       switchPortalTab('masterlist');
       loadCloudDB();
     }
 
     function lockPortal() {
-      safeRemoveStorage('sessionStorage', 'tubahan_sd_user');
+      safeRemoveStorage('sessionStorage', 'rosario_west_user');
       location.reload();
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      applySchoolProfileUI();
       applySavedSchoolLogo();
-      if (safeGetStorage('sessionStorage', 'tubahan_sd_user')) {
+      if (safeGetStorage('sessionStorage', 'rosario_west_user')) {
         initPortal();
       } else {
-        fetch(`${FIREBASE_DB_URL}/schoolData/customLogo.json`)
+        fetch(`${FIREBASE_DB_URL}/${CLOUD_NODE}.json`)
           .then(r => r.json())
-          .then(logo => {
-            if (logo) {
-              safeSetStorage('localStorage', 'tubahan_custom_logo_data', logo);
-              document.querySelectorAll('.school-logo-img').forEach(img => { img.src = logo; });
+          .then(data => {
+            if (data) {
+              if (data.schoolProfile) {
+                db.schoolProfile = { ...DEFAULT_DB.schoolProfile, ...data.schoolProfile };
+                applySchoolProfileUI();
+              }
+              if (data.customLogo) {
+                safeSetStorage('localStorage', 'rosario_west_custom_logo', data.customLogo);
+                document.querySelectorAll('.school-logo-img').forEach(img => { img.src = data.customLogo; });
+              }
             }
           }).catch(() => {});
       }
@@ -1917,6 +1910,11 @@
       const topBtn = document.getElementById('headerLockBadge');
       const barBtn = document.getElementById('barEditBtn');
       document.getElementById('btnUploadLogo').classList.toggle('hidden', !isEditMode);
+      document.getElementById('btnRestoreBackup').classList.toggle('hidden', !isEditMode);
+      document.getElementById('schoolProfileEditorBar').classList.toggle('hidden', !isEditMode);
+
+      const sbfpSel = document.getElementById('sbfpStatusSel');
+      if (sbfpSel) sbfpSel.disabled = !isEditMode;
 
       ['y1', 'y2', 'y3', 'y4'].forEach(k => {
         ['syInput_', 'mpsSyInput_'].forEach(pref => {
@@ -1958,7 +1956,7 @@
     // ==================== PILL TAB NAVIGATION ====================
     function switchPortalTab(tabKey) {
       activeTab = tabKey;
-      const allTabs = ['masterlist', 'mps', 'shs', 'enrollment', 'literacy', 'nat', 'nutrition', 'sbm', 'nsbi', 'analytics'];
+      const allTabs = ['masterlist', 'mps', 'enrollment', 'literacy', 'nat', 'nutrition', 'sbm', 'nsbi', 'analytics'];
       allTabs.forEach(k => {
         document.getElementById('sec_' + k).classList.toggle('hidden', k !== tabKey);
         const btn = document.getElementById('tabBtn_' + k);
@@ -1972,7 +1970,6 @@
     function renderActiveTab() {
       if (activeTab === 'masterlist') renderMasterlistTab();
       else if (activeTab === 'mps') renderMPSTab();
-      else if (activeTab === 'shs') renderSHSTab();
       else if (activeTab === 'enrollment') renderEnrollmentTab();
       else if (activeTab === 'literacy') renderLiteracyTab();
       else if (activeTab === 'nat') renderNATTab();
@@ -1982,7 +1979,7 @@
       else if (activeTab === 'analytics') renderAnalyticsTab();
     }
 
-    // ==================== TAB 1: GRADE LEVELS, SECTIONS, CLASS ADVISERS & MASTERLIST ====================
+    // ==================== TAB 1: MASTERLIST & ADVISERS ====================
     function renderMasterlistTab() {
       document.getElementById('formAddSection').classList.toggle('hidden', !isEditMode);
       document.getElementById('thDelSection').classList.toggle('hidden', !isEditMode);
@@ -2144,7 +2141,7 @@
         document.getElementById('syInput_' + k).value = db.syLabels[k];
         document.getElementById('mpsSyInput_' + k).value = db.syLabels[k];
       });
-      ['enrSySel', 'mpsSySel', 'shsSySel'].forEach(id => {
+      ['enrSySel', 'mpsSySel'].forEach(id => {
         const sel = document.getElementById(id);
         const cur = sel.value;
         sel.innerHTML = `
@@ -2201,24 +2198,69 @@
       renderMPSTab();
     }
 
-    // ==================== TAB 2: MPS (ELEMENTARY & JUNIOR HIGH SCHOOL) ====================
-    function getMPSTargetGrades(subj, lvlFilter) {
-      let base = G1_TO_G10;
-      if (subj === 'science') base = G3_TO_G10;
-      else if (['epp_tle', 'music_arts', 'pe_health'].includes(subj)) base = G4_TO_G10;
-
-      if (lvlFilter === 'ELEM') return base.filter(g => G1_TO_G6.includes(g));
-      if (lvlFilter === 'JHS') return base.filter(g => JHS_GRADES.includes(g));
-      return base;
+    // ==================== TAB 2: MPS (K-12: ELEM, JHS & SHS CORE/APPLIED/SPECIALIZED) ====================
+    function populateMpsSubjectsDropdown() {
+      const lvl = document.getElementById('mpsLevelSel')?.value || 'shs';
+      const subjSel = document.getElementById('mpsSubjectSel');
+      if (!subjSel) return;
+      const curVal = subjSel.value;
+      const list = db.mpsCatalog[lvl].subjects || [];
+      subjSel.innerHTML = list.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+      if (list.some(s => s.id === curVal)) subjSel.value = curVal;
     }
 
-    function getMPSGraphItems(sy, subj, lvlFilter = 'ALL') {
+    function onMpsLevelChange() {
+      populateMpsSubjectsDropdown();
+      renderMPSTab();
+    }
+
+    function addCustomMpsSubject(e) {
+      e.preventDefault();
+      const lvl = document.getElementById('mpsLevelSel').value;
+      const name = document.getElementById('newMpsSubjName').value.trim();
+      if (!name) return;
+      const sid = lvl + '_custom_' + Date.now();
+      db.mpsCatalog[lvl].subjects.push({ id: sid, name: name });
+      ensureMatrixIntegrity();
+      populateMpsSubjectsDropdown();
+      document.getElementById('mpsSubjectSel').value = sid;
+      saveDB();
+      renderMPSTab();
+      e.target.reset();
+    }
+
+    function addCustomMpsGrade(e) {
+      e.preventDefault();
+      const lvl = document.getElementById('mpsLevelSel').value;
+      const gName = document.getElementById('newMpsGradeName').value.trim();
+      if (!gName) return;
+      if (!db.mpsCatalog[lvl].grades.includes(gName)) {
+        db.mpsCatalog[lvl].grades.push(gName);
+      }
+      ensureMatrixIntegrity();
+      saveDB();
+      renderMPSTab();
+      e.target.reset();
+    }
+
+    function delMpsGradeRow(lvl, gIdx) {
+      if (db.mpsCatalog[lvl].grades.length <= 1) {
+        alert('Kailangan may natitirang kahit isang Grade Level sa table.');
+        return;
+      }
+      if (confirm('Alisin ang Grade Level row na ito sa MPS table?')) {
+        db.mpsCatalog[lvl].grades.splice(gIdx, 1);
+        saveDB();
+        renderMPSTab();
+      }
+    }
+
+    function getMPSGraphItems(sy, lvl, subjId) {
       const isPresent = sy === 'y4';
       const pCount = isPresent ? 3 : 4;
-      const targetGrades = getMPSTargetGrades(subj, lvlFilter);
-
+      const targetGrades = db.mpsCatalog[lvl].grades;
       return targetGrades.map(g => {
-        const arr = db.mpsMatrix[sy][subj][g];
+        const arr = (db.mpsMatrix[sy]?.[subjId]?.[g]) || Array.from({ length: pCount }, () => ({ m: 82.5, f: 84.5 }));
         let sum = 0;
         for (let i = 0; i < pCount; i++) {
           sum += ((Number(arr[i]?.m) || 0) + (Number(arr[i]?.f) || 0)) / 2;
@@ -2228,36 +2270,37 @@
     }
 
     function renderMPSTab() {
-      const subj = document.getElementById('mpsSubjectSel').value;
+      document.getElementById('mpsEditToolsBox').classList.toggle('hidden', !isEditMode);
+      const lvl = document.getElementById('mpsLevelSel').value;
+      const subjId = document.getElementById('mpsSubjectSel').value;
       const sy = document.getElementById('mpsSySel').value;
-      const lvlFilter = document.getElementById('mpsLevelFilter')?.value || 'ALL';
       const isPresent = sy === 'y4';
       const periods = isPresent ? ['Term 1', 'Term 2', 'Term 3'] : ['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4'];
       const colors = ['bg-[#094635]', 'bg-[#0e7490]', 'bg-[#d97706]', 'bg-[#4f46e5]'];
 
-      const targetGrades = getMPSTargetGrades(subj, lvlFilter);
-      const gradeRangeText = lvlFilter === 'ELEM'
-        ? 'Elementary (Grade 1–6)'
-        : (lvlFilter === 'JHS' ? 'Junior High School (Grade 7–10)' : 'Elementary & Junior High (Grade 1–10)');
+      const targetGrades = db.mpsCatalog[lvl].grades;
+      const subjObj = db.mpsCatalog[lvl].subjects.find(s => s.id === subjId);
+      const subjLabel = subjObj ? subjObj.name : subjId;
 
-      document.getElementById('mpsBannerTitle').innerText = `📌 ${db.syLabels[sy]} — MATATAG MPS SUMMARY (${gradeRangeText})`;
+      document.getElementById('mpsBannerTitle').innerText = `📌 ${db.syLabels[sy]} — ${subjLabel}`;
       document.getElementById('mpsBannerBadge').innerText = isPresent
         ? 'PRESENT SY: 3 TERMS (Term 1, Term 2, Term 3)'
         : 'PAST SY: 4 QUARTERS (Q1, Q2, Q3, Q4)';
 
-      let r1 = `<th rowspan="2" class="p-3 bg-[#0f172a] text-white text-left font-extrabold">Grade Level</th>`;
+      let r1 = `<th rowspan="2" class="p-3 bg-[#0f172a] text-white text-left font-extrabold">Grade Level / Strand</th>`;
       let r2 = '';
       periods.forEach((p, idx) => {
         r1 += `<th colspan="3" class="p-2.5 ${colors[idx]} text-white text-center font-extrabold border-l border-white/20">${p}</th>`;
         r2 += `<th class="p-2 bg-slate-100 text-slate-700 text-center border-l">Male %</th><th class="p-2 bg-slate-100 text-slate-700 text-center">Female %</th><th class="p-2 bg-emerald-50 text-emerald-950 text-center font-extrabold">Ave %</th>`;
       });
+      if (isEditMode) r1 += `<th rowspan="2" class="p-2 bg-rose-950 text-white text-center">Action</th>`;
       document.getElementById('mpsThead').innerHTML = `<tr>${r1}</tr><tr>${r2}</tr>`;
 
       const sumM = Array(periods.length).fill(0);
       const sumF = Array(periods.length).fill(0);
 
-      document.getElementById('mpsTbody').innerHTML = targetGrades.map(g => {
-        const arr = db.mpsMatrix[sy][subj][g];
+      document.getElementById('mpsTbody').innerHTML = targetGrades.map((g, gIdx) => {
+        const arr = db.mpsMatrix[sy][subjId][g];
         const tds = periods.map((_, i) => {
           const m = Number(arr[i]?.m) || 0;
           const f = Number(arr[i]?.f) || 0;
@@ -2267,17 +2310,21 @@
 
           if (isEditMode) {
             return `
-              <td class="p-1.5 text-center border-l"><input type="number" step="0.1" min="0" max="100" value="${m}" onchange="updMPSCell('${sy}','${subj}','${g}',${i},'m',this.value)" class="w-16 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
-              <td class="p-1.5 text-center"><input type="number" step="0.1" min="0" max="100" value="${f}" onchange="updMPSCell('${sy}','${subj}','${g}',${i},'f',this.value)" class="w-16 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
+              <td class="p-1.5 text-center border-l"><input type="number" step="0.1" min="0" max="100" value="${m}" onchange="updMPSCell('${sy}','${subjId}','${g}',${i},'m',this.value)" class="w-16 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
+              <td class="p-1.5 text-center"><input type="number" step="0.1" min="0" max="100" value="${f}" onchange="updMPSCell('${sy}','${subjId}','${g}',${i},'f',this.value)" class="w-16 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
               <td class="p-2.5 text-center font-extrabold bg-emerald-50/70">${ave}%</td>
             `;
           }
           return `<td class="p-3 text-center border-l">${m}%</td><td class="p-3 text-center">${f}%</td><td class="p-3 text-center font-extrabold bg-emerald-50/70">${ave}%</td>`;
         }).join('');
-        return `<tr class="hover:bg-slate-50"><td class="p-3 font-extrabold text-slate-800">${g}</td>${tds}</tr>`;
+
+        const delCol = isEditMode
+          ? `<td class="p-2 text-center border-l"><button type="button" onclick="delMpsGradeRow('${lvl}',${gIdx})" class="text-rose-600 font-bold">🗑️</button></td>`
+          : '';
+        return `<tr class="hover:bg-slate-50"><td class="p-3 font-extrabold text-slate-800">${g}</td>${tds}${delCol}</tr>`;
       }).join('');
 
-      document.getElementById('mpsTfoot').innerHTML = `<tr><td class="p-3 text-left">OVERALL MPS (${gradeRangeText})</td>${periods.map((_, i) => {
+      document.getElementById('mpsTfoot').innerHTML = `<tr><td class="p-3 text-left">OVERALL MPS (${db.mpsCatalog[lvl].label})</td>${periods.map((_, i) => {
         const mAvg = (sumM[i] / targetGrades.length).toFixed(2);
         const fAvg = (sumF[i] / targetGrades.length).toFixed(2);
         const gAvg = ((Number(mAvg) + Number(fAvg)) / 2).toFixed(2);
@@ -2286,12 +2333,12 @@
           <td class="p-3 text-center">${fAvg}%</td>
           <td class="p-3 text-center text-amber-300">${gAvg}%</td>
         `;
-      }).join('')}</tr>`;
+      }).join('')}${isEditMode ? '<td></td>' : ''}</tr>`;
 
       render3DBarChart('inlineGraph_mps', {
-        title: `3D Transparent Cylinder Graph: ${MPS_SUBJECT_LABELS[subj]} (${db.syLabels[sy]})`,
+        title: `3D Transparent Cylinder Graph: ${subjLabel} (${db.syLabels[sy]})`,
         subtitle: 'Average MPS (%) bawat baitang — awtomatikong nagbabago kapag may binagong datos.',
-        items: getMPSGraphItems(sy, subj, lvlFilter),
+        items: getMPSGraphItems(sy, lvl, subjId),
         suffix: '%',
         maxVal: 100
       });
@@ -2303,232 +2350,47 @@
       renderMPSTab();
     }
 
-    // ==================== TAB 2B: SENIOR HIGH SCHOOL (STRANDS & CORE SUBJECTS) ====================
-    function renderSHSTab() {
-      const sy = document.getElementById('shsSySel').value || 'y4';
-      const gFilter = document.getElementById('shsGradeFilter').value || 'ALL';
-
-      document.getElementById('formAddShsStrand').classList.toggle('hidden', !isEditMode);
-      document.getElementById('thDelShsStrand').classList.toggle('hidden', !isEditMode);
-      document.getElementById('formAddShsSubj').classList.toggle('hidden', !isEditMode);
-      document.getElementById('thDelShsSubj').classList.toggle('hidden', !isEditMode);
-
-      const allStrands = db.shsStrands[sy] || [];
-      let sumM = 0, sumF = 0;
-      const chartStrandItems = [];
-
-      document.getElementById('tbodyShsStrands').innerHTML = allStrands.map((st, idx) => {
-        if (gFilter !== 'ALL' && st.grade !== gFilter) return '';
-        const m = Number(st.m) || 0;
-        const f = Number(st.f) || 0;
-        const tot = m + f;
-        sumM += m;
-        sumF += f;
-        const shortStrand = st.strand.split('(')[0].trim();
-        chartStrandItems.push({ label: `${st.grade.replace('Grade ', 'G')} ${shortStrand}`, value: tot });
-
-        if (isEditMode) {
-          return `<tr class="hover:bg-slate-50">
-            <td class="p-2">
-              <select onchange="updShsStrand('${sy}',${idx},'grade',this.value)" class="w-full px-2 py-1 border border-emerald-400 rounded font-extrabold">
-                <option value="Grade 11" ${st.grade === 'Grade 11' ? 'selected' : ''}>Grade 11</option>
-                <option value="Grade 12" ${st.grade === 'Grade 12' ? 'selected' : ''}>Grade 12</option>
-              </select>
-            </td>
-            <td class="p-2"><input type="text" value="${st.strand.replace(/"/g, '&quot;')}" onchange="updShsStrand('${sy}',${idx},'strand',this.value)" class="w-full px-2 py-1 border border-emerald-400 rounded font-bold"></td>
-            <td class="p-2 text-center"><input type="number" min="0" value="${m}" onchange="updShsStrand('${sy}',${idx},'m',this.value)" class="w-16 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
-            <td class="p-2 text-center"><input type="number" min="0" value="${f}" onchange="updShsStrand('${sy}',${idx},'f',this.value)" class="w-16 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
-            <td class="p-2.5 text-center font-extrabold bg-emerald-50">${tot}</td>
-            <td class="p-2 text-center"><button type="button" onclick="delShsStrand('${sy}',${idx})" class="text-rose-600 hover:text-rose-800 font-bold">🗑️</button></td>
-          </tr>`;
-        }
-        return `<tr class="hover:bg-slate-50">
-          <td class="p-2.5 font-extrabold text-slate-900">${st.grade}</td>
-          <td class="p-2.5 font-bold text-emerald-950">${st.strand}</td>
-          <td class="p-2.5 text-center">${m}</td>
-          <td class="p-2.5 text-center">${f}</td>
-          <td class="p-2.5 text-center font-extrabold bg-emerald-50 text-emerald-950">${tot}</td>
-        </tr>`;
-      }).join('');
-
-      document.getElementById('shsTotalEnrolledBadge').innerText = `Total SHS Enrolled: ${sumM + sumF}`;
-      document.getElementById('tfootShsStrands').innerHTML = `
-        <tr>
-          <td colspan="2" class="p-2.5 text-left">TOTAL SENIOR HIGH ENROLLMENT (${gFilter === 'ALL' ? 'Grade 11 & 12' : gFilter})</td>
-          <td class="p-2.5 text-center">${sumM}</td>
-          <td class="p-2.5 text-center">${sumF}</td>
-          <td class="p-2.5 text-center text-amber-300">${sumM + sumF}</td>
-          ${isEditMode ? '<td></td>' : ''}
-        </tr>
-      `;
-
-      render3DBarChart('inlineGraph_shs_strands', {
-        title: `3D Transparent Cylinder Graph: SHS Enrollment per Strand (${db.syLabels[sy]})`,
-        subtitle: 'Bilang ng mag-aaral na nag-enroll sa bawat SHS Track/Strand.',
-        items: chartStrandItems
-      });
-
-      const allSubjs = db.shsCoreSubjects[sy] || [];
-      let s1mSum = 0, s1fSum = 0, s2mSum = 0, s2fSum = 0, countSubj = 0;
-      const chartSubjItems = [];
-
-      document.getElementById('tbodyShsSubjects').innerHTML = allSubjs.map((sb, idx) => {
-        if (gFilter !== 'ALL' && sb.grade !== gFilter) return '';
-        const s1m = Number(sb.s1m) || 0, s1f = Number(sb.s1f) || 0;
-        const s2m = Number(sb.s2m) || 0, s2f = Number(sb.s2f) || 0;
-        const s1Ave = (s1m + s1f) / 2;
-        const s2Ave = (s2m + s2f) / 2;
-        const finAve = (s1Ave + s2Ave) / 2;
-        s1mSum += s1m; s1fSum += s1f; s2mSum += s2m; s2fSum += s2f; countSubj++;
-
-        const shortName = sb.name.length > 22 ? sb.name.slice(0, 20) + '…' : sb.name;
-        chartSubjItems.push({ label: `${sb.grade.replace('Grade ', 'G')}: ${shortName}`, value: Number(finAve.toFixed(2)) });
-
-        const badgeCls = sb.category === 'Core Subject'
-          ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
-          : (sb.category === 'Applied Subject' ? 'bg-sky-100 text-sky-900 border-sky-300' : 'bg-amber-100 text-amber-900 border-amber-300');
-
-        if (isEditMode) {
-          return `<tr class="hover:bg-slate-50">
-            <td class="p-2">
-              <select onchange="updShsSubj('${sy}',${idx},'grade',this.value)" class="w-full px-1.5 py-1 border border-emerald-400 rounded font-extrabold">
-                <option value="Grade 11" ${sb.grade === 'Grade 11' ? 'selected' : ''}>Grade 11</option>
-                <option value="Grade 12" ${sb.grade === 'Grade 12' ? 'selected' : ''}>Grade 12</option>
-              </select>
-            </td>
-            <td class="p-2">
-              <select onchange="updShsSubj('${sy}',${idx},'category',this.value)" class="w-full px-1.5 py-1 border border-emerald-400 rounded font-bold text-[11px]">
-                <option value="Core Subject" ${sb.category === 'Core Subject' ? 'selected' : ''}>Core Subject</option>
-                <option value="Applied Subject" ${sb.category === 'Applied Subject' ? 'selected' : ''}>Applied Subject</option>
-                <option value="Specialized Subject" ${sb.category === 'Specialized Subject' ? 'selected' : ''}>Specialized Subject</option>
-              </select>
-            </td>
-            <td class="p-2"><input type="text" value="${sb.name.replace(/"/g, '&quot;')}" onchange="updShsSubj('${sy}',${idx},'name',this.value)" class="w-full px-2 py-1 border border-emerald-400 rounded font-bold"></td>
-            <td class="p-1.5 text-center border-l"><input type="number" step="0.1" min="0" max="100" value="${s1m}" onchange="updShsSubj('${sy}',${idx},'s1m',this.value)" class="w-14 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
-            <td class="p-1.5 text-center"><input type="number" step="0.1" min="0" max="100" value="${s1f}" onchange="updShsSubj('${sy}',${idx},'s1f',this.value)" class="w-14 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
-            <td class="p-2 text-center font-extrabold bg-emerald-50">${s1Ave.toFixed(2)}%</td>
-            <td class="p-1.5 text-center border-l"><input type="number" step="0.1" min="0" max="100" value="${s2m}" onchange="updShsSubj('${sy}',${idx},'s2m',this.value)" class="w-14 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
-            <td class="p-1.5 text-center"><input type="number" step="0.1" min="0" max="100" value="${s2f}" onchange="updShsSubj('${sy}',${idx},'s2f',this.value)" class="w-14 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
-            <td class="p-2 text-center font-extrabold bg-sky-50">${s2Ave.toFixed(2)}%</td>
-            <td class="p-2 text-center font-extrabold bg-amber-50 border-l">${finAve.toFixed(2)}%</td>
-            <td class="p-2 text-center border-l"><button type="button" onclick="delShsSubj('${sy}',${idx})" class="text-rose-600 hover:text-rose-800 font-bold">🗑️</button></td>
-          </tr>`;
-        }
-        return `<tr class="hover:bg-slate-50">
-          <td class="p-2.5 font-extrabold">${sb.grade}</td>
-          <td class="p-2.5"><span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-extrabold border ${badgeCls}">${sb.category}</span></td>
-          <td class="p-2.5 font-bold text-slate-900">${sb.name}</td>
-          <td class="p-2.5 text-center border-l">${s1m}%</td>
-          <td class="p-2.5 text-center">${s1f}%</td>
-          <td class="p-2.5 text-center font-extrabold bg-emerald-50">${s1Ave.toFixed(2)}%</td>
-          <td class="p-2.5 text-center border-l">${s2m}%</td>
-          <td class="p-2.5 text-center">${s2f}%</td>
-          <td class="p-2.5 text-center font-extrabold bg-sky-50">${s2Ave.toFixed(2)}%</td>
-          <td class="p-2.5 text-center font-extrabold bg-amber-50 text-emerald-950 border-l">${finAve.toFixed(2)}%</td>
-        </tr>`;
-      }).join('');
-
-      const d = Math.max(1, countSubj);
-      const avg1m = (s1mSum / d).toFixed(2), avg1f = (s1fSum / d).toFixed(2);
-      const avg1 = ((Number(avg1m) + Number(avg1f)) / 2).toFixed(2);
-      const avg2m = (s2mSum / d).toFixed(2), avg2f = (s2fSum / d).toFixed(2);
-      const avg2 = ((Number(avg2m) + Number(avg2f)) / 2).toFixed(2);
-      const overallFin = ((Number(avg1) + Number(avg2)) / 2).toFixed(2);
-
-      document.getElementById('tfootShsSubjects').innerHTML = `
-        <tr>
-          <td colspan="3" class="p-3 text-left">OVERALL SHS SUBJECTS MPS (${countSubj} Subjects)</td>
-          <td class="p-3 text-center border-l border-slate-700">${avg1m}%</td>
-          <td class="p-3 text-center">${avg1f}%</td>
-          <td class="p-3 text-center text-emerald-300">${avg1}%</td>
-          <td class="p-3 text-center border-l border-slate-700">${avg2m}%</td>
-          <td class="p-3 text-center">${avg2f}%</td>
-          <td class="p-3 text-center text-sky-300">${avg2}%</td>
-          <td class="p-3 text-center text-amber-300 border-l border-slate-700">${overallFin}%</td>
-          ${isEditMode ? '<td></td>' : ''}
-        </tr>
-      `;
-
-      render3DBarChart('inlineGraph_shs_subjects', {
-        title: `3D Transparent Cylinder Graph: SHS Core Subjects Final MPS % (${db.syLabels[sy]})`,
-        subtitle: 'Mean Percentage Score (%) ng bawat Senior High School Core/Strand Subject.',
-        items: chartSubjItems,
-        suffix: '%',
-        maxVal: 100
-      });
-    }
-
-    function addShsStrand(e) {
+    // ==================== TAB 3: ENROLLMENT (K-12 EDITABLE GRADES) ====================
+    function addK12GradeRow(e) {
       e.preventDefault();
-      const sy = document.getElementById('shsSySel').value || 'y4';
-      db.shsStrands[sy].push({
-        id: 'shs_' + Date.now(),
-        grade: document.getElementById('newShsGrade').value,
-        strand: document.getElementById('newShsStrandName').value.trim(),
-        m: Number(document.getElementById('newShsM').value) || 0,
-        f: Number(document.getElementById('newShsF').value) || 0
-      });
+      const gName = document.getElementById('newK12GradeInput').value.trim();
+      if (!gName) return;
+      if (!db.k12Grades.includes(gName)) {
+        db.k12Grades.push(gName);
+      }
+      ensureMatrixIntegrity();
       saveDB();
-      renderSHSTab();
+      renderEnrollmentTab();
       e.target.reset();
     }
 
-    function updShsStrand(sy, idx, field, val) {
-      db.shsStrands[sy][idx][field] = (field === 'm' || field === 'f') ? (Number(val) || 0) : val;
-      saveDB();
-      renderSHSTab();
-    }
-
-    function delShsStrand(sy, idx) {
-      if (confirm('Sigurado ka bang buburahin ang SHS Strand na ito?')) {
-        db.shsStrands[sy].splice(idx, 1);
+    function delK12GradeRow(idx) {
+      if (db.k12Grades.length <= 1) {
+        alert('Kailangan may natitirang kahit isang Grade Level.');
+        return;
+      }
+      if (confirm('Alisin ang Grade Level na ito?')) {
+        db.k12Grades.splice(idx, 1);
         saveDB();
-        renderSHSTab();
+        renderEnrollmentTab();
       }
     }
 
-    function addShsCoreSubject(e) {
-      e.preventDefault();
-      const sy = document.getElementById('shsSySel').value || 'y4';
-      db.shsCoreSubjects[sy].push({
-        id: 'shssubj_' + Date.now(),
-        grade: document.getElementById('newShsSubjGrade').value,
-        category: document.getElementById('newShsSubjType').value,
-        name: document.getElementById('newShsSubjName').value.trim(),
-        s1m: 82.0, s1f: 84.0, s2m: 83.0, s2f: 85.0
-      });
+    function applyGradePreset(preset) {
+      if (!confirm('Papalitan nito ang listahan ng Grade Levels sa Enrollment at SF8. Ituloy?')) return;
+      if (preset === 'elem') db.k12Grades = ['Kinder', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
+      else if (preset === 'jhs') db.k12Grades = ['Grade 7', 'Grade 8', 'Grade 9', 'Grade 10'];
+      else if (preset === 'shs') db.k12Grades = ['Grade 11', 'Grade 12'];
+      else db.k12Grades = [...DEFAULT_K12_GRADES];
+      ensureMatrixIntegrity();
       saveDB();
-      renderSHSTab();
-      e.target.reset();
+      renderEnrollmentTab();
     }
 
-    function updShsSubj(sy, idx, field, val) {
-      db.shsCoreSubjects[sy][idx][field] = ['s1m', 's1f', 's2m', 's2f'].includes(field) ? (Number(val) || 0) : val;
-      saveDB();
-      renderSHSTab();
-    }
-
-    function delShsSubj(sy, idx) {
-      if (confirm('Sigurado ka bang buburahin ang SHS Subject na ito?')) {
-        db.shsCoreSubjects[sy].splice(idx, 1);
-        saveDB();
-        renderSHSTab();
-      }
-    }
-
-    // ==================== TAB 3: ENROLLMENT (KINDER TO GRADE 12) ====================
-    function getEnrollmentTargetGrades(lvlFilter = 'ALL') {
-      if (lvlFilter === 'ELEM') return ELEM_GRADES;
-      if (lvlFilter === 'JHS') return JHS_GRADES;
-      if (lvlFilter === 'SHS') return SHS_GRADES;
-      return GRADES;
-    }
-
-    function getEnrollmentGraphItems(sy, cat, lvlFilter = 'ALL') {
+    function getEnrollmentGraphItems(sy, cat) {
       const pCount = sy === 'y4' ? 3 : 4;
-      const targetGrades = getEnrollmentTargetGrades(lvlFilter);
-      return targetGrades.map(g => {
-        const arr = db.enrMatrix[sy][cat][g];
+      return db.k12Grades.map(g => {
+        const arr = (db.enrMatrix[sy]?.[cat]?.[g]) || Array.from({ length: pCount }, () => ({ m: 0, f: 0 }));
         let val = 0;
         if (cat === 'enrollment') {
           for (let i = pCount - 1; i >= 0; i--) {
@@ -2545,19 +2407,17 @@
     }
 
     function renderEnrollmentTab() {
+      document.getElementById('enrGradeEditorBar').classList.toggle('hidden', !isEditMode);
       const cat = document.getElementById('enrCategorySel').value;
       const sy = document.getElementById('enrSySel').value;
-      const lvlFilter = document.getElementById('enrLevelFilter')?.value || 'ALL';
-      const targetGrades = getEnrollmentTargetGrades(lvlFilter);
       const isPresent = sy === 'y4';
       const periods = isPresent ? ['Term 1', 'Term 2', 'Term 3'] : ['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4'];
       const colors = ['bg-[#094635]', 'bg-[#0e7490]', 'bg-[#d97706]', 'bg-[#4f46e5]'];
-      const rangeLbl = lvlFilter === 'ELEM' ? 'Kinder–Grade 6' : (lvlFilter === 'JHS' ? 'Junior High G7–10' : (lvlFilter === 'SHS' ? 'Senior High G11–12' : 'Kinder–Grade 12'));
       const catTitles = {
-        enrollment: `ENROLLMENT (${rangeLbl})`,
-        dropout: `DROP-OUT (${rangeLbl})`,
-        trans_in: `TRANSFERRED IN (${rangeLbl})`,
-        trans_out: `TRANSFERRED OUT (${rangeLbl})`
+        enrollment: 'ENROLLMENT (K–12)',
+        dropout: 'DROP-OUT (K–12)',
+        trans_in: 'TRANSFERRED IN (K–12)',
+        trans_out: 'TRANSFERRED OUT (K–12)'
       };
 
       document.getElementById('enrBannerTitle').innerText = `📌 ${db.syLabels[sy]} — ${catTitles[cat]}`;
@@ -2571,12 +2431,13 @@
         r1 += `<th colspan="3" class="p-2.5 ${colors[idx]} text-white text-center font-extrabold border-l border-white/20">${p}</th>`;
         r2 += `<th class="p-2 bg-slate-100 text-slate-700 text-center border-l">Male</th><th class="p-2 bg-slate-100 text-slate-700 text-center">Female</th><th class="p-2 bg-emerald-50 text-emerald-950 text-center font-extrabold">Total</th>`;
       });
+      if (isEditMode) r1 += `<th rowspan="2" class="p-2 bg-rose-950 text-white text-center">Action</th>`;
       document.getElementById('enrThead').innerHTML = `<tr>${r1}</tr><tr>${r2}</tr>`;
 
       const totM = Array(periods.length).fill(0);
       const totF = Array(periods.length).fill(0);
 
-      document.getElementById('enrTbody').innerHTML = targetGrades.map(g => {
+      document.getElementById('enrTbody').innerHTML = db.k12Grades.map((g, gIdx) => {
         const arr = db.enrMatrix[sy][cat][g];
         const tds = periods.map((_, i) => {
           const m = Number(arr[i]?.m) || 0;
@@ -2592,19 +2453,22 @@
           }
           return `<td class="p-3 text-center border-l">${m}</td><td class="p-3 text-center">${f}</td><td class="p-3 text-center font-extrabold bg-emerald-50/70">${m + f}</td>`;
         }).join('');
-        return `<tr class="hover:bg-slate-50"><td class="p-3 font-extrabold text-slate-800">${g}</td>${tds}</tr>`;
+        const delCol = isEditMode
+          ? `<td class="p-2 text-center border-l"><button type="button" onclick="delK12GradeRow(${gIdx})" class="text-rose-600 font-bold">🗑️</button></td>`
+          : '';
+        return `<tr class="hover:bg-slate-50"><td class="p-3 font-extrabold text-slate-800">${g}</td>${tds}${delCol}</tr>`;
       }).join('');
 
-      document.getElementById('enrTfoot').innerHTML = `<tr><td class="p-3 text-left">TOTAL (${rangeLbl})</td>${periods.map((_, i) => `
+      document.getElementById('enrTfoot').innerHTML = `<tr><td class="p-3 text-left">GRAND TOTAL</td>${periods.map((_, i) => `
         <td class="p-3 text-center border-l border-slate-700">${totM[i]}</td>
         <td class="p-3 text-center">${totF[i]}</td>
         <td class="p-3 text-center text-amber-300">${totM[i] + totF[i]}</td>
-      `).join('')}</tr>`;
+      `).join('')}${isEditMode ? '<td></td>' : ''}</tr>`;
 
       render3DBarChart('inlineGraph_enr', {
         title: `3D Transparent Cylinder Graph: ${catTitles[cat]} — ${db.syLabels[sy]}`,
         subtitle: cat === 'enrollment' ? 'Kasalukuyang bilang ng mag-aaral bawat baitang.' : 'Kabuuang bilang ng mag-aaral sa buong taon bawat baitang.',
-        items: getEnrollmentGraphItems(sy, cat, lvlFilter)
+        items: getEnrollmentGraphItems(sy, cat)
       });
     }
 
@@ -2631,6 +2495,7 @@
       document.getElementById('box_rma').classList.toggle('hidden', f !== 'ALL' && f !== 'rma');
       document.getElementById('box_reading').classList.toggle('hidden', f !== 'ALL' && f !== 'reading');
 
+      // 1. CRLA
       const crlaSy = document.getElementById('crlaSySel').value || 'y3';
       const crlaLangF = document.getElementById('crlaLangFilter')?.value || 'ALL';
       const visibleCrlaRows = CRLA_LANG_ROWS.filter(r => crlaLangF === 'ALL' || r.lang === crlaLangF);
@@ -2673,6 +2538,7 @@
         ]
       });
 
+      // 2. Phil-IRI (Grade 4–10 • Filipino & English)
       const philLangF = document.getElementById('philiriLangFilter')?.value || 'ALL';
       const visiblePhilRows = PHILIRI_LANG_ROWS.filter(r => philLangF === 'ALL' || r.lang === philLangF);
       const pTot = Array(8).fill(0);
@@ -2698,12 +2564,12 @@
         </tr>`;
       }).join('');
 
-      document.getElementById('tfootPhilIRI').innerHTML = `<tr><td colspan="2" class="p-2.5 text-left">TOTAL (Grade 4–6 • ${philLangF === 'ALL' ? 'Filipino & English' : philLangF})</td>${[0,1,2,3].map(p => `
+      document.getElementById('tfootPhilIRI').innerHTML = `<tr><td colspan="2" class="p-2.5 text-left">TOTAL (${philLangF === 'ALL' ? 'Filipino & English' : philLangF})</td>${[0,1,2,3].map(p => `
         <td class="p-2.5 text-center border-l border-slate-700">${pTot[p*2]}</td><td class="p-2.5 text-center">${pTot[p*2+1]}</td><td class="p-2.5 text-center text-amber-300">${pTot[p*2]+pTot[p*2+1]}</td>
       `).join('')}<td class="p-2.5 text-center text-amber-300 border-l border-slate-700">${pTot.reduce((a,b)=>a+b,0)}</td></tr>`;
 
       render3DBarChart('inlineGraph_philiri', {
-        title: `3D Transparent Cylinder Graph: Phil-IRI Reading Profile (Grade 4–6 • ${philLangF === 'ALL' ? 'Filipino & English' : philLangF})`,
+        title: `3D Transparent Cylinder Graph: Phil-IRI Reading Profile (${philLangF === 'ALL' ? 'Filipino & English' : philLangF})`,
         subtitle: 'Kabuuang bilang ng mag-aaral bawat Phil-IRI reading level.',
         items: [
           { label: 'Independent', value: pTot[0] + pTot[1], color: '#059669', topColor: '#34d399', sideColor: '#047857' },
@@ -2713,9 +2579,10 @@
         ]
       });
 
+      // 3. RMA
       const rmaSy = document.getElementById('rmaSySel').value || 'y3';
       const rTot = Array(10).fill(0);
-      document.getElementById('tbodyRMA').innerHTML = G1_TO_G6.map(g => {
+      document.getElementById('tbodyRMA').innerHTML = RMA_GRADES.map(g => {
         const a = db.rmaV2[rmaSy][g];
         a.forEach((v, i) => rTot[i] += Number(v));
         const rowSum = a.reduce((x, y) => x + Number(y), 0);
@@ -2730,13 +2597,13 @@
         }
         return `<tr class="hover:bg-slate-50"><td class="p-2.5 font-extrabold">${g}</td>${cells}<td class="p-2.5 text-center font-extrabold bg-emerald-50 text-emerald-950 border-l">${rowSum}</td></tr>`;
       }).join('');
-      document.getElementById('tfootRMA').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL (Grade 1–6)</td>${[0,1,2,3,4].map(p => `
+      document.getElementById('tfootRMA').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL (Grade 1–10)</td>${[0,1,2,3,4].map(p => `
         <td class="p-2.5 text-center border-l border-slate-700">${rTot[p*2]}</td><td class="p-2.5 text-center">${rTot[p*2+1]}</td><td class="p-2.5 text-center text-amber-300">${rTot[p*2]+rTot[p*2+1]}</td>
       `).join('')}<td class="p-2.5 text-center text-amber-300 border-l border-slate-700">${rTot.reduce((a,b)=>a+b,0)}</td></tr>`;
 
       render3DBarChart('inlineGraph_rma', {
         title: `3D Transparent Cylinder Graph: RMA Numeracy Results (${db.triSyLabels.rma[rmaSy]})`,
-        subtitle: 'Kabuuang bilang ng mag-aaral (Grade 1–6) sa bawat proficiency level ng RMA.',
+        subtitle: 'Kabuuang bilang ng mag-aaral (Grade 1–10) sa bawat proficiency level ng RMA.',
         items: [
           { label: 'Emerging (Not Prof.)', value: rTot[0] + rTot[1], color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
           { label: 'Emerging (Low Prof.)', value: rTot[2] + rTot[3], color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
@@ -2746,6 +2613,7 @@
         ]
       });
 
+      // 4. READING ASSESSMENT RESULTS
       document.getElementById('formAddReadGrade').classList.toggle('hidden', !isEditMode);
       document.getElementById('thDelReadGrade').classList.toggle('hidden', !isEditMode);
 
@@ -2865,17 +2733,39 @@
     }
 
     // ==================== TAB 5: NAT & ELLNA ====================
+    function addNatAreaRow(e) {
+      e.preventDefault();
+      const areaName = document.getElementById('newNatAreaName').value.trim();
+      if (!areaName) return;
+      db.nat.push({ area: areaName, y1m: 75.0, y1f: 76.0, y2m: 77.0, y2f: 78.0, y3m: 79.0, y3f: 80.0 });
+      saveDB();
+      renderNATTab();
+      e.target.reset();
+    }
+
+    function delNatAreaRow(idx) {
+      if (db.nat.length <= 1) return;
+      if (confirm('Alisin ang assessment row na ito?')) {
+        db.nat.splice(idx, 1);
+        saveDB();
+        renderNATTab();
+      }
+    }
+
     function getNATGraphItems() {
       return db.nat.map(row => {
         const a1 = (Number(row.y1m) + Number(row.y1f)) / 2;
         const a2 = (Number(row.y2m) + Number(row.y2f)) / 2;
         const a3 = (Number(row.y3m) + Number(row.y3f)) / 2;
         const grand = Number(((a1 + a2 + a3) / 3).toFixed(2));
-        return { label: row.area.replace(' (Grade 3)', '').replace(' (Grade 6)', ''), value: grand };
+        return { label: row.area, value: grand };
       });
     }
 
     function renderNATTab() {
+      document.getElementById('formAddNatArea').classList.toggle('hidden', !isEditMode);
+      document.getElementById('thDelNat').classList.toggle('hidden', !isEditMode);
+
       document.getElementById('tbodyNAT').innerHTML = db.nat.map((row, idx) => {
         const a1 = ((Number(row.y1m) + Number(row.y1f)) / 2).toFixed(2);
         const a2 = ((Number(row.y2m) + Number(row.y2f)) / 2).toFixed(2);
@@ -2884,7 +2774,7 @@
 
         if (isEditMode) {
           return `<tr class="hover:bg-slate-50">
-            <td class="p-2.5 font-extrabold">${row.area}</td>
+            <td class="p-2 font-extrabold"><input type="text" value="${row.area}" onchange="updNAT(${idx},'area',this.value)" class="w-full px-2 py-1 border border-emerald-400 rounded font-extrabold"></td>
             <td class="p-1 text-center border-l"><input type="number" step="0.1" value="${row.y1m}" onchange="updNAT(${idx},'y1m',this.value)" class="w-14 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
             <td class="p-1 text-center"><input type="number" step="0.1" value="${row.y1f}" onchange="updNAT(${idx},'y1f',this.value)" class="w-14 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
             <td class="p-2 text-center font-extrabold bg-emerald-50">${a1}%</td>
@@ -2895,6 +2785,7 @@
             <td class="p-1 text-center"><input type="number" step="0.1" value="${row.y3f}" onchange="updNAT(${idx},'y3f',this.value)" class="w-14 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
             <td class="p-2 text-center font-extrabold bg-amber-50">${a3}%</td>
             <td class="p-2 text-center font-extrabold bg-emerald-100 border-l">${grand}%</td>
+            <td class="p-2 text-center border-l"><button type="button" onclick="delNatAreaRow(${idx})" class="text-rose-600 font-bold">🗑️</button></td>
           </tr>`;
         }
         return `<tr class="hover:bg-slate-50">
@@ -2907,8 +2798,8 @@
       }).join('');
 
       render3DBarChart('inlineGraph_nat', {
-        title: '3D Transparent Cylinder Graph: ELLNA (Grade 3) & NAT (Grade 6) 3-Year Average MPS (%)',
-        subtitle: '3-Year Average MPS (%) bawat learning area — may data labels.',
+        title: '3D Transparent Cylinder Graph: ELLNA & NAT (G3, G6, G10, G12) 3-Year Average MPS (%)',
+        subtitle: '3-Year Average MPS (%) bawat learning area — may floating data labels.',
         items: getNATGraphItems(),
         suffix: '%',
         maxVal: 100
@@ -2916,24 +2807,61 @@
     }
 
     function updNAT(idx, k, val) {
-      db.nat[idx][k] = Number(val) || 0;
+      db.nat[idx][k] = k === 'area' ? val : (Number(val) || 0);
       saveDB();
       renderNATTab();
     }
 
-    // ==================== TAB 6: NUTRITIONAL STATUS ====================
+    // ==================== TAB 6: NUTRITIONAL STATUS (SF8 & SBFP WITH N/A FOR HIGH SCHOOL) ====================
+    function updSbfpStatus(val) {
+      db.sbfpStatus = val;
+      if (val === 'na_hs') {
+        db.k12Grades.forEach(g => {
+          if (db.nutrition[g]) db.nutrition[g].feeding = 'N/A';
+        });
+      }
+      saveDB();
+      renderNutritionTab();
+    }
+
+    function updGradeFeedingStatus(g, val) {
+      db.nutrition[g].feeding = val;
+      saveDB();
+      renderNutritionTab();
+    }
+
     function renderNutritionTab() {
+      const status = db.sbfpStatus || 'active';
+      const sel = document.getElementById('sbfpStatusSel');
+      if (sel) sel.value = status;
+      document.getElementById('sbfpNaBanner').classList.toggle('hidden', status !== 'na_hs');
+
       let sN = 0, sW = 0, sSW = 0, sO = 0, sOB = 0;
       const pairs = [['nm','nf'], ['wm','wf'], ['swm','swf'], ['om','of'], ['obm','obf']];
 
-      document.getElementById('tbodyNutrition').innerHTML = GRADES.map(g => {
-        const d = db.nutrition[g];
-        const rN = d.nm + d.nf, rW = d.wm + d.wf, rSW = d.swm + d.swf, rO = d.om + d.of, rOB = d.obm + d.obf;
+      document.getElementById('tbodyNutrition').innerHTML = db.k12Grades.map(g => {
+        const d = db.nutrition[g] || { feeding: 'Active', nm: 0, nf: 0, wm: 0, wf: 0, swm: 0, swf: 0, om: 0, of: 0, obm: 0, obf: 0 };
+        const fState = d.feeding || 'Active';
+        const rN = Number(d.nm) + Number(d.nf);
+        const rW = Number(d.wm) + Number(d.wf);
+        const rSW = Number(d.swm) + Number(d.swf);
+        const rO = Number(d.om) + Number(d.of);
+        const rOB = Number(d.obm) + Number(d.obf);
         const rTot = rN + rW + rSW + rO + rOB;
+
         sN += rN; sW += rW; sSW += rSW; sO += rO; sOB += rOB;
 
+        const feedingBadge = isEditMode
+          ? `<select onchange="updGradeFeedingStatus('${g}', this.value)" class="px-2 py-1 rounded border border-amber-500 bg-white text-[11px] font-extrabold">
+               <option value="Active" ${fState === 'Active' ? 'selected' : ''}>With Feeding</option>
+               <option value="N/A" ${fState === 'N/A' ? 'selected' : ''}>N/A (No Feeding)</option>
+             </select>`
+          : (fState === 'N/A'
+              ? `<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-200 text-slate-700">N/A (No Feeding)</span>`
+              : `<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-900">With Feeding</span>`);
+
         const cells = pairs.map(([mk, fk]) => {
-          const mv = Number(d[mk]), fv = Number(d[fk]);
+          const mv = Number(d[mk]) || 0, fv = Number(d[fk]) || 0;
           if (isEditMode) {
             return `
               <td class="p-1 text-center border-l"><input type="number" min="0" value="${mv}" onchange="updNut('${g}','${mk}',this.value)" class="w-10 px-1 py-1 border border-emerald-400 rounded text-center font-bold"></td>
@@ -2941,28 +2869,39 @@
               <td class="p-2 text-center font-extrabold bg-slate-50">${mv + fv}</td>
             `;
           }
+          if (fState === 'N/A' && rTot === 0) {
+            return `<td class="p-2 text-center border-l text-slate-400">-</td><td class="p-2 text-center text-slate-400">-</td><td class="p-2 text-center font-bold text-slate-400 bg-slate-50">N/A</td>`;
+          }
           return `<td class="p-2 text-center border-l">${mv}</td><td class="p-2 text-center">${fv}</td><td class="p-2 text-center font-extrabold bg-slate-50">${mv + fv}</td>`;
         }).join('');
 
-        return `<tr class="hover:bg-slate-50"><td class="p-2.5 font-extrabold">${g}</td>${cells}<td class="p-2.5 text-center font-extrabold bg-emerald-50 text-emerald-950 border-l">${rTot}</td></tr>`;
+        return `<tr class="hover:bg-slate-50">
+          <td class="p-2.5 font-extrabold">${g}</td>
+          <td class="p-2 text-center border-l">${feedingBadge}</td>
+          ${cells}
+          <td class="p-2.5 text-center font-extrabold bg-emerald-50 text-emerald-950 border-l">${fState === 'N/A' && rTot === 0 ? 'N/A' : rTot}</td>
+        </tr>`;
       }).join('');
 
-      document.getElementById('nutCardNormal').innerText = sN;
-      document.getElementById('nutCardWasted').innerText = sW;
-      document.getElementById('nutCardSevWasted').innerText = sSW;
-      document.getElementById('nutCardOverweight').innerText = sO;
-      document.getElementById('nutCardObese').innerText = sOB;
-      document.getElementById('nutCardTotal').innerText = sN + sW + sSW + sO + sOB;
+      const grandWeighed = sN + sW + sSW + sO + sOB;
+      const isAllNA = status === 'na_hs' && grandWeighed === 0;
+
+      document.getElementById('nutCardNormal').innerText = isAllNA ? 'N/A' : sN;
+      document.getElementById('nutCardWasted').innerText = isAllNA ? 'N/A' : sW;
+      document.getElementById('nutCardSevWasted').innerText = isAllNA ? 'N/A' : sSW;
+      document.getElementById('nutCardOverweight').innerText = isAllNA ? 'N/A' : sO;
+      document.getElementById('nutCardObese').innerText = isAllNA ? 'N/A' : sOB;
+      document.getElementById('nutCardTotal').innerText = isAllNA ? 'N/A' : grandWeighed;
 
       document.getElementById('tfootNutrition').innerHTML = `
         <tr>
-          <td class="p-3 text-left">TOTAL</td>
-          <td colspan="3" class="p-3 text-center text-emerald-300 border-l border-slate-700">${sN}</td>
-          <td colspan="3" class="p-3 text-center text-amber-300 border-l border-slate-700">${sW}</td>
-          <td colspan="3" class="p-3 text-center text-rose-300 border-l border-slate-700">${sSW}</td>
-          <td colspan="3" class="p-3 text-center text-sky-300 border-l border-slate-700">${sO}</td>
-          <td colspan="3" class="p-3 text-center text-purple-300 border-l border-slate-700">${sOB}</td>
-          <td class="p-3 text-center text-amber-300 border-l border-slate-700">${sN + sW + sSW + sO + sOB}</td>
+          <td colspan="2" class="p-3 text-left">TOTAL</td>
+          <td colspan="3" class="p-3 text-center text-emerald-300 border-l border-slate-700">${isAllNA ? 'N/A' : sN}</td>
+          <td colspan="3" class="p-3 text-center text-amber-300 border-l border-slate-700">${isAllNA ? 'N/A' : sW}</td>
+          <td colspan="3" class="p-3 text-center text-rose-300 border-l border-slate-700">${isAllNA ? 'N/A' : sSW}</td>
+          <td colspan="3" class="p-3 text-center text-sky-300 border-l border-slate-700">${isAllNA ? 'N/A' : sO}</td>
+          <td colspan="3" class="p-3 text-center text-purple-300 border-l border-slate-700">${isAllNA ? 'N/A' : sOB}</td>
+          <td class="p-3 text-center text-amber-300 border-l border-slate-700">${isAllNA ? 'N/A' : grandWeighed}</td>
         </tr>
       `;
     }
@@ -3095,3 +3034,404 @@
         name: document.getElementById('nsbiName').value.trim(),
         type: document.getElementById('nsbiType').value,
         condition: document.getElementById('nsbiCond').value,
+        rooms: Number(document.getElementById('nsbiRooms').value) || 0,
+        gripo: Number(document.getElementById('nsbiGripo').value) || 0,
+        cr: Number(document.getElementById('nsbiCR').value) || 0,
+        silya: Number(document.getElementById('nsbiSilya').value) || 0,
+        lamesa: Number(document.getElementById('nsbiLamesa').value) || 0,
+        board: Number(document.getElementById('nsbiBoard').value) || 0,
+        fans: Number(document.getElementById('nsbiFans').value) || 0,
+        remarks: document.getElementById('nsbiRemarks').value.trim()
+      });
+      saveDB();
+      renderNSBITab();
+      e.target.reset();
+    }
+
+    function delNSBI(idx) {
+      db.nsbi.splice(idx, 1);
+      saveDB();
+      renderNSBITab();
+    }
+
+    // ==================== TAB 9: 3D TRANSPARENT CYLINDER ANALYTICS DASHBOARD ====================
+    function selectAnalyticsCat(cat) {
+      activeAnalyticsCat = cat;
+      renderAnalyticsTab();
+    }
+
+    function renderAnalyticsTab() {
+      const cats = ['mps', 'enr', 'crla', 'philiri', 'rma', 'reading', 'nat', 'nutrition', 'sbm'];
+      cats.forEach(c => {
+        const btn = document.getElementById('gCatBtn_' + c);
+        if (!btn) return;
+        btn.className = c === activeAnalyticsCat
+          ? 'px-3.5 py-2 rounded-xl text-xs font-extrabold bg-[#094635] text-amber-300 shadow transition'
+          : 'px-3.5 py-2 rounded-xl text-xs font-extrabold bg-white border border-slate-300 text-slate-800 hover:bg-emerald-50 transition';
+      });
+
+      const ctrl = document.getElementById('analyticsControlsBar');
+      const subBox = document.getElementById('analyticsSubChartBox');
+      subBox.classList.remove('hidden');
+
+      if (activeAnalyticsCat === 'mps') {
+        const curLvl = document.getElementById('anaMpsLvl')?.value || 'shs';
+        const subjList = db.mpsCatalog[curLvl].subjects;
+        let curSubj = document.getElementById('anaMpsSubj')?.value || subjList[0].id;
+        if (!subjList.some(s => s.id === curSubj)) curSubj = subjList[0].id;
+        const curSy = document.getElementById('anaMpsSy')?.value || 'y4';
+        const subjObj = subjList.find(s => s.id === curSubj);
+
+        ctrl.innerHTML = `
+          <span class="text-xs font-extrabold text-emerald-950">Level, Subject & School Year:</span>
+          <select id="anaMpsLvl" onchange="renderAnalyticsTab()" class="bg-amber-400 text-slate-950 rounded-xl px-3 py-1.5 text-xs font-extrabold">
+            <option value="elem" ${curLvl === 'elem' ? 'selected' : ''}>Elementary (G1–6)</option>
+            <option value="jhs" ${curLvl === 'jhs' ? 'selected' : ''}>Junior High (G7–10)</option>
+            <option value="shs" ${curLvl === 'shs' ? 'selected' : ''}>Senior High (G11–12 Core)</option>
+          </select>
+          <select id="anaMpsSubj" onchange="renderAnalyticsTab()" class="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold">
+            ${subjList.map(s => `<option value="${s.id}" ${s.id === curSubj ? 'selected' : ''}>${s.name}</option>`).join('')}
+          </select>
+          <select id="anaMpsSy" onchange="renderAnalyticsTab()" class="bg-[#094635] text-white rounded-xl px-3 py-1.5 text-xs font-bold">
+            <option value="y4" ${curSy === 'y4' ? 'selected' : ''}>${db.syLabels.y4} (Present)</option>
+            <option value="y3" ${curSy === 'y3' ? 'selected' : ''}>${db.syLabels.y3}</option>
+            <option value="y2" ${curSy === 'y2' ? 'selected' : ''}>${db.syLabels.y2}</option>
+            <option value="y1" ${curSy === 'y1' ? 'selected' : ''}>${db.syLabels.y1}</option>
+          </select>
+        `;
+        render3DBarChart('analyticsMainChartBox', {
+          title: `3D Transparent Cylinder Graph — ${subjObj.name} (${db.syLabels[curSy]})`,
+          subtitle: 'Mean Percentage Score (%) bawat baitang na may floating data labels.',
+          items: getMPSGraphItems(curSy, curLvl, curSubj),
+          suffix: '%',
+          maxVal: 100
+        });
+
+        const syCompare = ['y1', 'y2', 'y3', 'y4'].map(yk => {
+          const gItems = getMPSGraphItems(yk, curLvl, curSubj);
+          const avg = gItems.reduce((a, b) => a + b.value, 0) / gItems.length;
+          return { label: db.syLabels[yk], value: Number(avg.toFixed(2)) };
+        });
+        render3DBarChart('analyticsSubChartBox', {
+          title: `Multi-Year MPS Comparison — ${subjObj.name}`,
+          subtitle: 'Paghahambing ng Overall School MPS sa bawat School Year.',
+          items: syCompare,
+          suffix: '%',
+          maxVal: 100
+        });
+      }
+
+      else if (activeAnalyticsCat === 'enr') {
+        const curCat = document.getElementById('anaEnrCat')?.value || 'enrollment';
+        const curSy = document.getElementById('anaEnrSy')?.value || 'y4';
+        const catNames = {
+          enrollment: 'Enrollment (Nagpatala)',
+          dropout: 'Drop-out (Huminto sa Pag-aaral)',
+          trans_in: 'Transferred In (Lumipat Papasok)',
+          trans_out: 'Transferred Out (Lumipat Palabas)'
+        };
+        ctrl.innerHTML = `
+          <span class="text-xs font-extrabold text-emerald-950">Kategorya:</span>
+          <div class="flex flex-wrap gap-1.5">
+            ${Object.keys(catNames).map(k => `
+              <button type="button" onclick="document.getElementById('anaEnrCat').value='${k}'; renderAnalyticsTab();"
+                class="px-3 py-1.5 rounded-lg text-xs font-extrabold ${k === curCat ? 'bg-amber-400 text-slate-950 shadow' : 'bg-white border text-slate-700'}">
+                ${catNames[k]}
+              </button>
+            `).join('')}
+          </div>
+          <input type="hidden" id="anaEnrCat" value="${curCat}">
+          <select id="anaEnrSy" onchange="renderAnalyticsTab()" class="bg-[#094635] text-white rounded-xl px-3 py-1.5 text-xs font-bold">
+            <option value="y4" ${curSy === 'y4' ? 'selected' : ''}>${db.syLabels.y4}</option>
+            <option value="y3" ${curSy === 'y3' ? 'selected' : ''}>${db.syLabels.y3}</option>
+            <option value="y2" ${curSy === 'y2' ? 'selected' : ''}>${db.syLabels.y2}</option>
+            <option value="y1" ${curSy === 'y1' ? 'selected' : ''}>${db.syLabels.y1}</option>
+          </select>
+        `;
+        render3DBarChart('analyticsMainChartBox', {
+          title: `3D Transparent Cylinder Graph: ${catNames[curCat]} — ${db.syLabels[curSy]}`,
+          subtitle: 'Bilang ng mag-aaral bawat baitang (K–12).',
+          items: getEnrollmentGraphItems(curSy, curCat)
+        });
+
+        const syItems = ['y1', 'y2', 'y3', 'y4'].map(yk => {
+          const total = getEnrollmentGraphItems(yk, curCat).reduce((a, b) => a + b.value, 0);
+          return { label: db.syLabels[yk], value: total };
+        });
+        render3DBarChart('analyticsSubChartBox', {
+          title: `4-Year Trend: Kabuuang ${catNames[curCat]}`,
+          subtitle: 'Kabuuang bilang sa buong paaralan bawat School Year.',
+          items: syItems
+        });
+      }
+
+      else if (activeAnalyticsCat === 'crla') {
+        const curSy = document.getElementById('anaCrlaSy')?.value || 'y3';
+        const curLang = document.getElementById('anaCrlaLang')?.value || 'ALL';
+        ctrl.innerHTML = `
+          <span class="text-xs font-extrabold text-emerald-950">CRLA Filter:</span>
+          <select id="anaCrlaLang" onchange="renderAnalyticsTab()" class="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold">
+            <option value="ALL" ${curLang === 'ALL' ? 'selected' : ''}>All Languages</option>
+            <option value="Tagalog" ${curLang === 'Tagalog' ? 'selected' : ''}>Tagalog (G1–G3)</option>
+            <option value="Filipino" ${curLang === 'Filipino' ? 'selected' : ''}>Filipino (G2–G3)</option>
+            <option value="English" ${curLang === 'English' ? 'selected' : ''}>English (G3)</option>
+          </select>
+          <select id="anaCrlaSy" onchange="renderAnalyticsTab()" class="bg-[#094635] text-white rounded-xl px-3 py-1.5 text-xs font-bold">
+            <option value="y1" ${curSy === 'y1' ? 'selected' : ''}>${db.triSyLabels.crla.y1}</option>
+            <option value="y2" ${curSy === 'y2' ? 'selected' : ''}>${db.triSyLabels.crla.y2}</option>
+            <option value="y3" ${curSy === 'y3' ? 'selected' : ''}>${db.triSyLabels.crla.y3}</option>
+          </select>
+        `;
+        const rows = CRLA_LANG_ROWS.filter(r => curLang === 'ALL' || r.lang === curLang);
+        const cTot = Array(10).fill(0);
+        rows.forEach(r => db.crlaV3[curSy][r.key].forEach((v, i) => cTot[i] += Number(v)));
+
+        render3DBarChart('analyticsMainChartBox', {
+          title: `3D Transparent Cylinder Graph: CRLA Profile (${db.triSyLabels.crla[curSy]} • ${curLang === 'ALL' ? 'All Languages' : curLang})`,
+          subtitle: 'Kabuuang bilang ng mag-aaral sa 5 kategorya ng CRLA.',
+          items: [
+            { label: 'Low Emerging', value: cTot[0] + cTot[1], color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
+            { label: 'High Emerging', value: cTot[2] + cTot[3], color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
+            { label: 'Developing Reader', value: cTot[4] + cTot[5], color: '#0284c7', topColor: '#38bdf8', sideColor: '#0369a1' },
+            { label: 'Transitioning Reader', value: cTot[6] + cTot[7], color: '#4f46e5', topColor: '#818cf8', sideColor: '#3730a3' },
+            { label: 'Reading at Grade Level', value: cTot[8] + cTot[9], color: '#059669', topColor: '#34d399', sideColor: '#047857' }
+          ]
+        });
+
+        render3DBarChart('analyticsSubChartBox', {
+          title: `Reading at Grade Level per Grade & Language (${db.triSyLabels.crla[curSy]})`,
+          subtitle: 'Bilang ng mga batang nasa "Reading at Grade Level" bawat baitang at wika.',
+          items: rows.map(r => ({
+            label: `${r.grade} (${r.lang})`,
+            value: Number(db.crlaV3[curSy][r.key][8]) + Number(db.crlaV3[curSy][r.key][9])
+          }))
+        });
+      }
+
+      else if (activeAnalyticsCat === 'philiri') {
+        const curLang = document.getElementById('anaPhilLang')?.value || 'ALL';
+        ctrl.innerHTML = `
+          <span class="text-xs font-extrabold text-emerald-950">Phil-IRI Assessment (Grade 4 – Grade 10):</span>
+          <select id="anaPhilLang" onchange="renderAnalyticsTab()" class="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold">
+            <option value="ALL" ${curLang === 'ALL' ? 'selected' : ''}>All Languages (Filipino & English)</option>
+            <option value="Filipino" ${curLang === 'Filipino' ? 'selected' : ''}>Filipino Only</option>
+            <option value="English" ${curLang === 'English' ? 'selected' : ''}>English Only</option>
+          </select>
+        `;
+        const rows = PHILIRI_LANG_ROWS.filter(r => curLang === 'ALL' || r.lang === curLang);
+        const pTot = Array(8).fill(0);
+        rows.forEach(r => db.philiriV2[r.key].forEach((v, i) => pTot[i] += Number(v)));
+
+        render3DBarChart('analyticsMainChartBox', {
+          title: `3D Transparent Cylinder Graph: Phil-IRI Reading Profile (${curLang === 'ALL' ? 'Filipino & English' : curLang})`,
+          subtitle: 'Kabuuang bilang sa Independent, Instructional, Frustration at Non-Reader.',
+          items: [
+            { label: 'Independent', value: pTot[0] + pTot[1], color: '#059669', topColor: '#34d399', sideColor: '#047857' },
+            { label: 'Instructional', value: pTot[2] + pTot[3], color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
+            { label: 'Frustration', value: pTot[4] + pTot[5], color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
+            { label: 'Non-Reader', value: pTot[6] + pTot[7], color: '#475569', topColor: '#94a3b8', sideColor: '#334155' }
+          ]
+        });
+
+        render3DBarChart('analyticsSubChartBox', {
+          title: `Phil-IRI Independent Readers per Grade & Language`,
+          subtitle: 'Bilang ng Independent Readers bawat baitang.',
+          items: rows.map(r => ({
+            label: `${r.grade} (${r.lang})`,
+            value: Number(db.philiriV2[r.key][0]) + Number(db.philiriV2[r.key][1])
+          }))
+        });
+      }
+
+      else if (activeAnalyticsCat === 'rma') {
+        const curSy = document.getElementById('anaRmaSy')?.value || 'y3';
+        ctrl.innerHTML = `
+          <span class="text-xs font-extrabold text-emerald-950">RMA Numeracy School Year (Grade 1–10):</span>
+          <select id="anaRmaSy" onchange="renderAnalyticsTab()" class="bg-[#094635] text-white rounded-xl px-3 py-1.5 text-xs font-bold">
+            <option value="y1" ${curSy === 'y1' ? 'selected' : ''}>${db.triSyLabels.rma.y1}</option>
+            <option value="y2" ${curSy === 'y2' ? 'selected' : ''}>${db.triSyLabels.rma.y2}</option>
+            <option value="y3" ${curSy === 'y3' ? 'selected' : ''}>${db.triSyLabels.rma.y3}</option>
+          </select>
+        `;
+        const rTot = Array(10).fill(0);
+        RMA_GRADES.forEach(g => db.rmaV2[curSy][g].forEach((v, i) => rTot[i] += Number(v)));
+
+        render3DBarChart('analyticsMainChartBox', {
+          title: `3D Transparent Cylinder Graph: RMA Numeracy Profile (${db.triSyLabels.rma[curSy]})`,
+          subtitle: 'Kabuuang bilang ng mag-aaral (Grade 1–10) sa 5 antas ng RMA.',
+          items: [
+            { label: 'Emerging (Not Prof.)', value: rTot[0] + rTot[1], color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
+            { label: 'Emerging (Low Prof.)', value: rTot[2] + rTot[3], color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
+            { label: 'Developing (Nearly)', value: rTot[4] + rTot[5], color: '#0284c7', topColor: '#38bdf8', sideColor: '#0369a1' },
+            { label: 'Transitioning (Prof.)', value: rTot[6] + rTot[7], color: '#4f46e5', topColor: '#818cf8', sideColor: '#3730a3' },
+            { label: 'At Grade Level (High)', value: rTot[8] + rTot[9], color: '#059669', topColor: '#34d399', sideColor: '#047857' }
+          ]
+        });
+
+        render3DBarChart('analyticsSubChartBox', {
+          title: `At Grade Level (Highly Proficient) per Baitang — RMA (${db.triSyLabels.rma[curSy]})`,
+          subtitle: 'Bilang ng Highly Proficient learners bawat baitang.',
+          items: RMA_GRADES.map(g => ({
+            label: g,
+            value: Number(db.rmaV2[curSy][g][8]) + Number(db.rmaV2[curSy][g][9])
+          }))
+        });
+      }
+
+      else if (activeAnalyticsCat === 'reading') {
+        const curSy = document.getElementById('anaReadSy')?.value || 'y3';
+        const curLang = document.getElementById('anaReadLang')?.value || 'ALL';
+        ctrl.innerHTML = `
+          <span class="text-xs font-extrabold text-emerald-950">School Reading Assessment Filter:</span>
+          <select id="anaReadLang" onchange="renderAnalyticsTab()" class="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold">
+            <option value="ALL" ${curLang === 'ALL' ? 'selected' : ''}>All Languages (Filipino & English)</option>
+            <option value="Filipino" ${curLang === 'Filipino' ? 'selected' : ''}>Filipino Only</option>
+            <option value="English" ${curLang === 'English' ? 'selected' : ''}>English Only</option>
+          </select>
+          <select id="anaReadSy" onchange="renderAnalyticsTab()" class="bg-[#094635] text-white rounded-xl px-3 py-1.5 text-xs font-bold">
+            <option value="y1" ${curSy === 'y1' ? 'selected' : ''}>${db.triSyLabels.reading.y1}</option>
+            <option value="y2" ${curSy === 'y2' ? 'selected' : ''}>${db.triSyLabels.reading.y2}</option>
+            <option value="y3" ${curSy === 'y3' ? 'selected' : ''}>${db.triSyLabels.reading.y3}</option>
+          </select>
+        `;
+        const rdRows = (db.readingV3[curSy] || []).filter(r => curLang === 'ALL' || (r.lang || 'Filipino') === curLang);
+        const rdTot = Array(10).fill(0);
+        rdRows.forEach(r => r.vals.forEach((v, i) => rdTot[i] += Number(v)));
+
+        render3DBarChart('analyticsMainChartBox', {
+          title: `3D Transparent Cylinder Graph: School Reading Assessment (${db.triSyLabels.reading[curSy]} • ${curLang === 'ALL' ? 'Filipino & English' : curLang})`,
+          subtitle: 'Kabuuang bilang sa Non-Reader, Struggling, Slow, Average at Fast Reader.',
+          items: [
+            { label: 'Non-Reader', value: rdTot[0] + rdTot[1], color: '#be123c', topColor: '#fb7185', sideColor: '#9f1239' },
+            { label: 'Struggling Reader', value: rdTot[2] + rdTot[3], color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
+            { label: 'Slow Reader', value: rdTot[4] + rdTot[5], color: '#ea580c', topColor: '#fb923c', sideColor: '#c2410c' },
+            { label: 'Average Reader', value: rdTot[6] + rdTot[7], color: '#0284c7', topColor: '#38bdf8', sideColor: '#0369a1' },
+            { label: 'Fast Reader', value: rdTot[8] + rdTot[9], color: '#059669', topColor: '#34d399', sideColor: '#047857' }
+          ]
+        });
+
+        render3DBarChart('analyticsSubChartBox', {
+          title: `Average & Fast Readers per Grade & Language (${db.triSyLabels.reading[curSy]})`,
+          subtitle: 'Pinagsamang bilang ng Average at Fast Readers bawat baitang.',
+          items: rdRows.map(r => ({
+            label: `${r.grade} (${r.lang || 'Filipino'})`,
+            value: Number(r.vals[6]) + Number(r.vals[7]) + Number(r.vals[8]) + Number(r.vals[9])
+          }))
+        });
+      }
+
+      else if (activeAnalyticsCat === 'nat') {
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-emerald-950">ELLNA (Grade 3) & NAT (Grade 6, 10, 12) — 3-Year MPS Comparison</span>`;
+        render3DBarChart('analyticsMainChartBox', {
+          title: '3D Transparent Cylinder Graph: ELLNA & NAT 3-Year Overall Average MPS (%)',
+          subtitle: 'Mean Percentage Score (%) bawat learning area.',
+          items: getNATGraphItems(),
+          suffix: '%',
+          maxVal: 100
+        });
+
+        const syItems = [
+          {
+            label: 'SY 2023–2024',
+            value: Number((db.nat.reduce((s, r) => s + (Number(r.y1m) + Number(r.y1f)) / 2, 0) / db.nat.length).toFixed(2))
+          },
+          {
+            label: 'SY 2024–2025',
+            value: Number((db.nat.reduce((s, r) => s + (Number(r.y2m) + Number(r.y2f)) / 2, 0) / db.nat.length).toFixed(2))
+          },
+          {
+            label: 'SY 2025–2026',
+            value: Number((db.nat.reduce((s, r) => s + (Number(r.y3m) + Number(r.y3f)) / 2, 0) / db.nat.length).toFixed(2))
+          }
+        ];
+        render3DBarChart('analyticsSubChartBox', {
+          title: 'Overall ELLNA & NAT School Average by School Year (%)',
+          subtitle: 'Pag-unlad ng pangkalahatang MPS sa nakalipas na 3 taon.',
+          items: syItems,
+          suffix: '%',
+          maxVal: 100
+        });
+      }
+
+      else if (activeAnalyticsCat === 'nutrition') {
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-emerald-950">School Form 8 (SF8) — Nutritional Status Summary (SBFP Status: ${(db.sbfpStatus || 'active').toUpperCase()})</span>`;
+        let sN = 0, sW = 0, sSW = 0, sO = 0, sOB = 0;
+        db.k12Grades.forEach(g => {
+          const d = db.nutrition[g] || { nm: 0, nf: 0, wm: 0, wf: 0, swm: 0, swf: 0, om: 0, of: 0, obm: 0, obf: 0 };
+          sN += Number(d.nm) + Number(d.nf);
+          sW += Number(d.wm) + Number(d.wf);
+          sSW += Number(d.swm) + Number(d.swf);
+          sO += Number(d.om) + Number(d.of);
+          sOB += Number(d.obm) + Number(d.obf);
+        });
+        render3DBarChart('analyticsMainChartBox', {
+          title: '3D Transparent Cylinder Graph: Nutritional Status (SF8)',
+          subtitle: 'Kabuuang bilang ng mag-aaral sa bawat BMI category.',
+          items: [
+            { label: 'Normal', value: sN, color: '#059669', topColor: '#34d399', sideColor: '#047857' },
+            { label: 'Wasted', value: sW, color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
+            { label: 'Severely Wasted', value: sSW, color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
+            { label: 'Overweight', value: sO, color: '#0284c7', topColor: '#38bdf8', sideColor: '#0369a1' },
+            { label: 'Obese', value: sOB, color: '#7c3aed', topColor: '#a78bfa', sideColor: '#5b21b6' }
+          ]
+        });
+        subBox.classList.add('hidden');
+      }
+
+      else if (activeAnalyticsCat === 'sbm') {
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-emerald-950">SBM Self-Assessment Checklist (42 Indicators Tally)</span>`;
+        let c1 = 0, c2 = 0, c3 = 0, c4 = 0;
+        SBM_DIMENSIONS.forEach(dim => dim.indicators.forEach(ind => {
+          const lvl = (db.sbm && db.sbm[ind.num]) ? db.sbm[ind.num].level : '';
+          if (lvl === '1') c1++; else if (lvl === '2') c2++; else if (lvl === '3') c3++; else if (lvl === '4') c4++;
+        }));
+        render3DBarChart('analyticsMainChartBox', {
+          title: '3D Transparent Cylinder Graph: SBM Checklist Manifestation Tally',
+          subtitle: 'Bilang ng SBM indicators sa bawat antas ng pagsasakatuparan.',
+          items: [
+            { label: 'Not Yet Manifested', value: c1, color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
+            { label: 'Rarely Manifested', value: c2, color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
+            { label: 'Frequently Manifested', value: c3, color: '#0284c7', topColor: '#38bdf8', sideColor: '#0369a1' },
+            { label: 'Always Manifested', value: c4, color: '#059669', topColor: '#34d399', sideColor: '#047857' }
+          ]
+        });
+        subBox.classList.add('hidden');
+      }
+    }
+
+    // ==================== CSV EXPORT ====================
+    function exportCurrentCSV() {
+      const sName = (db.schoolProfile?.schoolName || 'Rosario_West').replace(/[^a-zA-Z0-9]/g, '_');
+      let csv = `"${db.schoolProfile?.schoolName || 'ROSARIO WEST DISTRICT SCHOOL'} - ${db.schoolProfile?.district || 'Rosario West District'}"\n\n`;
+      if (activeTab === 'masterlist') {
+        csv += 'Grade Level,Section / Strand,Class Adviser,Male,Female,Total\n';
+        db.sectionsList.forEach(s => {
+          csv += `"${s.grade}","${s.section}","${s.adviser}",${s.m},${s.f},${Number(s.m) + Number(s.f)}\n`;
+        });
+      } else if (activeTab === 'nsbi') {
+        csv += 'Building Name,Type,Condition,Classrooms,Gripo,CR,Silya,Lamesa,Board/TV,Fans,Remarks\n';
+        db.nsbi.forEach(b => {
+          csv += `"${b.name}","${b.type}","${b.condition}",${b.rooms},${b.gripo},${b.cr},${b.silya},${b.lamesa},${b.board},${b.fans},"${b.remarks || ''}"\n`;
+        });
+      } else if (activeTab === 'nutrition') {
+        csv += `SBFP Status: ${db.sbfpStatus}\nGrade Level,Feeding Status,Normal M,Normal F,Wasted M,Wasted F,Sev Wasted M,Sev Wasted F,Overweight M,Overweight F,Obese M,Obese F\n`;
+        db.k12Grades.forEach(g => {
+          const d = db.nutrition[g] || {};
+          csv += `"${g}","${d.feeding || 'Active'}",${d.nm||0},${d.nf||0},${d.wm||0},${d.wf||0},${d.swm||0},${d.swf||0},${d.om||0},${d.of||0},${d.obm||0},${d.obf||0}\n`;
+        });
+      } else {
+        csv += 'Grade Level,Male,Female,Total\n';
+        db.k12Grades.forEach(g => {
+          const d = db.enrMatrix.y4.enrollment[g]?.[0] || { m: 0, f: 0 };
+          csv += `"${g}",${d.m},${d.f},${d.m + d.f}\n`;
+        });
+      }
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${sName}_${activeTab}_2026.csv`;
+      a.click();
+    }
+  </script>
+</body>
+</html>
