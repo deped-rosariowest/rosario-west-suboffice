@@ -518,7 +518,7 @@
             <option value="crla">1. CRLA Only (Grade 1–3 • Tagalog, Filipino, English)</option>
             <option value="philiri">2. Phil-IRI Only (Grade 4–6 • Filipino & English)</option>
             <option value="rma">3. RMA Numeracy Only (Grade 1 – Grade 6 • 3 SY)</option>
-            <option value="reading">4. Reading Assessment Results (Grade 1–6 • Filipino & English • 3 SY)</option>
+            <option value="reading">4. Reading Assessment Results (Grade 1–6 • 3 SY)</option>
           </select>
         </div>
 
@@ -668,21 +668,14 @@
         <div id="box_reading" class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-orange-700 text-white px-4 py-3 flex flex-wrap justify-between items-center gap-2">
             <div>
-              <span class="text-xs sm:text-sm font-extrabold block">📘 4. School Reading Assessment Results (Grade 1–6 • Filipino & English • 3 SY)</span>
-              <span class="text-[10px] text-orange-100">Non-Reader, Struggling Reader, Slow Reader, Average Reader & Fast Reader (Filipino & English Coverage)</span>
+              <span class="text-xs sm:text-sm font-extrabold block">📘 4. School Reading Assessment Results (Grade 1–6 • Editable Rows & 3 SY)</span>
+              <span class="text-[10px] text-orange-100">Non-Reader, Struggling Reader, Slow Reader, Average Reader & Fast Reader</span>
             </div>
-            <div class="flex flex-wrap items-center gap-2">
-              <select id="readLangSel" onchange="renderLiteracyTab()" class="bg-slate-900 text-white border border-orange-300 text-xs font-extrabold px-3 py-1.5 rounded-xl">
-                <option value="ALL">All Languages (Filipino & English)</option>
-                <option value="filipino">Filipino (Grade 1–6)</option>
-                <option value="english">English (Grade 1–6)</option>
-              </select>
-              <select id="readSySel" onchange="renderLiteracyTab()" class="bg-slate-950 text-orange-400 text-xs font-extrabold px-3 py-1.5 rounded-xl">
-                <option value="y1">SY 2024–2025</option>
-                <option value="y2">SY 2025–2026</option>
-                <option value="y3" selected>SY 2026–2027</option>
-              </select>
-            </div>
+            <select id="readSySel" onchange="renderLiteracyTab()" class="bg-slate-950 text-orange-400 text-xs font-extrabold px-3 py-1.5 rounded-xl">
+              <option value="y1">SY 2024–2025</option>
+              <option value="y2">SY 2025–2026</option>
+              <option value="y3" selected>SY 2026–2027</option>
+            </select>
           </div>
           <div class="bg-slate-100 px-4 py-3 border-b space-y-2.5">
             <div class="flex flex-wrap items-center justify-between gap-2">
@@ -694,12 +687,8 @@
               </div>
             </div>
             <form id="formAddReadGrade" onsubmit="addReadingGradeRow(event)" class="hidden bg-white p-3 rounded-xl border-2 border-orange-500 flex flex-wrap items-center gap-2">
-              <span class="text-xs font-extrabold text-slate-900">➕ Magdagdag ng Row:</span>
-              <input type="text" id="newReadGradeName" required placeholder="hal. Grade 1 - Sampaguita" class="flex-1 min-w-[180px] px-3 py-1.5 rounded-lg border text-xs font-bold">
-              <select id="newReadLang" class="px-3 py-1.5 rounded-lg border text-xs font-extrabold bg-slate-50">
-                <option value="filipino">Filipino</option>
-                <option value="english">English</option>
-              </select>
+              <span class="text-xs font-extrabold text-slate-900">➕ Magdagdag ng Grade Level / Section:</span>
+              <input type="text" id="newReadGradeName" required placeholder="hal. Grade 1 - Sampaguita" class="flex-1 min-w-[200px] px-3 py-1.5 rounded-lg border text-xs font-bold">
               <button type="submit" class="bg-orange-600 hover:bg-orange-500 text-white font-extrabold px-4 py-1.5 rounded-lg text-xs">➕ Idagdag</button>
             </form>
           </div>
@@ -707,7 +696,7 @@
             <table class="w-full text-xs border-collapse">
               <thead>
                 <tr class="bg-slate-950 text-white">
-                  <th rowspan="2" class="p-3 text-left min-w-[165px]">Grade Level & Language</th>
+                  <th rowspan="2" class="p-3 text-left min-w-[130px]">Grade Level</th>
                   <th colspan="3" class="p-2 text-center bg-red-900 border-l border-white/20">Non-Reader</th>
                   <th colspan="3" class="p-2 text-center bg-red-700 border-l border-white/20">Struggling Reader</th>
                   <th colspan="3" class="p-2 text-center bg-orange-700 border-l border-white/20">Slow Reader</th>
@@ -1258,21 +1247,11 @@
       ['y1', 'y2', 'y3'].forEach(sy => {
         CRLA_COVERAGE.forEach(c => { rec.crlaV2[sy][c.key] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; });
         G1_TO_G6.forEach(g => { rec.rmaV2[sy][g] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; });
-        rec.readingV2[sy] = [];
-        G1_TO_G6.forEach(g => {
-          rec.readingV2[sy].push({
-            id: 'rd_' + sy + '_' + g.replace(/\s+/g, '') + '_fil',
-            grade: g,
-            lang: 'filipino',
-            vals: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-          });
-          rec.readingV2[sy].push({
-            id: 'rd_' + sy + '_' + g.replace(/\s+/g, '') + '_eng',
-            grade: g,
-            lang: 'english',
-            vals: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-          });
-        });
+        rec.readingV2[sy] = G1_TO_G6.map(g => ({
+          id: 'rd_' + sy + '_' + g.replace(/\s+/g, ''),
+          grade: g,
+          vals: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }));
       });
 
       PHILIRI_COVERAGE.forEach(p => { rec.philiri[p.key] = [0, 0, 0, 0, 0, 0, 0, 0]; });
@@ -2535,94 +2514,53 @@
         ]
       });
 
-      // 4. Reading Assessment Results (Filipino & English)
+      // 4. Reading Assessment Results
       document.getElementById('formAddReadGrade').classList.toggle('hidden', !canEdit);
       document.getElementById('thDelReadGrade').classList.toggle('hidden', !canEdit);
 
       const readSy = document.getElementById('readSySel').value || 'y3';
-      const readLang = document.getElementById('readLangSel')?.value || 'ALL';
-
-      function normalizeReadingRows(rawList, syKey) {
-        const list = Array.isArray(rawList) ? rawList : [];
-        const hasLang = list.some(r => r && r.lang);
-        if (hasLang) {
-          return list.map(r => ({ ...r, lang: r.lang || 'filipino' }));
-        }
-        // Auto-upgrade legacy rows (without lang) into Filipino & English pairs
-        const upgraded = [];
-        const sourceGrades = list.length ? list : G1_TO_G6.map(g => ({ grade: g, vals: Array(10).fill(0) }));
-        sourceGrades.forEach((r, idx) => {
-          upgraded.push({
-            id: (r.id || ('rd_' + syKey + '_' + idx)) + '_fil',
-            grade: r.grade,
-            lang: 'filipino',
-            vals: Array.isArray(r.vals) ? [...r.vals] : Array(10).fill(0)
-          });
-          upgraded.push({
-            id: (r.id || ('rd_' + syKey + '_' + idx)) + '_eng',
-            grade: r.grade,
-            lang: 'english',
-            vals: Array(10).fill(0)
-          });
-        });
-        return upgraded;
-      }
-
       let rdRows = [];
       if (target) {
-        if (!target.readingV2) target.readingV2 = {};
-        const normalized = normalizeReadingRows(target.readingV2[readSy], readSy);
-        if (!target.readingV2[readSy] || !target.readingV2[readSy].some(r => r && r.lang)) {
-          target.readingV2[readSy] = normalized;
-        }
-        rdRows = target.readingV2[readSy].map((r, realIdx) => ({ ...r, _realIdx: realIdx }));
+        rdRows = target.readingV2?.[readSy] || [];
       } else {
         const gMap = {};
         getAllSchoolRecordsList().forEach(sc => {
-          const scRows = normalizeReadingRows(sc.readingV2?.[readSy], readSy);
-          scRows.forEach(r => {
-            const key = r.grade + '__' + r.lang;
-            if (!gMap[key]) gMap[key] = { grade: r.grade, lang: r.lang, vals: Array(10).fill(0) };
-            (r.vals || []).forEach((v, i) => gMap[key].vals[i] += Number(v) || 0);
+          (sc.readingV2?.[readSy] || []).forEach(r => {
+            if (!gMap[r.grade]) gMap[r.grade] = { grade: r.grade, vals: Array(10).fill(0) };
+            r.vals.forEach((v, i) => gMap[r.grade].vals[i] += Number(v) || 0);
           });
         });
         rdRows = Object.values(gMap);
       }
 
-      const filteredRdRows = rdRows.filter(r => readLang === 'ALL' || r.lang === readLang);
       const rdTot = Array(10).fill(0);
-      document.getElementById('tbodyReading').innerHTML = filteredRdRows.map((row, dispIdx) => {
-        const realIdx = row._realIdx !== undefined ? row._realIdx : dispIdx;
-        const a = row.vals || Array(10).fill(0);
-        a.forEach((v, i) => rdTot[i] += Number(v) || 0);
-        const rowSum = a.reduce((x, y) => x + (Number(y) || 0), 0);
-        const langBadge = row.lang === 'english'
-          ? '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-blue-900">English</span>'
-          : '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-orange-100 text-orange-900">Filipino</span>';
-
+      document.getElementById('tbodyReading').innerHTML = rdRows.map((row, rIdx) => {
+        const a = row.vals;
+        a.forEach((v, i) => rdTot[i] += Number(v));
+        const rowSum = a.reduce((x, y) => x + Number(y), 0);
         let cells = '';
         for (let p = 0; p < 5; p++) {
-          const m = Number(a[p * 2]) || 0, fem = Number(a[p * 2 + 1]) || 0;
+          const m = Number(a[p * 2]), fem = Number(a[p * 2 + 1]);
           cells += canEdit
-            ? `<td class="p-1 text-center border-l"><input type="number" min="0" value="${m}" onchange="updReadingCell('${readSy}',${realIdx},${p*2},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
-               <td class="p-1 text-center"><input type="number" min="0" value="${fem}" onchange="updReadingCell('${readSy}',${realIdx},${p*2+1},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+            ? `<td class="p-1 text-center border-l"><input type="number" min="0" value="${m}" onchange="updReadingCell('${readSy}',${rIdx},${p*2},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+               <td class="p-1 text-center"><input type="number" min="0" value="${fem}" onchange="updReadingCell('${readSy}',${rIdx},${p*2+1},this.value)" class="w-11 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
                <td class="p-2 text-center font-extrabold bg-slate-50">${m + fem}</td>`
             : `<td class="p-2.5 text-center border-l">${m}</td><td class="p-2.5 text-center">${fem}</td><td class="p-2.5 text-center font-extrabold bg-slate-50">${m + fem}</td>`;
         }
         return `<tr class="hover:bg-slate-50">
-          <td class="p-2.5 font-extrabold whitespace-nowrap">${row.grade} ${langBadge}</td>
+          <td class="p-2.5 font-extrabold">${row.grade}</td>
           ${cells}
           <td class="p-2.5 text-center font-extrabold bg-orange-50 border-l">${rowSum}</td>
-          ${canEdit ? `<td class="p-2 text-center border-l"><button type="button" onclick="delReadingGradeRow('${readSy}',${realIdx})" class="text-red-600 font-bold">🗑️</button></td>` : ''}
+          ${canEdit ? `<td class="p-2 text-center border-l"><button type="button" onclick="delReadingGradeRow('${readSy}',${rIdx})" class="text-red-600 font-bold">🗑️</button></td>` : ''}
         </tr>`;
       }).join('');
 
-      document.getElementById('tfootReading').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL (${readLang === 'ALL' ? 'Filipino & English' : readLang.toUpperCase()})</td>${[0,1,2,3,4].map(p => `
+      document.getElementById('tfootReading').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL</td>${[0,1,2,3,4].map(p => `
         <td class="p-2.5 text-center border-l border-slate-700">${rdTot[p*2]}</td><td class="p-2.5 text-center">${rdTot[p*2+1]}</td><td class="p-2.5 text-center text-orange-400">${rdTot[p*2]+rdTot[p*2+1]}</td>
       `).join('')}<td class="p-2.5 text-center text-orange-400 border-l border-slate-700">${rdTot.reduce((a,b)=>a+b,0)}</td>${canEdit ? '<td></td>' : ''}</tr>`;
 
       render3DGlassBarChart('inlineGraph_reading', {
-        title: `3D Glass Bar Graph: School Reading Assessment Results (${readLang === 'ALL' ? 'Filipino & English' : readLang.toUpperCase()})`,
+        title: '3D Glass Bar Graph: School Reading Assessment Results',
         items: [
           { label: 'Non-Reader', value: rdTot[0] + rdTot[1], color: '#dc2626', topColor: '#f87171', sideColor: '#991b1b' },
           { label: 'Struggling Reader', value: rdTot[2] + rdTot[3], color: '#e11d48', topColor: '#fb7185', sideColor: '#881337' },
@@ -2668,8 +2606,7 @@
       if (!target) return;
       const sy = document.getElementById('readSySel').value || 'y3';
       const gradeName = document.getElementById('newReadGradeName').value.trim();
-      const langVal = document.getElementById('newReadLang')?.value || 'filipino';
-      target.readingV2[sy].push({ id: 'rd_' + Date.now(), grade: gradeName, lang: langVal, vals: Array(10).fill(0) });
+      target.readingV2[sy].push({ id: 'rd_' + Date.now(), grade: gradeName, vals: Array(10).fill(0) });
       saveDistrictDB();
       renderLiteracyTab();
       e.target.reset();
