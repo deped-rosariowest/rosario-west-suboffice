@@ -172,7 +172,7 @@
             🏫 8. NSBI Inventory
           </button>
           <button type="button" id="tabBtn_analytics" onclick="switchPortalTab('analytics')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
-            📊 9. 3D Graphical Analytics
+            📊 9. 3D Cylinder Analytics
           </button>
         </div>
 
@@ -389,8 +389,8 @@
           </div>
         </div>
 
-        <!-- LIVE 3D GRAPH FOR MPS -->
-        <div id="inlineGraph_mps" class="bg-slate-50 rounded-2xl border border-slate-200 p-4"></div>
+        <!-- LIVE 3D TRANSPARENT CYLINDER GRAPH FOR MPS -->
+        <div id="inlineGraph_mps" class="bg-transparent rounded-2xl border border-slate-200/80 p-4"></div>
       </section>
 
 
@@ -405,7 +405,7 @@
               🎓 Senior High School (SHS) Strand Enrollment & Core Subjects MPS
             </h2>
             <p class="text-xs text-slate-500">
-              Pamahalaan ang iba't ibang gusto i-enroll na <strong>SHS Strands</strong> (STEM, ABM, HUMSS, GAS, TVL-HE, TVL-ICT, atbp.) at subaybayan ang <strong>SHS Core Subjects</strong> (1st Sem & 2nd Sem • Male, Female & Auto-Average) na may live <strong>Transparent 3D Glass Graph</strong>.
+              Pamahalaan ang iba't ibang gusto i-enroll na <strong>SHS Strands</strong> (STEM, ABM, HUMSS, GAS, TVL-HE, TVL-ICT, atbp.) at subaybayan ang <strong>SHS Core Subjects</strong> (1st Sem & 2nd Sem • Male, Female & Auto-Average) na may live <strong>Transparent 3D Cylinder Graph</strong>.
             </p>
           </div>
           <div class="flex flex-col gap-2 min-w-[260px]">
@@ -486,8 +486,8 @@
             </table>
           </div>
 
-          <!-- Transparent 3D Glass Graph for SHS Strand Enrollment -->
-          <div id="inlineGraph_shs_strands" class="bg-transparent rounded-2xl border border-slate-200 p-4"></div>
+          <!-- Transparent 3D Cylinder Graph for SHS Strand Enrollment -->
+          <div id="inlineGraph_shs_strands" class="bg-transparent rounded-2xl border border-slate-200/80 p-4"></div>
         </div>
 
         <!-- PART B: SHS CORE SUBJECTS (MPS %) -->
@@ -537,8 +537,8 @@
             </table>
           </div>
 
-          <!-- Transparent 3D Glass Graph for SHS Core Subjects MPS -->
-          <div id="inlineGraph_shs_subjects" class="p-4 bg-transparent border-t border-slate-200"></div>
+          <!-- Transparent 3D Cylinder Graph for SHS Core Subjects MPS -->
+          <div id="inlineGraph_shs_subjects" class="p-4 bg-transparent border-t border-slate-200/80"></div>
         </div>
       </section>
 
@@ -616,8 +616,8 @@
           </div>
         </div>
 
-        <!-- LIVE 3D GRAPH FOR ENROLLMENT / DROPOUT / TRANS IN / TRANS OUT -->
-        <div id="inlineGraph_enr" class="bg-slate-50 rounded-2xl border border-slate-200 p-4"></div>
+        <!-- LIVE 3D TRANSPARENT CYLINDER GRAPH FOR ENROLLMENT / DROPOUT / TRANS IN / TRANS OUT -->
+        <div id="inlineGraph_enr" class="bg-transparent rounded-2xl border border-slate-200/80 p-4"></div>
       </section>
 
       <!-- ==================== TAB 4: CRLA, PHIL-IRI, RMA & READING ASSESSMENT ==================== -->
@@ -626,7 +626,7 @@
           <div>
             <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">COMPREHENSIVE LITERACY, READING & NUMERACY PROFILE (MALE, FEMALE & TOTAL)</span>
             <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">📚 CRLA, Phil-IRI, RMA & Reading Assessment Results</h2>
-            <p class="text-xs text-slate-500">Naka-hiwalay na ayon sa wika (Tagalog, Filipino, at English) ang CRLA, Phil-IRI, at Reading Assessment Results—at awtomatikong nag-uupdate ang 3D Bar Graph bawat kategorya.</p>
+            <p class="text-xs text-slate-500">Naka-hiwalay na ayon sa wika (Tagalog, Filipino, at English) ang CRLA, Phil-IRI, at Reading Assessment Results—at awtomatikong nag-uupdate ang 3D Transparent Cylinder Graph bawat kategorya.</p>
           </div>
           <select id="litToolFilter" onchange="renderLiteracyTab()" class="px-4 py-2.5 rounded-xl bg-[#094635] text-white text-xs sm:text-sm font-extrabold">
             <option value="ALL">Ipakita Lahat (CRLA, Phil-IRI, RMA & Reading)</option>
@@ -694,7 +694,7 @@
               <tfoot id="tfootCRLA" class="bg-[#0f172a] text-white font-extrabold"></tfoot>
             </table>
           </div>
-          <div id="inlineGraph_crla" class="p-4 bg-slate-50 border-t border-slate-200"></div>
+          <div id="inlineGraph_crla" class="p-4 bg-transparent border-t border-slate-200/80"></div>
         </div>
 
         <!-- 2. PHIL-IRI (GRADE 4 TO GRADE 6 ONLY • FILIPINO & ENGLISH) -->
@@ -736,7 +736,7 @@
               <tfoot id="tfootPhilIRI" class="bg-[#0f172a] text-white font-extrabold"></tfoot>
             </table>
           </div>
-          <div id="inlineGraph_philiri" class="p-4 bg-slate-50 border-t border-slate-200"></div>
+          <div id="inlineGraph_philiri" class="p-4 bg-transparent border-t border-slate-200/80"></div>
         </div>
 
         <!-- 3. RMA (GRADE 1 TO GRADE 6 — 3 EDITABLE SCHOOL YEARS, 5 UPDATED COLUMNS) -->
@@ -789,7 +789,7 @@
               <tfoot id="tfootRMA" class="bg-[#0f172a] text-white font-extrabold"></tfoot>
             </table>
           </div>
-          <div id="inlineGraph_rma" class="p-4 bg-slate-50 border-t border-slate-200"></div>
+          <div id="inlineGraph_rma" class="p-4 bg-transparent border-t border-slate-200/80"></div>
         </div>
 
         <!-- 4. READING ASSESSMENT RESULTS (GRADE 1–6 • FILIPINO & ENGLISH • ADD/DELETE ROWS • 3 EDITABLE SY) -->
@@ -862,7 +862,7 @@
               <tfoot id="tfootReading" class="bg-[#0f172a] text-white font-extrabold"></tfoot>
             </table>
           </div>
-          <div id="inlineGraph_reading" class="p-4 bg-slate-50 border-t border-slate-200"></div>
+          <div id="inlineGraph_reading" class="p-4 bg-transparent border-t border-slate-200/80"></div>
         </div>
       </section>
 
@@ -895,8 +895,8 @@
           </table>
         </div>
 
-        <!-- LIVE 3D GRAPH FOR NAT & ELLNA -->
-        <div id="inlineGraph_nat" class="bg-slate-50 rounded-2xl border border-slate-200 p-4"></div>
+        <!-- LIVE 3D TRANSPARENT CYLINDER GRAPH FOR NAT & ELLNA -->
+        <div id="inlineGraph_nat" class="bg-transparent rounded-2xl border border-slate-200/80 p-4"></div>
       </section>
 
       <!-- ==================== TAB 6: NUTRITIONAL STATUS ==================== -->
@@ -1069,13 +1069,13 @@
         </div>
       </section>
 
-      <!-- ==================== TAB 9: 3D GRAPHICAL ANALYTICS DASHBOARD ==================== -->
+      <!-- ==================== TAB 9: 3D TRANSPARENT CYLINDER ANALYTICS DASHBOARD ==================== -->
       <section id="sec_analytics" class="hidden bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-6">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
           <div>
-            <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">LIVE INTERACTIVE 3D BAR CHARTS WITH DATA LABELS</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">📊 3D Graphical Presentation (Kanya-kanyang Kategorya)</h2>
-            <p class="text-xs text-slate-500">I-click ang bawat kategorya sa ibaba upang makita ang 3D Bar Graph na may data labels. Awtomatikong nagbabago habang naglalagay o nag-e-edit ng data sa portal.</p>
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 block">LIVE INTERACTIVE 3D TRANSPARENT CYLINDER CHARTS WITH DATA LABELS</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">📊 3D Transparent Cylinder Graphical Presentation</h2>
+            <p class="text-xs text-slate-500">I-click ang bawat kategorya sa ibaba upang makita ang 3D Transparent Cylinder Graph na may data labels. Awtomatikong nagbabago habang naglalagay o nag-e-edit ng data sa portal.</p>
           </div>
           <button type="button" onclick="window.print()" class="no-print bg-slate-800 text-white text-xs font-extrabold px-4 py-2 rounded-xl">🖨️ Print Graphs</button>
         </div>
@@ -1117,11 +1117,11 @@
         <!-- SUB-FILTERS FOR SELECTED GRAPH CATEGORY -->
         <div id="analyticsControlsBar" class="flex flex-wrap items-center gap-3 bg-emerald-50/70 p-3.5 rounded-2xl border border-emerald-200"></div>
 
-        <!-- MAIN 3D GRAPH CANVAS CONTAINER -->
-        <div id="analyticsMainChartBox" class="bg-white rounded-2xl border-2 border-slate-200 p-4 sm:p-6 shadow-xs"></div>
+        <!-- MAIN 3D TRANSPARENT CYLINDER GRAPH CANVAS CONTAINER -->
+        <div id="analyticsMainChartBox" class="bg-transparent rounded-2xl border-2 border-slate-200/80 p-4 sm:p-6"></div>
 
-        <!-- SECONDARY GRADE-BY-GRADE BREAKDOWN 3D GRAPH -->
-        <div id="analyticsSubChartBox" class="bg-slate-50 rounded-2xl border border-slate-200 p-4 sm:p-6"></div>
+        <!-- SECONDARY GRADE-BY-GRADE BREAKDOWN 3D TRANSPARENT CYLINDER GRAPH -->
+        <div id="analyticsSubChartBox" class="bg-transparent rounded-2xl border border-slate-200/80 p-4 sm:p-6"></div>
       </section>
 
     </main>
@@ -1203,7 +1203,6 @@
     const G4_TO_G10 = ['Grade 4', 'Grade 5', 'Grade 6', ...JHS_GRADES];
     const G4_TO_G6 = ['Grade 4', 'Grade 5', 'Grade 6'];
 
-    // CRLA Grade + Language Structure (Grade 1: Tagalog; Grade 2: Tagalog & Filipino; Grade 3: Tagalog, Filipino & English)
     const CRLA_LANG_ROWS = [
       { key: 'g1_tagalog', grade: 'Grade 1', lang: 'Tagalog' },
       { key: 'g2_tagalog', grade: 'Grade 2', lang: 'Tagalog' },
@@ -1213,7 +1212,6 @@
       { key: 'g3_english', grade: 'Grade 3', lang: 'English' }
     ];
 
-    // Phil-IRI Grade + Language Structure (Grade 4 to Grade 6 ONLY • Filipino & English)
     const PHILIRI_LANG_ROWS = [
       { key: 'g4_filipino', grade: 'Grade 4', lang: 'Filipino' },
       { key: 'g4_english', grade: 'Grade 4', lang: 'English' },
@@ -1342,13 +1340,9 @@
       masterlist: [],
       mpsMatrix: {},
       enrMatrix: {},
-      // CRLA v3: 3 School Years (y1, y2, y3), Grade 1 (Tagalog), Grade 2 (Tagalog, Filipino), Grade 3 (Tagalog, Filipino, English)
       crlaV3: { y1: {}, y2: {}, y3: {} },
-      // Phil-IRI v2: Grade 4 to Grade 6 ONLY, Filipino & English
       philiriV2: {},
-      // RMA v2: 3 School Years (y1, y2, y3), Grade 1 to Grade 6, 10 values per grade [M,F for 5 categories]
       rmaV2: { y1: {}, y2: {}, y3: {} },
-      // Reading Assessment v3: 3 School Years (y1, y2, y3), Grade 1 to Grade 6 (Filipino & English rows)
       readingV3: {
         y1: [],
         y2: [],
@@ -1501,7 +1495,6 @@
         if (!db.triSyLabels[k]) db.triSyLabels[k] = { y1: 'SY 2024–2025', y2: 'SY 2025–2026', y3: 'SY 2026–2027' };
       });
 
-      // Ensure CRLA v3 (Grade 1 Tagalog, Grade 2 Tagalog/Filipino, Grade 3 Tagalog/Filipino/English)
       if (!db.crlaV3) db.crlaV3 = JSON.parse(JSON.stringify(DEFAULT_DB.crlaV3));
       ['y1', 'y2', 'y3'].forEach(sy => {
         if (!db.crlaV3[sy]) db.crlaV3[sy] = {};
@@ -1515,7 +1508,6 @@
         });
       });
 
-      // Ensure Phil-IRI v2 (Grade 4 to Grade 6 ONLY • Filipino & English)
       if (!db.philiriV2) db.philiriV2 = {};
       PHILIRI_LANG_ROWS.forEach(r => {
         if (!Array.isArray(db.philiriV2[r.key]) || db.philiriV2[r.key].length !== 8) {
@@ -1526,7 +1518,6 @@
         }
       });
 
-      // Ensure RMA v2
       if (!db.rmaV2) db.rmaV2 = JSON.parse(JSON.stringify(DEFAULT_DB.rmaV2));
       ['y1', 'y2', 'y3'].forEach(sy => {
         if (!db.rmaV2[sy]) db.rmaV2[sy] = {};
@@ -1537,7 +1528,6 @@
         });
       });
 
-      // Ensure Reading Assessment v3 (Filipino & English rows)
       if (!db.readingV3) db.readingV3 = { y1: [], y2: [], y3: [] };
       ['y1', 'y2', 'y3'].forEach(sy => {
         if (!Array.isArray(db.readingV3[sy]) || db.readingV3[sy].length === 0) {
@@ -1579,7 +1569,7 @@
           if (!db.masterlist) db.masterlist = [];
           if (!db.nsbi) db.nsbi = [];
           GRADES.forEach(g => { if (!db.nutrition[g]) db.nutrition[g] = { nm: 18, nf: 17, wm: 1, wf: 1, swm: 0, swf: 0, om: 1, of: 1, obm: 0, obf: 0 }; });
-    ensureMatrixIntegrity();
+          ensureMatrixIntegrity();
           safeSetStorage('localStorage', 'tubahan_complete_v8', JSON.stringify(db));
           applySavedSchoolLogo();
           syncAllSYInputsFromDB();
@@ -1620,14 +1610,14 @@
     }, 10000);
 
     // =========================================================================
-    // TRUE TRANSPARENT 3D GLASS BAR GRAPH ENGINE WITH DATA LABELS (AUTO-UPDATING)
+    // TRUE 3D TRANSPARENT GLASS CYLINDER GRAPH ENGINE WITH DATA LABELS
     // =========================================================================
     function render3DBarChart(containerId, opts) {
       const container = document.getElementById(containerId);
       if (!container) return;
 
       const {
-        title = '3D Graphical Presentation',
+        title = '3D Transparent Cylinder Presentation',
         subtitle = '',
         items = [],
         suffix = '',
@@ -1642,158 +1632,167 @@
       const uid = containerId.replace(/[^a-zA-Z0-9]/g, '') + '_' + Math.floor(Math.random() * 100000);
 
       const glassPalette = [
-        { c1: '#10b981', c2: '#047857', edge: '#a7f3d0' },
-        { c1: '#0ea5e9', c2: '#0369a1', edge: '#bae6fd' },
-        { c1: '#f59e0b', c2: '#b45309', edge: '#fde68a' },
-        { c1: '#6366f1', c2: '#3730a3', edge: '#c7d2fe' },
-        { c1: '#f43f5e', c2: '#be123c', edge: '#fecdd3' },
-        { c1: '#14b8a6', c2: '#0f766e', edge: '#99f6e4' },
-        { c1: '#8b5cf6', c2: '#5b21b6', edge: '#ddd6fe' }
+        { c1: '#10b981', c2: '#047857', glow: '#a7f3d0' },
+        { c1: '#0ea5e9', c2: '#0369a1', glow: '#bae6fd' },
+        { c1: '#f59e0b', c2: '#b45309', glow: '#fde68a' },
+        { c1: '#6366f1', c2: '#3730a3', glow: '#c7d2fe' },
+        { c1: '#f43f5e', c2: '#be123c', glow: '#fecdd3' },
+        { c1: '#14b8a6', c2: '#0f766e', glow: '#99f6e4' },
+        { c1: '#8b5cf6', c2: '#5b21b6', glow: '#ddd6fe' }
       ];
 
       const rawMax = Math.max(...items.map(i => Number(i.value) || 0), 1);
-      const yMax = maxVal !== null ? maxVal : (suffix === '%' ? 100 : Math.ceil(rawMax * 1.2));
+      const yMax = maxVal !== null ? maxVal : (suffix === '%' ? 100 : Math.ceil(rawMax * 1.22));
 
       const svgW = Math.max(700, items.length * 108 + 130);
-      const svgH = 340;
-      const padL = 58, padR = 40, padT = 54, padB = 72;
+      const svgH = 350;
+      const padL = 58, padR = 36, padT = 58, padB = 72;
       const plotW = svgW - padL - padR;
       const plotH = svgH - padT - padB;
-      const depthX = 18, depthY = 12;
 
       let defsSvg = `
         <defs>
-          <linearGradient id="bgGlass_${uid}" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
-            <stop offset="100%" stop-color="#e2e8f0" stop-opacity="0.06"/>
+          <!-- Cylindrical specular vertical sheen -->
+          <linearGradient id="cylSheen_${uid}" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+            <stop offset="22%" stop-color="#ffffff" stop-opacity="0.72"/>
+            <stop offset="42%" stop-color="#ffffff" stop-opacity="0.12"/>
+            <stop offset="78%" stop-color="#ffffff" stop-opacity="0.04"/>
+            <stop offset="94%" stop-color="#ffffff" stop-opacity="0.32"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.10"/>
           </linearGradient>
-          <linearGradient id="floorGlass_${uid}" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#94a3b8" stop-opacity="0.22"/>
-            <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.08"/>
+
+          <!-- Top glass ellipse gradient -->
+          <radialGradient id="cylTopGlass_${uid}" cx="38%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+            <stop offset="65%" stop-color="#ffffff" stop-opacity="0.32"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.12"/>
+          </radialGradient>
+
+          <!-- Transparent frosted stage base -->
+          <linearGradient id="stageGlass_${uid}" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#94a3b8" stop-opacity="0.16"/>
+            <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.05"/>
           </linearGradient>
-          <linearGradient id="glassSheen_${uid}" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.62"/>
-            <stop offset="40%" stop-color="#ffffff" stop-opacity="0.16"/>
-            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
-          </linearGradient>
-          <linearGradient id="glassTopSheen_${uid}" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.78"/>
-            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.22"/>
-          </linearGradient>
-          <filter id="glassShadow_${uid}" x="-20%" y="-20%" width="150%" height="150%">
-            <feDropShadow dx="4" dy="8" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.14"/>
+
+          <filter id="cylShadow_${uid}" x="-20%" y="-20%" width="150%" height="150%">
+            <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.15"/>
           </filter>
       `;
 
       items.forEach((item, idx) => {
         const pal = item.color
-          ? { c1: item.topColor || item.color, c2: item.sideColor || item.color, edge: '#ffffff' }
+          ? { c1: item.topColor || item.color, c2: item.sideColor || item.color, glow: '#ffffff' }
           : glassPalette[idx % glassPalette.length];
-        // Translucent 3D glass opacity (0.30 - 0.56) so gridlines & back edges show right through the 3D crystal prism
+
+        // Cylindrical horizontal wrap gradient (translucent 0.24 - 0.56 so back gridlines shine right through!)
         defsSvg += `
-          <linearGradient id="barFront_${uid}_${idx}" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="${pal.c1}" stop-opacity="0.42"/>
-            <stop offset="100%" stop-color="${pal.c2}" stop-opacity="0.56"/>
+          <linearGradient id="cylBody_${uid}_${idx}" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="${pal.c2}" stop-opacity="0.54"/>
+            <stop offset="25%" stop-color="${pal.c1}" stop-opacity="0.26"/>
+            <stop offset="55%" stop-color="${pal.c1}" stop-opacity="0.34"/>
+            <stop offset="85%" stop-color="${pal.c2}" stop-opacity="0.52"/>
+            <stop offset="100%" stop-color="${pal.c2}" stop-opacity="0.60"/>
           </linearGradient>
-          <linearGradient id="barSide_${uid}_${idx}" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="${pal.c1}" stop-opacity="0.28"/>
-            <stop offset="100%" stop-color="${pal.c2}" stop-opacity="0.46"/>
-          </linearGradient>
-          <linearGradient id="barBack_${uid}_${idx}" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="${pal.c2}" stop-opacity="0.14"/>
-            <stop offset="100%" stop-color="${pal.c2}" stop-opacity="0.24"/>
+
+          <linearGradient id="cylCap_${uid}_${idx}" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="${pal.c1}" stop-opacity="0.52"/>
+            <stop offset="100%" stop-color="${pal.c2}" stop-opacity="0.34"/>
           </linearGradient>
         `;
       });
       defsSvg += `</defs>`;
 
-      // Transparent Frosted Backdrop Panel
-      const backdropSvg = `
-        <rect x="${padL + depthX}" y="${padT - depthY}" width="${plotW}" height="${plotH}" rx="12"
-          fill="url(#bgGlass_${uid})" stroke="#94a3b8" stroke-opacity="0.45" stroke-width="1"/>
-      `;
-
-      // Gridlines (5 steps) - clearly visible behind the transparent 3D bars
+      // Transparent Gridlines (visible right through the clear glass cylinders)
       let gridSvg = '';
       for (let step = 0; step <= 4; step++) {
         const val = (yMax * step) / 4;
         const y = padT + plotH - (plotH * step) / 4;
         const labelTxt = suffix === '%' ? val.toFixed(0) + '%' : Math.round(val);
         gridSvg += `
-          <line x1="${padL}" y1="${y}" x2="${padL + depthX}" y2="${y - depthY}" stroke="#94a3b8" stroke-opacity="0.55" stroke-width="1"/>
-          <line x1="${padL + depthX}" y1="${y - depthY}" x2="${svgW - padR + depthX}" y2="${y - depthY}" stroke="#94a3b8" stroke-opacity="0.55" stroke-dasharray="4 4" stroke-width="1"/>
-          <text x="${padL - 9}" y="${y + 4}" text-anchor="end" font-size="10.5" font-weight="800" fill="#334155">${labelTxt}</text>
+          <line x1="${padL}" y1="${y}" x2="${svgW - padR}" y2="${y}"
+            stroke="#94a3b8" stroke-opacity="0.48" stroke-dasharray="4 4" stroke-width="1"/>
+          <text x="${padL - 10}" y="${y + 4}" text-anchor="end" font-size="10.5" font-weight="800" fill="#334155">${labelTxt}</text>
         `;
       }
 
-      // Transparent 3D Glass Floor Stage
+      // Transparent Glass Floor Platform
       const floorSvg = `
-        <polygon points="${padL},${padT + plotH} ${padL + depthX},${padT + plotH - depthY} ${svgW - padR + depthX},${padT + plotH - depthY} ${svgW - padR},${padT + plotH}"
-          fill="url(#floorGlass_${uid})" stroke="#94a3b8" stroke-opacity="0.6" stroke-width="1"/>
-        <rect x="${padL}" y="${padT + plotH}" width="${plotW}" height="5" rx="2" fill="#64748b" opacity="0.25"/>
+        <polygon points="${padL + 10},${padT + plotH - 8} ${svgW - padR - 10},${padT + plotH - 8} ${svgW - padR},${padT + plotH + 8} ${padL},${padT + plotH + 8}"
+          fill="url(#stageGlass_${uid})" stroke="#94a3b8" stroke-opacity="0.45" stroke-width="1"/>
       `;
 
       const slotW = plotW / items.length;
-      const barW = Math.min(54, Math.max(28, slotW * 0.50));
+      const cylW = Math.min(56, Math.max(32, slotW * 0.52));
+      const rx = cylW / 2;
+      const ry = Math.max(6, Math.min(10, cylW * 0.19));
 
-      let barsSvg = '';
+      let cylindersSvg = '';
       items.forEach((item, idx) => {
         const val = Number(item.value) || 0;
         const ratio = Math.min(1, Math.max(0, val / yMax));
-        const barH = Math.max(5, ratio * plotH);
+        const cylH = Math.max(8, ratio * plotH);
         const cx = padL + slotW * idx + slotW / 2;
-        const x = cx - barW / 2;
-        const y = padT + plotH - barH;
+        const xLeft = cx - rx;
+        const xRight = cx + rx;
+        const yBottom = padT + plotH;
+        const yTop = yBottom - cylH;
 
         const pal = item.color
-          ? { c1: item.topColor || item.color, c2: item.sideColor || item.color, edge: '#ffffff' }
+          ? { c1: item.topColor || item.color, c2: item.sideColor || item.color, glow: '#ffffff' }
           : glassPalette[idx % glassPalette.length];
 
-        // 1. Internal Back Wall & Base Outline (visible through the transparent glass prism)
-        const backPrism = `
-          <polygon points="${x + depthX},${y - depthY} ${x + barW + depthX},${y - depthY} ${x + barW + depthX},${y + barH - depthY} ${x + depthX},${y + barH - depthY}"
-            fill="url(#barBack_${uid}_${idx})" stroke="${pal.edge}" stroke-opacity="0.65" stroke-width="0.9"/>
-          <line x1="${x}" y1="${y + barH}" x2="${x + depthX}" y2="${y + barH - depthY}" stroke="${pal.edge}" stroke-opacity="0.7" stroke-width="1" stroke-dasharray="2 2"/>
-          <line x1="${x + depthX}" y1="${y - depthY}" x2="${x + depthX}" y2="${y + barH - depthY}" stroke="${pal.edge}" stroke-opacity="0.7" stroke-width="1" stroke-dasharray="2 2"/>
+        // 1. Back rim of the bottom base ellipse (visible through transparent glass cylinder!)
+        const bottomBackRim = `
+          <path d="M ${xLeft} ${yBottom} A ${rx} ${ry} 0 0 1 ${xRight} ${yBottom}"
+            fill="none" stroke="${pal.glow}" stroke-opacity="0.65" stroke-width="1.1" stroke-dasharray="2.5 2"/>
         `;
 
-        // 2. Right Transparent 3D Glass Side Extrusion
-        const sideFace = `
-          <polygon points="${x + barW},${y} ${x + barW + depthX},${y - depthY} ${x + barW + depthX},${y + barH - depthY} ${x + barW},${y + barH}"
-            fill="url(#barSide_${uid}_${idx})" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.1"/>
+        // 2. Bottom base ellipse fill & front rim
+        const bottomBase = `
+          <ellipse cx="${cx}" cy="${yBottom}" rx="${rx}" ry="${ry}"
+            fill="url(#cylCap_${uid}_${idx})" stroke="#ffffff" stroke-opacity="0.88" stroke-width="1.2"/>
         `;
 
-        // 3. Front Transparent Crystal Glass Face + Diagonal Specular Reflection
-        const frontFace = `
-          <rect x="${x}" y="${y}" width="${barW}" height="${barH}" rx="3"
-            fill="url(#barFront_${uid}_${idx})" stroke="#ffffff" stroke-opacity="0.92" stroke-width="1.3"/>
-          <rect x="${x + 1.5}" y="${y + 1.5}" width="${Math.max(5, barW * 0.36)}" height="${Math.max(2, barH - 3)}" rx="2"
-            fill="url(#glassSheen_${uid})"/>
+        // 3. Curved Transparent Cylinder Wall (Path with top & bottom elliptical arcs)
+        const bodyPath = `
+          M ${xLeft} ${yTop}
+          L ${xLeft} ${yBottom}
+          A ${rx} ${ry} 0 0 0 ${xRight} ${yBottom}
+          L ${xRight} ${yTop}
+          A ${rx} ${ry} 0 0 1 ${xLeft} ${yTop}
+          Z
         `;
 
-        // 4. Top 3D Transparent Glass Cap with Crisp Bevel Highlight
-        const topFace = `
-          <polygon points="${x},${y} ${x + depthX},${y - depthY} ${x + barW + depthX},${y - depthY} ${x + barW},${y}"
-            fill="url(#barFront_${uid}_${idx})" stroke="#ffffff" stroke-opacity="0.95" stroke-width="1.3"/>
-          <polygon points="${x},${y} ${x + depthX},${y - depthY} ${x + barW + depthX},${y - depthY} ${x + barW},${y}"
-            fill="url(#glassTopSheen_${uid})"/>
+        const cylinderBody = `
+          <path d="${bodyPath}" fill="url(#cylBody_${uid}_${idx})"/>
+          <path d="${bodyPath}" fill="url(#cylSheen_${uid})"/>
+          <!-- Left & Right glass rim highlights -->
+          <line x1="${xLeft}" y1="${yTop}" x2="${xLeft}" y2="${yBottom}" stroke="#ffffff" stroke-opacity="0.92" stroke-width="1.3"/>
+          <line x1="${xRight}" y1="${yTop}" x2="${xRight}" y2="${yBottom}" stroke="#ffffff" stroke-opacity="0.80" stroke-width="1.1"/>
         `;
 
-        // 5. Specular Corner Glint
-        const glint = `<circle cx="${x + 3.2}" cy="${y + 3.2}" r="2.3" fill="#ffffff" opacity="0.95"/>`;
+        // 4. Top Transparent 3D Elliptical Glass Cap + Specular Glint
+        const topCap = `
+          <ellipse cx="${cx}" cy="${yTop}" rx="${rx}" ry="${ry}"
+            fill="url(#cylCap_${uid}_${idx})" stroke="#ffffff" stroke-opacity="0.95" stroke-width="1.4"/>
+          <ellipse cx="${cx}" cy="${yTop}" rx="${rx - 1}" ry="${ry - 0.8}"
+            fill="url(#cylTopGlass_${uid})"/>
+          <ellipse cx="${cx - rx * 0.36}" cy="${yTop - ry * 0.15}" rx="${rx * 0.24}" ry="${ry * 0.28}"
+            fill="#ffffff" opacity="0.85"/>
+        `;
 
-        // 6. Floating Frosted Data Label Pill
+        // 5. Floating Frosted Data Label Pill above cylinder top
         const displayVal = suffix === '%' ? `${val.toFixed(1)}%` : `${val}${suffix}`;
-        const labelX = x + barW / 2 + depthX / 2;
-        const labelY = y - depthY - 8;
+        const labelY = yTop - ry - 9;
 
         const dataLabel = `
-          <rect x="${labelX - 26}" y="${labelY - 13}" width="52" height="17" rx="8.5"
-            fill="#0f172a" fill-opacity="0.88" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1"/>
-          <text x="${labelX}" y="${labelY - 1}" text-anchor="middle" font-size="10" font-weight="800" fill="#fde047">${displayVal}</text>
+          <rect x="${cx - 26}" y="${labelY - 13}" width="52" height="17" rx="8.5"
+            fill="#0f172a" fill-opacity="0.88" stroke="#ffffff" stroke-opacity="0.9" stroke-width="1"/>
+          <text x="${cx}" y="${labelY - 1}" text-anchor="middle" font-size="10" font-weight="800" fill="#fde047">${displayVal}</text>
         `;
 
-        // 7. X-Axis Label
+        // 6. X-Axis Label
         const words = String(item.label).split(' ');
         let xLabelSvg = '';
         if (words.length > 2 && String(item.label).length > 14) {
@@ -1801,16 +1800,16 @@
           const l1 = words.slice(0, mid).join(' ');
           const l2 = words.slice(mid).join(' ');
           xLabelSvg = `
-            <text x="${cx}" y="${padT + plotH + 20}" text-anchor="middle" font-size="10" font-weight="800" fill="#0f172a">${l1}</text>
-            <text x="${cx}" y="${padT + plotH + 32}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#475569">${l2}</text>
+            <text x="${cx}" y="${padT + plotH + 22}" text-anchor="middle" font-size="10" font-weight="800" fill="#0f172a">${l1}</text>
+            <text x="${cx}" y="${padT + plotH + 34}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#475569">${l2}</text>
           `;
         } else {
           xLabelSvg = `
-            <text x="${cx}" y="${padT + plotH + 21}" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0f172a">${item.label}</text>
+            <text x="${cx}" y="${padT + plotH + 23}" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0f172a">${item.label}</text>
           `;
         }
 
-        barsSvg += `<g filter="url(#glassShadow_${uid})">${backPrism}${sideFace}${frontFace}${topFace}${glint}${dataLabel}</g><g>${xLabelSvg}</g>`;
+        cylindersSvg += `<g filter="url(#cylShadow_${uid})">${bottomBase}${bottomBackRim}${cylinderBody}${topCap}${dataLabel}</g><g>${xLabelSvg}</g>`;
       });
 
       container.innerHTML = `
@@ -1819,15 +1818,14 @@
             <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">📊 ${title}</h4>
             ${subtitle ? `<p class="text-[11px] text-slate-500">${subtitle}</p>` : ''}
           </div>
-          <span class="bg-emerald-950/90 text-amber-300 border border-emerald-400/50 text-[10px] font-extrabold px-3 py-1 rounded-full shadow-xs">💎 Transparent 3D Glass Graph</span>
+          <span class="bg-emerald-950/90 text-amber-300 border border-emerald-400/50 text-[10px] font-extrabold px-3 py-1 rounded-full shadow-xs">🧪 3D Transparent Cylinder Graph</span>
         </div>
-        <div class="overflow-x-auto rounded-xl bg-transparent border border-slate-300/70 p-2" style="background-image: radial-gradient(rgba(148,163,184,0.18) 1px, transparent 1px); background-size: 14px 14px;">
+        <div class="overflow-x-auto rounded-xl bg-transparent border border-slate-300/60 p-2">
           <svg viewBox="0 0 ${svgW} ${svgH}" class="w-full min-w-[620px] h-auto select-none bg-transparent">
             ${defsSvg}
-            ${backdropSvg}
             ${gridSvg}
             ${floorSvg}
-            ${barsSvg}
+            ${cylindersSvg}
           </svg>
         </div>
       `;
@@ -2158,7 +2156,6 @@
         sel.value = cur;
       });
 
-      // Sync 3-SY selectors for CRLA, RMA, and Reading Assessment
       const triMap = [
         { key: 'crla', selId: 'crlaSySel', inpPref: 'crlaSyInp_' },
         { key: 'rma', selId: 'rmaSySel', inpPref: 'rmaSyInp_' },
@@ -2292,7 +2289,7 @@
       }).join('')}</tr>`;
 
       render3DBarChart('inlineGraph_mps', {
-        title: `3D Bar Graph: ${MPS_SUBJECT_LABELS[subj]} (${db.syLabels[sy]})`,
+        title: `3D Transparent Cylinder Graph: ${MPS_SUBJECT_LABELS[subj]} (${db.syLabels[sy]})`,
         subtitle: 'Average MPS (%) bawat baitang — awtomatikong nagbabago kapag may binagong datos.',
         items: getMPSGraphItems(sy, subj, lvlFilter),
         suffix: '%',
@@ -2366,12 +2363,11 @@
       `;
 
       render3DBarChart('inlineGraph_shs_strands', {
-        title: `Transparent 3D Glass Graph: SHS Enrollment per Strand (${db.syLabels[sy]})`,
+        title: `3D Transparent Cylinder Graph: SHS Enrollment per Strand (${db.syLabels[sy]})`,
         subtitle: 'Bilang ng mag-aaral na nag-enroll sa bawat SHS Track/Strand.',
         items: chartStrandItems
       });
 
-      // PART B: SHS CORE SUBJECTS
       const allSubjs = db.shsCoreSubjects[sy] || [];
       let s1mSum = 0, s1fSum = 0, s2mSum = 0, s2fSum = 0, countSubj = 0;
       const chartSubjItems = [];
@@ -2454,7 +2450,7 @@
       `;
 
       render3DBarChart('inlineGraph_shs_subjects', {
-        title: `Transparent 3D Glass Graph: SHS Core Subjects Final MPS % (${db.syLabels[sy]})`,
+        title: `3D Transparent Cylinder Graph: SHS Core Subjects Final MPS % (${db.syLabels[sy]})`,
         subtitle: 'Mean Percentage Score (%) ng bawat Senior High School Core/Strand Subject.',
         items: chartSubjItems,
         suffix: '%',
@@ -2606,7 +2602,7 @@
       `).join('')}</tr>`;
 
       render3DBarChart('inlineGraph_enr', {
-        title: `3D Bar Graph: ${catTitles[cat]} — ${db.syLabels[sy]}`,
+        title: `3D Transparent Cylinder Graph: ${catTitles[cat]} — ${db.syLabels[sy]}`,
         subtitle: cat === 'enrollment' ? 'Kasalukuyang bilang ng mag-aaral bawat baitang.' : 'Kabuuang bilang ng mag-aaral sa buong taon bawat baitang.',
         items: getEnrollmentGraphItems(sy, cat, lvlFilter)
       });
@@ -2635,7 +2631,6 @@
       document.getElementById('box_rma').classList.toggle('hidden', f !== 'ALL' && f !== 'rma');
       document.getElementById('box_reading').classList.toggle('hidden', f !== 'ALL' && f !== 'reading');
 
-      // 1. CRLA (Grade 1: Tagalog • Grade 2: Tagalog & Filipino • Grade 3: Tagalog, Filipino & English)
       const crlaSy = document.getElementById('crlaSySel').value || 'y3';
       const crlaLangF = document.getElementById('crlaLangFilter')?.value || 'ALL';
       const visibleCrlaRows = CRLA_LANG_ROWS.filter(r => crlaLangF === 'ALL' || r.lang === crlaLangF);
@@ -2667,7 +2662,7 @@
       `).join('')}<td class="p-2.5 text-center text-amber-300 border-l border-slate-700">${cTot.reduce((a,b)=>a+b,0)}</td></tr>`;
 
       render3DBarChart('inlineGraph_crla', {
-        title: `3D Glass Bar Graph: CRLA Results (${db.triSyLabels.crla[crlaSy]} • ${crlaLangF === 'ALL' ? 'All Languages' : crlaLangF})`,
+        title: `3D Transparent Cylinder Graph: CRLA Results (${db.triSyLabels.crla[crlaSy]} • ${crlaLangF === 'ALL' ? 'All Languages' : crlaLangF})`,
         subtitle: 'Kabuuang bilang ng mag-aaral sa bawat antas ng CRLA.',
         items: [
           { label: 'Low Emerging', value: cTot[0] + cTot[1], color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
@@ -2678,7 +2673,6 @@
         ]
       });
 
-      // 2. Phil-IRI (Grade 4 to Grade 6 ONLY • Filipino & English)
       const philLangF = document.getElementById('philiriLangFilter')?.value || 'ALL';
       const visiblePhilRows = PHILIRI_LANG_ROWS.filter(r => philLangF === 'ALL' || r.lang === philLangF);
       const pTot = Array(8).fill(0);
@@ -2709,7 +2703,7 @@
       `).join('')}<td class="p-2.5 text-center text-amber-300 border-l border-slate-700">${pTot.reduce((a,b)=>a+b,0)}</td></tr>`;
 
       render3DBarChart('inlineGraph_philiri', {
-        title: `3D Glass Bar Graph: Phil-IRI Reading Profile (Grade 4–6 • ${philLangF === 'ALL' ? 'Filipino & English' : philLangF})`,
+        title: `3D Transparent Cylinder Graph: Phil-IRI Reading Profile (Grade 4–6 • ${philLangF === 'ALL' ? 'Filipino & English' : philLangF})`,
         subtitle: 'Kabuuang bilang ng mag-aaral bawat Phil-IRI reading level.',
         items: [
           { label: 'Independent', value: pTot[0] + pTot[1], color: '#059669', topColor: '#34d399', sideColor: '#047857' },
@@ -2719,7 +2713,6 @@
         ]
       });
 
-      // 3. RMA (Grade 1 - Grade 6, 3 Editable SY, 5 Updated Categories)
       const rmaSy = document.getElementById('rmaSySel').value || 'y3';
       const rTot = Array(10).fill(0);
       document.getElementById('tbodyRMA').innerHTML = G1_TO_G6.map(g => {
@@ -2742,7 +2735,7 @@
       `).join('')}<td class="p-2.5 text-center text-amber-300 border-l border-slate-700">${rTot.reduce((a,b)=>a+b,0)}</td></tr>`;
 
       render3DBarChart('inlineGraph_rma', {
-        title: `3D Glass Bar Graph: RMA Numeracy Results (${db.triSyLabels.rma[rmaSy]})`,
+        title: `3D Transparent Cylinder Graph: RMA Numeracy Results (${db.triSyLabels.rma[rmaSy]})`,
         subtitle: 'Kabuuang bilang ng mag-aaral (Grade 1–6) sa bawat proficiency level ng RMA.',
         items: [
           { label: 'Emerging (Not Prof.)', value: rTot[0] + rTot[1], color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
@@ -2753,7 +2746,6 @@
         ]
       });
 
-      // 4. READING ASSESSMENT RESULTS (Filipino & English • Grade 1–6 • Editable Rows & 3 Editable SY)
       document.getElementById('formAddReadGrade').classList.toggle('hidden', !isEditMode);
       document.getElementById('thDelReadGrade').classList.toggle('hidden', !isEditMode);
 
@@ -2800,7 +2792,7 @@
       `).join('')}<td class="p-2.5 text-center text-amber-300 border-l border-slate-700">${rdTot.reduce((a,b)=>a+b,0)}</td>${isEditMode ? '<td></td>' : ''}</tr>`;
 
       render3DBarChart('inlineGraph_reading', {
-        title: `3D Glass Bar Graph: School Reading Assessment (${db.triSyLabels.reading[readSy]} • ${readLangF === 'ALL' ? 'Filipino & English' : readLangF})`,
+        title: `3D Transparent Cylinder Graph: School Reading Assessment (${db.triSyLabels.reading[readSy]} • ${readLangF === 'ALL' ? 'Filipino & English' : readLangF})`,
         subtitle: 'Kabuuang bilang ng mag-aaral bawat kategorya ng pagbasa.',
         items: [
           { label: 'Non-Reader', value: rdTot[0] + rdTot[1], color: '#be123c', topColor: '#fb7185', sideColor: '#9f1239' },
@@ -2915,7 +2907,7 @@
       }).join('');
 
       render3DBarChart('inlineGraph_nat', {
-        title: '3D Glass Bar Graph: ELLNA (Grade 3) & NAT (Grade 6) 3-Year Average MPS (%)',
+        title: '3D Transparent Cylinder Graph: ELLNA (Grade 3) & NAT (Grade 6) 3-Year Average MPS (%)',
         subtitle: '3-Year Average MPS (%) bawat learning area — may data labels.',
         items: getNATGraphItems(),
         suffix: '%',
@@ -3103,418 +3095,3 @@
         name: document.getElementById('nsbiName').value.trim(),
         type: document.getElementById('nsbiType').value,
         condition: document.getElementById('nsbiCond').value,
-        rooms: Number(document.getElementById('nsbiRooms').value) || 0,
-        gripo: Number(document.getElementById('nsbiGripo').value) || 0,
-        cr: Number(document.getElementById('nsbiCR').value) || 0,
-        silya: Number(document.getElementById('nsbiSilya').value) || 0,
-        lamesa: Number(document.getElementById('nsbiLamesa').value) || 0,
-        board: Number(document.getElementById('nsbiBoard').value) || 0,
-        fans: Number(document.getElementById('nsbiFans').value) || 0,
-        remarks: document.getElementById('nsbiRemarks').value.trim()
-      });
-      saveDB();
-      renderNSBITab();
-      e.target.reset();
-    }
-
-    function delNSBI(idx) {
-      db.nsbi.splice(idx, 1);
-      saveDB();
-      renderNSBITab();
-    }
-
-    // ==================== TAB 9: 3D GRAPHICAL ANALYTICS DASHBOARD ====================
-    function selectAnalyticsCat(cat) {
-      activeAnalyticsCat = cat;
-      renderAnalyticsTab();
-    }
-
-    function renderAnalyticsTab() {
-      const cats = ['mps', 'shs', 'enr', 'crla', 'philiri', 'rma', 'reading', 'nat', 'nutrition', 'sbm'];
-      cats.forEach(c => {
-        const btn = document.getElementById('gCatBtn_' + c);
-        if (!btn) return;
-        btn.className = c === activeAnalyticsCat
-          ? 'px-3.5 py-2 rounded-xl text-xs font-extrabold bg-[#094635] text-amber-300 shadow transition'
-          : 'px-3.5 py-2 rounded-xl text-xs font-extrabold bg-white border border-slate-300 text-slate-800 hover:bg-emerald-50 transition';
-      });
-
-      const ctrl = document.getElementById('analyticsControlsBar');
-      const subBox = document.getElementById('analyticsSubChartBox');
-      subBox.classList.remove('hidden');
-
-      if (activeAnalyticsCat === 'mps') {
-        const curSubj = document.getElementById('anaMpsSubj')?.value || 'all_avg';
-        const curSy = document.getElementById('anaMpsSy')?.value || 'y4';
-        ctrl.innerHTML = `
-          <span class="text-xs font-extrabold text-emerald-950">Pumili ng Subject at School Year:</span>
-          <select id="anaMpsSubj" onchange="renderAnalyticsTab()" class="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold">
-            ${ALL_MPS_SUBJECTS.map(s => `<option value="${s}" ${s === curSubj ? 'selected' : ''}>${MPS_SUBJECT_LABELS[s]}</option>`).join('')}
-          </select>
-          <select id="anaMpsSy" onchange="renderAnalyticsTab()" class="bg-[#094635] text-white rounded-xl px-3 py-1.5 text-xs font-bold">
-            <option value="y4" ${curSy === 'y4' ? 'selected' : ''}>${db.syLabels.y4} (Present)</option>
-            <option value="y3" ${curSy === 'y3' ? 'selected' : ''}>${db.syLabels.y3}</option>
-            <option value="y2" ${curSy === 'y2' ? 'selected' : ''}>${db.syLabels.y2}</option>
-            <option value="y1" ${curSy === 'y1' ? 'selected' : ''}>${db.syLabels.y1}</option>
-          </select>
-        `;
-        render3DBarChart('analyticsMainChartBox', {
-          title: `MPS 3D Glass Bar Graph — ${MPS_SUBJECT_LABELS[curSubj]} (${db.syLabels[curSy]})`,
-          subtitle: 'Mean Percentage Score (%) bawat baitang na may data labels.',
-          items: getMPSGraphItems(curSy, curSubj),
-          suffix: '%',
-          maxVal: 100
-        });
-
-        const syCompare = ['y1', 'y2', 'y3', 'y4'].map(yk => {
-          const gItems = getMPSGraphItems(yk, curSubj);
-          const avg = gItems.reduce((a, b) => a + b.value, 0) / gItems.length;
-          return { label: db.syLabels[yk], value: Number(avg.toFixed(2)) };
-        });
-        render3DBarChart('analyticsSubChartBox', {
-          title: `Multi-Year MPS Comparison — ${MPS_SUBJECT_LABELS[curSubj]}`,
-          subtitle: 'Paghahambing ng Overall School MPS sa bawat School Year.',
-          items: syCompare,
-          suffix: '%',
-          maxVal: 100
-        });
-      }
-
-      else if (activeAnalyticsCat === 'shs') {
-        const curSy = document.getElementById('anaShsSy')?.value || 'y4';
-        const curGr = document.getElementById('anaShsGr')?.value || 'ALL';
-        ctrl.innerHTML = `
-          <span class="text-xs font-extrabold text-emerald-950">Senior High School Filter:</span>
-          <select id="anaShsGr" onchange="renderAnalyticsTab()" class="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold">
-            <option value="ALL" ${curGr === 'ALL' ? 'selected' : ''}>All SHS (Grade 11 & 12)</option>
-            <option value="Grade 11" ${curGr === 'Grade 11' ? 'selected' : ''}>Grade 11 Only</option>
-            <option value="Grade 12" ${curGr === 'Grade 12' ? 'selected' : ''}>Grade 12 Only</option>
-          </select>
-          <select id="anaShsSy" onchange="renderAnalyticsTab()" class="bg-[#094635] text-white rounded-xl px-3 py-1.5 text-xs font-bold">
-            <option value="y4" ${curSy === 'y4' ? 'selected' : ''}>${db.syLabels.y4}</option>
-            <option value="y3" ${curSy === 'y3' ? 'selected' : ''}>${db.syLabels.y3}</option>
-            <option value="y2" ${curSy === 'y2' ? 'selected' : ''}>${db.syLabels.y2}</option>
-            <option value="y1" ${curSy === 'y1' ? 'selected' : ''}>${db.syLabels.y1}</option>
-          </select>
-        `;
-        const strands = (db.shsStrands[curSy] || []).filter(s => curGr === 'ALL' || s.grade === curGr);
-        render3DBarChart('analyticsMainChartBox', {
-          title: `Transparent 3D Glass Graph: SHS Enrollment per Strand (${db.syLabels[curSy]})`,
-          subtitle: 'Bilang ng nag-enroll sa bawat Senior High School Strand/Track.',
-          items: strands.map(s => ({
-            label: `${s.grade.replace('Grade ', 'G')} ${s.strand.split('(')[0].trim()}`,
-            value: (Number(s.m) || 0) + (Number(s.f) || 0)
-          }))
-        });
-
-        const subjs = (db.shsCoreSubjects[curSy] || []).filter(sb => curGr === 'ALL' || sb.grade === curGr);
-        render3DBarChart('analyticsSubChartBox', {
-          title: `Transparent 3D Glass Graph: SHS Core & Strand Subjects Final MPS % (${db.syLabels[curSy]})`,
-          subtitle: 'Mean Percentage Score (%) bawat Senior High School Subject.',
-          items: subjs.map(sb => {
-            const ave = (((Number(sb.s1m) || 0) + (Number(sb.s1f) || 0)) / 2 + ((Number(sb.s2m) || 0) + (Number(sb.s2f) || 0)) / 2) / 2;
-            return {
-              label: `${sb.grade.replace('Grade ', 'G')}: ${sb.name.length > 20 ? sb.name.slice(0, 18) + '…' : sb.name}`,
-              value: Number(ave.toFixed(2))
-            };
-          }),
-          suffix: '%',
-          maxVal: 100
-        });
-      }
-
-      else if (activeAnalyticsCat === 'enr') {
-        const curCat = document.getElementById('anaEnrCat')?.value || 'enrollment';
-        const curSy = document.getElementById('anaEnrSy')?.value || 'y4';
-        const catNames = {
-          enrollment: 'Enrollment (Nagpatala)',
-          dropout: 'Drop-out (Huminto sa Pag-aaral)',
-          trans_in: 'Transferred In (Lumipat Papasok)',
-          trans_out: 'Transferred Out (Lumipat Palabas)'
-        };
-        ctrl.innerHTML = `
-          <span class="text-xs font-extrabold text-emerald-950">Kategorya:</span>
-          <div class="flex flex-wrap gap-1.5">
-            ${Object.keys(catNames).map(k => `
-              <button type="button" onclick="document.getElementById('anaEnrCat').value='${k}'; renderAnalyticsTab();"
-                class="px-3 py-1.5 rounded-lg text-xs font-extrabold ${k === curCat ? 'bg-amber-400 text-slate-950 shadow' : 'bg-white border text-slate-700'}">
-                ${catNames[k]}
-              </button>
-            `).join('')}
-          </div>
-          <input type="hidden" id="anaEnrCat" value="${curCat}">
-          <select id="anaEnrSy" onchange="renderAnalyticsTab()" class="bg-[#094635] text-white rounded-xl px-3 py-1.5 text-xs font-bold">
-            <option value="y4" ${curSy === 'y4' ? 'selected' : ''}>${db.syLabels.y4}</option>
-            <option value="y3" ${curSy === 'y3' ? 'selected' : ''}>${db.syLabels.y3}</option>
-            <option value="y2" ${curSy === 'y2' ? 'selected' : ''}>${db.syLabels.y2}</option>
-            <option value="y1" ${curSy === 'y1' ? 'selected' : ''}>${db.syLabels.y1}</option>
-          </select>
-        `;
-        render3DBarChart('analyticsMainChartBox', {
-          title: `3D Glass Bar Graph: ${catNames[curCat]} — ${db.syLabels[curSy]}`,
-          subtitle: 'Bilang ng mag-aaral mula Kinder hanggang Grade 6.',
-          items: getEnrollmentGraphItems(curSy, curCat)
-        });
-
-        const syItems = ['y1', 'y2', 'y3', 'y4'].map(yk => {
-          const total = getEnrollmentGraphItems(yk, curCat).reduce((a, b) => a + b.value, 0);
-          return { label: db.syLabels[yk], value: total };
-        });
-        render3DBarChart('analyticsSubChartBox', {
-          title: `4-Year Trend: Kabuuang ${catNames[curCat]}`,
-          subtitle: 'Kabuuang bilang sa buong paaralan bawat School Year.',
-          items: syItems
-        });
-      }
-
-      else if (activeAnalyticsCat === 'crla') {
-        const curSy = document.getElementById('anaCrlaSy')?.value || 'y3';
-        const curLang = document.getElementById('anaCrlaLang')?.value || 'ALL';
-        ctrl.innerHTML = `
-          <span class="text-xs font-extrabold text-emerald-950">CRLA Filter:</span>
-          <select id="anaCrlaLang" onchange="renderAnalyticsTab()" class="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold">
-            <option value="ALL" ${curLang === 'ALL' ? 'selected' : ''}>All Languages</option>
-            <option value="Tagalog" ${curLang === 'Tagalog' ? 'selected' : ''}>Tagalog (G1–G3)</option>
-            <option value="Filipino" ${curLang === 'Filipino' ? 'selected' : ''}>Filipino (G2–G3)</option>
-            <option value="English" ${curLang === 'English' ? 'selected' : ''}>English (G3)</option>
-          </select>
-          <select id="anaCrlaSy" onchange="renderAnalyticsTab()" class="bg-[#094635] text-white rounded-xl px-3 py-1.5 text-xs font-bold">
-            <option value="y1" ${curSy === 'y1' ? 'selected' : ''}>${db.triSyLabels.crla.y1}</option>
-            <option value="y2" ${curSy === 'y2' ? 'selected' : ''}>${db.triSyLabels.crla.y2}</option>
-            <option value="y3" ${curSy === 'y3' ? 'selected' : ''}>${db.triSyLabels.crla.y3}</option>
-          </select>
-        `;
-        const rows = CRLA_LANG_ROWS.filter(r => curLang === 'ALL' || r.lang === curLang);
-        const cTot = Array(10).fill(0);
-        rows.forEach(r => db.crlaV3[curSy][r.key].forEach((v, i) => cTot[i] += Number(v)));
-
-        render3DBarChart('analyticsMainChartBox', {
-          title: `3D Glass Bar Graph: CRLA Profile (${db.triSyLabels.crla[curSy]} • ${curLang === 'ALL' ? 'All Languages' : curLang})`,
-          subtitle: 'Kabuuang bilang ng mag-aaral sa 5 kategorya ng CRLA.',
-          items: [
-            { label: 'Low Emerging', value: cTot[0] + cTot[1], color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
-            { label: 'High Emerging', value: cTot[2] + cTot[3], color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
-            { label: 'Developing Reader', value: cTot[4] + cTot[5], color: '#0284c7', topColor: '#38bdf8', sideColor: '#0369a1' },
-            { label: 'Transitioning Reader', value: cTot[6] + cTot[7], color: '#4f46e5', topColor: '#818cf8', sideColor: '#3730a3' },
-            { label: 'Reading at Grade Level', value: cTot[8] + cTot[9], color: '#059669', topColor: '#34d399', sideColor: '#047857' }
-          ]
-        });
-
-        render3DBarChart('analyticsSubChartBox', {
-          title: `Reading at Grade Level per Grade & Language (${db.triSyLabels.crla[curSy]})`,
-          subtitle: 'Bilang ng mga batang nasa "Reading at Grade Level" bawat baitang at wika.',
-          items: rows.map(r => ({
-            label: `${r.grade} (${r.lang})`,
-            value: Number(db.crlaV3[curSy][r.key][8]) + Number(db.crlaV3[curSy][r.key][9])
-          }))
-        });
-      }
-
-      else if (activeAnalyticsCat === 'philiri') {
-        const curLang = document.getElementById('anaPhilLang')?.value || 'ALL';
-        ctrl.innerHTML = `
-          <span class="text-xs font-extrabold text-emerald-950">Phil-IRI Assessment (Grade 4 – Grade 6):</span>
-          <select id="anaPhilLang" onchange="renderAnalyticsTab()" class="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold">
-            <option value="ALL" ${curLang === 'ALL' ? 'selected' : ''}>All Languages (Filipino & English)</option>
-            <option value="Filipino" ${curLang === 'Filipino' ? 'selected' : ''}>Filipino Only</option>
-            <option value="English" ${curLang === 'English' ? 'selected' : ''}>English Only</option>
-          </select>
-        `;
-        const rows = PHILIRI_LANG_ROWS.filter(r => curLang === 'ALL' || r.lang === curLang);
-        const pTot = Array(8).fill(0);
-        rows.forEach(r => db.philiriV2[r.key].forEach((v, i) => pTot[i] += Number(v)));
-
-        render3DBarChart('analyticsMainChartBox', {
-          title: `3D Glass Bar Graph: Phil-IRI Reading Profile (Grade 4–6 • ${curLang === 'ALL' ? 'Filipino & English' : curLang})`,
-          subtitle: 'Kabuuang bilang sa Independent, Instructional, Frustration at Non-Reader.',
-          items: [
-            { label: 'Independent', value: pTot[0] + pTot[1], color: '#059669', topColor: '#34d399', sideColor: '#047857' },
-            { label: 'Instructional', value: pTot[2] + pTot[3], color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
-            { label: 'Frustration', value: pTot[4] + pTot[5], color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
-            { label: 'Non-Reader', value: pTot[6] + pTot[7], color: '#475569', topColor: '#94a3b8', sideColor: '#334155' }
-          ]
-        });
-
-        render3DBarChart('analyticsSubChartBox', {
-          title: `Phil-IRI Independent Readers per Grade & Language (Grade 4–6)`,
-          subtitle: 'Bilang ng Independent Readers mula Grade 4 hanggang Grade 6.',
-          items: rows.map(r => ({
-            label: `${r.grade} (${r.lang})`,
-            value: Number(db.philiriV2[r.key][0]) + Number(db.philiriV2[r.key][1])
-          }))
-        });
-      }
-
-      else if (activeAnalyticsCat === 'rma') {
-        const curSy = document.getElementById('anaRmaSy')?.value || 'y3';
-        ctrl.innerHTML = `
-          <span class="text-xs font-extrabold text-emerald-950">RMA Numeracy School Year (Grade 1–6):</span>
-          <select id="anaRmaSy" onchange="renderAnalyticsTab()" class="bg-[#094635] text-white rounded-xl px-3 py-1.5 text-xs font-bold">
-            <option value="y1" ${curSy === 'y1' ? 'selected' : ''}>${db.triSyLabels.rma.y1}</option>
-            <option value="y2" ${curSy === 'y2' ? 'selected' : ''}>${db.triSyLabels.rma.y2}</option>
-            <option value="y3" ${curSy === 'y3' ? 'selected' : ''}>${db.triSyLabels.rma.y3}</option>
-          </select>
-        `;
-        const rTot = Array(10).fill(0);
-        G1_TO_G6.forEach(g => db.rmaV2[curSy][g].forEach((v, i) => rTot[i] += Number(v)));
-
-        render3DBarChart('analyticsMainChartBox', {
-          title: `3D Glass Bar Graph: RMA Numeracy Profile (${db.triSyLabels.rma[curSy]})`,
-          subtitle: 'Kabuuang bilang ng mag-aaral (Grade 1–6) sa 5 antas ng RMA.',
-          items: [
-            { label: 'Emerging (Not Prof.)', value: rTot[0] + rTot[1], color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
-            { label: 'Emerging (Low Prof.)', value: rTot[2] + rTot[3], color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
-            { label: 'Developing (Nearly)', value: rTot[4] + rTot[5], color: '#0284c7', topColor: '#38bdf8', sideColor: '#0369a1' },
-            { label: 'Transitioning (Prof.)', value: rTot[6] + rTot[7], color: '#4f46e5', topColor: '#818cf8', sideColor: '#3730a3' },
-            { label: 'At Grade Level (High)', value: rTot[8] + rTot[9], color: '#059669', topColor: '#34d399', sideColor: '#047857' }
-          ]
-        });
-
-        render3DBarChart('analyticsSubChartBox', {
-          title: `At Grade Level (Highly Proficient) per Baitang — RMA (${db.triSyLabels.rma[curSy]})`,
-          subtitle: 'Bilang ng Highly Proficient learners bawat baitang.',
-          items: G1_TO_G6.map(g => ({
-            label: g,
-            value: Number(db.rmaV2[curSy][g][8]) + Number(db.rmaV2[curSy][g][9])
-          }))
-        });
-      }
-
-      else if (activeAnalyticsCat === 'reading') {
-        const curSy = document.getElementById('anaReadSy')?.value || 'y3';
-        const curLang = document.getElementById('anaReadLang')?.value || 'ALL';
-        ctrl.innerHTML = `
-          <span class="text-xs font-extrabold text-emerald-950">School Reading Assessment Filter:</span>
-          <select id="anaReadLang" onchange="renderAnalyticsTab()" class="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold">
-            <option value="ALL" ${curLang === 'ALL' ? 'selected' : ''}>All Languages (Filipino & English)</option>
-            <option value="Filipino" ${curLang === 'Filipino' ? 'selected' : ''}>Filipino Only</option>
-            <option value="English" ${curLang === 'English' ? 'selected' : ''}>English Only</option>
-          </select>
-          <select id="anaReadSy" onchange="renderAnalyticsTab()" class="bg-[#094635] text-white rounded-xl px-3 py-1.5 text-xs font-bold">
-            <option value="y1" ${curSy === 'y1' ? 'selected' : ''}>${db.triSyLabels.reading.y1}</option>
-            <option value="y2" ${curSy === 'y2' ? 'selected' : ''}>${db.triSyLabels.reading.y2}</option>
-            <option value="y3" ${curSy === 'y3' ? 'selected' : ''}>${db.triSyLabels.reading.y3}</option>
-          </select>
-        `;
-        const rdRows = (db.readingV3[curSy] || []).filter(r => curLang === 'ALL' || (r.lang || 'Filipino') === curLang);
-        const rdTot = Array(10).fill(0);
-        rdRows.forEach(r => r.vals.forEach((v, i) => rdTot[i] += Number(v)));
-
-        render3DBarChart('analyticsMainChartBox', {
-          title: `3D Glass Bar Graph: School Reading Assessment (${db.triSyLabels.reading[curSy]} • ${curLang === 'ALL' ? 'Filipino & English' : curLang})`,
-          subtitle: 'Kabuuang bilang sa Non-Reader, Struggling, Slow, Average at Fast Reader.',
-          items: [
-            { label: 'Non-Reader', value: rdTot[0] + rdTot[1], color: '#be123c', topColor: '#fb7185', sideColor: '#9f1239' },
-            { label: 'Struggling Reader', value: rdTot[2] + rdTot[3], color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
-            { label: 'Slow Reader', value: rdTot[4] + rdTot[5], color: '#ea580c', topColor: '#fb923c', sideColor: '#c2410c' },
-            { label: 'Average Reader', value: rdTot[6] + rdTot[7], color: '#0284c7', topColor: '#38bdf8', sideColor: '#0369a1' },
-            { label: 'Fast Reader', value: rdTot[8] + rdTot[9], color: '#059669', topColor: '#34d399', sideColor: '#047857' }
-          ]
-        });
-
-        render3DBarChart('analyticsSubChartBox', {
-          title: `Average & Fast Readers per Grade & Language (${db.triSyLabels.reading[curSy]})`,
-          subtitle: 'Pinagsamang bilang ng Average at Fast Readers bawat baitang.',
-          items: rdRows.map(r => ({
-            label: `${r.grade} (${r.lang || 'Filipino'})`,
-            value: Number(r.vals[6]) + Number(r.vals[7]) + Number(r.vals[8]) + Number(r.vals[9])
-          }))
-        });
-      }
-
-      else if (activeAnalyticsCat === 'nat') {
-        ctrl.innerHTML = `<span class="text-xs font-extrabold text-emerald-950">ELLNA (Grade 3) & NAT (Grade 6) — 3-Year MPS Comparison</span>`;
-        render3DBarChart('analyticsMainChartBox', {
-          title: '3D Glass Bar Graph: ELLNA & NAT 3-Year Overall Average MPS (%)',
-          subtitle: 'Mean Percentage Score (%) bawat learning area.',
-          items: getNATGraphItems(),
-          suffix: '%',
-          maxVal: 100
-        });
-
-        const syItems = [
-          {
-            label: 'SY 2023–2024',
-            value: Number((db.nat.reduce((s, r) => s + (Number(r.y1m) + Number(r.y1f)) / 2, 0) / db.nat.length).toFixed(2))
-          },
-          {
-            label: 'SY 2024–2025',
-            value: Number((db.nat.reduce((s, r) => s + (Number(r.y2m) + Number(r.y2f)) / 2, 0) / db.nat.length).toFixed(2))
-          },
-          {
-            label: 'SY 2025–2026',
-            value: Number((db.nat.reduce((s, r) => s + (Number(r.y3m) + Number(r.y3f)) / 2, 0) / db.nat.length).toFixed(2))
-          }
-        ];
-        render3DBarChart('analyticsSubChartBox', {
-          title: '3-Year ELLNA & NAT Overall School MPS Trend (%)',
-          subtitle: 'Pangkalahatang MPS trend sa loob ng 3 taon.',
-          items: syItems,
-          suffix: '%',
-          maxVal: 100
-        });
-      }
-
-      else if (activeAnalyticsCat === 'nutrition') {
-        ctrl.innerHTML = `<span class="text-xs font-extrabold text-emerald-950">School Form 8 (SF8) Nutritional Status — Kinder to Grade 6</span>`;
-        let sN = 0, sW = 0, sSW = 0, sO = 0, sOB = 0;
-        GRADES.forEach(g => {
-          const d = db.nutrition[g];
-          sN += Number(d.nm) + Number(d.nf);
-          sW += Number(d.wm) + Number(d.wf);
-          sSW += Number(d.swm) + Number(d.swf);
-          sO += Number(d.om) + Number(d.of);
-          sOB += Number(d.obm) + Number(d.obf);
-        });
-        render3DBarChart('analyticsMainChartBox', {
-          title: '3D Glass Bar Graph: Nutritional Status Summary (SF8)',
-          subtitle: 'Kabuuang bilang ng mag-aaral bawat nutritional status category.',
-          items: [
-            { label: 'Normal', value: sN, color: '#059669', topColor: '#34d399', sideColor: '#047857' },
-            { label: 'Wasted', value: sW, color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
-            { label: 'Severely Wasted', value: sSW, color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
-            { label: 'Overweight', value: sO, color: '#0284c7', topColor: '#38bdf8', sideColor: '#0369a1' },
-            { label: 'Obese', value: sOB, color: '#7c3aed', topColor: '#a78bfa', sideColor: '#5b21b6' }
-          ]
-        });
-        subBox.classList.add('hidden');
-      }
-
-      else if (activeAnalyticsCat === 'sbm') {
-        ctrl.innerHTML = `<span class="text-xs font-extrabold text-emerald-950">SBM Self-Assessment Checklist (42 Indicators Tally)</span>`;
-        let c1 = 0, c2 = 0, c3 = 0, c4 = 0;
-        SBM_DIMENSIONS.forEach(dim => {
-          dim.indicators.forEach(ind => {
-            const lvl = (db.sbm && db.sbm[ind.num]?.level) || '';
-            if (lvl === '1') c1++; else if (lvl === '2') c2++; else if (lvl === '3') c3++; else if (lvl === '4') c4++;
-          });
-        });
-        render3DBarChart('analyticsMainChartBox', {
-          title: '3D Glass Bar Graph: SBM Self-Assessment Tally (42 Indicators)',
-          subtitle: 'Bilang ng indicators sa bawat antas ng pagpapatupad.',
-          items: [
-            { label: 'Not Yet Manifested', value: c1, color: '#e11d48', topColor: '#fb7185', sideColor: '#be123c' },
-            { label: 'Rarely Manifested', value: c2, color: '#d97706', topColor: '#fbbf24', sideColor: '#b45309' },
-            { label: 'Frequently Manifested', value: c3, color: '#0284c7', topColor: '#38bdf8', sideColor: '#0369a1' },
-            { label: 'Always Manifested', value: c4, color: '#059669', topColor: '#34d399', sideColor: '#047857' }
-          ]
-        });
-        subBox.classList.add('hidden');
-      }
-    }
-
-    // ==================== EXPORT EXCEL / CSV ====================
-    function exportCurrentCSV() {
-      let csv = 'Grade Level,Section,Class Adviser,Male,Female,Total\n';
-      db.sectionsList.forEach(s => {
-        csv += `"${s.grade}","${s.section}","${s.adviser}",${s.m},${s.f},${Number(s.m)+Number(s.f)}\n`;
-      });
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `Tubahan_ES_${activeTab}_${new Date().toISOString().slice(0, 10)}.csv`;
-      a.click();
-    }
-  </script>
-</body>
-</html>
