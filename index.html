@@ -45,10 +45,10 @@
           Department of Education • Region IV-A CALABARZON • Division of Batangas
         </span>
         <h1 class="text-xl sm:text-2xl font-extrabold text-slate-950 mt-0.5">ROSARIO WEST SUB-OFFICE</h1>
-        <p class="text-xs font-bold text-orange-600">Rosario, Batangas • District Information, SMEA, Personnel & NSBI Hub</p>
+        <p class="text-xs font-bold text-orange-600">Rosario, Batangas • District Information, SMEA, Financial, SHS & NSBI Hub</p>
       </div>
 
-      <!-- AUTH MODE TABS: LOGIN | REGISTER SCHOOL | FORGOT PASSWORD -->
+      <!-- AUTH MODE TABS -->
       <div class="grid grid-cols-3 gap-1.5 bg-slate-100 p-1.5 rounded-2xl mb-5 text-xs font-extrabold">
         <button type="button" id="authTab_login" onclick="switchAuthTab('login')" class="py-2 rounded-xl bg-slate-950 text-white shadow transition">
           🔐 Mag-Login
@@ -90,7 +90,7 @@
       <!-- 2. SELF-REGISTRATION FORM FOR SCHOOLS -->
       <form id="authBox_register" onsubmit="handleSchoolRegister(event)" class="hidden space-y-3">
         <div class="bg-blue-50 border border-blue-200 p-3 rounded-xl text-[11px] text-blue-950 font-semibold">
-          🏫 Mag-register dito ang bawat paaralan sa <strong>Rosario West Sub-Office</strong>. Tanging ang sariling data lamang ng inyong paaralan ang makikita sa inyong account.
+          🏫 Mag-register dito ang bawat paaralan sa <strong>Rosario West Sub-Office</strong> (Elementary o Senior High School).
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -106,7 +106,7 @@
 
         <div>
           <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Opisyal na Pangalan ng Paaralan *</label>
-          <input type="text" id="regSchoolName" required placeholder="hal. Tubahan Elementary School" class="w-full px-3 py-2 rounded-xl border text-xs font-extrabold">
+          <input type="text" id="regSchoolName" required placeholder="Pangalan ng Paaralan sa Rosario West" class="w-full px-3 py-2 rounded-xl border text-xs font-extrabold">
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -115,7 +115,7 @@
             <input type="password" id="regPass" required minlength="4" placeholder="Min. 4 characters" class="w-full px-3 py-2 rounded-xl border text-xs font-bold">
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-slate-700 mb-0.5">4-Digit Recovery PIN (Kung malimutan) *</label>
+            <label class="block text-[11px] font-bold text-slate-700 mb-0.5">4-Digit Recovery PIN *</label>
             <input type="text" id="regPin" required maxlength="6" placeholder="hal. 1234" class="w-full px-3 py-2 rounded-xl border text-xs font-extrabold text-center">
           </div>
         </div>
@@ -130,26 +130,21 @@
       <!-- 3. FORGOT / RESET PASSWORD FORM -->
       <form id="authBox_reset" onsubmit="handleSelfResetPass(event)" class="hidden space-y-3">
         <div class="bg-orange-50 border border-orange-200 p-3 rounded-xl text-[11px] text-orange-950 font-semibold">
-          🔑 Ilagay ang <strong>DepEd School ID</strong> at ang <strong>Recovery PIN</strong> na itinakda noong nag-register. (Kung pati PIN ay nalimutan, hilingin sa Sub-Office Admin na i-reset).
+          🔑 Ilagay ang <strong>DepEd School ID</strong> at ang <strong>Recovery PIN</strong> na itinakda noong nag-register.
         </div>
-
         <div>
           <label class="block text-[11px] font-bold text-slate-700 mb-0.5">DepEd School ID *</label>
           <input type="text" id="rstSchoolId" required placeholder="hal. 107582" class="w-full px-3 py-2 rounded-xl border text-xs font-extrabold">
         </div>
-
         <div>
           <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Secret Recovery PIN *</label>
           <input type="text" id="rstPin" required placeholder="Ilagay ang Recovery PIN" class="w-full px-3 py-2 rounded-xl border text-xs font-extrabold">
         </div>
-
         <div>
           <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Bagong Password *</label>
           <input type="password" id="rstNewPass" required minlength="4" placeholder="Bagong password" class="w-full px-3 py-2 rounded-xl border text-xs font-bold">
         </div>
-
         <p id="rstStatusMsg" class="hidden text-xs font-bold text-center py-2 px-3 rounded-xl"></p>
-
         <button type="submit" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-extrabold py-3 rounded-2xl text-xs sm:text-sm shadow-md transition">
           🔄 Palitan ang Password
         </button>
@@ -172,7 +167,7 @@
       </div>
     </div>
 
-    <!-- TOP HEADER (BLUE, RED, BLACK & ORANGE THEME) -->
+    <!-- TOP HEADER -->
     <header class="no-print bg-gradient-to-r from-slate-950 via-blue-950 to-red-950 text-white shadow-lg sticky top-0 z-30 border-b-2 border-orange-500">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-3.5">
@@ -194,13 +189,11 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-2">
-          <!-- ADMIN-ONLY LOGO UPLOAD BUTTON -->
           <label id="btnUploadDistrictLogo" class="hidden cursor-pointer bg-orange-600 hover:bg-orange-500 text-white text-xs font-extrabold px-3 py-2 rounded-xl shadow transition">
             🖼️ Palitan Logo
             <input type="file" accept="image/*" onchange="handleDistrictLogoUpload(event)" class="hidden">
           </label>
 
-          <!-- ADMIN SCHOOL FILTER SELECTOR -->
           <div id="adminSchoolScopeBox" class="hidden flex items-center gap-1.5 bg-slate-900 border border-orange-500/60 px-2.5 py-1.5 rounded-xl">
             <span class="text-[10px] font-extrabold text-orange-400 uppercase">Scope:</span>
             <select id="adminSchoolFilter" onchange="onAdminScopeChange()" class="bg-slate-950 text-white text-xs font-extrabold px-2 py-1 rounded-lg border border-slate-700">
@@ -227,31 +220,31 @@
       </div>
     </header>
 
-    <!-- SUBMISSION LOCK NOTICE BANNER FOR SCHOOLS -->
+    <!-- SUBMISSION LOCK NOTICE BANNER -->
     <div id="schoolLockedBanner" class="hidden no-print bg-red-900 text-white text-center py-2 px-4 text-xs font-extrabold border-b border-red-600">
       🔒 PAALALA: Kasalukuyang naka-LOCK ang pag-edit ng datos ng Rosario West Sub-Office Admin para sa District Consolidation.
     </div>
 
-    <!-- NAVIGATION TABS BAR (11 TABS) -->
+    <!-- NAVIGATION TABS BAR (12 TABS INCLUDING FINANCIAL & SHS) -->
     <div class="no-print bg-slate-900 border-b border-slate-800 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-2">
         <button type="button" id="tabBtn_personnel" onclick="switchPortalTab('personnel')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
-          👩‍🏫 1. Personnel (Teaching & Non-Teaching)
+          👩‍🏫 1. Personnel
         </button>
         <button type="button" id="tabBtn_masterlist" onclick="switchPortalTab('masterlist')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
           🧑‍🎓 2. Sections & Masterlist
         </button>
         <button type="button" id="tabBtn_mps" onclick="switchPortalTab('mps')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
-          📈 3. MPS (MATATAG)
+          📈 3. MPS & SHS Core Subjects
         </button>
         <button type="button" id="tabBtn_enrollment" onclick="switchPortalTab('enrollment')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
-          👥 4. Enrollment & Drop-out
+          👥 4. Enrollment & SHS (K–G12)
         </button>
         <button type="button" id="tabBtn_literacy" onclick="switchPortalTab('literacy')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
           📚 5. CRLA, Phil-IRI, RMA & Reading
         </button>
         <button type="button" id="tabBtn_nat" onclick="switchPortalTab('nat')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
-          🏆 6. NAT & ELLNA (3 Yrs)
+          🏆 6. NAT & ELLNA
         </button>
         <button type="button" id="tabBtn_nutrition" onclick="switchPortalTab('nutrition')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
           🥗 7. Nutritional Status (SF8)
@@ -262,11 +255,14 @@
         <button type="button" id="tabBtn_nsbi" onclick="switchPortalTab('nsbi')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
           🏫 9. NSBI Inventory
         </button>
+        <button type="button" id="tabBtn_financial" onclick="switchPortalTab('financial')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
+          💰 10. Financial (MOOE, Canteen, Adopt-a-School, SEF)
+        </button>
         <button type="button" id="tabBtn_analytics" onclick="switchPortalTab('analytics')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
-          📊 10. 3D Graphical Analytics
+          📊 11. 3D Graphical Analytics
         </button>
         <button type="button" id="tabBtn_admin" onclick="switchPortalTab('admin')" class="hidden px-3 py-2 rounded-xl text-xs font-extrabold transition">
-          🛡️ 11. Admin & Submission Tracker
+          🛡️ 12. Admin & Tracker
         </button>
       </div>
     </div>
@@ -274,7 +270,7 @@
     <!-- MAIN CONTENT CONTAINER -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 space-y-6">
 
-      <!-- ==================== TAB 1: TEACHING, SCHOOL HEAD & NON-TEACHING PERSONNEL ==================== -->
+      <!-- ==================== TAB 1: PERSONNEL ==================== -->
       <section id="sec_personnel" class="bg-white rounded-3xl shadow-md border border-slate-200 p-6 space-y-6">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
           <div>
@@ -288,7 +284,6 @@
           </div>
         </div>
 
-        <!-- INDIVIDUALIZED SUMMARY CARDS PER POSITION (T-I..T-VII, MT-I..IV, HT-I..IV, P-I..IV & NON-TEACHING) -->
         <div id="persIndividualSummaryGrid" class="space-y-3"></div>
 
         <div class="overflow-x-auto rounded-2xl border border-slate-300">
@@ -307,16 +302,15 @@
           </table>
         </div>
 
-        <!-- LIVE 3D GRAPH WITH OPACITY FOR PERSONNEL -->
         <div id="inlineGraph_personnel" class="bg-slate-950 rounded-2xl border border-slate-800 p-4 text-white"></div>
       </section>
 
       <!-- ==================== TAB 2: MASTERLIST & ADVISERS ==================== -->
       <section id="sec_masterlist" class="hidden bg-white rounded-3xl shadow-md border border-slate-200 p-6 space-y-6">
         <div>
-          <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">OFFICIAL SCHOOL FORM 1 (SF1) • SECTIONS, ADVISERS & LEARNERS</span>
-          <h2 class="text-xl font-extrabold text-slate-950">🧑‍🎓 Grade Levels, Sections, Class Advisers & Learner Masterlist</h2>
-          <p class="text-xs text-slate-500">Magdagdag ng Grade Level at Section, itakda ang Class Adviser bawat section, at pamahalaan ang opisyal na Masterlist.</p>
+          <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">OFFICIAL SCHOOL FORM 1 (SF1) • SECTIONS, ADVISERS & LEARNERS (KINDER TO GRADE 12)</span>
+          <h2 class="text-xl font-extrabold text-slate-950">🧑‍🎓 Grade Levels, SHS Strands, Sections, Class Advisers & Learner Masterlist</h2>
+          <p class="text-xs text-slate-500">Magdagdag ng Grade Level (Kinder–Grade 12 / SHS Strands) at Section, itakda ang Class Adviser, at pamahalaan ang Masterlist.</p>
         </div>
 
         <div class="bg-slate-50 rounded-2xl p-4 sm:p-5 border border-slate-200 space-y-4">
@@ -327,16 +321,18 @@
 
           <form id="formAddSection" onsubmit="addGradeSection(event)" class="hidden bg-white p-4 rounded-xl border-2 border-blue-600 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2.5">
             <div>
-              <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Grade Level *</label>
-              <input type="text" id="newSecGrade" list="gradeOptionsList" required placeholder="hal. Grade 1" class="w-full px-3 py-2 rounded-lg border text-xs font-bold">
+              <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Grade Level / SHS Strand *</label>
+              <input type="text" id="newSecGrade" list="gradeOptionsList" required placeholder="hal. Grade 11 - STEM" class="w-full px-3 py-2 rounded-lg border text-xs font-bold">
               <datalist id="gradeOptionsList">
                 <option value="Kinder"><option value="Grade 1"><option value="Grade 2"><option value="Grade 3">
                 <option value="Grade 4"><option value="Grade 5"><option value="Grade 6"><option value="SNED">
+                <option value="Grade 11 - STEM"><option value="Grade 11 - ABM"><option value="Grade 11 - HUMSS"><option value="Grade 11 - GAS"><option value="Grade 11 - TVL">
+                <option value="Grade 12 - STEM"><option value="Grade 12 - ABM"><option value="Grade 12 - HUMSS"><option value="Grade 12 - GAS"><option value="Grade 12 - TVL">
               </datalist>
             </div>
             <div>
               <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Section Name *</label>
-              <input type="text" id="newSecName" required placeholder="hal. Sampaguita" class="w-full px-3 py-2 rounded-lg border text-xs font-bold">
+              <input type="text" id="newSecName" required placeholder="hal. Sampaguita / Rizal" class="w-full px-3 py-2 rounded-lg border text-xs font-bold">
             </div>
             <div class="lg:col-span-2">
               <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Class Adviser *</label>
@@ -359,7 +355,7 @@
               <thead>
                 <tr class="bg-slate-950 text-white">
                   <th id="thSecSchoolCol" class="hidden p-2.5 text-left bg-blue-950">School</th>
-                  <th class="p-2.5 text-left w-32">Grade Level</th>
+                  <th class="p-2.5 text-left w-36">Grade Level / Strand</th>
                   <th class="p-2.5 text-left">Section Name</th>
                   <th class="p-2.5 text-left">Class Adviser</th>
                   <th class="p-2.5 text-center w-20">Male</th>
@@ -400,7 +396,7 @@
                   <th id="thMlSchoolCol" class="hidden p-3 bg-blue-950">School</th>
                   <th class="p-3">LRN</th>
                   <th class="p-3">Buong Pangalan</th>
-                  <th class="p-3">Grade Level</th>
+                  <th class="p-3">Grade Level / Strand</th>
                   <th class="p-3">Section</th>
                   <th class="p-3">Class Adviser</th>
                   <th class="p-3">Sex</th>
@@ -413,13 +409,13 @@
         </div>
       </section>
 
-      <!-- ==================== TAB 3: MPS (MATATAG) ==================== -->
+      <!-- ==================== TAB 3: MPS (MATATAG) & SENIOR HIGH SCHOOL CORE SUBJECTS ==================== -->
       <section id="sec_mps" class="hidden bg-white rounded-3xl shadow-md border border-slate-200 p-6 space-y-6">
         <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
           <div class="space-y-1">
-            <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">MATATAG CURRICULUM • MEAN PERCENTAGE SCORE (MPS %)</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">📈 Quarterly & Term MPS Summary (MATATAG Learning Areas)</h2>
-            <p class="text-xs text-slate-500">Kasalukuyang SY: 3 Terms (Term 1–3) | Mga Nagdaang SY: 4 Quarters (Q1–Q4).</p>
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">MATATAG CURRICULUM & SENIOR HIGH SCHOOL CORE SUBJECTS</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">📈 Quarterly/Term MPS & SHS Core Subjects Enrollment Summary</h2>
+            <p class="text-xs text-slate-500">Kasalukuyang SY: 3 Terms (Term 1–3) | Mga Nagdaang SY: 4 Quarters (Q1–Q4) + SHS Core Subjects Enrollment & MPS.</p>
           </div>
 
           <div class="flex flex-col gap-2 min-w-[270px]">
@@ -445,6 +441,7 @@
           </div>
         </div>
 
+        <!-- ELEMENTARY MATATAG MPS TABLE -->
         <div class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-slate-950 text-white px-4 py-3 flex flex-wrap items-center justify-between gap-2">
             <span id="mpsBannerTitle" class="text-xs sm:text-sm font-extrabold">📌 SY 2026–2027 — MATATAG MPS SUMMARY</span>
@@ -460,15 +457,45 @@
         </div>
 
         <div id="inlineGraph_mps" class="bg-slate-950 rounded-2xl border border-slate-800 p-4 text-white"></div>
+
+        <!-- SENIOR HIGH SCHOOL (SHS) CORE SUBJECTS ENROLLMENT & MPS -->
+        <div class="rounded-2xl overflow-hidden border-2 border-blue-900 mt-6">
+          <div class="bg-gradient-to-r from-blue-950 via-slate-900 to-red-950 text-white px-4 py-3 flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="text-xs sm:text-sm font-extrabold block">🎓 SENIOR HIGH SCHOOL (SHS) CORE SUBJECTS — ENROLLED LEARNERS & MPS (%)</span>
+              <span class="text-[11px] text-orange-300">Bilang ng naka-enroll (Male, Female, Total) at Mean Percentage Score (MPS %) sa bawat Core Subject</span>
+            </div>
+            <select id="shsCoreSemSel" onchange="renderSHSCoreSubjectsTable()" class="bg-orange-500 text-slate-950 text-xs font-extrabold px-3 py-1.5 rounded-xl">
+              <option value="sem1">1st Semester (SY 2026–2027)</option>
+              <option value="sem2">2nd Semester (SY 2026–2027)</option>
+            </select>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-950 text-white">
+                  <th class="p-3 text-left">SHS Core Subject</th>
+                  <th class="p-3 text-center w-24">Grade Level</th>
+                  <th class="p-3 text-center w-24 bg-blue-900">Enrolled Male</th>
+                  <th class="p-3 text-center w-24 bg-red-900">Enrolled Female</th>
+                  <th class="p-3 text-center w-24 bg-orange-600">Total Enrolled</th>
+                  <th class="p-3 text-center w-28 bg-emerald-900">Subject MPS (%)</th>
+                </tr>
+              </thead>
+              <tbody id="tbodySHSCoreSubjects" class="divide-y divide-slate-200 bg-white"></tbody>
+              <tfoot id="tfootSHSCoreSubjects" class="bg-slate-950 text-white font-extrabold"></tfoot>
+            </table>
+          </div>
+        </div>
       </section>
 
-      <!-- ==================== TAB 4: ENROLLMENT, DROP-OUT, TRANS IN/OUT ==================== -->
+      <!-- ==================== TAB 4: ENROLLMENT, DROP-OUT, TRANS IN/OUT (KINDER TO SHS GRADE 12) ==================== -->
       <section id="sec_enrollment" class="hidden bg-white rounded-3xl shadow-md border border-slate-200 p-6 space-y-6">
         <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
           <div class="space-y-1">
-            <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">KINDER TO GRADE 6 • MALE, FEMALE & AUTO-COMPUTED TOTAL</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">👥 Enrollment, Drop-out, Transferred In & Transferred Out</h2>
-            <p class="text-xs text-slate-500">Kasalukuyang SY: 3 Terms (Term 1–3) | Mga Nagdaang SY: 4 Quarters (Q1–Q4).</p>
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">KINDER TO GRADE 12 (ELEMENTARY & SENIOR HIGH SCHOOL)</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">👥 Enrollment, Drop-out, Transferred In & Transferred Out (Elem & SHS)</h2>
+            <p class="text-xs text-slate-500">Saklaw ang Kinder–Grade 6 at Senior High School (Grade 11 & Grade 12 Strands). Kasalukuyang SY: 3 Terms | Nagdaang SY: 4 Quarters.</p>
           </div>
 
           <div class="flex flex-col gap-2 min-w-[270px]">
@@ -490,7 +517,7 @@
 
         <div class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-slate-950 text-white px-4 py-3 flex flex-wrap items-center justify-between gap-2">
-            <span id="enrBannerTitle" class="text-xs sm:text-sm font-extrabold">📌 SY 2026–2027 — ENROLLMENT</span>
+            <span id="enrBannerTitle" class="text-xs sm:text-sm font-extrabold">📌 SY 2026–2027 — ENROLLMENT (KINDER TO GRADE 12)</span>
             <span id="enrBannerBadge" class="bg-orange-500 text-slate-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">PRESENT SY: 3 TERMS</span>
           </div>
           <div class="overflow-x-auto">
@@ -511,7 +538,7 @@
           <div>
             <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">COMPREHENSIVE LITERACY, READING & NUMERACY PROFILE</span>
             <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">📚 CRLA, Phil-IRI, RMA & Reading Assessment Results</h2>
-            <p class="text-xs text-slate-500">Hindi kasama ang Kinder sa CRLA (Grade 1–3) at sa Reading Assessment Results (Grade 1–6, puwedeng magdagdag/mag-delete ng row).</p>
+            <p class="text-xs text-slate-500">Hindi kasama ang Kinder sa CRLA (Grade 1–3) at sa Reading Assessment Results (Grade 1–6).</p>
           </div>
           <select id="litToolFilter" onchange="renderLiteracyTab()" class="px-4 py-2.5 rounded-xl bg-slate-950 text-orange-400 text-xs sm:text-sm font-extrabold">
             <option value="ALL">Ipakita Lahat (CRLA, Phil-IRI, RMA & Reading)</option>
@@ -669,7 +696,7 @@
           <div class="bg-orange-700 text-white px-4 py-3 flex flex-wrap justify-between items-center gap-2">
             <div>
               <span class="text-xs sm:text-sm font-extrabold block">📘 4. School Reading Assessment Results (Grade 1–6 • Filipino & English • 3 SY)</span>
-              <span class="text-[10px] text-orange-100">Non-Reader, Struggling Reader, Slow Reader, Average Reader & Fast Reader (Filipino & English Coverage)</span>
+              <span class="text-[10px] text-orange-100">Non-Reader, Struggling Reader, Slow Reader, Average Reader & Fast Reader</span>
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <select id="readLangSel" onchange="renderLiteracyTab()" class="bg-slate-900 text-white border border-orange-300 text-xs font-extrabold px-3 py-1.5 rounded-xl">
@@ -874,22 +901,119 @@
         </div>
       </section>
 
-      <!-- ==================== TAB 10: 3D TRANSLUCENT GRAPHICAL ANALYTICS ==================== -->
+      <!-- ==================== TAB 10: FINANCIAL MANAGEMENT & 3D GLASS PIE CHART ==================== -->
+      <section id="sec_financial" class="hidden bg-white rounded-3xl shadow-md border border-slate-200 p-6 space-y-6">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b pb-4">
+          <div>
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">ROSARIO WEST SUB-OFFICE • FINANCIAL UTILIZATION & EXPENSE TRACKER</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">💰 School Financial Expenses (MOOE, Canteen, Adopt-a-School & SEF)</h2>
+            <p id="finScopeSubtitle" class="text-xs text-slate-500">Ilagay ang halaga / presyo ng bawat kagastusan bawat Fund Source.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3">
+            <select id="finFundSel" onchange="renderFinancialTab()" class="px-4 py-2.5 rounded-xl bg-blue-950 text-white text-xs sm:text-sm font-extrabold border-2 border-orange-500">
+              <option value="ALL">📊 ALL FUNDS SUMMARY (Lahat ng Pondo)</option>
+              <option value="mooe">1. MOOE (Maintenance & Other Operating Expenses)</option>
+              <option value="canteen">2. School Canteen Fund</option>
+              <option value="adopt_local">3. Adopt-a-School (Local Partners)</option>
+              <option value="adopt_intl">4. Adopt-a-School (International Partners)</option>
+              <option value="sef">5. Special Education Fund (SEF / LGU)</option>
+            </select>
+            <div class="bg-slate-950 text-white px-4 py-2 rounded-2xl border-l-4 border-emerald-500 text-right">
+              <span class="text-[10px] font-bold text-emerald-400 uppercase block">Total Expenses</span>
+              <span id="finGrandTotalBadge" class="text-xl font-extrabold text-white">₱0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FUND SUMMARY CARDS -->
+        <div id="finFundCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3"></div>
+
+        <!-- ADD CUSTOM EXPENSE ITEM FORM (WHEN EDITING) -->
+        <form id="formAddCustomExpense" onsubmit="addCustomFinancialItem(event)" class="hidden bg-slate-50 p-4 rounded-2xl border-2 border-blue-600 grid grid-cols-1 sm:grid-cols-4 gap-2.5">
+          <div>
+            <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Fund Source *</label>
+            <select id="newFinFund" class="w-full px-3 py-2 rounded-xl border bg-white text-xs font-extrabold">
+              <option value="mooe">MOOE</option>
+              <option value="canteen">Canteen Fund</option>
+              <option value="adopt_local">Adopt-a-School (Local)</option>
+              <option value="adopt_intl">Adopt-a-School (International)</option>
+              <option value="sef">SEF</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Pangalan ng Kagastusan / Item *</label>
+            <input type="text" id="newFinLabel" required placeholder="hal. Printing / Bond Paper / Paint" class="w-full px-3 py-2 rounded-xl border bg-white text-xs font-bold">
+          </div>
+          <div>
+            <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Halaga / Presyo (₱) *</label>
+            <input type="number" step="0.01" min="0" id="newFinAmount" required placeholder="0.00" class="w-full px-3 py-2 rounded-xl border bg-white text-xs font-extrabold">
+          </div>
+          <div class="flex items-end">
+            <button type="submit" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-extrabold py-2 rounded-xl text-xs">➕ Idagdag Expense Item</button>
+          </div>
+        </form>
+
+        <!-- FINANCIAL EXPENSE BREAKDOWN TABLE -->
+        <div class="overflow-x-auto rounded-2xl border border-slate-300">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="bg-slate-950 text-white">
+                <th class="p-3 text-left">Expense Category / Particulars</th>
+                <th class="p-3 text-right bg-blue-950">MOOE (₱)</th>
+                <th class="p-3 text-right bg-orange-900">Canteen (₱)</th>
+                <th class="p-3 text-right bg-emerald-950">Adopt-a-School Local (₱)</th>
+                <th class="p-3 text-right bg-cyan-950">Adopt-a-School Int'l (₱)</th>
+                <th class="p-3 text-right bg-red-950">SEF (₱)</th>
+                <th class="p-3 text-right bg-orange-600 text-white">Total Expense (₱)</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyFinancial" class="divide-y divide-slate-200 bg-white"></tbody>
+            <tfoot id="tfootFinancial" class="bg-slate-950 text-white font-extrabold"></tfoot>
+          </table>
+        </div>
+
+        <!-- CUSTOM EXPENSE ITEMS LIST (IF ANY) -->
+        <div id="customFinItemsBox" class="hidden space-y-2">
+          <h3 class="text-xs font-extrabold uppercase text-slate-700">📌 Karagdagang Itinalang Kagastusan (Custom Expense Items)</h3>
+          <div class="overflow-x-auto rounded-xl border border-slate-300">
+            <table class="w-full text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-800 text-white">
+                  <th class="p-2.5 text-left">Fund Source</th>
+                  <th class="p-2.5 text-left">Expense Item / Description</th>
+                  <th class="p-2.5 text-right">Amount (₱)</th>
+                  <th id="thDelCustomFin" class="hidden p-2.5 text-center w-20">Action</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyCustomFin" class="divide-y bg-white"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3D GLASS PIE CHART FOR FINANCIAL EXPENSES -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div id="financial3DPieChartBox" class="bg-slate-950 rounded-3xl border-2 border-orange-500/50 p-5 text-white shadow-xl"></div>
+          <div id="financialFund3DPieBox" class="bg-slate-950 rounded-3xl border-2 border-blue-500/50 p-5 text-white shadow-xl"></div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 11: 3D TRANSLUCENT GRAPHICAL ANALYTICS ==================== -->
       <section id="sec_analytics" class="hidden bg-slate-950 text-white rounded-3xl shadow-xl border-2 border-orange-500/60 p-6 space-y-6">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
           <div>
-            <span class="text-[11px] font-extrabold uppercase tracking-wider text-orange-400 block">ROSARIO WEST SUB-OFFICE • TRANSLUCENT 3D GLASS BAR CHARTS</span>
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-orange-400 block">ROSARIO WEST SUB-OFFICE • TRANSLUCENT 3D GLASS CHARTS</span>
             <h2 class="text-xl sm:text-2xl font-extrabold text-white">📊 3D Graphical Presentation & School-by-School Comparison</h2>
-            <p class="text-xs text-slate-400">I-click ang bawat kategorya upang makita ang 3D glass bar graph na may opacity at data labels.</p>
+            <p class="text-xs text-slate-400">I-click ang bawat kategorya upang makita ang 3D glass bar graph at 3D glass pie chart.</p>
           </div>
           <button type="button" onclick="window.print()" class="no-print bg-orange-600 hover:bg-orange-500 text-white text-xs font-extrabold px-4 py-2 rounded-xl">🖨️ Print Graphs</button>
         </div>
 
         <div class="flex flex-wrap gap-2 bg-slate-900 p-3 rounded-2xl border border-slate-800">
           <button type="button" id="gCatBtn_school_compare" onclick="selectAnalyticsCat('school_compare')" class="hidden px-3 py-2 rounded-xl text-xs font-extrabold transition">🏫 School-by-School Comparison (Admin)</button>
+          <button type="button" id="gCatBtn_financial" onclick="selectAnalyticsCat('financial')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">💰 Financial (3D Glass Pie)</button>
           <button type="button" id="gCatBtn_personnel" onclick="selectAnalyticsCat('personnel')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">👩‍🏫 Personnel</button>
-          <button type="button" id="gCatBtn_mps" onclick="selectAnalyticsCat('mps')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">📈 MPS (MATATAG)</button>
-          <button type="button" id="gCatBtn_enr" onclick="selectAnalyticsCat('enr')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">👥 Enrollment</button>
+          <button type="button" id="gCatBtn_mps" onclick="selectAnalyticsCat('mps')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">📈 MPS & SHS Core</button>
+          <button type="button" id="gCatBtn_enr" onclick="selectAnalyticsCat('enr')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">👥 Enrollment (K–G12)</button>
           <button type="button" id="gCatBtn_crla" onclick="selectAnalyticsCat('crla')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">📖 CRLA (3 SY)</button>
           <button type="button" id="gCatBtn_philiri" onclick="selectAnalyticsCat('philiri')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">📚 Phil-IRI</button>
           <button type="button" id="gCatBtn_rma" onclick="selectAnalyticsCat('rma')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">🔢 RMA (3 SY)</button>
@@ -902,30 +1026,27 @@
         <div id="analyticsSubChartBox" class="bg-slate-900/70 rounded-2xl border border-slate-800 p-4 sm:p-6"></div>
       </section>
 
-      <!-- ==================== TAB 11: ADMIN CONTROL PANEL, SUBMISSION TRACKER & SECURITY ==================== -->
+      <!-- ==================== TAB 12: ADMIN CONTROL PANEL, SUBMISSION TRACKER & SECURITY ==================== -->
       <section id="sec_admin" class="hidden bg-white rounded-3xl shadow-md border-2 border-red-600 p-6 space-y-6">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
           <div>
             <span class="text-[11px] font-extrabold uppercase tracking-wider text-red-700 block">SUB-OFFICE ADMIN CONTROL PANEL • MONITORING, SECURITY & BACKUP</span>
             <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">🛡️ Submission Status Tracker, Security & Registered Schools</h2>
-            <p class="text-xs text-slate-500">I-monitor kung aling mga paaralan na ang nakapag-encode ng data, i-lock ang submissions pagkatapos ng deadline, at mag-download ng full backup.</p>
+            <p class="text-xs text-slate-500">I-monitor kung aling mga paaralan na ang nakapag-encode ng data, i-lock ang submissions, at mag-download ng backup.</p>
           </div>
           <span id="adminTotalSchoolsBadge" class="bg-slate-950 text-orange-400 text-xs font-extrabold px-4 py-2 rounded-xl">0 Registered Schools</span>
         </div>
 
-        <!-- SECURITY, SUBMISSION LOCK & BACKUP CARDS -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <!-- 1. CHANGE ADMIN PASSWORD -->
           <div class="bg-slate-50 border border-slate-300 rounded-2xl p-4 space-y-2.5">
             <h3 class="text-xs font-extrabold uppercase text-blue-950">🔐 Change Sub-Office Admin Password</h3>
-            <p class="text-[11px] text-slate-600">Palitan ang default password (<code class="font-bold">rwest2026</code>) para mas secure ang Admin account.</p>
+            <p class="text-[11px] text-slate-600">Palitan ang default password (<code class="font-bold">rwest2026</code>).</p>
             <div class="flex gap-2">
               <input type="password" id="newAdminPassInput" minlength="4" placeholder="Bagong Admin Password" class="flex-1 px-3 py-2 rounded-xl border text-xs font-bold bg-white">
               <button type="button" onclick="changeAdminPassword()" class="bg-blue-900 hover:bg-blue-800 text-white text-xs font-extrabold px-3.5 py-2 rounded-xl">Save</button>
             </div>
           </div>
 
-          <!-- 2. SUBMISSION LOCK / FREEZE TOGGLE -->
           <div class="bg-slate-50 border border-slate-300 rounded-2xl p-4 space-y-2.5">
             <h3 class="text-xs font-extrabold uppercase text-red-900">🔒 District Submission Lock / Freeze</h3>
             <p id="lockStatusDesc" class="text-[11px] text-slate-600">Bukas ang pag-encode at pag-edit ng mga paaralan.</p>
@@ -934,21 +1055,19 @@
             </button>
           </div>
 
-          <!-- 3. ONE-CLICK JSON BACKUP -->
           <div class="bg-slate-50 border border-slate-300 rounded-2xl p-4 space-y-2.5">
             <h3 class="text-xs font-extrabold uppercase text-emerald-900">💾 District Cloud Data Backup</h3>
-            <p class="text-[11px] text-slate-600">Mag-download ng kumpletong offline backup file (<code class="font-bold">.json</code>) ng lahat ng paaralan.</p>
+            <p class="text-[11px] text-slate-600">Mag-download ng kumpletong offline backup file (<code class="font-bold">.json</code>).</p>
             <button type="button" onclick="downloadFullDistrictJSONBackup()" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-extrabold py-2.5 rounded-xl shadow transition">
               📥 Download Full District Backup (.json)
             </button>
           </div>
         </div>
 
-        <!-- SUBMISSION STATUS TRACKER TABLE -->
         <div class="space-y-2">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <h3 class="text-sm font-extrabold text-slate-950">📋 Real-Time Submission Status Tracker & Registered Schools</h3>
-            <span class="text-[11px] font-bold text-slate-500">✅ = May Na-encode na Data | ⏳ = Pending / Wala Pang Entry</span>
+            <span class="text-[11px] font-bold text-slate-500">✅ = May Entry | ⏳ = Pending</span>
           </div>
 
           <div class="overflow-x-auto rounded-2xl border border-slate-300">
@@ -966,6 +1085,7 @@
                   <th class="p-2 text-center bg-blue-950">Nutr.</th>
                   <th class="p-2 text-center bg-blue-950">SBM</th>
                   <th class="p-2 text-center bg-blue-950">NSBI</th>
+                  <th class="p-2 text-center bg-emerald-950">Fin.</th>
                   <th class="p-3 text-center bg-orange-700">Completion</th>
                   <th class="p-3 text-center">Admin Actions</th>
                 </tr>
@@ -989,7 +1109,6 @@
           </div>
         </div>
 
-        <!-- OFFICIAL DEPED LETTERHEAD -->
         <div class="flex items-center justify-center gap-4 border-b-2 border-slate-900 pb-4">
           <img src="district-logo.jpg" alt="Logo" class="district-logo-img w-16 h-16 rounded-full object-cover" onerror="this.onerror=null; this.src=FALLBACK_DISTRICT_SEAL;">
           <div class="text-center">
@@ -1002,7 +1121,6 @@
 
         <div id="execSummaryBody" class="space-y-4 text-xs"></div>
 
-        <!-- SIGNATORY BLOCK -->
         <div class="grid grid-cols-2 gap-8 pt-8 border-t border-slate-300 text-xs">
           <div>
             <p class="text-slate-600 mb-8">Prepared by:</p>
@@ -1033,7 +1151,7 @@
     let currentSession = null;
     let isEditMode = false;
     let activeTab = 'personnel';
-    let activeAnalyticsCat = 'personnel';
+    let activeAnalyticsCat = 'financial';
     let adminViewScope = 'ALL';
     let schoolCompareMetric = 'enrollment';
 
@@ -1081,10 +1199,56 @@
       { key: 'nt_jo', title: 'Job Order / LGU-Paid Personnel', cat: 'Non-Teaching' }
     ];
 
-    const GRADES = ['Kinder', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
+    // KASAMA NA ANG SENIOR HIGH SCHOOL (GRADE 11 & GRADE 12 STRANDS)
+    const GRADES = [
+      'Kinder', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6',
+      'Grade 11 - STEM', 'Grade 11 - ABM', 'Grade 11 - HUMSS', 'Grade 11 - GAS', 'Grade 11 - TVL',
+      'Grade 12 - STEM', 'Grade 12 - ABM', 'Grade 12 - HUMSS', 'Grade 12 - GAS', 'Grade 12 - TVL'
+    ];
     const G1_TO_G6 = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
-    const G1_TO_G3 = ['Grade 1', 'Grade 2', 'Grade 3'];
     const G3_TO_G6 = ['Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
+    const G4_TO_G6 = ['Grade 4', 'Grade 5', 'Grade 6'];
+
+    // SENIOR HIGH SCHOOL CORE SUBJECTS
+    const SHS_CORE_SUBJECTS = [
+      { key: 'shs_oralcomm', title: 'Oral Communication in Context', grade: 'Grade 11' },
+      { key: 'shs_readwrite', title: 'Reading and Writing Skills', grade: 'Grade 11' },
+      { key: 'shs_komunikasyon', title: 'Komunikasyon at Pananaliksik sa Wika at Kulturang Pilipino', grade: 'Grade 11' },
+      { key: 'shs_pagbasa', title: 'Pagbasa at Pagsusuri ng Iba’t Ibang Teksto Tungo sa Pananaliksik', grade: 'Grade 11' },
+      { key: 'shs_21stlit', title: '21st Century Literature from the Philippines and the World', grade: 'Grade 11/12' },
+      { key: 'shs_cpar', title: 'Contemporary Philippine Arts from the Regions', grade: 'Grade 11/12' },
+      { key: 'shs_mil', title: 'Media and Information Literacy', grade: 'Grade 12' },
+      { key: 'shs_genmath', title: 'General Mathematics', grade: 'Grade 11' },
+      { key: 'shs_statprob', title: 'Statistics and Probability', grade: 'Grade 11' },
+      { key: 'shs_earthlife', title: 'Earth and Life Science / Earth Science', grade: 'Grade 11' },
+      { key: 'shs_physci', title: 'Physical Science / DRRR', grade: 'Grade 11/12' },
+      { key: 'shs_perdev', title: 'Personal Development (Pansariling Kaunlaran)', grade: 'Grade 11' },
+      { key: 'shs_ucsp', title: 'Understanding Culture, Society and Politics', grade: 'Grade 11/12' },
+      { key: 'shs_philo', title: 'Introduction to the Philosophy of the Human Person', grade: 'Grade 12' },
+      { key: 'shs_pehealth', title: 'Physical Education and Health (1–4)', grade: 'Grade 11/12' },
+      { key: 'shs_emptech', title: 'Empowerment Technologies (Applied Core)', grade: 'Grade 11/12' },
+      { key: 'shs_pracres', title: 'Practical Research 1 & 2 / Inquiries, Investigation & Immersion', grade: 'Grade 11/12' }
+    ];
+
+    // FINANCIAL FUNDS & EXPENSE CATEGORIES
+    const FINANCIAL_FUNDS = [
+      { key: 'mooe', label: 'MOOE', full: 'Maintenance & Other Operating Expenses (MOOE)', color: '#2563eb', light: '#60a5fa', dark: '#1e3a8a' },
+      { key: 'canteen', label: 'Canteen Fund', full: 'School Canteen Operating Fund', color: '#ea580c', light: '#fb923c', dark: '#9a3412' },
+      { key: 'adopt_local', label: 'Adopt-a-School (Local)', full: 'Adopt-a-School Program (Local Partners)', color: '#059669', light: '#34d399', dark: '#065f46' },
+      { key: 'adopt_intl', label: 'Adopt-a-School (Int\'l)', full: 'Adopt-a-School Program (International Partners)', color: '#0284c7', light: '#38bdf8', dark: '#075985' },
+      { key: 'sef', label: 'SEF (LGU)', full: 'Special Education Fund (SEF)', color: '#dc2626', light: '#f87171', dark: '#991b1b' }
+    ];
+
+    const FINANCIAL_CATEGORIES = [
+      { key: 'supplies', label: 'School & Office Supplies (Bond paper, ink, chalk, instructional materials)', color: '#2563eb', light: '#60a5fa', dark: '#1e3a8a' },
+      { key: 'repair', label: 'Repair & Maintenance (Classrooms, roofs, plumbing, electrical, equipment)', color: '#dc2626', light: '#f87171', dark: '#991b1b' },
+      { key: 'electricity', label: 'Electricity Expense (Meralco / BATELEC Electric Bills)', color: '#f59e0b', light: '#fcd34d', dark: '#92400e' },
+      { key: 'water', label: 'Water Expense (Water District / Water Refilling / Utilities)', color: '#0284c7', light: '#38bdf8', dark: '#075985' },
+      { key: 'services', label: 'Services (Internet/Wi-Fi, Security, Janitorial, ICT & Other Services)', color: '#059669', light: '#34d399', dark: '#065f46' },
+      { key: 'labor', label: 'Labor / Skilled Work (Carpentry, Masonry, Hauling, Groundskeeping)', color: '#7c3aed', light: '#a78bfa', dark: '#4c1d95' },
+      { key: 'other', label: 'Other Expenses (Training/LAC, Feeding, SBFP, Transportation, Miscellaneous)', color: '#ea580c', light: '#fb923c', dark: '#9a3412' }
+    ];
+
     const CRLA_COVERAGE = [
       { key: 'g1_tag', grade: 'Grade 1', lang: 'tagalog', langLabel: 'Tagalog' },
       { key: 'g2_tag', grade: 'Grade 2', lang: 'tagalog', langLabel: 'Tagalog' },
@@ -1101,7 +1265,6 @@
       { key: 'g6_fil', grade: 'Grade 6', lang: 'filipino', langLabel: 'Filipino' },
       { key: 'g6_eng', grade: 'Grade 6', lang: 'english', langLabel: 'English' }
     ];
-    const G4_TO_G6 = ['Grade 4', 'Grade 5', 'Grade 6'];
 
     const ALL_MPS_SUBJECTS = ['all_avg', 'gmrc', 'filipino', 'english', 'math', 'makabansa', 'science', 'epp_tle', 'music_arts', 'pe_health'];
     const MPS_SUBJECT_LABELS = {
@@ -1119,12 +1282,11 @@
 
     const SBM_DIMENSIONS = [
       {
-        id: '1',
-        title: 'Curriculum and Teaching',
-        description: 'School personnel and stakeholders work collaboratively to enhance learning standards to continually build a relevant and inclusive learning community and achieve improved learning outcomes.',
+        id: '1', title: 'Curriculum and Teaching',
+        description: 'School personnel and stakeholders work collaboratively to enhance learning standards.',
         indicators: [
           { num: 1, text: 'Grade 3 learners achieve the proficiency level for each cluster of early language, literacy, and numeracy skills', defaultRemark: '' },
-          { num: 2, text: 'Grade 6, 10, and 12 learners achieve the proficiency level in all 21st century skills and core learning areas in the National Achievement Test (NAT)', defaultRemark: '' },
+          { num: 2, text: 'Grade 6, 10, and 12 learners achieve the proficiency level in all 21st century skills and core learning areas in NAT', defaultRemark: '' },
           { num: 3, text: 'School-based ALS learners attain certification as elementary and junior high school completers', defaultRemark: 'N/A' },
           { num: 4, text: 'Teachers prepare contextualized learning materials responsive to the needs of learners', defaultRemark: '' },
           { num: 5, text: 'Teachers conduct remediation activities to address learning gaps in reading and comprehension, science and technology, and mathematics', defaultRemark: '' },
@@ -1134,9 +1296,8 @@
         ]
       },
       {
-        id: '2',
-        title: 'Learning Environment',
-        description: 'The school and its community work collaboratively to ensure equitable access to a learner-centered, motivating, healthy, safe, secure, inclusive, resilient, and enabling learning environment and to achieve improved learning outcomes.',
+        id: '2', title: 'Learning Environment',
+        description: 'Equitable access to a learner-centered, safe, inclusive, and resilient learning environment.',
         indicators: [
           { num: 9, text: 'The school has zero bullying incidence', defaultRemark: '' },
           { num: 10, text: 'The school has zero child abuse incidence', defaultRemark: '' },
@@ -1151,9 +1312,8 @@
         ]
       },
       {
-        id: '3',
-        title: 'Leadership',
-        description: 'School personnel and stakeholders are empowered and actively engaged in taking on appropriate leadership roles and responsibilities to continuously improve the school for improved learning outcomes.',
+        id: '3', title: 'Leadership',
+        description: 'School personnel and stakeholders are empowered and actively engaged in leadership roles.',
         indicators: [
           { num: 19, text: 'The school develops a strategic plan', defaultRemark: '' },
           { num: 20, text: 'The school has a functional school-community planning team', defaultRemark: '' },
@@ -1162,9 +1322,8 @@
         ]
       },
       {
-        id: '4',
-        title: 'Governance and Accountability',
-        description: 'The school and its community come together to take responsibility for ensuring participation, transparency, and accountability, as well as the implementation of a plan to continuously improve the delivery of basic education services, organizational health, and performance for improved learning outcomes.',
+        id: '4', title: 'Governance and Accountability',
+        description: 'Participation, transparency, and accountability to continuously improve basic education services.',
         indicators: [
           { num: 23, text: "The school's strategic plan is operationalized through an implementation plan", defaultRemark: '' },
           { num: 24, text: 'The school has a functional School Governance Council (SGC)', defaultRemark: '' },
@@ -1175,13 +1334,12 @@
         ]
       },
       {
-        id: '5',
-        title: 'Human Resource and Team Development',
-        description: 'School personnel collaborate to continuously improve individual capabilities and team capacity to create an environment that shall yield high performance for improved learning outcomes.',
+        id: '5', title: 'Human Resource and Team Development',
+        description: 'Collaborate to improve individual capabilities and team capacity.',
         indicators: [
-          { num: 29, text: 'School personnel achieve an average rating of very satisfactory in the individual performance commitment and review', defaultRemark: '' },
-          { num: 30, text: 'The school achieves an average rating of very satisfactory in the office performance commitment and review', defaultRemark: '' },
-          { num: 31, text: 'The school conducts needs-based Learning Action Cells and Learning & Development activities', defaultRemark: '' },
+          { num: 29, text: 'School personnel achieve an average rating of very satisfactory in IPCRF', defaultRemark: '' },
+          { num: 30, text: 'The school achieves an average rating of very satisfactory in OPCRF', defaultRemark: '' },
+          { num: 31, text: 'The school conducts needs-based Learning Action Cells and L&D activities', defaultRemark: '' },
           { num: 32, text: 'The school facilitates the promotion and continuous professional development of its personnel', defaultRemark: '' },
           { num: 33, text: 'The school recognizes and rewards milestone achievements of its personnel', defaultRemark: '' },
           { num: 34, text: 'The school facilitates receipt of correct salaries, allowances, and other additional compensation in a timely manner', defaultRemark: '' },
@@ -1189,16 +1347,15 @@
         ]
       },
       {
-        id: '6',
-        title: 'Finance and Resource Management and Mobilization',
-        description: 'The school judiciously manages and mobilizes resources to support programs, projects, and activities that contribute to the improvement of learning outcomes.',
+        id: '6', title: 'Finance and Resource Management and Mobilization',
+        description: 'Judiciously manages and mobilizes resources to support programs and projects.',
         indicators: [
           { num: 36, text: 'The school inspects its infrastructure and facilities', defaultRemark: '' },
           { num: 37, text: 'The school initiates improvement of its infrastructure and facilities', defaultRemark: '' },
           { num: 38, text: 'The school has a functional library', defaultRemark: '' },
           { num: 39, text: 'The school has functional water, electric, and internet facilities', defaultRemark: '' },
           { num: 40, text: 'The school has a functional computer laboratory/ classroom', defaultRemark: '' },
-          { num: 41, text: 'The school achieves a 75-100% utilization rate of its Maintenance and Other Operating Expenses (MOOE)', defaultRemark: '' },
+          { num: 41, text: 'The school achieves a 75-100% utilization rate of its MOOE', defaultRemark: '' },
           { num: 42, text: 'The school liquidates 100% of its utilized MOOE', defaultRemark: '' }
         ]
       }
@@ -1219,6 +1376,7 @@
         sectionsList: [],
         masterlist: [],
         mpsMatrix: {},
+        shsCoreSubjects: { sem1: {}, sem2: {} },
         enrMatrix: {},
         crlaV2: { y1: {}, y2: {}, y3: {} },
         philiri: {},
@@ -1234,10 +1392,24 @@
         ],
         nutrition: {},
         sbm: {},
-        nsbi: []
+        nsbi: [],
+        financial: {
+          matrix: {},
+          customItems: []
+        }
       };
 
       PERSONNEL_POSITIONS.forEach(p => { rec.personnel[p.key] = { m: 0, f: 0 }; });
+
+      ['sem1', 'sem2'].forEach(sem => {
+        SHS_CORE_SUBJECTS.forEach(sub => {
+          rec.shsCoreSubjects[sem][sub.key] = { m: 0, f: 0, mps: 0 };
+        });
+      });
+
+      FINANCIAL_CATEGORIES.forEach(cat => {
+        rec.financial.matrix[cat.key] = { mooe: 0, canteen: 0, adopt_local: 0, adopt_intl: 0, sef: 0 };
+      });
 
       ['y1', 'y2', 'y3', 'y4'].forEach(sy => {
         const pCount = sy === 'y4' ? 3 : 4;
@@ -1260,18 +1432,8 @@
         G1_TO_G6.forEach(g => { rec.rmaV2[sy][g] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; });
         rec.readingV2[sy] = [];
         G1_TO_G6.forEach(g => {
-          rec.readingV2[sy].push({
-            id: 'rd_' + sy + '_' + g.replace(/\s+/g, '') + '_fil',
-            grade: g,
-            lang: 'filipino',
-            vals: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-          });
-          rec.readingV2[sy].push({
-            id: 'rd_' + sy + '_' + g.replace(/\s+/g, '') + '_eng',
-            grade: g,
-            lang: 'english',
-            vals: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-          });
+          rec.readingV2[sy].push({ id: 'rd_' + sy + '_' + g.replace(/\s+/g, '') + '_fil', grade: g, lang: 'filipino', vals: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] });
+          rec.readingV2[sy].push({ id: 'rd_' + sy + '_' + g.replace(/\s+/g, '') + '_eng', grade: g, lang: 'english', vals: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] });
         });
       });
 
@@ -1294,6 +1456,10 @@
       if (localSaved) districtDB = { ...districtDB, ...localSaved };
     } catch (e) {}
 
+    function formatPeso(num) {
+      return '₱' + (Number(num) || 0).toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
     function setSyncStatus(text, isError = false) {
       const badge = document.getElementById('cloudSyncBadge');
       if (!badge) return;
@@ -1314,9 +1480,7 @@
       document.getElementById('globalLockBadge').classList.toggle('hidden', !locked);
       document.getElementById('schoolLockedBanner').classList.toggle('hidden', !(locked && isSchool));
 
-      if (locked && isSchool && isEditMode) {
-        isEditMode = false;
-      }
+      if (locked && isSchool && isEditMode) isEditMode = false;
       updateEditBtnUI();
 
       const lockBtn = document.getElementById('btnToggleGlobalLock');
@@ -1469,14 +1633,7 @@
         return;
       }
 
-      districtDB.accounts[schoolId] = {
-        schoolId,
-        schoolName,
-        headName,
-        password,
-        pin,
-        createdAt: new Date().toISOString()
-      };
+      districtDB.accounts[schoolId] = { schoolId, schoolName, headName, password, pin, createdAt: new Date().toISOString() };
       districtDB.schoolsData[schoolId] = createEmptySchoolRecord(schoolId, schoolName, headName);
       await saveDistrictDB();
 
@@ -1496,7 +1653,7 @@
       const acc = districtDB.accounts[schoolId];
 
       if (!acc || acc.pin !== pin) {
-        msgEl.innerText = '❌ Mali ang School ID o Secret Recovery PIN. Makipag-ugnayan sa Sub-Office Admin para ma-reset.';
+        msgEl.innerText = '❌ Mali ang School ID o Secret Recovery PIN.';
         msgEl.className = 'text-xs font-bold text-center py-2 px-3 rounded-xl bg-red-100 text-red-800';
         msgEl.classList.remove('hidden');
         return;
@@ -1526,13 +1683,13 @@
         document.getElementById('headerMainTitle').innerText = 'ROSARIO WEST SUB-OFFICE';
         document.getElementById('headerSubRoleBadge').innerText = '🛡️ Sub-Office Administrator • Full District Access';
         adminViewScope = 'ALL';
-        activeAnalyticsCat = 'school_compare';
+        activeAnalyticsCat = 'financial';
         refreshAdminSchoolDropdown();
       } else {
         document.getElementById('headerMainTitle').innerText = currentSession.schoolName.toUpperCase();
         document.getElementById('headerSubRoleBadge').innerText = `🏫 Rosario West Sub-Office • School ID: ${currentSession.schoolId}`;
         adminViewScope = currentSession.schoolId;
-        activeAnalyticsCat = 'personnel';
+        activeAnalyticsCat = 'financial';
       }
 
       isEditMode = false;
@@ -1572,9 +1729,7 @@
 
     function onAdminScopeChange() {
       adminViewScope = document.getElementById('adminSchoolFilter').value;
-      if (adminViewScope === 'ALL' && isEditMode) {
-        isEditMode = false;
-      }
+      if (adminViewScope === 'ALL' && isEditMode) isEditMode = false;
       updateEditBtnUI();
       renderActiveTab();
     }
@@ -1599,11 +1754,11 @@
 
     function toggleEditMode() {
       if (currentSession.role === 'school' && districtDB.submissionsLocked) {
-        alert('🔒 Naka-LOCK na ang pag-edit ng datos ng Sub-Office Admin. Makipag-ugnayan sa Sub-Office kung kailangang magpa-unlock.');
+        alert('🔒 Naka-LOCK na ang pag-edit ng datos ng Sub-Office Admin.');
         return;
       }
       if (currentSession.role === 'admin' && adminViewScope === 'ALL') {
-        alert('ℹ️ Pumili muna ng isang partikular na paaralan sa "Scope" dropdown sa itaas kung nais mong mag-edit ng datos ng paaralang iyon.');
+        alert('ℹ️ Pumili muna ng isang partikular na paaralan sa "Scope" dropdown sa itaas kung nais mong mag-edit ng datos.');
         return;
       }
       isEditMode = !isEditMode;
@@ -1641,14 +1796,7 @@
       const container = document.getElementById(containerId);
       if (!container) return;
 
-      const {
-        title = '3D Graphical Presentation',
-        subtitle = '',
-        items = [],
-        suffix = '',
-        maxVal = null
-      } = opts;
-
+      const { title = '3D Graphical Presentation', subtitle = '', items = [], suffix = '', maxVal = null } = opts;
       if (!items.length) {
         container.innerHTML = `<p class="text-xs text-slate-400 italic text-center py-6">Walang datos na maipapakita sa graph.</p>`;
         return;
@@ -1667,7 +1815,7 @@
       const rawMax = Math.max(...items.map(i => Number(i.value) || 0), 1);
       const yMax = maxVal !== null ? maxVal : (suffix === '%' ? 100 : Math.ceil(rawMax * 1.2));
 
-      const svgW = Math.max(700, items.length * 110 + 120);
+      const svgW = Math.max(700, items.length * 100 + 120);
       const svgH = 325;
       const padL = 56, padR = 36, padT = 48, padB = 72;
       const plotW = svgW - padL - padR;
@@ -1691,7 +1839,7 @@
       `;
 
       const slotW = plotW / items.length;
-      const barW = Math.min(54, Math.max(26, slotW * 0.52));
+      const barW = Math.min(50, Math.max(22, slotW * 0.52));
 
       let barsSvg = '';
       items.forEach((item, idx) => {
@@ -1725,11 +1873,11 @@
         if (words.length > 2 && String(item.label).length > 13) {
           const mid = Math.ceil(words.length / 2);
           xLabelSvg = `
-            <text x="${cx}" y="${padT + plotH + 17}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#f8fafc">${words.slice(0, mid).join(' ')}</text>
-            <text x="${cx}" y="${padT + plotH + 29}" text-anchor="middle" font-size="9" font-weight="700" fill="#94a3b8">${words.slice(mid).join(' ')}</text>
+            <text x="${cx}" y="${padT + plotH + 17}" text-anchor="middle" font-size="9" font-weight="800" fill="#f8fafc">${words.slice(0, mid).join(' ')}</text>
+            <text x="${cx}" y="${padT + plotH + 29}" text-anchor="middle" font-size="8.5" font-weight="700" fill="#94a3b8">${words.slice(mid).join(' ')}</text>
           `;
         } else {
-          xLabelSvg = `<text x="${cx}" y="${padT + plotH + 18}" text-anchor="middle" font-size="10" font-weight="800" fill="#f8fafc">${item.label}</text>`;
+          xLabelSvg = `<text x="${cx}" y="${padT + plotH + 18}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#f8fafc">${item.label}</text>`;
         }
 
         barsSvg += `<g>${backEdge}${sideFace}${frontFace}${topFace}${dataLabel}${xLabelSvg}</g>`;
@@ -1745,10 +1893,154 @@
         </div>
         <div class="overflow-x-auto">
           <svg viewBox="0 0 ${svgW} ${svgH}" class="w-full min-w-[600px] h-auto select-none">
-            ${gridSvg}
-            ${floorSvg}
-            ${barsSvg}
+            ${gridSvg}${floorSvg}${barsSvg}
           </svg>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 3D TRANSLUCENT GLASS PIE CHART ENGINE (FOR FINANCIAL DATA)
+    // =========================================================================
+    function render3DGlassPieChart(containerId, opts) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const { title = '3D Glass Pie Chart', subtitle = '', slices = [] } = opts;
+      const validSlices = slices.filter(s => (Number(s.value) || 0) > 0);
+      const total = validSlices.reduce((sum, s) => sum + (Number(s.value) || 0), 0);
+
+      if (total <= 0) {
+        container.innerHTML = `
+          <div class="space-y-2">
+            <h4 class="text-xs sm:text-sm font-extrabold text-white">🥧 ${title}</h4>
+            <p class="text-xs text-slate-400 italic py-10 text-center">Wala pang na-encode na halaga (₱) para maipakita ang 3D Glass Pie Chart.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const cx = 210, cy = 135, rx = 145, ry = 88, depth = 26;
+      let startAngle = -Math.PI / 2;
+
+      const computed = validSlices.map(s => {
+        const val = Number(s.value) || 0;
+        const frac = val / total;
+        const endAngle = startAngle + frac * Math.PI * 2;
+        const midAngle = (startAngle + endAngle) / 2;
+        const sliceObj = { ...s, val, frac, pct: (frac * 100).toFixed(1), startAngle, endAngle, midAngle };
+        startAngle = endAngle;
+        return sliceObj;
+      });
+
+      // Draw 3D extruded wall (bottom + side skirts) first for realistic 3D glass depth
+      let sideWallsSvg = '';
+      let topFacesSvg = '';
+      let glassHighlightSvg = '';
+      let labelsSvg = '';
+
+      computed.forEach((sl, idx) => {
+        const { startAngle: a1, endAngle: a2, midAngle, color, light, dark, pct } = sl;
+        const x1 = cx + rx * Math.cos(a1);
+        const y1 = cy + ry * Math.sin(a1);
+        const x2 = cx + rx * Math.cos(a2);
+        const y2 = cy + ry * Math.sin(a2);
+        const largeArc = (a2 - a1) > Math.PI ? 1 : 0;
+
+        // 3D Outer Rim Extrusion (visible cylinder skirt)
+        const skirtPath = `
+          M ${x1} ${y1}
+          A ${rx} ${ry} 0 ${largeArc} 1 ${x2} ${y2}
+          L ${x2} ${y2 + depth}
+          A ${rx} ${ry} 0 ${largeArc} 0 ${x1} ${y1 + depth}
+          Z
+        `;
+        sideWallsSvg += `<path d="${skirtPath}" fill="${dark}" fill-opacity="0.82" stroke="#ffffff" stroke-opacity="0.28" stroke-width="0.9"/>`;
+
+        // Radial inner cut walls for translucent glass depth
+        const wall1 = `M ${cx} ${cy} L ${x1} ${y1} L ${x1} ${y1 + depth} L ${cx} ${cy + depth} Z`;
+        const wall2 = `M ${cx} ${cy} L ${x2} ${y2} L ${x2} ${y2 + depth} L ${cx} ${cy + depth} Z`;
+        sideWallsSvg += `<path d="${wall1}" fill="${dark}" fill-opacity="0.45"/>`;
+        sideWallsSvg += `<path d="${wall2}" fill="${dark}" fill-opacity="0.45"/>`;
+
+        // Top Translucent Glass Wedge
+        const topPath = (computed.length === 1)
+          ? `M ${cx - rx} ${cy} A ${rx} ${ry} 0 1 0 ${cx + rx} ${cy} A ${rx} ${ry} 0 1 0 ${cx - rx} ${cy} Z`
+          : `M ${cx} ${cy} L ${x1} ${y1} A ${rx} ${ry} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+
+        topFacesSvg += `
+          <path d="${topPath}" fill="url(#glassGrad_${containerId}_${idx})" fill-opacity="0.82"
+            stroke="#ffffff" stroke-opacity="0.65" stroke-width="1.3"/>
+        `;
+
+        // Percentage badge on slice if >= 5%
+        if (sl.frac >= 0.05) {
+          const lx = cx + (rx * 0.64) * Math.cos(midAngle);
+          const ly = cy + (ry * 0.64) * Math.sin(midAngle);
+          labelsSvg += `
+            <rect x="${lx - 21}" y="${ly - 9}" width="42" height="16" rx="5" fill="#090d16" fill-opacity="0.85" stroke="#ffffff" stroke-opacity="0.4" stroke-width="0.8"/>
+            <text x="${lx}" y="${ly + 2.5}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#ffffff">${pct}%</text>
+          `;
+        }
+      });
+
+      // Glossy Glass Specular Reflection Overlay
+      glassHighlightSvg = `
+        <ellipse cx="${cx - 25}" cy="${cy - 28}" rx="${rx * 0.68}" ry="${ry * 0.42}"
+          fill="url(#specularGlass_${containerId})" pointer-events="none"/>
+      `;
+
+      const defsSvg = `
+        <defs>
+          ${computed.map((sl, idx) => `
+            <linearGradient id="glassGrad_${containerId}_${idx}" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="${sl.light}" stop-opacity="0.95"/>
+              <stop offset="55%" stop-color="${sl.color}" stop-opacity="0.82"/>
+              <stop offset="100%" stop-color="${sl.dark}" stop-opacity="0.9"/>
+            </linearGradient>
+          `).join('')}
+          <linearGradient id="specularGlass_${containerId}" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
+          </linearGradient>
+        </defs>
+      `;
+
+      const legendHtml = computed.map(sl => `
+        <div class="flex items-center justify-between gap-2 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl text-[11px]">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="w-3 h-3 rounded-full shrink-0 border border-white/60" style="background:${sl.color}"></span>
+            <span class="font-bold text-slate-200 truncate">${sl.label}</span>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="font-extrabold text-orange-300">${formatPeso(sl.val)}</span>
+            <span class="text-[10px] text-slate-400 ml-1">(${sl.pct}%)</span>
+          </div>
+        </div>
+      `).join('');
+
+      container.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+          <div>
+            <h4 class="text-xs sm:text-sm font-extrabold text-white">🥧 ${title}</h4>
+            ${subtitle ? `<p class="text-[11px] text-slate-400">${subtitle}</p>` : ''}
+          </div>
+          <span class="bg-blue-600/20 border border-blue-400 text-blue-200 text-[10px] font-extrabold px-2.5 py-1 rounded-full">3D Glass Pie</span>
+        </div>
+
+        <div class="flex justify-center">
+          <svg viewBox="0 0 420 295" class="w-full max-w-[410px] h-auto select-none">
+            ${defsSvg}
+            <ellipse cx="${cx}" cy="${cy + depth + 6}" rx="${rx + 8}" ry="${ry + 4}" fill="#000000" fill-opacity="0.45"/>
+            ${sideWallsSvg}
+            ${topFacesSvg}
+            ${glassHighlightSvg}
+            ${labelsSvg}
+          </svg>
+        </div>
+
+        <div class="space-y-1.5 mt-2 max-h-56 overflow-y-auto pr-1">
+          ${legendHtml}
         </div>
       `;
     }
@@ -1758,7 +2050,7 @@
     // =========================================================================
     function switchPortalTab(tabKey) {
       activeTab = tabKey;
-      const allTabs = ['personnel', 'masterlist', 'mps', 'enrollment', 'literacy', 'nat', 'nutrition', 'sbm', 'nsbi', 'analytics', 'admin'];
+      const allTabs = ['personnel', 'masterlist', 'mps', 'enrollment', 'literacy', 'nat', 'nutrition', 'sbm', 'nsbi', 'financial', 'analytics', 'admin'];
       allTabs.forEach(k => {
         const sec = document.getElementById('sec_' + k);
         if (sec) sec.classList.toggle('hidden', k !== tabKey);
@@ -1782,12 +2074,13 @@
       else if (activeTab === 'nutrition') renderNutritionTab();
       else if (activeTab === 'sbm') renderSBMTab();
       else if (activeTab === 'nsbi') renderNSBITab();
+      else if (activeTab === 'financial') renderFinancialTab();
       else if (activeTab === 'analytics') renderAnalyticsTab();
       else if (activeTab === 'admin') renderAdminSchoolsTab();
     }
 
     // =========================================================================
-    // TAB 1: TEACHING, SCHOOL HEAD & NON-TEACHING PERSONNEL
+    // TAB 1: PERSONNEL
     // =========================================================================
     function getAggregatedPersonnel(specificSchool = null) {
       const target = specificSchool || getTargetSchoolRecord();
@@ -1823,11 +2116,8 @@
       let cTeachers = 0, cMT = 0, cHT = 0, cPrin = 0, cNonTeach = 0;
 
       document.getElementById('tbodyPersonnel').innerHTML = PERSONNEL_POSITIONS.map(p => {
-        const m = data[p.key].m;
-        const f = data[p.key].f;
-        const rowTot = m + f;
-        totM += m;
-        totF += f;
+        const m = data[p.key].m, f = data[p.key].f, rowTot = m + f;
+        totM += m; totF += f;
 
         if (p.cat === 'Teaching') cTeachers += rowTot;
         else if (p.cat === 'Master Teacher') cMT += rowTot;
@@ -1864,9 +2154,7 @@
 
       const makeMiniCards = (keys, bgCls, borderCls, labelCls, subLabelCls) => keys.map(k => {
         const pos = PERSONNEL_POSITIONS.find(x => x.key === k);
-        const mVal = data[k]?.m || 0;
-        const fVal = data[k]?.f || 0;
-        const tVal = mVal + fVal;
+        const mVal = data[k]?.m || 0, fVal = data[k]?.f || 0, tVal = mVal + fVal;
         return `
           <div class="${bgCls} text-white rounded-xl p-2.5 border-b-4 ${borderCls} shadow-sm">
             <span class="text-[10px] font-extrabold ${labelCls} uppercase block truncate" title="${pos.title}">${pos.title}</span>
@@ -1879,38 +2167,35 @@
       document.getElementById('persIndividualSummaryGrid').innerHTML = `
         <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-3 space-y-2">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-extrabold uppercase text-blue-950">👩‍🏫 Teaching Positions (Individual Summary: Teacher I – VII)</span>
+            <span class="text-[11px] font-extrabold uppercase text-blue-950">👩‍🏫 Teaching Positions (Teacher I – VII)</span>
             <span class="text-[11px] font-extrabold bg-blue-900 text-white px-2.5 py-0.5 rounded-full">Sub-Total: ${cTeachers}</span>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
             ${makeMiniCards(['t1','t2','t3','t4','t5','t6','t7'], 'bg-blue-950', 'border-blue-500', 'text-blue-200', 'text-blue-300/80')}
           </div>
         </div>
-
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
           <div class="bg-orange-50/70 border border-orange-200 rounded-2xl p-3 space-y-2">
             <div class="flex items-center justify-between">
-              <span class="text-[11px] font-extrabold uppercase text-orange-950">⭐ Master Teachers (MT-I – IV)</span>
+              <span class="text-[11px] font-extrabold uppercase text-orange-950">⭐ Master Teachers</span>
               <span class="text-[11px] font-extrabold bg-orange-600 text-white px-2 py-0.5 rounded-full">Sub-Total: ${cMT}</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
               ${makeMiniCards(['mt1','mt2','mt3','mt4'], 'bg-orange-700', 'border-orange-300', 'text-orange-100', 'text-orange-200')}
             </div>
           </div>
-
           <div class="bg-red-50/70 border border-red-200 rounded-2xl p-3 space-y-2">
             <div class="flex items-center justify-between">
-              <span class="text-[11px] font-extrabold uppercase text-red-950">🏫 Head Teachers (HT-I – IV)</span>
+              <span class="text-[11px] font-extrabold uppercase text-red-950">🏫 Head Teachers</span>
               <span class="text-[11px] font-extrabold bg-red-800 text-white px-2 py-0.5 rounded-full">Sub-Total: ${cHT}</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
               ${makeMiniCards(['ht1','ht2','ht3','ht4'], 'bg-red-900', 'border-red-400', 'text-red-100', 'text-red-200')}
             </div>
           </div>
-
           <div class="bg-slate-100 border border-slate-300 rounded-2xl p-3 space-y-2">
             <div class="flex items-center justify-between">
-              <span class="text-[11px] font-extrabold uppercase text-slate-950">🎓 School Principals (P-I – IV)</span>
+              <span class="text-[11px] font-extrabold uppercase text-slate-950">🎓 School Principals</span>
               <span class="text-[11px] font-extrabold bg-slate-900 text-orange-400 px-2 py-0.5 rounded-full">Sub-Total: ${cPrin}</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -1918,10 +2203,9 @@
             </div>
           </div>
         </div>
-
         <div class="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-3 space-y-2">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] font-extrabold uppercase text-emerald-950">🏢 Non-Teaching & Support Staff (Individual Breakdown)</span>
+            <span class="text-[11px] font-extrabold uppercase text-emerald-950">🏢 Non-Teaching & Support Staff</span>
             <span class="text-[11px] font-extrabold bg-emerald-800 text-white px-2.5 py-0.5 rounded-full">Sub-Total: ${cNonTeach}</span>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
@@ -1940,30 +2224,13 @@
       `;
 
       render3DGlassBarChart('inlineGraph_personnel', {
-        title: '3D Personnel Distribution per Individual Position (T-I–VII, MT-I–IV, HT-I–IV, P-I–IV & Non-Teaching)',
-        subtitle: 'Indibidwal na kabuuang bilang bawat plantilla position.',
+        title: '3D Personnel Distribution per Individual Position',
         items: [
-          ...['t1','t2','t3','t4','t5','t6','t7'].map(k => ({
-            label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Teacher ', 'T-'),
-            value: (data[k]?.m || 0) + (data[k]?.f || 0),
-            color: '#2563eb', topColor: '#60a5fa', sideColor: '#1e3a8a'
-          })),
-          ...['mt1','mt2','mt3','mt4'].map(k => ({
-            label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Master Teacher ', 'MT-'),
-            value: (data[k]?.m || 0) + (data[k]?.f || 0),
-            color: '#ea580c', topColor: '#fb923c', sideColor: '#9a3412'
-          })),
-          ...['ht1','ht2','ht3','ht4'].map(k => ({
-            label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Head Teacher ', 'HT-'),
-            value: (data[k]?.m || 0) + (data[k]?.f || 0),
-            color: '#dc2626', topColor: '#f87171', sideColor: '#991b1b'
-          })),
-          ...['p1','p2','p3','p4'].map(k => ({
-            label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Principal ', 'P-'),
-            value: (data[k]?.m || 0) + (data[k]?.f || 0),
-            color: '#475569', topColor: '#94a3b8', sideColor: '#1e293b'
-          })),
-          { label: 'Non-Teaching', value: cNonTeach, color: '#059669', topColor: '#34d399', sideColor: '#065f46' }
+          ...['t1','t2','t3','t4','t5','t6','t7'].map(k => ({ label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Teacher ', 'T-'), value: (data[k]?.m || 0) + (data[k]?.f || 0), color: '#2563eb' })),
+          ...['mt1','mt2','mt3','mt4'].map(k => ({ label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Master Teacher ', 'MT-'), value: (data[k]?.m || 0) + (data[k]?.f || 0), color: '#ea580c' })),
+          ...['ht1','ht2','ht3','ht4'].map(k => ({ label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Head Teacher ', 'HT-'), value: (data[k]?.m || 0) + (data[k]?.f || 0), color: '#dc2626' })),
+          ...['p1','p2','p3','p4'].map(k => ({ label: PERSONNEL_POSITIONS.find(x => x.key === k).title.replace('Principal ', 'P-'), value: (data[k]?.m || 0) + (data[k]?.f || 0), color: '#475569' })),
+          { label: 'Non-Teaching', value: cNonTeach, color: '#059669' }
         ]
       });
     }
@@ -1995,9 +2262,7 @@
         allSections = (target.sectionsList || []).map((s, idx) => ({ ...s, _idx: idx, _schoolName: target.schoolName }));
       } else {
         getAllSchoolRecordsList().forEach(sc => {
-          (sc.sectionsList || []).forEach((s, idx) => {
-            allSections.push({ ...s, _idx: idx, _schoolName: sc.schoolName });
-          });
+          (sc.sectionsList || []).forEach((s, idx) => { allSections.push({ ...s, _idx: idx, _schoolName: sc.schoolName }); });
         });
       }
 
@@ -2006,8 +2271,7 @@
 
       document.getElementById('tbodyAdvisers').innerHTML = allSections.length ? allSections.map(sec => {
         const tot = Number(sec.m) + Number(sec.f);
-        sumM += Number(sec.m);
-        sumF += Number(sec.f);
+        sumM += Number(sec.m); sumF += Number(sec.f);
         if (canEdit) {
           return `<tr class="hover:bg-slate-50">
             <td class="p-2"><input type="text" value="${sec.grade}" onchange="updSection(${sec._idx},'grade',this.value)" class="w-full px-2 py-1 border border-blue-500 rounded font-extrabold"></td>
@@ -2065,8 +2329,7 @@
 
       const q = document.getElementById('mlSearch').value.toLowerCase();
       const fSecId = filterSel.value;
-      const filtered = allLearners.filter(m => (fSecId === 'ALL' || m.secId === fSecId) &&
-        (m.name.toLowerCase().includes(q) || m.lrn.includes(q)));
+      const filtered = allLearners.filter(m => (fSecId === 'ALL' || m.secId === fSecId) && (m.name.toLowerCase().includes(q) || m.lrn.includes(q)));
 
       document.getElementById('tbodyMasterlist').innerHTML = filtered.length ? filtered.map(m => `
         <tr class="hover:bg-slate-50">
@@ -2151,15 +2414,13 @@
     }
 
     // =========================================================================
-    // TAB 3: MPS (MATATAG)
+    // TAB 3: MPS (MATATAG) & SENIOR HIGH SCHOOL CORE SUBJECTS
     // =========================================================================
     function getMPSData(sy, subj, specificSchool = null) {
       const target = specificSchool || getTargetSchoolRecord();
       const pCount = sy === 'y4' ? 3 : 4;
       const res = {};
-      G1_TO_G6.forEach(g => {
-        res[g] = Array.from({ length: pCount }, () => ({ m: 0, f: 0 }));
-      });
+      G1_TO_G6.forEach(g => { res[g] = Array.from({ length: pCount }, () => ({ m: 0, f: 0 })); });
 
       if (target) {
         G1_TO_G6.forEach(g => {
@@ -2219,11 +2480,8 @@
       document.getElementById('mpsTbody').innerHTML = targetGrades.map(g => {
         const arr = mpsData[g];
         const tds = periods.map((_, i) => {
-          const m = arr[i].m;
-          const f = arr[i].f;
-          const ave = ((m + f) / 2).toFixed(2);
-          sumM[i] += m;
-          sumF[i] += f;
+          const m = arr[i].m, f = arr[i].f, ave = ((m + f) / 2).toFixed(2);
+          sumM[i] += m; sumF[i] += f;
 
           if (canEdit) {
             return `
@@ -2258,6 +2516,8 @@
         suffix: '%',
         maxVal: 100
       });
+
+      renderSHSCoreSubjectsTable();
     }
 
     function updMPSCell(sy, subj, g, i, sex, val) {
@@ -2268,8 +2528,82 @@
       renderMPSTab();
     }
 
+    function renderSHSCoreSubjectsTable() {
+      const sem = document.getElementById('shsCoreSemSel')?.value || 'sem1';
+      const target = getTargetSchoolRecord();
+      const canEdit = Boolean(target && isEditMode);
+
+      let totM = 0, totF = 0, sumMps = 0, cntMps = 0;
+
+      document.getElementById('tbodySHSCoreSubjects').innerHTML = SHS_CORE_SUBJECTS.map(sub => {
+        let m = 0, f = 0, mps = 0;
+        if (target) {
+          const row = target.shsCoreSubjects?.[sem]?.[sub.key] || { m: 0, f: 0, mps: 0 };
+          m = Number(row.m) || 0;
+          f = Number(row.f) || 0;
+          mps = Number(row.mps) || 0;
+        } else {
+          let mpsAcc = 0, mpsN = 0;
+          getAllSchoolRecordsList().forEach(sc => {
+            const row = sc.shsCoreSubjects?.[sem]?.[sub.key];
+            if (row) {
+              m += Number(row.m) || 0;
+              f += Number(row.f) || 0;
+              if (Number(row.mps) > 0) { mpsAcc += Number(row.mps); mpsN++; }
+            }
+          });
+          mps = mpsN ? Number((mpsAcc / mpsN).toFixed(2)) : 0;
+        }
+
+        totM += m; totF += f;
+        if (mps > 0) { sumMps += mps; cntMps++; }
+
+        if (canEdit) {
+          return `<tr class="hover:bg-slate-50">
+            <td class="p-2.5 font-extrabold text-slate-900">${sub.title}</td>
+            <td class="p-2.5 text-center font-bold text-slate-600">${sub.grade}</td>
+            <td class="p-1.5 text-center"><input type="number" min="0" value="${m}" onchange="updSHSCore('${sem}','${sub.key}','m',this.value)" class="w-16 px-2 py-1 border border-blue-500 rounded text-center font-bold"></td>
+            <td class="p-1.5 text-center"><input type="number" min="0" value="${f}" onchange="updSHSCore('${sem}','${sub.key}','f',this.value)" class="w-16 px-2 py-1 border border-red-500 rounded text-center font-bold"></td>
+            <td class="p-2.5 text-center font-extrabold bg-orange-50 text-orange-950">${m + f}</td>
+            <td class="p-1.5 text-center"><input type="number" step="0.1" min="0" max="100" value="${mps}" onchange="updSHSCore('${sem}','${sub.key}','mps',this.value)" class="w-20 px-2 py-1 border border-emerald-600 rounded text-center font-extrabold"></td>
+          </tr>`;
+        }
+
+        return `<tr class="hover:bg-slate-50">
+          <td class="p-2.5 font-extrabold text-slate-900">${sub.title}</td>
+          <td class="p-2.5 text-center font-bold text-slate-600">${sub.grade}</td>
+          <td class="p-2.5 text-center font-bold text-blue-950">${m}</td>
+          <td class="p-2.5 text-center font-bold text-red-900">${f}</td>
+          <td class="p-2.5 text-center font-extrabold bg-orange-50 text-orange-950">${m + f}</td>
+          <td class="p-2.5 text-center font-extrabold text-emerald-900 bg-emerald-50/50">${mps}%</td>
+        </tr>`;
+      }).join('');
+
+      const avgMps = cntMps ? (sumMps / cntMps).toFixed(2) : '0.00';
+      document.getElementById('tfootSHSCoreSubjects').innerHTML = `
+        <tr>
+          <td colspan="2" class="p-3 text-left">TOTAL SHS CORE SUBJECT ENROLLMENT & AVERAGE MPS</td>
+          <td class="p-3 text-center text-blue-300">${totM}</td>
+          <td class="p-3 text-center text-red-300">${totF}</td>
+          <td class="p-3 text-center text-orange-400">${totM + totF}</td>
+          <td class="p-3 text-center text-emerald-300">${avgMps}%</td>
+        </tr>
+      `;
+    }
+
+    function updSHSCore(sem, subKey, field, val) {
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      if (!target.shsCoreSubjects) target.shsCoreSubjects = { sem1: {}, sem2: {} };
+      if (!target.shsCoreSubjects[sem]) target.shsCoreSubjects[sem] = {};
+      if (!target.shsCoreSubjects[sem][subKey]) target.shsCoreSubjects[sem][subKey] = { m: 0, f: 0, mps: 0 };
+      target.shsCoreSubjects[sem][subKey][field] = Number(val) || 0;
+      saveDistrictDB();
+      renderSHSCoreSubjectsTable();
+    }
+
     // =========================================================================
-    // TAB 4: ENROLLMENT, DROP-OUT, TRANS IN/OUT
+    // TAB 4: ENROLLMENT, DROP-OUT, TRANS IN/OUT (KINDER TO GRADE 12)
     // =========================================================================
     function getEnrData(sy, cat, specificSchool = null) {
       const target = specificSchool || getTargetSchoolRecord();
@@ -2308,7 +2642,7 @@
       const colors = ['bg-blue-900', 'bg-red-900', 'bg-orange-700', 'bg-slate-800'];
       const enrData = getEnrData(sy, cat);
 
-      let r1 = `<th rowspan="2" class="p-3 bg-slate-950 text-white text-left font-extrabold">Grade Level</th>`;
+      let r1 = `<th rowspan="2" class="p-3 bg-slate-950 text-white text-left font-extrabold min-w-[160px]">Grade Level / SHS Strand</th>`;
       let r2 = '';
       periods.forEach((p, idx) => {
         r1 += `<th colspan="3" class="p-2.5 ${colors[idx]} text-white text-center font-extrabold border-l border-white/20">${p}</th>`;
@@ -2321,6 +2655,7 @@
 
       document.getElementById('enrTbody').innerHTML = GRADES.map(g => {
         const arr = enrData[g];
+        const isSHS = g.startsWith('Grade 11') || g.startsWith('Grade 12');
         const tds = periods.map((_, i) => {
           const m = arr[i].m, f = arr[i].f;
           totM[i] += m; totF[i] += f;
@@ -2333,10 +2668,13 @@
           }
           return `<td class="p-3 text-center border-l">${m}</td><td class="p-3 text-center">${f}</td><td class="p-3 text-center font-extrabold bg-orange-50/70">${m + f}</td>`;
         }).join('');
-        return `<tr class="hover:bg-slate-50"><td class="p-3 font-extrabold text-slate-900">${g}</td>${tds}</tr>`;
+        return `<tr class="hover:bg-slate-50 ${isSHS ? 'bg-blue-50/30' : ''}">
+          <td class="p-3 font-extrabold text-slate-900">${g} ${isSHS ? '<span class="ml-1 px-1.5 py-0.5 rounded text-[9px] bg-blue-900 text-white">SHS</span>' : ''}</td>
+          ${tds}
+        </tr>`;
       }).join('');
 
-      document.getElementById('enrTfoot').innerHTML = `<tr><td class="p-3 text-left">TOTAL (Kinder–Grade 6)</td>${periods.map((_, i) => `
+      document.getElementById('enrTfoot').innerHTML = `<tr><td class="p-3 text-left">GRAND TOTAL (Kinder–Grade 12)</td>${periods.map((_, i) => `
         <td class="p-3 text-center border-l border-slate-700">${totM[i]}</td>
         <td class="p-3 text-center">${totF[i]}</td>
         <td class="p-3 text-center text-orange-400">${totM[i] + totF[i]}</td>
@@ -2353,12 +2691,12 @@
         } else {
           arr.forEach(p => { val += p.m + p.f; });
         }
-        return { label: g, value: val };
+        return { label: g.replace('Grade ', 'G'), value: val };
       });
 
       render3DGlassBarChart('inlineGraph_enr', {
-        title: `3D Glass Bar Graph: ${cat.toUpperCase()} per Grade Level`,
-        subtitle: 'Bilang ng mag-aaral mula Kinder hanggang Grade 6.',
+        title: `3D Glass Bar Graph: ${cat.toUpperCase()} (Kinder to Grade 12 SHS)`,
+        subtitle: 'Bilang ng mag-aaral mula Elementary hanggang Senior High School.',
         items: chartItems
       });
     }
@@ -2366,6 +2704,10 @@
     function updEnr(sy, cat, g, i, sex, val) {
       const target = getTargetSchoolRecord();
       if (!target) return;
+      if (!target.enrMatrix[sy][cat][g]) {
+        const pCount = sy === 'y4' ? 3 : 4;
+        target.enrMatrix[sy][cat][g] = Array.from({ length: pCount }, () => ({ m: 0, f: 0 }));
+      }
       target.enrMatrix[sy][cat][g][i][sex] = Number(val) || 0;
       saveDistrictDB();
       renderEnrollmentTab();
@@ -2399,7 +2741,7 @@
         });
       });
 
-      // 1. CRLA (G1: Tagalog | G2: Tagalog, Filipino | G3: Tagalog, Filipino, English)
+      // 1. CRLA
       const crlaSy = document.getElementById('crlaSySel').value || 'y3';
       const crlaLang = document.getElementById('crlaLangSel')?.value || 'ALL';
       const filteredCrla = CRLA_COVERAGE.filter(c => crlaLang === 'ALL' || c.lang === crlaLang);
@@ -2408,20 +2750,18 @@
       document.getElementById('tbodyCRLA').innerHTML = filteredCrla.map(c => {
         const a = Array(10).fill(0);
         if (target) {
-          const arr = target.crlaV2?.[crlaSy]?.[c.key] || (c.lang === 'tagalog' ? target.crlaV2?.[crlaSy]?.[c.grade] : null) || [];
+          const arr = target.crlaV2?.[crlaSy]?.[c.key] || [];
           arr.forEach((v, i) => a[i] = Number(v) || 0);
         } else {
           getAllSchoolRecordsList().forEach(sc => {
-            const arr = sc.crlaV2?.[crlaSy]?.[c.key] || (c.lang === 'tagalog' ? sc.crlaV2?.[crlaSy]?.[c.grade] : null) || [];
+            const arr = sc.crlaV2?.[crlaSy]?.[c.key] || [];
             arr.forEach((v, i) => a[i] += Number(v) || 0);
           });
         }
         a.forEach((v, i) => cTot[i] += v);
         const rowSum = a.reduce((x, y) => x + y, 0);
-        const langBadge = c.lang === 'tagalog'
-          ? '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-blue-900">Tagalog</span>'
-          : c.lang === 'filipino'
-          ? '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-orange-100 text-orange-900">Filipino</span>'
+        const langBadge = c.lang === 'tagalog' ? '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-blue-900">Tagalog</span>'
+          : c.lang === 'filipino' ? '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-orange-100 text-orange-900">Filipino</span>'
           : '<span class="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-red-100 text-red-900">English</span>';
 
         let cells = '';
@@ -2435,22 +2775,22 @@
         }
         return `<tr class="hover:bg-slate-50"><td class="p-2.5 font-extrabold whitespace-nowrap">${c.grade} ${langBadge}</td>${cells}<td class="p-2.5 text-center font-extrabold bg-orange-50 border-l">${rowSum}</td></tr>`;
       }).join('');
-      document.getElementById('tfootCRLA').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL (${crlaLang === 'ALL' ? 'Grade 1–3 All Languages' : crlaLang.toUpperCase()})</td>${[0,1,2,3,4].map(p => `
+      document.getElementById('tfootCRLA').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL</td>${[0,1,2,3,4].map(p => `
         <td class="p-2.5 text-center border-l border-slate-700">${cTot[p*2]}</td><td class="p-2.5 text-center">${cTot[p*2+1]}</td><td class="p-2.5 text-center text-orange-400">${cTot[p*2]+cTot[p*2+1]}</td>
       `).join('')}<td class="p-2.5 text-center text-orange-400 border-l border-slate-700">${cTot.reduce((a,b)=>a+b,0)}</td></tr>`;
 
       render3DGlassBarChart('inlineGraph_crla', {
-        title: `3D Glass Bar Graph: CRLA Results (${crlaLang === 'ALL' ? 'G1 Tagalog • G2 Tag/Fil • G3 Tag/Fil/Eng' : crlaLang.toUpperCase()})`,
+        title: '3D Glass Bar Graph: CRLA Results',
         items: [
-          { label: 'Low Emerging', value: cTot[0] + cTot[1], color: '#dc2626', topColor: '#f87171', sideColor: '#991b1b' },
-          { label: 'High Emerging', value: cTot[2] + cTot[3], color: '#ea580c', topColor: '#fb923c', sideColor: '#9a3412' },
-          { label: 'Developing Reader', value: cTot[4] + cTot[5], color: '#2563eb', topColor: '#60a5fa', sideColor: '#1e3a8a' },
-          { label: 'Transitioning Reader', value: cTot[6] + cTot[7], color: '#475569', topColor: '#94a3b8', sideColor: '#1e293b' },
-          { label: 'Reading at Grade Level', value: cTot[8] + cTot[9], color: '#0284c7', topColor: '#38bdf8', sideColor: '#075985' }
+          { label: 'Low Emerging', value: cTot[0] + cTot[1], color: '#dc2626' },
+          { label: 'High Emerging', value: cTot[2] + cTot[3], color: '#ea580c' },
+          { label: 'Developing', value: cTot[4] + cTot[5], color: '#2563eb' },
+          { label: 'Transitioning', value: cTot[6] + cTot[7], color: '#475569' },
+          { label: 'At Grade Level', value: cTot[8] + cTot[9], color: '#0284c7' }
         ]
       });
 
-      // 2. Phil-IRI (Grade 4 to Grade 6 • Filipino & English)
+      // 2. Phil-IRI
       const philiriLang = document.getElementById('philiriLangSel')?.value || 'ALL';
       const filteredPhiliri = PHILIRI_COVERAGE.filter(p => philiriLang === 'ALL' || p.lang === philiriLang);
       const pTot = Array(8).fill(0);
@@ -2458,12 +2798,10 @@
       document.getElementById('tbodyPhilIRI').innerHTML = filteredPhiliri.map(pObj => {
         const a = Array(8).fill(0);
         if (target) {
-          const arr = target.philiri?.[pObj.key] || (pObj.lang === 'filipino' ? target.philiri?.[pObj.grade] : null) || [];
-          arr.forEach((v, i) => a[i] = Number(v) || 0);
+          (target.philiri?.[pObj.key] || []).forEach((v, i) => a[i] = Number(v) || 0);
         } else {
           getAllSchoolRecordsList().forEach(sc => {
-            const arr = sc.philiri?.[pObj.key] || (pObj.lang === 'filipino' ? sc.philiri?.[pObj.grade] : null) || [];
-            arr.forEach((v, i) => a[i] += Number(v) || 0);
+            (sc.philiri?.[pObj.key] || []).forEach((v, i) => a[i] += Number(v) || 0);
           });
         }
         a.forEach((v, i) => pTot[i] += v);
@@ -2483,17 +2821,17 @@
         }
         return `<tr class="hover:bg-slate-50"><td class="p-2.5 font-extrabold whitespace-nowrap">${pObj.grade} ${langBadge}</td>${cells}<td class="p-2.5 text-center font-extrabold bg-orange-50 border-l">${rowSum}</td></tr>`;
       }).join('');
-      document.getElementById('tfootPhilIRI').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL (${philiriLang === 'ALL' ? 'Grade 4–6 Filipino & English' : philiriLang.toUpperCase()})</td>${[0,1,2,3].map(p => `
+      document.getElementById('tfootPhilIRI').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL</td>${[0,1,2,3].map(p => `
         <td class="p-2.5 text-center border-l border-slate-700">${pTot[p*2]}</td><td class="p-2.5 text-center">${pTot[p*2+1]}</td><td class="p-2.5 text-center text-orange-400">${pTot[p*2]+pTot[p*2+1]}</td>
       `).join('')}<td class="p-2.5 text-center text-orange-400 border-l border-slate-700">${pTot.reduce((a,b)=>a+b,0)}</td></tr>`;
 
       render3DGlassBarChart('inlineGraph_philiri', {
-        title: `3D Glass Bar Graph: Phil-IRI Results (Grade 4–6 • ${philiriLang === 'ALL' ? 'Filipino & English' : philiriLang.toUpperCase()})`,
+        title: '3D Glass Bar Graph: Phil-IRI Results (Grade 4–6)',
         items: [
-          { label: 'Independent', value: pTot[0] + pTot[1], color: '#2563eb', topColor: '#60a5fa', sideColor: '#1e3a8a' },
-          { label: 'Instructional', value: pTot[2] + pTot[3], color: '#ea580c', topColor: '#fb923c', sideColor: '#9a3412' },
-          { label: 'Frustration', value: pTot[4] + pTot[5], color: '#dc2626', topColor: '#f87171', sideColor: '#991b1b' },
-          { label: 'Non-Reader', value: pTot[6] + pTot[7], color: '#475569', topColor: '#94a3b8', sideColor: '#1e293b' }
+          { label: 'Independent', value: pTot[0] + pTot[1], color: '#2563eb' },
+          { label: 'Instructional', value: pTot[2] + pTot[3], color: '#ea580c' },
+          { label: 'Frustration', value: pTot[4] + pTot[5], color: '#dc2626' },
+          { label: 'Non-Reader', value: pTot[6] + pTot[7], color: '#475569' }
         ]
       });
 
@@ -2527,69 +2865,39 @@
       render3DGlassBarChart('inlineGraph_rma', {
         title: '3D Glass Bar Graph: RMA Numeracy Results (Grade 1–6)',
         items: [
-          { label: 'Emerging (Not Prof.)', value: rTot[0] + rTot[1], color: '#dc2626', topColor: '#f87171', sideColor: '#991b1b' },
-          { label: 'Emerging (Low Prof.)', value: rTot[2] + rTot[3], color: '#ea580c', topColor: '#fb923c', sideColor: '#9a3412' },
-          { label: 'Developing (Nearly)', value: rTot[4] + rTot[5], color: '#2563eb', topColor: '#60a5fa', sideColor: '#1e3a8a' },
-          { label: 'Transitioning (Prof.)', value: rTot[6] + rTot[7], color: '#475569', topColor: '#94a3b8', sideColor: '#1e293b' },
-          { label: 'At Grade Level (High)', value: rTot[8] + rTot[9], color: '#0284c7', topColor: '#38bdf8', sideColor: '#075985' }
+          { label: 'Not Proficient', value: rTot[0] + rTot[1], color: '#dc2626' },
+          { label: 'Low Proficient', value: rTot[2] + rTot[3], color: '#ea580c' },
+          { label: 'Nearly Proficient', value: rTot[4] + rTot[5], color: '#2563eb' },
+          { label: 'Proficient', value: rTot[6] + rTot[7], color: '#475569' },
+          { label: 'Highly Proficient', value: rTot[8] + rTot[9], color: '#0284c7' }
         ]
       });
 
-      // 4. Reading Assessment Results (Filipino & English)
+      // 4. Reading Assessment
       document.getElementById('formAddReadGrade').classList.toggle('hidden', !canEdit);
       document.getElementById('thDelReadGrade').classList.toggle('hidden', !canEdit);
 
       const readSy = document.getElementById('readSySel').value || 'y3';
       const readLang = document.getElementById('readLangSel')?.value || 'ALL';
 
-      function normalizeReadingRows(rawList, syKey) {
-        const list = Array.isArray(rawList) ? rawList : [];
-        const hasLang = list.some(r => r && r.lang);
-        if (hasLang) {
-          return list.map(r => ({ ...r, lang: r.lang || 'filipino' }));
-        }
-        // Auto-upgrade legacy rows (without lang) into Filipino & English pairs
-        const upgraded = [];
-        const sourceGrades = list.length ? list : G1_TO_G6.map(g => ({ grade: g, vals: Array(10).fill(0) }));
-        sourceGrades.forEach((r, idx) => {
-          upgraded.push({
-            id: (r.id || ('rd_' + syKey + '_' + idx)) + '_fil',
-            grade: r.grade,
-            lang: 'filipino',
-            vals: Array.isArray(r.vals) ? [...r.vals] : Array(10).fill(0)
-          });
-          upgraded.push({
-            id: (r.id || ('rd_' + syKey + '_' + idx)) + '_eng',
-            grade: r.grade,
-            lang: 'english',
-            vals: Array(10).fill(0)
-          });
-        });
-        return upgraded;
-      }
-
       let rdRows = [];
       if (target) {
         if (!target.readingV2) target.readingV2 = {};
-        const normalized = normalizeReadingRows(target.readingV2[readSy], readSy);
-        if (!target.readingV2[readSy] || !target.readingV2[readSy].some(r => r && r.lang)) {
-          target.readingV2[readSy] = normalized;
-        }
+        if (!Array.isArray(target.readingV2[readSy])) target.readingV2[readSy] = [];
         rdRows = target.readingV2[readSy].map((r, realIdx) => ({ ...r, _realIdx: realIdx }));
       } else {
         const gMap = {};
         getAllSchoolRecordsList().forEach(sc => {
-          const scRows = normalizeReadingRows(sc.readingV2?.[readSy], readSy);
-          scRows.forEach(r => {
-            const key = r.grade + '__' + r.lang;
-            if (!gMap[key]) gMap[key] = { grade: r.grade, lang: r.lang, vals: Array(10).fill(0) };
+          (sc.readingV2?.[readSy] || []).forEach(r => {
+            const key = r.grade + '__' + (r.lang || 'filipino');
+            if (!gMap[key]) gMap[key] = { grade: r.grade, lang: r.lang || 'filipino', vals: Array(10).fill(0) };
             (r.vals || []).forEach((v, i) => gMap[key].vals[i] += Number(v) || 0);
           });
         });
         rdRows = Object.values(gMap);
       }
 
-      const filteredRdRows = rdRows.filter(r => readLang === 'ALL' || r.lang === readLang);
+      const filteredRdRows = rdRows.filter(r => readLang === 'ALL' || (r.lang || 'filipino') === readLang);
       const rdTot = Array(10).fill(0);
       document.getElementById('tbodyReading').innerHTML = filteredRdRows.map((row, dispIdx) => {
         const realIdx = row._realIdx !== undefined ? row._realIdx : dispIdx;
@@ -2617,18 +2925,18 @@
         </tr>`;
       }).join('');
 
-      document.getElementById('tfootReading').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL (${readLang === 'ALL' ? 'Filipino & English' : readLang.toUpperCase()})</td>${[0,1,2,3,4].map(p => `
+      document.getElementById('tfootReading').innerHTML = `<tr><td class="p-2.5 text-left">TOTAL</td>${[0,1,2,3,4].map(p => `
         <td class="p-2.5 text-center border-l border-slate-700">${rdTot[p*2]}</td><td class="p-2.5 text-center">${rdTot[p*2+1]}</td><td class="p-2.5 text-center text-orange-400">${rdTot[p*2]+rdTot[p*2+1]}</td>
       `).join('')}<td class="p-2.5 text-center text-orange-400 border-l border-slate-700">${rdTot.reduce((a,b)=>a+b,0)}</td>${canEdit ? '<td></td>' : ''}</tr>`;
 
       render3DGlassBarChart('inlineGraph_reading', {
-        title: `3D Glass Bar Graph: School Reading Assessment Results (${readLang === 'ALL' ? 'Filipino & English' : readLang.toUpperCase()})`,
+        title: '3D Glass Bar Graph: School Reading Assessment Results',
         items: [
-          { label: 'Non-Reader', value: rdTot[0] + rdTot[1], color: '#dc2626', topColor: '#f87171', sideColor: '#991b1b' },
-          { label: 'Struggling Reader', value: rdTot[2] + rdTot[3], color: '#e11d48', topColor: '#fb7185', sideColor: '#881337' },
-          { label: 'Slow Reader', value: rdTot[4] + rdTot[5], color: '#ea580c', topColor: '#fb923c', sideColor: '#9a3412' },
-          { label: 'Average Reader', value: rdTot[6] + rdTot[7], color: '#2563eb', topColor: '#60a5fa', sideColor: '#1e3a8a' },
-          { label: 'Fast Reader', value: rdTot[8] + rdTot[9], color: '#0284c7', topColor: '#38bdf8', sideColor: '#075985' }
+          { label: 'Non-Reader', value: rdTot[0] + rdTot[1], color: '#dc2626' },
+          { label: 'Struggling Reader', value: rdTot[2] + rdTot[3], color: '#e11d48' },
+          { label: 'Slow Reader', value: rdTot[4] + rdTot[5], color: '#ea580c' },
+          { label: 'Average Reader', value: rdTot[6] + rdTot[7], color: '#2563eb' },
+          { label: 'Fast Reader', value: rdTot[8] + rdTot[9], color: '#0284c7' }
         ]
       });
     }
@@ -2770,7 +3078,7 @@
       let sN = 0, sW = 0, sSW = 0, sO = 0, sOB = 0;
       const pairs = [['nm','nf'], ['wm','wf'], ['swm','swf'], ['om','of'], ['obm','obf']];
 
-      document.getElementById('tbodyNutrition').innerHTML = GRADES.map(g => {
+      document.getElementById('tbodyNutrition').innerHTML = GRADES.slice(0, 7).map(g => {
         const d = { nm: 0, nf: 0, wm: 0, wf: 0, swm: 0, swf: 0, om: 0, of: 0, obm: 0, obf: 0 };
         if (target && target.nutrition?.[g]) {
           Object.assign(d, target.nutrition[g]);
@@ -2801,657 +3109,4 @@
         <tr>
           <td class="p-3 text-left">TOTAL</td>
           <td colspan="3" class="p-3 text-center text-blue-300 border-l border-slate-700">${sN}</td>
-          <td colspan="3" class="p-3 text-center text-orange-300 border-l border-slate-700">${sW}</td>
-          <td colspan="3" class="p-3 text-center text-red-300 border-l border-slate-700">${sSW}</td>
-          <td colspan="3" class="p-3 text-center text-slate-300 border-l border-slate-700">${sO}</td>
-          <td colspan="3" class="p-3 text-center text-blue-200 border-l border-slate-700">${sOB}</td>
-          <td class="p-3 text-center text-orange-400 border-l border-slate-700">${sN + sW + sSW + sO + sOB}</td>
-        </tr>
-      `;
-    }
-
-    function updNut(g, k, val) {
-      const target = getTargetSchoolRecord();
-      if (!target) return;
-      target.nutrition[g][k] = Number(val) || 0;
-      saveDistrictDB();
-      renderNutritionTab();
-    }
-
-    // =========================================================================
-    // TAB 8: SBM CHECKLIST (ANNEX A • 6 DIMENSIONS & 42 INDICATORS)
-    // =========================================================================
-    function renderSBMTab() {
-      const target = getTargetSchoolRecord();
-      const canEdit = Boolean(target && isEditMode);
-      const isConsolidated = !target;
-      const wrapper = document.getElementById('sbmDimensionsWrapper');
-      wrapper.innerHTML = '';
-      let c1 = 0, c2 = 0, c3 = 0, c4 = 0;
-
-      SBM_DIMENSIONS.forEach(dim => {
-        const rowsHtml = dim.indicators.map(ind => {
-          const defRem = ind.defaultRemark || '';
-          const existing = target && target.sbm?.[ind.num];
-          const saved = existing
-            ? { level: existing.level || '', remark: existing.remark !== undefined ? existing.remark : defRem }
-            : { level: '', remark: defRem };
-
-          if (isConsolidated) {
-            let sc1 = 0, sc2 = 0, sc3 = 0, sc4 = 0;
-            getAllSchoolRecordsList().forEach(sc => {
-              const lvl = sc.sbm?.[ind.num]?.level;
-              if (lvl === '1') sc1++;
-              else if (lvl === '2') sc2++;
-              else if (lvl === '3') sc3++;
-              else if (lvl === '4') sc4++;
-            });
-            c1 += sc1; c2 += sc2; c3 += sc3; c4 += sc4;
-
-            return `<tr class="hover:bg-slate-50">
-              <td class="p-3 border border-slate-200"><span class="font-extrabold">${ind.num}.</span> ${ind.text}</td>
-              <td class="p-3 border border-slate-200 text-center font-extrabold text-red-800 bg-red-50/40">${sc1}</td>
-              <td class="p-3 border border-slate-200 text-center font-extrabold text-orange-800 bg-orange-50/40">${sc2}</td>
-              <td class="p-3 border border-slate-200 text-center font-extrabold text-blue-800 bg-blue-50/40">${sc3}</td>
-              <td class="p-3 border border-slate-200 text-center font-extrabold text-slate-900 bg-slate-100">${sc4}</td>
-              <td class="p-2 border border-slate-200 text-xs text-slate-500">${defRem || 'District Tally'}</td>
-            </tr>`;
-          }
-
-          if (saved.level === '1') c1++; else if (saved.level === '2') c2++; else if (saved.level === '3') c3++; else if (saved.level === '4') c4++;
-
-          return `<tr class="hover:bg-slate-50">
-            <td class="p-3 border border-slate-200"><span class="font-extrabold">${ind.num}.</span> ${ind.text}</td>
-            ${['1', '2', '3', '4'].map(lvl => `
-              <td class="p-3 border border-slate-200 text-center">
-                <input type="checkbox" ${saved.level === lvl ? 'checked' : ''} ${!canEdit ? 'disabled' : ''}
-                  onchange="tickSBM(${ind.num},'${lvl}',this.checked)" class="w-5 h-5 accent-blue-800 cursor-pointer">
-              </td>
-            `).join('')}
-            <td class="p-2 border border-slate-200">
-              <input type="text" value="${(saved.remark || '').replace(/"/g, '&quot;')}" ${!canEdit ? 'disabled' : ''}
-                oninput="updSBMRem(${ind.num},this.value)" placeholder="${canEdit ? 'Remarks...' : '-'}"
-                class="w-full px-2 py-1 border rounded text-xs disabled:border-transparent disabled:bg-transparent">
-            </td>
-          </tr>`;
-        }).join('');
-
-        wrapper.innerHTML += `
-          <div class="rounded-2xl border border-slate-300 overflow-hidden">
-            <div class="bg-slate-950 text-white p-4 border-l-4 border-orange-500">
-              <h4 class="text-sm font-extrabold">${dim.id}. ${dim.title}</h4>
-              <p class="text-xs text-slate-300 mt-0.5">${dim.description}</p>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-xs border-collapse">
-                <thead>
-                  <tr class="bg-slate-100 font-extrabold">
-                    <th class="p-3 border text-left">SBM Indicator</th>
-                    <th class="p-2 border text-center w-24">Not Yet</th>
-                    <th class="p-2 border text-center w-24">Rarely</th>
-                    <th class="p-2 border text-center w-24">Frequently</th>
-                    <th class="p-2 border text-center w-24">Always</th>
-                    <th class="p-3 border text-left w-44">Remarks</th>
-                  </tr>
-                </thead>
-                <tbody>${rowsHtml}</tbody>
-              </table>
-            </div>
-          </div>
-        `;
-      });
-
-      document.getElementById('tally1').innerText = c1;
-      document.getElementById('tally2').innerText = c2;
-      document.getElementById('tally3').innerText = c3;
-      document.getElementById('tally4').innerText = c4;
-    }
-
-    function tickSBM(num, lvl, chk) {
-      const target = getTargetSchoolRecord();
-      if (!target) return;
-      if (!target.sbm) target.sbm = {};
-      if (!target.sbm[num]) target.sbm[num] = { level: '', remark: '' };
-      target.sbm[num].level = chk ? lvl : '';
-      saveDistrictDB();
-      renderSBMTab();
-    }
-
-    function updSBMRem(num, val) {
-      const target = getTargetSchoolRecord();
-      if (!target) return;
-      if (!target.sbm) target.sbm = {};
-      if (!target.sbm[num]) target.sbm[num] = { level: '', remark: val };
-      else target.sbm[num].remark = val;
-      saveDistrictDB();
-    }
-
-    // =========================================================================
-    // TAB 9: NSBI INVENTORY
-    // =========================================================================
-    function renderNSBITab() {
-      const target = getTargetSchoolRecord();
-      const canEdit = Boolean(target && isEditMode);
-      const isConsolidated = !target;
-
-      document.getElementById('nsbiAddForm').classList.toggle('hidden', !canEdit);
-      document.getElementById('thNsbiAction').classList.toggle('hidden', !canEdit);
-      document.getElementById('thNsbiSchoolCol').classList.toggle('hidden', !isConsolidated);
-
-      let rows = [];
-      if (target) {
-        rows = (target.nsbi || []).map((b, idx) => ({ ...b, _idx: idx, _schoolName: target.schoolName }));
-      } else {
-        getAllSchoolRecordsList().forEach(sc => {
-          (sc.nsbi || []).forEach((b, idx) => rows.push({ ...b, _idx: idx, _schoolName: sc.schoolName }));
-        });
-      }
-
-      let tR = 0, tG = 0, tC = 0, tS = 0, tL = 0, tB = 0, tF = 0;
-      document.getElementById('nsbiTableBody').innerHTML = rows.length ? rows.map(b => {
-        tR += Number(b.rooms); tG += Number(b.gripo); tC += Number(b.cr);
-        tS += Number(b.silya); tL += Number(b.lamesa); tB += Number(b.board); tF += Number(b.fans);
-        return `<tr class="hover:bg-slate-50">
-          ${isConsolidated ? `<td class="p-2.5 border font-extrabold text-blue-900">${b._schoolName}</td>` : ''}
-          <td class="p-2.5 border font-extrabold">${b.name}</td>
-          <td class="p-2.5 border">${b.type}</td>
-          <td class="p-2.5 border font-bold text-blue-900">${b.condition}</td>
-          <td class="p-2.5 border text-center font-extrabold">${b.rooms}</td>
-          <td class="p-2.5 border text-center font-bold bg-blue-50/40">${b.gripo}</td>
-          <td class="p-2.5 border text-center font-bold bg-blue-50/40">${b.cr}</td>
-          <td class="p-2.5 border text-center font-bold bg-orange-50/40">${b.silya}</td>
-          <td class="p-2.5 border text-center font-bold bg-orange-50/40">${b.lamesa}</td>
-          <td class="p-2.5 border text-center">${b.board}</td>
-          <td class="p-2.5 border text-center">${b.fans}</td>
-          <td class="p-2.5 border text-slate-600">${b.remarks || '-'}</td>
-          ${canEdit ? `<td class="p-2.5 border text-center"><button type="button" onclick="delNSBI(${b._idx})" class="text-red-600 font-bold">🗑️</button></td>` : ''}
-        </tr>`;
-      }).join('') : `<tr><td colspan="13" class="p-6 text-center text-slate-400 font-bold">Walang nakalistang school building.</td></tr>`;
-
-      document.getElementById('nsbiTableFoot').innerHTML = `
-        <tr>
-          <td colspan="${isConsolidated ? 4 : 3}" class="p-3 text-left">GRAND TOTAL (${rows.length} Buildings)</td>
-          <td class="p-3 text-center text-orange-400">${tR}</td>
-          <td class="p-3 text-center text-blue-300">${tG}</td>
-          <td class="p-3 text-center text-blue-300">${tC}</td>
-          <td class="p-3 text-center text-orange-300">${tS}</td>
-          <td class="p-3 text-center text-orange-300">${tL}</td>
-          <td class="p-3 text-center">${tB}</td>
-          <td class="p-3 text-center">${tF}</td>
-          <td colspan="${canEdit ? 2 : 1}" class="p-3"></td>
-        </tr>
-      `;
-    }
-
-    function addNSBIBuilding(e) {
-      e.preventDefault();
-      const target = getTargetSchoolRecord();
-      if (!target) return;
-      if (!target.nsbi) target.nsbi = [];
-      target.nsbi.push({
-        name: document.getElementById('nsbiName').value.trim(),
-        type: document.getElementById('nsbiType').value,
-        condition: document.getElementById('nsbiCond').value,
-        rooms: Number(document.getElementById('nsbiRooms').value) || 0,
-        gripo: Number(document.getElementById('nsbiGripo').value) || 0,
-        cr: Number(document.getElementById('nsbiCR').value) || 0,
-        silya: Number(document.getElementById('nsbiSilya').value) || 0,
-        lamesa: Number(document.getElementById('nsbiLamesa').value) || 0,
-        board: Number(document.getElementById('nsbiBoard').value) || 0,
-        fans: Number(document.getElementById('nsbiFans').value) || 0,
-        remarks: document.getElementById('nsbiRemarks').value.trim()
-      });
-      saveDistrictDB();
-      renderNSBITab();
-      e.target.reset();
-    }
-
-    function delNSBI(idx) {
-      const target = getTargetSchoolRecord();
-      if (!target) return;
-      target.nsbi.splice(idx, 1);
-      saveDistrictDB();
-      renderNSBITab();
-    }
-
-    // =========================================================================
-    // TAB 10: 3D GRAPHICAL ANALYTICS & SCHOOL-BY-SCHOOL COMPARISON
-    // =========================================================================
-    function selectAnalyticsCat(cat) {
-      activeAnalyticsCat = cat;
-      renderAnalyticsTab();
-    }
-
-    function changeSchoolCompareMetric(val) {
-      schoolCompareMetric = val;
-      renderAnalyticsTab();
-    }
-
-    function getSchoolMetricsSummary(sc) {
-      let totPers = 0;
-      PERSONNEL_POSITIONS.forEach(p => {
-        totPers += (Number(sc.personnel?.[p.key]?.m) || 0) + (Number(sc.personnel?.[p.key]?.f) || 0);
-      });
-
-      let totEnr = 0;
-      GRADES.forEach(g => {
-        const arr = sc.enrMatrix?.y4?.enrollment?.[g] || [];
-        let latest = 0;
-        for (let i = arr.length - 1; i >= 0; i--) {
-          const sum = (Number(arr[i]?.m) || 0) + (Number(arr[i]?.f) || 0);
-          if (sum > 0 || i === 0) { latest = sum; break; }
-        }
-        totEnr += latest;
-      });
-
-      let mpsSum = 0, mpsCnt = 0;
-      G1_TO_G6.forEach(g => {
-        const arr = sc.mpsMatrix?.y4?.all_avg?.[g] || [];
-        arr.forEach(p => {
-          const avg = ((Number(p?.m) || 0) + (Number(p?.f) || 0)) / 2;
-          if (avg > 0) { mpsSum += avg; mpsCnt++; }
-        });
-      });
-      const avgMPS = mpsCnt ? Number((mpsSum / mpsCnt).toFixed(2)) : 0;
-
-      let totRooms = 0;
-      (sc.nsbi || []).forEach(b => { totRooms += Number(b.rooms) || 0; });
-
-      return { totPers, totEnr, avgMPS, totRooms };
-    }
-
-    function renderAnalyticsTab() {
-      const cats = ['school_compare', 'personnel', 'mps', 'enr', 'crla', 'philiri', 'rma', 'reading', 'nat'];
-      cats.forEach(c => {
-        const btn = document.getElementById('gCatBtn_' + c);
-        if (!btn) return;
-        const baseCls = c === 'school_compare' && (!currentSession || currentSession.role !== 'admin') ? 'hidden ' : '';
-        btn.className = baseCls + (c === activeAnalyticsCat
-          ? 'px-3 py-2 rounded-xl text-xs font-extrabold bg-orange-600 text-white shadow transition'
-          : 'px-3 py-2 rounded-xl text-xs font-extrabold bg-slate-800 text-slate-300 hover:bg-slate-700 transition');
-      });
-
-      const ctrl = document.getElementById('analyticsControlsBar');
-      const subBox = document.getElementById('analyticsSubChartBox');
-      subBox.classList.remove('hidden');
-
-      if (activeAnalyticsCat === 'school_compare' && currentSession && currentSession.role === 'admin') {
-        ctrl.innerHTML = `
-          <span class="text-xs font-extrabold text-orange-300">🏫 School-by-School 3D Comparison (Rosario West Sub-Office)</span>
-          <select onchange="changeSchoolCompareMetric(this.value)" class="bg-slate-950 text-white border border-orange-500 rounded-xl px-3 py-1.5 text-xs font-extrabold">
-            <option value="enrollment" ${schoolCompareMetric === 'enrollment' ? 'selected' : ''}>1. Total Enrollment per School (SY 2026–2027)</option>
-            <option value="personnel" ${schoolCompareMetric === 'personnel' ? 'selected' : ''}>2. Total Personnel per School</option>
-            <option value="mps" ${schoolCompareMetric === 'mps' ? 'selected' : ''}>3. General Average MPS (%) per School</option>
-            <option value="rooms" ${schoolCompareMetric === 'rooms' ? 'selected' : ''}>4. Total Classrooms (NSBI) per School</option>
-          </select>
-        `;
-
-        const accounts = Object.values(districtDB.accounts || {});
-        const items = accounts.map(acc => {
-          const sc = districtDB.schoolsData?.[acc.schoolId] || createEmptySchoolRecord(acc.schoolId, acc.schoolName, acc.headName);
-          const m = getSchoolMetricsSummary(sc);
-          let val = m.totEnr;
-          if (schoolCompareMetric === 'personnel') val = m.totPers;
-          else if (schoolCompareMetric === 'mps') val = m.avgMPS;
-          else if (schoolCompareMetric === 'rooms') val = m.totRooms;
-          return {
-            label: acc.schoolName.replace(/Elementary School/gi, 'ES').replace(/National High School/gi, 'NHS'),
-            value: val
-          };
-        });
-
-        const metricTitles = {
-          enrollment: 'School-by-School 3D Comparison: Total Enrollment (SY 2026–2027)',
-          personnel: 'School-by-School 3D Comparison: Total Teaching & Non-Teaching Personnel',
-          mps: 'School-by-School 3D Comparison: General Average MPS (%)',
-          rooms: 'School-by-School 3D Comparison: Total Classrooms (NSBI)'
-        };
-
-        render3DGlassBarChart('analyticsMainChartBox', {
-          title: metricTitles[schoolCompareMetric],
-          subtitle: 'Paghahambing ng bawat rehistradong paaralan sa Rosario West Sub-Office.',
-          items,
-          suffix: schoolCompareMetric === 'mps' ? '%' : '',
-          maxVal: schoolCompareMetric === 'mps' ? 100 : null
-        });
-        subBox.classList.add('hidden');
-      } else if (activeAnalyticsCat === 'personnel') {
-        const pData = getAggregatedPersonnel();
-        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">👩‍🏫 Teaching, School Head & Non-Teaching Personnel Breakdown</span>`;
-
-        render3DGlassBarChart('analyticsMainChartBox', {
-          title: '3D Glass Bar Graph: Teaching Positions (Teacher I–VII & Master Teacher I–IV)',
-          items: PERSONNEL_POSITIONS.slice(0, 11).map(p => ({
-            label: p.title.replace('Master Teacher ', 'MT-').replace('Teacher ', 'T-'),
-            value: pData[p.key].m + pData[p.key].f
-          }))
-        });
-
-        render3DGlassBarChart('analyticsSubChartBox', {
-          title: '3D Glass Bar Graph: Head Teachers (HT-I–IV), Principals (P-I–IV) & Non-Teaching',
-          items: PERSONNEL_POSITIONS.slice(11).map(p => ({
-            label: p.title.replace('Head Teacher ', 'HT-').replace('Principal ', 'P-').replace('Administrative Officer II (AO II)', 'AO II').replace('Administrative Assistant (ADAS I–III)', 'ADAS').replace('School Nurse / Health Personnel', 'Nurse').replace('Utility / Janitorial Staff', 'Utility').replace('Security Guard', 'Guard').replace('Job Order / LGU-Paid Personnel', 'JO/LGU'),
-            value: pData[p.key].m + pData[p.key].f
-          }))
-        });
-      } else if (activeAnalyticsCat === 'mps') {
-        const mpsData = getMPSData('y4', 'all_avg');
-        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">📈 MATATAG General Average MPS (%) — SY 2026–2027</span>`;
-        render3DGlassBarChart('analyticsMainChartBox', {
-          title: '3D Glass Bar Graph: General Average MPS per Grade Level',
-          items: G1_TO_G6.map(g => {
-            const avg = mpsData[g].reduce((s, p) => s + (p.m + p.f) / 2, 0) / 3;
-            return { label: g, value: Number(avg.toFixed(2)) };
-          }),
-          suffix: '%',
-          maxVal: 100
-        });
-        subBox.classList.add('hidden');
-      } else if (activeAnalyticsCat === 'enr') {
-        const enrData = getEnrData('y4', 'enrollment');
-        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">👥 Enrollment Summary (Kinder to Grade 6)</span>`;
-        render3DGlassBarChart('analyticsMainChartBox', {
-          title: '3D Glass Bar Graph: Enrollment per Grade Level (SY 2026–2027)',
-          items: GRADES.map(g => ({ label: g, value: enrData[g][0].m + enrData[g][0].f }))
-        });
-        subBox.classList.add('hidden');
-      } else {
-        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">📊 Live 3D Summary Chart (${activeAnalyticsCat.toUpperCase()})</span>`;
-        if (['crla', 'philiri', 'rma', 'reading'].includes(activeAnalyticsCat)) {
-          renderLiteracyTab();
-          document.getElementById('analyticsMainChartBox').innerHTML = document.getElementById('inlineGraph_' + activeAnalyticsCat).innerHTML;
-          subBox.classList.add('hidden');
-        } else if (activeAnalyticsCat === 'nat') {
-          renderNATTab();
-          document.getElementById('analyticsMainChartBox').innerHTML = document.getElementById('inlineGraph_nat').innerHTML;
-          subBox.classList.add('hidden');
-        } else {
-          subBox.classList.add('hidden');
-        }
-      }
-    }
-
-    // =========================================================================
-    // TAB 11: ADMIN SUBMISSION TRACKER, SECURITY & BACKUP
-    // =========================================================================
-    function getSchoolSubmissionChecklist(sc) {
-      if (!sc) return { pers: false, sec: false, mps: false, enr: false, lit: false, nat: false, nutr: false, sbm: false, nsbi: false, count: 0 };
-      const pers = Object.values(sc.personnel || {}).some(p => (Number(p.m) || 0) + (Number(p.f) || 0) > 0);
-      const sec = (sc.sectionsList || []).length > 0;
-      const mps = G1_TO_G6.some(g => (sc.mpsMatrix?.y4?.all_avg?.[g] || []).some(p => (Number(p.m) || 0) + (Number(p.f) || 0) > 0));
-      const enr = GRADES.some(g => (sc.enrMatrix?.y4?.enrollment?.[g] || []).some(p => (Number(p.m) || 0) + (Number(p.f) || 0) > 0));
-      const lit = CRLA_COVERAGE.some(c => (sc.crlaV2?.y3?.[c.key] || []).some(v => Number(v) > 0)) ||
-                  PHILIRI_COVERAGE.some(p => (sc.philiri?.[p.key] || []).some(v => Number(v) > 0)) ||
-                  G1_TO_G6.some(g => (sc.rmaV2?.y3?.[g] || []).some(v => Number(v) > 0));
-      const nat = (sc.nat || []).some(r => (Number(r.y1m) + Number(r.y1f) + Number(r.y2m) + Number(r.y2f) + Number(r.y3m) + Number(r.y3f)) > 0);
-      const nutr = GRADES.some(g => {
-        const d = sc.nutrition?.[g] || {};
-        return Object.values(d).some(v => Number(v) > 0);
-      });
-      const sbm = Object.values(sc.sbm || {}).some(v => Boolean(v.level));
-      const nsbi = (sc.nsbi || []).length > 0;
-
-      const flags = [pers, sec, mps, enr, lit, nat, nutr, sbm, nsbi];
-      const count = flags.filter(Boolean).length;
-      return { pers, sec, mps, enr, lit, nat, nutr, sbm, nsbi, count };
-    }
-
-    function renderAdminSchoolsTab() {
-      if (!currentSession || currentSession.role !== 'admin') return;
-      applyGlobalLockUI();
-
-      const accounts = Object.values(districtDB.accounts || {});
-      document.getElementById('adminTotalSchoolsBadge').innerText = `${accounts.length} Registered School${accounts.length !== 1 ? 's' : ''}`;
-
-      const tbody = document.getElementById('tbodyAdminSchools');
-      if (!accounts.length) {
-        tbody.innerHTML = `<tr><td colspan="13" class="p-6 text-center text-slate-400 font-bold">Wala pang naka-register na paaralan. Maaari na silang mag-register gamit ang "Register School" tab sa Login screen.</td></tr>`;
-        return;
-      }
-
-      const badge = (ok) => ok ? `<span class="text-emerald-600 font-extrabold text-sm" title="Submitted">✅</span>` : `<span class="text-slate-300 font-bold text-sm" title="Pending">⏳</span>`;
-
-      tbody.innerHTML = accounts.map(acc => {
-        const scData = districtDB.schoolsData?.[acc.schoolId];
-        const chk = getSchoolSubmissionChecklist(scData);
-        const pct = Math.round((chk.count / 9) * 100);
-
-        return `<tr class="hover:bg-slate-50">
-          <td class="p-3">
-            <span class="font-mono font-extrabold text-blue-900 block">${acc.schoolId}</span>
-            <span class="font-extrabold text-slate-950">${acc.schoolName}</span>
-          </td>
-          <td class="p-3">
-            <span class="font-semibold block">${acc.headName}</span>
-            <span class="text-[10px] font-mono font-bold text-orange-700">PIN: ${acc.pin}</span>
-          </td>
-          <td class="p-2 text-center">${badge(chk.pers)}</td>
-          <td class="p-2 text-center">${badge(chk.sec)}</td>
-          <td class="p-2 text-center">${badge(chk.mps)}</td>
-          <td class="p-2 text-center">${badge(chk.enr)}</td>
-          <td class="p-2 text-center">${badge(chk.lit)}</td>
-          <td class="p-2 text-center">${badge(chk.nat)}</td>
-          <td class="p-2 text-center">${badge(chk.nutr)}</td>
-          <td class="p-2 text-center">${badge(chk.sbm)}</td>
-          <td class="p-2 text-center">${badge(chk.nsbi)}</td>
-          <td class="p-2 text-center font-extrabold">
-            <span class="px-2 py-1 rounded-full text-[10px] ${pct === 100 ? 'bg-emerald-100 text-emerald-900' : pct > 0 ? 'bg-orange-100 text-orange-900' : 'bg-slate-100 text-slate-600'}">
-              ${chk.count}/9 (${pct}%)
-            </span>
-          </td>
-          <td class="p-2 text-center space-x-1">
-            <button type="button" onclick="adminResetSchoolPass('${acc.schoolId}')" class="bg-blue-800 hover:bg-blue-700 text-white px-2 py-1 rounded-lg text-[10px] font-extrabold">🔑 Reset</button>
-            <button type="button" onclick="adminDeleteSchool('${acc.schoolId}')" class="bg-red-700 hover:bg-red-600 text-white px-2 py-1 rounded-lg text-[10px] font-extrabold">🗑️</button>
-          </td>
-        </tr>`;
-      }).join('');
-    }
-
-    function changeAdminPassword() {
-      if (!currentSession || currentSession.role !== 'admin') return;
-      const newPass = document.getElementById('newAdminPassInput').value.trim();
-      if (newPass.length < 4) {
-        alert('❌ Maglagay ng hindi bababa sa 4 characters para sa bagong Admin Password.');
-        return;
-      }
-      districtDB.adminPass = newPass;
-      saveDistrictDB();
-      document.getElementById('newAdminPassInput').value = '';
-      alert('✅ Matagumpay na napalitan ang Sub-Office Admin Password!');
-    }
-
-    function toggleGlobalSubmissionLock() {
-      if (!currentSession || currentSession.role !== 'admin') return;
-      districtDB.submissionsLocked = !districtDB.submissionsLocked;
-      saveDistrictDB();
-      applyGlobalLockUI();
-      alert(districtDB.submissionsLocked
-        ? '🔒 Naka-LOCK na ang lahat ng school submissions. Hindi na maaaring mag-edit ang mga paaralan.'
-        : '🔓 Naka-UNLOCK na muli ang submissions. Maaari nang mag-encode ang mga paaralan.');
-    }
-
-    function downloadFullDistrictJSONBackup() {
-      const blob = new Blob([JSON.stringify(districtDB, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `RosarioWest_SubOffice_FullBackup_${new Date().toISOString().slice(0, 10)}.json`;
-      a.click();
-    }
-
-    function adminResetSchoolPass(schoolId) {
-      const acc = districtDB.accounts[schoolId];
-      if (!acc) return;
-      if (confirm(`I-reset ang password ng ${acc.schoolName} (${schoolId}) patungong "DepEd2026"?`)) {
-        acc.password = 'DepEd2026';
-        saveDistrictDB();
-        alert(`✅ Na-reset na ang password ng ${acc.schoolName} sa: DepEd2026`);
-      }
-    }
-
-    function adminDeleteSchool(schoolId) {
-      const acc = districtDB.accounts[schoolId];
-      if (!acc) return;
-      if (confirm(`⚠️ SIGURADO KA BA? Buburahin nito ang account at lahat ng datos ng ${acc.schoolName} (${schoolId})!`)) {
-        delete districtDB.accounts[schoolId];
-        delete districtDB.schoolsData[schoolId];
-        saveDistrictDB();
-        refreshAdminSchoolDropdown();
-        renderAdminSchoolsTab();
-      }
-    }
-
-    // =========================================================================
-    // PRINT-READY 1-PAGE EXECUTIVE SUMMARY REPORT
-    // =========================================================================
-    function openExecutiveSummaryModal() {
-      const target = getTargetSchoolRecord();
-      const scopeName = target ? `${target.schoolName.toUpperCase()} (${target.schoolId})` : `DISTRICT CONSOLIDATED (${Object.keys(districtDB.accounts || {}).length} SCHOOLS)`;
-      document.getElementById('execReportScopeTitle').innerText = `EXECUTIVE SUMMARY REPORT • ${scopeName} • ${new Date().toLocaleDateString()}`;
-
-      // 1. Personnel Summary
-      const pData = getAggregatedPersonnel();
-      let cTeach = 0, cMT = 0, cHT = 0, cPrin = 0, cNT = 0;
-      PERSONNEL_POSITIONS.forEach(p => {
-        const tot = pData[p.key].m + pData[p.key].f;
-        if (p.cat === 'Teaching') cTeach += tot;
-        else if (p.cat === 'Master Teacher') cMT += tot;
-        else if (p.cat === 'Head Teacher') cHT += tot;
-        else if (p.cat === 'School Principal') cPrin += tot;
-        else if (p.cat === 'Non-Teaching') cNT += tot;
-      });
-      const grandPers = cTeach + cMT + cHT + cPrin + cNT;
-
-      // 2. Enrollment Summary (SY 2026-2027)
-      const enrData = getEnrData('y4', 'enrollment');
-      let enrM = 0, enrF = 0;
-      GRADES.forEach(g => {
-        const arr = enrData[g];
-        for (let i = arr.length - 1; i >= 0; i--) {
-          if (arr[i].m + arr[i].f > 0 || i === 0) {
-            enrM += arr[i].m;
-            enrF += arr[i].f;
-            break;
-          }
-        }
-      });
-
-      // 3. MPS General Average (SY 2026-2027)
-      const mpsData = getMPSData('y4', 'all_avg');
-      let mpsSum = 0, mpsCnt = 0;
-      G1_TO_G6.forEach(g => {
-        mpsData[g].forEach(p => {
-          const avg = (p.m + p.f) / 2;
-          if (avg > 0) { mpsSum += avg; mpsCnt++; }
-        });
-      });
-      const overallMPS = mpsCnt ? (mpsSum / mpsCnt).toFixed(2) + '%' : '0.00%';
-
-      // 4. NSBI Summary
-      const scList = target ? [target] : getAllSchoolRecordsList();
-      let bldgCnt = 0, rmCnt = 0, silyaCnt = 0, lamesaCnt = 0, crCnt = 0, gripoCnt = 0;
-      scList.forEach(sc => {
-        (sc.nsbi || []).forEach(b => {
-          bldgCnt++;
-          rmCnt += Number(b.rooms) || 0;
-          silyaCnt += Number(b.silya) || 0;
-          lamesaCnt += Number(b.lamesa) || 0;
-          crCnt += Number(b.cr) || 0;
-          gripoCnt += Number(b.gripo) || 0;
-        });
-      });
-
-      document.getElementById('execSummaryBody').innerHTML = `
-        <div class="grid grid-cols-4 gap-3 text-center">
-          <div class="border border-slate-300 rounded-xl p-3 bg-slate-50">
-            <span class="text-[10px] font-bold uppercase text-slate-500 block">Total Enrollment</span>
-            <span class="text-xl font-extrabold text-blue-950">${enrM + enrF}</span>
-            <span class="text-[10px] text-slate-600 block">M: ${enrM} | F: ${enrF}</span>
-          </div>
-          <div class="border border-slate-300 rounded-xl p-3 bg-slate-50">
-            <span class="text-[10px] font-bold uppercase text-slate-500 block">Total Personnel</span>
-            <span class="text-xl font-extrabold text-slate-950">${grandPers}</span>
-            <span class="text-[10px] text-slate-600 block">Teach/Heads: ${grandPers - cNT} | Non-Teach: ${cNT}</span>
-          </div>
-          <div class="border border-slate-300 rounded-xl p-3 bg-slate-50">
-            <span class="text-[10px] font-bold uppercase text-slate-500 block">MATATAG Gen. MPS</span>
-            <span class="text-xl font-extrabold text-orange-700">${overallMPS}</span>
-            <span class="text-[10px] text-slate-600 block">SY 2026–2027 Average</span>
-          </div>
-          <div class="border border-slate-300 rounded-xl p-3 bg-slate-50">
-            <span class="text-[10px] font-bold uppercase text-slate-500 block">Classrooms (NSBI)</span>
-            <span class="text-xl font-extrabold text-emerald-800">${rmCnt}</span>
-            <span class="text-[10px] text-slate-600 block">${bldgCnt} School Buildings</span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="border border-slate-300 rounded-xl overflow-hidden">
-            <div class="bg-slate-900 text-white px-3 py-1.5 font-extrabold">I. INDIVIDUAL PERSONNEL SUMMARY BREAKDOWN</div>
-            <table class="w-full text-[11px]">
-              <thead>
-                <tr class="bg-slate-100 border-b font-extrabold">
-                  <th class="px-2.5 py-1 text-left">Position</th>
-                  <th class="px-2 py-1 text-center">M</th>
-                  <th class="px-2 py-1 text-center">F</th>
-                  <th class="px-2.5 py-1 text-right">Total</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y">
-                ${PERSONNEL_POSITIONS.filter(p => p.cat !== 'Non-Teaching').map(p => {
-                  const m = pData[p.key]?.m || 0;
-                  const f = pData[p.key]?.f || 0;
-                  return `<tr><td class="px-2.5 py-1 font-bold">${p.title}</td><td class="px-2 py-1 text-center">${m}</td><td class="px-2 py-1 text-center">${f}</td><td class="px-2.5 py-1 text-right font-extrabold">${m + f}</td></tr>`;
-                }).join('')}
-                <tr><td class="px-2.5 py-1 font-bold">Non-Teaching & JO Personnel</td><td class="px-2 py-1 text-center">${PERSONNEL_POSITIONS.filter(p => p.cat === 'Non-Teaching').reduce((s,p)=>s+(pData[p.key]?.m||0),0)}</td><td class="px-2 py-1 text-center">${PERSONNEL_POSITIONS.filter(p => p.cat === 'Non-Teaching').reduce((s,p)=>s+(pData[p.key]?.f||0),0)}</td><td class="px-2.5 py-1 text-right font-extrabold">${cNT}</td></tr>
-                <tr class="bg-slate-100 font-extrabold"><td class="px-2.5 py-1.5" colspan="3">GRAND TOTAL PERSONNEL</td><td class="px-2.5 py-1.5 text-right">${grandPers}</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="border border-slate-300 rounded-xl overflow-hidden">
-            <div class="bg-slate-900 text-white px-3 py-1.5 font-extrabold">II. PHYSICAL FACILITIES (NSBI INVENTORY)</div>
-            <table class="w-full text-xs">
-              <tbody class="divide-y">
-                <tr><td class="p-2 font-bold">Total School Buildings</td><td class="p-2 text-right font-extrabold">${bldgCnt}</td></tr>
-                <tr><td class="p-2 font-bold">Total Instructional Classrooms</td><td class="p-2 text-right font-extrabold">${rmCnt}</td></tr>
-                <tr><td class="p-2 font-bold">Functional Comfort Rooms (CR)</td><td class="p-2 text-right font-extrabold">${crCnt}</td></tr>
-                <tr><td class="p-2 font-bold">Water Faucets / Gripo</td><td class="p-2 text-right font-extrabold">${gripoCnt}</td></tr>
-                <tr><td class="p-2 font-bold">Learner Chairs (Silya) / Desks (Lamesa)</td><td class="p-2 text-right font-extrabold">${silyaCnt} / ${lamesaCnt}</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-
-      document.getElementById('execSummaryPrintModal').classList.remove('hidden');
-    }
-
-    function closeExecutiveSummaryModal() {
-      document.body.classList.remove('exec-print-mode');
-      document.getElementById('execSummaryPrintModal').classList.add('hidden');
-    }
-
-    function printExecutiveSummary() {
-      document.body.classList.add('exec-print-mode');
-      window.print();
-      setTimeout(() => document.body.classList.remove('exec-print-mode'), 500);
-    }
-
-    // =========================================================================
-    // EXPORT CSV
-    // =========================================================================
-    function exportCurrentCSV() {
-      const pData = getAggregatedPersonnel();
-      let csv = 'Position,Category,Male,Female,Total\n';
-      PERSONNEL_POSITIONS.forEach(p => {
-        csv += `"${p.title}","${p.cat}",${pData[p.key].m},${pData[p.key].f},${pData[p.key].m + pData[p.key].f}\n`;
-      });
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `Rosario_West_SubOffice_${activeTab}_${new Date().toISOString().slice(0, 10)}.csv`;
-      a.click();
-    }
-  </script>
-</body>
-</html>
+          <td colspan="3" class="p-3 text
