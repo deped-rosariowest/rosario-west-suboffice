@@ -3,9 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <title>Rosario West Sub-Office • Division of Batangas | Official District DataHub & SMEA System</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -228,7 +225,7 @@
       🔒 PAALALA: Kasalukuyang naka-LOCK ang pag-edit ng datos ng Rosario West Sub-Office Admin para sa District Consolidation.
     </div>
 
-    <!-- NAVIGATION TABS BAR (12 TABS) -->
+    <!-- NAVIGATION TABS BAR (12 TABS INCLUDING FINANCIAL & SHS) -->
     <div class="no-print bg-slate-900 border-b border-slate-800 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-2">
         <button type="button" id="tabBtn_personnel" onclick="switchPortalTab('personnel')" class="px-3 py-2 rounded-xl text-xs font-extrabold transition">
@@ -412,13 +409,13 @@
         </div>
       </section>
 
-      <!-- ==================== TAB 3: MPS (BUONG MPS PER GRADE & SUBJECT — WALANG MALE/FEMALE) & SHS CORE SUBJECTS ==================== -->
+      <!-- ==================== TAB 3: MPS (MATATAG — OVERALL MPS ONLY) & SENIOR HIGH SCHOOL CORE SUBJECTS ==================== -->
       <section id="sec_mps" class="hidden bg-white rounded-3xl shadow-md border border-slate-200 p-6 space-y-6">
         <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
           <div class="space-y-1">
             <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">MATATAG CURRICULUM & SENIOR HIGH SCHOOL CORE SUBJECTS</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">📈 Quarterly/Term MPS (Overall %) & SHS Core Subjects Summary</h2>
-            <p class="text-xs text-slate-500">Buong Mean Percentage Score (MPS %) per Grade at per Subject (walang hiwalay na Male/Female sa MPS).</p>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">📈 Quarterly/Term MPS & SHS Core Subjects Enrollment Summary</h2>
+            <p class="text-xs text-slate-500">Kasalukuyang SY: 3 Terms (Term 1–3) | Mga Nagdaang SY: 4 Quarters (Q1–Q4) + SHS Core Subjects Enrollment & MPS.</p>
           </div>
 
           <div class="flex flex-col gap-2 min-w-[270px]">
@@ -444,11 +441,11 @@
           </div>
         </div>
 
-        <!-- ELEMENTARY MATATAG MPS TABLE (BUONG MPS BAWAT TERM/QUARTER — WALANG MALE/FEMALE) -->
+        <!-- ELEMENTARY MATATAG MPS TABLE -->
         <div class="rounded-2xl overflow-hidden border border-slate-300">
           <div class="bg-slate-950 text-white px-4 py-3 flex flex-wrap items-center justify-between gap-2">
             <span id="mpsBannerTitle" class="text-xs sm:text-sm font-extrabold">📌 SY 2026–2027 — MATATAG MPS SUMMARY</span>
-            <span id="mpsBannerBadge" class="bg-orange-500 text-slate-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">BUONG MPS (%) PER GRADE & SUBJECT</span>
+            <span id="mpsBannerBadge" class="bg-orange-500 text-slate-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">PRESENT SY: 3 TERMS</span>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-xs border-collapse">
@@ -461,12 +458,12 @@
 
         <div id="inlineGraph_mps" class="bg-slate-950 rounded-2xl border border-slate-800 p-4 text-white"></div>
 
-        <!-- SENIOR HIGH SCHOOL (SHS) CORE SUBJECTS: MAY MALE/FEMALE SA ENROLLED, BUO ANG MPS (%) -->
+        <!-- SENIOR HIGH SCHOOL (SHS) CORE SUBJECTS ENROLLMENT & MPS -->
         <div class="rounded-2xl overflow-hidden border-2 border-blue-900 mt-6">
           <div class="bg-gradient-to-r from-blue-950 via-slate-900 to-red-950 text-white px-4 py-3 flex flex-wrap items-center justify-between gap-2">
             <div>
-              <span class="text-xs sm:text-sm font-extrabold block">🎓 SENIOR HIGH SCHOOL (SHS) CORE SUBJECTS — ENROLLED LEARNERS & OVERALL MPS (%)</span>
-              <span class="text-[11px] text-orange-300">Enrolled Learners (Male, Female, Total) at Buong Mean Percentage Score (MPS %) sa bawat Core Subject</span>
+              <span class="text-xs sm:text-sm font-extrabold block">🎓 SENIOR HIGH SCHOOL (SHS) CORE SUBJECTS — ENROLLED LEARNERS & MPS (%)</span>
+              <span class="text-[11px] text-orange-300">Bilang ng naka-enroll (Male, Female, Total) at Mean Percentage Score (MPS %) sa bawat Core Subject</span>
             </div>
             <select id="shsCoreSemSel" onchange="renderSHSCoreSubjectsTable()" class="bg-orange-500 text-slate-950 text-xs font-extrabold px-3 py-1.5 rounded-xl">
               <option value="sem1">1st Semester (SY 2026–2027)</option>
@@ -492,13 +489,13 @@
         </div>
       </section>
 
-      <!-- ==================== TAB 4: ENROLLMENT, DROP-OUT, TRANS IN/OUT (MAY MALE & FEMALE) ==================== -->
+      <!-- ==================== TAB 4: ENROLLMENT, DROP-OUT, TRANS IN/OUT (KINDER TO SHS GRADE 12) ==================== -->
       <section id="sec_enrollment" class="hidden bg-white rounded-3xl shadow-md border border-slate-200 p-6 space-y-6">
         <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
           <div class="space-y-1">
             <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">KINDER TO GRADE 12 (ELEMENTARY & SENIOR HIGH SCHOOL)</span>
             <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">👥 Enrollment, Drop-out, Transferred In & Transferred Out (Elem & SHS)</h2>
-            <p class="text-xs text-slate-500">Saklaw ang Kinder–Grade 6 at Senior High School (Grade 11 & Grade 12 Strands) na may Male, Female at Total.</p>
+            <p class="text-xs text-slate-500">Saklaw ang Kinder–Grade 6 at Senior High School (Grade 11 & Grade 12 Strands). Kasalukuyang SY: 3 Terms | Nagdaang SY: 4 Quarters.</p>
           </div>
 
           <div class="flex flex-col gap-2 min-w-[270px]">
@@ -762,23 +759,22 @@
         </div>
       </section>
 
-      <!-- ==================== TAB 6: NAT & ELLNA (BUONG MPS PER GRADE & SUBJECT — WALANG MALE/FEMALE) ==================== -->
+      <!-- ==================== TAB 6: NAT & ELLNA (OVERALL MPS ONLY) ==================== -->
       <section id="sec_nat" class="hidden bg-white rounded-3xl shadow-md border border-slate-200 p-6 space-y-6">
         <div>
           <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">NATIONAL ASSESSMENT RESULTS • 3-YEAR COMPARATIVE TREND</span>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">🏆 ELLNA (Grade 3) & NAT (Grade 6) — Overall MPS (%) per Grade & Subject</h2>
-          <p class="text-xs text-slate-500">Buong Mean Percentage Score (MPS %) per Grade at Subject (wala nang hiwalay na Male at Female).</p>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">🏆 ELLNA (Grade 3) & NAT (Grade 6) — Overall MPS (%)</h2>
         </div>
 
         <div class="overflow-x-auto rounded-2xl border border-slate-300">
           <table class="w-full text-xs border-collapse">
             <thead>
               <tr class="bg-slate-950 text-white">
-                <th class="p-3 text-left min-w-[230px]">Grade Level & Learning Area (Subject)</th>
+                <th class="p-3 text-left min-w-[230px]">Assessment & Learning Area</th>
                 <th class="p-3 text-center bg-blue-950 border-l border-white/20">SY 2023–2024 MPS (%)</th>
                 <th class="p-3 text-center bg-red-900 border-l border-white/20">SY 2024–2025 MPS (%)</th>
                 <th class="p-3 text-center bg-orange-700 border-l border-white/20">SY 2025–2026 MPS (%)</th>
-                <th class="p-3 text-center bg-slate-900 text-orange-400 border-l border-white/20">3-Yr Overall Ave (%)</th>
+                <th class="p-3 text-center bg-slate-900 text-orange-400 border-l border-white/20">3-Yr Ave (%)</th>
               </tr>
             </thead>
             <tbody id="tbodyNAT" class="divide-y"></tbody>
@@ -924,8 +920,10 @@
           </div>
         </div>
 
+        <!-- FUND SUMMARY CARDS -->
         <div id="finFundCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3"></div>
 
+        <!-- ADD CUSTOM EXPENSE ITEM FORM (WHEN EDITING) -->
         <form id="formAddCustomExpense" onsubmit="addCustomFinancialItem(event)" class="hidden bg-slate-50 p-4 rounded-2xl border-2 border-blue-600 grid grid-cols-1 sm:grid-cols-4 gap-2.5">
           <div>
             <label class="text-[10px] font-extrabold text-slate-600 block mb-0.5">Fund Source *</label>
@@ -950,6 +948,7 @@
           </div>
         </form>
 
+        <!-- FINANCIAL EXPENSE BREAKDOWN TABLE -->
         <div class="overflow-x-auto rounded-2xl border border-slate-300">
           <table class="w-full text-xs border-collapse">
             <thead>
@@ -968,6 +967,7 @@
           </table>
         </div>
 
+        <!-- CUSTOM EXPENSE ITEMS LIST (IF ANY) -->
         <div id="customFinItemsBox" class="hidden space-y-2">
           <h3 class="text-xs font-extrabold uppercase text-slate-700">📌 Karagdagang Itinalang Kagastusan (Custom Expense Items)</h3>
           <div class="overflow-x-auto rounded-xl border border-slate-300">
@@ -985,6 +985,7 @@
           </div>
         </div>
 
+        <!-- 3D GLASS PIE CHART FOR FINANCIAL EXPENSES -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div id="financial3DPieChartBox" class="bg-slate-950 rounded-3xl border-2 border-orange-500/50 p-5 text-white shadow-xl"></div>
           <div id="financialFund3DPieBox" class="bg-slate-950 rounded-3xl border-2 border-blue-500/50 p-5 text-white shadow-xl"></div>
@@ -1134,7 +1135,7 @@
 
   <script>
     // =========================================================================
-    // FIREBASE NODE PARA SA ROSARIO WEST SUB-OFFICE
+    // HIWALAY NA FIREBASE NODE PARA SA ROSARIO WEST SUB-OFFICE
     // =========================================================================
     const FIREBASE_DB_URL = "https://tubahanes-datahub-default-rtdb.asia-southeast1.firebasedatabase.app";
     const SUBOFFICE_NODE = "rosarioWestSubOffice";
@@ -1373,14 +1374,13 @@
         philiri: {},
         rmaV2: { y1: {}, y2: {}, y3: {} },
         readingV2: { y1: [], y2: [], y3: [] },
-        // NAT & ELLNA: BUO PER GRADE PER SUBJECT (WALANG MALE AT FEMALE)
         nat: [
-          { area: 'ELLNA (Grade 3) — English', y1: 0, y2: 0, y3: 0 },
-          { area: 'ELLNA (Grade 3) — Filipino', y1: 0, y2: 0, y3: 0 },
-          { area: 'ELLNA (Grade 3) — Numeracy', y1: 0, y2: 0, y3: 0 },
-          { area: 'NAT (Grade 6) — Problem Solving', y1: 0, y2: 0, y3: 0 },
-          { area: 'NAT (Grade 6) — Information Literacy', y1: 0, y2: 0, y3: 0 },
-          { area: 'NAT (Grade 6) — Critical Thinking', y1: 0, y2: 0, y3: 0 }
+          { area: 'ELLNA (Grade 3) — English', y1m: 0, y1f: 0, y2m: 0, y2f: 0, y3m: 0, y3f: 0 },
+          { area: 'ELLNA (Grade 3) — Filipino', y1m: 0, y1f: 0, y2m: 0, y2f: 0, y3m: 0, y3f: 0 },
+          { area: 'ELLNA (Grade 3) — Numeracy', y1m: 0, y1f: 0, y2m: 0, y2f: 0, y3m: 0, y3f: 0 },
+          { area: 'NAT (Grade 6) — Problem Solving', y1m: 0, y1f: 0, y2m: 0, y2f: 0, y3m: 0, y3f: 0 },
+          { area: 'NAT (Grade 6) — Information Literacy', y1m: 0, y1f: 0, y2m: 0, y2f: 0, y3m: 0, y3f: 0 },
+          { area: 'NAT (Grade 6) — Critical Thinking', y1m: 0, y1f: 0, y2m: 0, y2f: 0, y3m: 0, y3f: 0 }
         ],
         nutrition: {},
         sbm: {},
@@ -1408,8 +1408,7 @@
         rec.mpsMatrix[sy] = {};
         ALL_MPS_SUBJECTS.forEach(s => {
           rec.mpsMatrix[sy][s] = {};
-          // MPS: BUO PER GRADE PER SUBJECT (WALANG MALE AT FEMALE)
-          G1_TO_G6.forEach(g => { rec.mpsMatrix[sy][s][g] = Array.from({ length: pCount }, () => ({ mps: 0 })); });
+          G1_TO_G6.forEach(g => { rec.mpsMatrix[sy][s][g] = Array.from({ length: pCount }, () => ({ m: 0, f: 0 })); });
         });
         rec.enrMatrix[sy] = { enrollment: {}, dropout: {}, trans_in: {}, trans_out: {} };
         GRADES.forEach(g => {
@@ -1445,7 +1444,7 @@
     };
 
     try {
-      const localSaved = JSON.parse(safeGetStorage('localStorage', 'rwest_suboffice_v2') || 'null');
+      const localSaved = JSON.parse(safeGetStorage('localStorage', 'rwest_suboffice_v1') || 'null');
       if (localSaved) districtDB = { ...districtDB, ...localSaved };
     } catch (e) {}
 
@@ -1516,7 +1515,7 @@
           districtDB = { ...districtDB, ...cloud };
           if (!districtDB.accounts) districtDB.accounts = {};
           if (!districtDB.schoolsData) districtDB.schoolsData = {};
-          safeSetStorage('localStorage', 'rwest_suboffice_v2', JSON.stringify(districtDB));
+          safeSetStorage('localStorage', 'rwest_suboffice_v1', JSON.stringify(districtDB));
           applySavedDistrictLogo();
           if (currentSession) {
             applyGlobalLockUI();
@@ -1534,7 +1533,7 @@
     }
 
     async function saveDistrictDB() {
-      safeSetStorage('localStorage', 'rwest_suboffice_v2', JSON.stringify(districtDB));
+      safeSetStorage('localStorage', 'rwest_suboffice_v1', JSON.stringify(districtDB));
       try {
         setSyncStatus("💾 Saving...");
         const res = await fetch(`${FIREBASE_DB_URL}/${SUBOFFICE_NODE}.json`, {
@@ -2165,7 +2164,7 @@
           <div class="bg-orange-50/70 border border-orange-200 rounded-2xl p-3 space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-extrabold uppercase text-orange-950">⭐ Master Teachers</span>
-              <span class="text-[11px] font-extrabold bg-orange-600 text-white px-2 py-0.5 rounded-full">Sub-Total: ${cMT}</span>
+              <span class="text-[11px] font-extrabold bg-orange-600 text-white px-2.5 py-0.5 rounded-full">Sub-Total: ${cMT}</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
               ${makeMiniCards(['mt1','mt2','mt3','mt4'], 'bg-orange-700', 'border-orange-300', 'text-orange-100', 'text-orange-200')}
@@ -2174,7 +2173,7 @@
           <div class="bg-red-50/70 border border-red-200 rounded-2xl p-3 space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-extrabold uppercase text-red-950">🏫 Head Teachers</span>
-              <span class="text-[11px] font-extrabold bg-red-800 text-white px-2 py-0.5 rounded-full">Sub-Total: ${cHT}</span>
+              <span class="text-[11px] font-extrabold bg-red-800 text-white px-2.5 py-0.5 rounded-full">Sub-Total: ${cHT}</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
               ${makeMiniCards(['ht1','ht2','ht3','ht4'], 'bg-red-900', 'border-red-400', 'text-red-100', 'text-red-200')}
@@ -2183,7 +2182,7 @@
           <div class="bg-slate-100 border border-slate-300 rounded-2xl p-3 space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-extrabold uppercase text-slate-950">🎓 School Principals</span>
-              <span class="text-[11px] font-extrabold bg-slate-900 text-orange-400 px-2 py-0.5 rounded-full">Sub-Total: ${cPrin}</span>
+              <span class="text-[11px] font-extrabold bg-slate-900 text-orange-400 px-2.5 py-0.5 rounded-full">Sub-Total: ${cPrin}</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
               ${makeMiniCards(['p1','p2','p3','p4'], 'bg-slate-950', 'border-orange-500', 'text-orange-300', 'text-slate-400')}
@@ -2401,27 +2400,23 @@
     }
 
     // =========================================================================
-    // TAB 3: MPS (BUO PER GRADE & SUBJECT — WALANG MALE/FEMALE) & SHS CORE SUBJECTS
+    // TAB 3: MPS (MATATAG — OVERALL MPS ONLY) & SENIOR HIGH SCHOOL CORE SUBJECTS
     // =========================================================================
-    function extractSingleMPSCell(cellObj) {
-      if (!cellObj) return 0;
-      if (cellObj.mps !== undefined) return Number(cellObj.mps) || 0;
-      const m = Number(cellObj.m) || 0;
-      const f = Number(cellObj.f) || 0;
-      return (m > 0 || f > 0) ? Number(((m + f) / 2).toFixed(2)) : 0;
-    }
-
     function getMPSData(sy, subj, specificSchool = null) {
       const target = specificSchool || getTargetSchoolRecord();
       const pCount = sy === 'y4' ? 3 : 4;
       const res = {};
-      G1_TO_G6.forEach(g => { res[g] = Array(pCount).fill(0); });
+      G1_TO_G6.forEach(g => { res[g] = Array.from({ length: pCount }, () => ({ m: 0, f: 0 })); });
 
       if (target) {
         G1_TO_G6.forEach(g => {
           const arr = target.mpsMatrix?.[sy]?.[subj]?.[g] || [];
           for (let i = 0; i < pCount; i++) {
-            res[g][i] = extractSingleMPSCell(arr[i]);
+            const mVal = Number(arr[i]?.m) || 0;
+            const fVal = Number(arr[i]?.f) || 0;
+            const combined = (mVal > 0 && fVal > 0 && mVal !== fVal) ? Number(((mVal + fVal) / 2).toFixed(2)) : (mVal || fVal);
+            res[g][i].m = combined;
+            res[g][i].f = combined;
           }
         });
       } else {
@@ -2431,10 +2426,14 @@
             for (let i = 0; i < pCount; i++) {
               let sum = 0, cnt = 0;
               schools.forEach(sc => {
-                const val = extractSingleMPSCell(sc.mpsMatrix?.[sy]?.[subj]?.[g]?.[i]);
+                const mVal = Number(sc.mpsMatrix?.[sy]?.[subj]?.[g]?.[i]?.m) || 0;
+                const fVal = Number(sc.mpsMatrix?.[sy]?.[subj]?.[g]?.[i]?.f) || 0;
+                const val = (mVal > 0 && fVal > 0 && mVal !== fVal) ? (mVal + fVal) / 2 : (mVal || fVal);
                 if (val > 0) { sum += val; cnt++; }
               });
-              res[g][i] = cnt ? Number((sum / cnt).toFixed(2)) : 0;
+              const avg = cnt ? Number((sum / cnt).toFixed(2)) : 0;
+              res[g][i].m = avg;
+              res[g][i].f = avg;
             }
           });
         }
@@ -2458,23 +2457,21 @@
       const mpsData = getMPSData(sy, subj);
       document.getElementById('mpsBannerTitle').innerText = `📌 ${MPS_SUBJECT_LABELS[subj]} — ${target ? target.schoolName : 'District Average'}`;
 
-      document.getElementById('mpsThead').innerHTML = `
-        <tr class="bg-slate-950 text-white">
-          <th class="p-3 text-left font-extrabold">Grade Level</th>
-          ${periods.map((p, idx) => `<th class="p-3 ${colors[idx]} text-center font-extrabold border-l border-white/20">${p} MPS (%)</th>`).join('')}
-          <th class="p-3 bg-slate-900 text-orange-400 text-center font-extrabold border-l border-white/20">SY Overall Ave (%)</th>
-        </tr>
-      `;
+      let r1 = `<th class="p-3 bg-slate-950 text-white text-left font-extrabold">Grade Level</th>`;
+      periods.forEach((p, idx) => {
+        r1 += `<th class="p-3 ${colors[idx]} text-white text-center font-extrabold border-l border-white/20">${p} MPS (%)</th>`;
+      });
+      r1 += `<th class="p-3 bg-slate-900 text-orange-400 text-center font-extrabold border-l border-white/20">Overall Ave (%)</th>`;
+      document.getElementById('mpsThead').innerHTML = `<tr>${r1}</tr>`;
 
-      const sumPeriods = Array(periods.length).fill(0);
+      const sumPeriod = Array(periods.length).fill(0);
 
       document.getElementById('mpsTbody').innerHTML = targetGrades.map(g => {
         const arr = mpsData[g];
         let rowSum = 0;
-
         const tds = periods.map((_, i) => {
-          const val = Number(arr[i]) || 0;
-          sumPeriods[i] += val;
+          const val = Number(arr[i].m) || 0;
+          sumPeriod[i] += val;
           rowSum += val;
 
           if (canEdit) {
@@ -2482,11 +2479,11 @@
               <td class="p-2 text-center border-l">
                 <input type="number" step="0.1" min="0" max="100" value="${val}"
                   onchange="updMPSCell('${sy}','${subj}','${g}',${i},this.value)"
-                  class="w-24 px-2 py-1.5 border border-blue-500 rounded-lg text-center font-extrabold">
+                  class="w-24 px-2 py-1 border border-blue-500 rounded text-center font-extrabold">
               </td>
             `;
           }
-          return `<td class="p-3 text-center font-bold border-l">${val}%</td>`;
+          return `<td class="p-3 text-center border-l font-bold text-slate-900">${val.toFixed(2)}%</td>`;
         }).join('');
 
         const rowAve = (rowSum / periods.length).toFixed(2);
@@ -2497,26 +2494,32 @@
         </tr>`;
       }).join('');
 
-      const periodAves = sumPeriods.map(s => Number((s / targetGrades.length).toFixed(2)));
-      const grandOverallAve = (periodAves.reduce((a, b) => a + b, 0) / periods.length).toFixed(2);
+      let grandSum = 0;
+      const footCells = periods.map((_, i) => {
+        const pAvg = sumPeriod[i] / targetGrades.length;
+        grandSum += pAvg;
+        return `<td class="p-3 text-center border-l border-slate-700 text-orange-300">${pAvg.toFixed(2)}%</td>`;
+      }).join('');
+      const grandAve = (grandSum / periods.length).toFixed(2);
 
       document.getElementById('mpsTfoot').innerHTML = `
         <tr>
-          <td class="p-3 text-left">OVERALL MPS (%)</td>
-          ${periodAves.map(a => `<td class="p-3 text-center border-l border-slate-700">${a.toFixed(2)}%</td>`).join('')}
-          <td class="p-3 text-center text-orange-400 border-l border-slate-700">${grandOverallAve}%</td>
+          <td class="p-3 text-left">OVERALL MPS</td>
+          ${footCells}
+          <td class="p-3 text-center border-l border-slate-700 text-orange-400">${grandAve}%</td>
         </tr>
       `;
 
       const chartItems = targetGrades.map(g => {
         const arr = mpsData[g];
-        const s = arr.reduce((acc, v) => acc + (Number(v) || 0), 0);
+        let s = 0;
+        arr.forEach(p => { s += Number(p.m) || 0; });
         return { label: g, value: Number((s / periods.length).toFixed(2)) };
       });
 
       render3DGlassBarChart('inlineGraph_mps', {
         title: `3D Glass Bar Graph: ${MPS_SUBJECT_LABELS[subj]}`,
-        subtitle: 'Buong Mean Percentage Score (%) per baitang.',
+        subtitle: 'Overall Mean Percentage Score (%) bawat baitang.',
         items: chartItems,
         suffix: '%',
         maxVal: 100
@@ -2528,13 +2531,9 @@
     function updMPSCell(sy, subj, g, i, val) {
       const target = getTargetSchoolRecord();
       if (!target) return;
-      if (!target.mpsMatrix[sy]) target.mpsMatrix[sy] = {};
-      if (!target.mpsMatrix[sy][subj]) target.mpsMatrix[sy][subj] = {};
-      if (!target.mpsMatrix[sy][subj][g]) {
-        const pCount = sy === 'y4' ? 3 : 4;
-        target.mpsMatrix[sy][subj][g] = Array.from({ length: pCount }, () => ({ mps: 0 }));
-      }
-      target.mpsMatrix[sy][subj][g][i] = { mps: Number(val) || 0 };
+      const numVal = Number(val) || 0;
+      target.mpsMatrix[sy][subj][g][i].m = numVal;
+      target.mpsMatrix[sy][subj][g][i].f = numVal;
       saveDistrictDB();
       renderMPSTab();
     }
@@ -2614,7 +2613,7 @@
     }
 
     // =========================================================================
-    // TAB 4: ENROLLMENT, DROP-OUT, TRANS IN/OUT (MAY MALE & FEMALE)
+    // TAB 4: ENROLLMENT, DROP-OUT, TRANS IN/OUT (KINDER TO GRADE 12)
     // =========================================================================
     function getEnrData(sy, cat, specificSchool = null) {
       const target = specificSchool || getTargetSchoolRecord();
@@ -3003,43 +3002,39 @@
     }
 
     // =========================================================================
-    // TAB 6: NAT & ELLNA (BUO PER GRADE PER SUBJECT — WALANG MALE AT FEMALE)
+    // TAB 6: NAT & ELLNA (OVERALL MPS ONLY)
     // =========================================================================
     function getNATRows() {
       const target = getTargetSchoolRecord();
-      const base = createEmptySchoolRecord('TMP', '', '').nat;
-
-      const getSingleSYVal = (row, syKey) => {
-        if (!row) return 0;
-        if (row[syKey] !== undefined) return Number(row[syKey]) || 0;
-        const m = Number(row[syKey + 'm']) || 0;
-        const f = Number(row[syKey + 'f']) || 0;
-        return (m > 0 || f > 0) ? Number(((m + f) / 2).toFixed(2)) : 0;
-      };
-
       if (target) {
-        return base.map((bRow, idx) => {
-          const r = target.nat?.[idx];
-          return {
-            area: bRow.area,
-            y1: getSingleSYVal(r, 'y1'),
-            y2: getSingleSYVal(r, 'y2'),
-            y3: getSingleSYVal(r, 'y3')
-          };
+        return (target.nat || []).map(r => {
+          const out = { area: r.area };
+          ['y1', 'y2', 'y3'].forEach(yk => {
+            const m = Number(r[yk + 'm']) || 0;
+            const f = Number(r[yk + 'f']) || 0;
+            const val = (m > 0 && f > 0 && m !== f) ? Number(((m + f) / 2).toFixed(2)) : (m || f);
+            out[yk + 'm'] = val;
+            out[yk + 'f'] = val;
+          });
+          return out;
         });
       }
-
+      const base = createEmptySchoolRecord('TMP', '', '').nat;
       const schools = getAllSchoolRecordsList();
       if (!schools.length) return base;
       return base.map((row, idx) => {
         const out = { area: row.area };
-        ['y1', 'y2', 'y3'].forEach(k => {
+        ['y1', 'y2', 'y3'].forEach(yk => {
           let s = 0, c = 0;
           schools.forEach(sc => {
-            const v = getSingleSYVal(sc.nat?.[idx], k);
+            const m = Number(sc.nat?.[idx]?.[yk + 'm']) || 0;
+            const f = Number(sc.nat?.[idx]?.[yk + 'f']) || 0;
+            const v = (m > 0 && f > 0 && m !== f) ? (m + f) / 2 : (m || f);
             if (v > 0) { s += v; c++; }
           });
-          out[k] = c ? Number((s / c).toFixed(2)) : 0;
+          const avg = c ? Number((s / c).toFixed(2)) : 0;
+          out[yk + 'm'] = avg;
+          out[yk + 'f'] = avg;
         });
         return out;
       });
@@ -3051,31 +3046,25 @@
       const rows = getNATRows();
 
       document.getElementById('tbodyNAT').innerHTML = rows.map((row, idx) => {
-        const y1 = Number(row.y1) || 0;
-        const y2 = Number(row.y2) || 0;
-        const y3 = Number(row.y3) || 0;
-        const grand = ((y1 + y2 + y3) / 3).toFixed(2);
+        const v1 = Number(row.y1m) || 0;
+        const v2 = Number(row.y2m) || 0;
+        const v3 = Number(row.y3m) || 0;
+        const grand = ((v1 + v2 + v3) / 3).toFixed(2);
 
         if (canEdit) {
           return `<tr class="hover:bg-slate-50">
             <td class="p-3 font-extrabold text-slate-900">${row.area}</td>
-            <td class="p-2 text-center border-l bg-blue-50/40">
-              <input type="number" step="0.1" min="0" max="100" value="${y1}" onchange="updNAT(${idx},'y1',this.value)" class="w-24 px-2 py-1.5 border border-blue-500 rounded-lg text-center font-extrabold">
-            </td>
-            <td class="p-2 text-center border-l bg-red-50/40">
-              <input type="number" step="0.1" min="0" max="100" value="${y2}" onchange="updNAT(${idx},'y2',this.value)" class="w-24 px-2 py-1.5 border border-red-500 rounded-lg text-center font-extrabold">
-            </td>
-            <td class="p-2 text-center border-l bg-orange-50/40">
-              <input type="number" step="0.1" min="0" max="100" value="${y3}" onchange="updNAT(${idx},'y3',this.value)" class="w-24 px-2 py-1.5 border border-orange-500 rounded-lg text-center font-extrabold">
-            </td>
+            <td class="p-2 text-center border-l"><input type="number" step="0.1" min="0" max="100" value="${v1}" onchange="updNAT(${idx},'y1',this.value)" class="w-24 px-2 py-1 border border-blue-500 rounded text-center font-extrabold"></td>
+            <td class="p-2 text-center border-l"><input type="number" step="0.1" min="0" max="100" value="${v2}" onchange="updNAT(${idx},'y2',this.value)" class="w-24 px-2 py-1 border border-red-500 rounded text-center font-extrabold"></td>
+            <td class="p-2 text-center border-l"><input type="number" step="0.1" min="0" max="100" value="${v3}" onchange="updNAT(${idx},'y3',this.value)" class="w-24 px-2 py-1 border border-orange-500 rounded text-center font-extrabold"></td>
             <td class="p-3 text-center font-extrabold bg-slate-900 text-orange-400 border-l">${grand}%</td>
           </tr>`;
         }
         return `<tr class="hover:bg-slate-50">
           <td class="p-3 font-extrabold text-slate-900">${row.area}</td>
-          <td class="p-3 text-center font-bold border-l bg-blue-50/40">${y1}%</td>
-          <td class="p-3 text-center font-bold border-l bg-red-50/40">${y2}%</td>
-          <td class="p-3 text-center font-bold border-l bg-orange-50/40">${y3}%</td>
+          <td class="p-3 text-center border-l font-bold">${v1.toFixed(2)}%</td>
+          <td class="p-3 text-center border-l font-bold">${v2.toFixed(2)}%</td>
+          <td class="p-3 text-center border-l font-bold">${v3.toFixed(2)}%</td>
           <td class="p-3 text-center font-extrabold bg-slate-900 text-orange-400 border-l">${grand}%</td>
         </tr>`;
       }).join('');
@@ -3083,7 +3072,7 @@
       render3DGlassBarChart('inlineGraph_nat', {
         title: '3D Glass Bar Graph: ELLNA & NAT 3-Year Overall Average MPS (%)',
         items: rows.map(r => {
-          const g = ((Number(r.y1) || 0) + (Number(r.y2) || 0) + (Number(r.y3) || 0)) / 3;
+          const g = ((Number(r.y1m) || 0) + (Number(r.y2m) || 0) + (Number(r.y3m) || 0)) / 3;
           return { label: r.area.replace(' (Grade 3)', '').replace(' (Grade 6)', ''), value: Number(g.toFixed(2)) };
         }),
         suffix: '%',
@@ -3091,12 +3080,12 @@
       });
     }
 
-    function updNAT(idx, k, val) {
+    function updNAT(idx, yKey, val) {
       const target = getTargetSchoolRecord();
       if (!target) return;
-      if (!target.nat) target.nat = createEmptySchoolRecord('TMP', '', '').nat;
-      if (!target.nat[idx]) target.nat[idx] = { area: '', y1: 0, y2: 0, y3: 0 };
-      target.nat[idx][k] = Number(val) || 0;
+      const numVal = Number(val) || 0;
+      target.nat[idx][yKey + 'm'] = numVal;
+      target.nat[idx][yKey + 'f'] = numVal;
       saveDistrictDB();
       renderNATTab();
     }
@@ -3215,4 +3204,45 @@
           <div class="rounded-2xl border border-slate-300 overflow-hidden">
             <div class="bg-slate-950 text-white p-4 border-l-4 border-orange-500">
               <h4 class="text-sm font-extrabold">${dim.id}. ${dim.title}</h4>
-              <p class="text-xs text-slate-
+              <p class="text-xs text-slate-300 mt-0.5">${dim.description}</p>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs border-collapse">
+                <thead>
+                  <tr class="bg-slate-100 font-extrabold">
+                    <th class="p-3 border text-left">SBM Indicator</th>
+                    <th class="p-2 border text-center w-24">Not Yet</th>
+                    <th class="p-2 border text-center w-24">Rarely</th>
+                    <th class="p-2 border text-center w-24">Frequently</th>
+                    <th class="p-2 border text-center w-24">Always</th>
+                    <th class="p-3 border text-left w-44">Remarks</th>
+                  </tr>
+                </thead>
+                <tbody>${rowsHtml}</tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      });
+
+      document.getElementById('tally1').innerText = c1;
+      document.getElementById('tally2').innerText = c2;
+      document.getElementById('tally3').innerText = c3;
+      document.getElementById('tally4').innerText = c4;
+    }
+
+    function tickSBM(num, lvl, chk) {
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      if (!target.sbm) target.sbm = {};
+      if (!target.sbm[num]) target.sbm[num] = { level: '', remark: '' };
+      target.sbm[num].level = chk ? lvl : '';
+      saveDistrictDB();
+      renderSBMTab();
+    }
+
+    function updSBMRem(num, val) {
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      if (!target.sbm) target.sbm = {};
+      if (!target.sbm[num])
