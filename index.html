@@ -2456,13 +2456,15 @@
 
       const mpsData = getMPSData(sy, subj);
       document.getElementById('mpsBannerTitle').innerText = `📌 ${MPS_SUBJECT_LABELS[subj]} — ${target ? target.schoolName : 'District Average'}`;
+      document.getElementById('mpsBannerBadge').innerText = isPresent ? 'PRESENT SY: 3 TERMS' : 'PAST SY: 4 QUARTERS';
 
-      let r1 = `<th class="p-3 bg-slate-950 text-white text-left font-extrabold">Grade Level</th>`;
+      // ISANG OVERALL MPS (%) COLUMN LANG BAWAT TERM/QUARTER (WALANG MALE/FEMALE)
+      let headerCols = `<th class="p-3 bg-slate-950 text-white text-left font-extrabold">Grade Level</th>`;
       periods.forEach((p, idx) => {
-        r1 += `<th class="p-3 ${colors[idx]} text-white text-center font-extrabold border-l border-white/20">${p} MPS (%)</th>`;
+        headerCols += `<th class="p-3 ${colors[idx]} text-white text-center font-extrabold border-l border-white/20">${p} MPS (%)</th>`;
       });
-      r1 += `<th class="p-3 bg-slate-900 text-orange-400 text-center font-extrabold border-l border-white/20">Overall Ave (%)</th>`;
-      document.getElementById('mpsThead').innerHTML = `<tr>${r1}</tr>`;
+      headerCols += `<th class="p-3 bg-slate-900 text-orange-400 text-center font-extrabold border-l border-white/20">Overall Ave (%)</th>`;
+      document.getElementById('mpsThead').innerHTML = `<tr>${headerCols}</tr>`;
 
       const sumPeriod = Array(periods.length).fill(0);
 
@@ -2477,7 +2479,7 @@
           if (canEdit) {
             return `
               <td class="p-2 text-center border-l">
-                <input type="number" step="0.1" min="0" max="100" value="${val}"
+                <input type="number" step="0.01" min="0" max="100" value="${val}"
                   onchange="updMPSCell('${sy}','${subj}','${g}',${i},this.value)"
                   class="w-24 px-2 py-1 border border-blue-500 rounded text-center font-extrabold">
               </td>
@@ -3245,4 +3247,662 @@
       const target = getTargetSchoolRecord();
       if (!target) return;
       if (!target.sbm) target.sbm = {};
-      if (!target.sbm[num])
+      if (!target.sbm[num]) target.sbm[num] = { level: '', remark: val };
+      else target.sbm[num].remark = val;
+      saveDistrictDB();
+    }
+
+    // =========================================================================
+    // TAB 9: NSBI INVENTORY
+    // =========================================================================
+    function renderNSBITab() {
+      const target = getTargetSchoolRecord();
+      const canEdit = Boolean(target && isEditMode);
+      const isConsolidated = !target;
+
+      document.getElementById('nsbiAddForm').classList.toggle('hidden', !canEdit);
+      document.getElementById('thNsbiAction').classList.toggle('hidden', !canEdit);
+      document.getElementById('thNsbiSchoolCol').classList.toggle('hidden', !isConsolidated);
+
+      let rows = [];
+      if (target) {
+        rows = (target.nsbi || []).map((b, idx) => ({ ...b, _idx: idx, _schoolName: target.schoolName }));
+      } else {
+        getAllSchoolRecordsList().forEach(sc => {
+          (sc.nsbi || []).forEach((b, idx) => rows.push({ ...b, _idx: idx, _schoolName: sc.schoolName }));
+        });
+      }
+
+      let tR = 0, tG = 0, tC = 0, tS = 0, tL = 0, tB = 0, tF = 0;
+      document.getElementById('nsbiTableBody').innerHTML = rows.length ? rows.map(b => {
+        tR += Number(b.rooms); tG += Number(b.gripo); tC += Number(b.cr);
+        tS += Number(b.silya); tL += Number(b.lamesa); tB += Number(b.board); tF += Number(b.fans);
+        return `<tr class="hover:bg-slate-50">
+          ${isConsolidated ? `<td class="p-2.5 border font-extrabold text-blue-900">${b._schoolName}</td>` : ''}
+          <td class="p-2.5 border font-extrabold">${b.name}</td>
+          <td class="p-2.5 border">${b.type}</td>
+          <td class="p-2.5 border font-bold text-blue-900">${b.condition}</td>
+          <td class="p-2.5 border text-center font-extrabold">${b.rooms}</td>
+          <td class="p-2.5 border text-center font-bold bg-blue-50/40">${b.gripo}</td>
+          <td class="p-2.5 border text-center font-bold bg-blue-50/40">${b.cr}</td>
+          <td class="p-2.5 border text-center font-bold bg-orange-50/40">${b.silya}</td>
+          <td class="p-2.5 border text-center font-bold bg-orange-50/40">${b.lamesa}</td>
+          <td class="p-2.5 border text-center">${b.board}</td>
+          <td class="p-2.5 border text-center">${b.fans}</td>
+          <td class="p-2.5 border text-slate-600">${b.remarks || '-'}</td>
+          ${canEdit ? `<td class="p-2.5 border text-center"><button type="button" onclick="delNSBI(${b._idx})" class="text-red-600 font-bold">🗑️</button></td>` : ''}
+        </tr>`;
+      }).join('') : `<tr><td colspan="13" class="p-6 text-center text-slate-400 font-bold">Walang nakalistang school building.</td></tr>`;
+
+      document.getElementById('nsbiTableFoot').innerHTML = `
+        <tr>
+          <td colspan="${isConsolidated ? 4 : 3}" class="p-3 text-left">GRAND TOTAL (${rows.length} Buildings)</td>
+          <td class="p-3 text-center text-orange-400">${tR}</td>
+          <td class="p-3 text-center text-blue-300">${tG}</td>
+          <td class="p-3 text-center text-blue-300">${tC}</td>
+          <td class="p-3 text-center text-orange-300">${tS}</td>
+          <td class="p-3 text-center text-orange-300">${tL}</td>
+          <td class="p-3 text-center">${tB}</td>
+          <td class="p-3 text-center">${tF}</td>
+          <td colspan="${canEdit ? 2 : 1}" class="p-3"></td>
+        </tr>
+      `;
+    }
+
+    function addNSBIBuilding(e) {
+      e.preventDefault();
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      if (!target.nsbi) target.nsbi = [];
+      target.nsbi.push({
+        name: document.getElementById('nsbiName').value.trim(),
+        type: document.getElementById('nsbiType').value,
+        condition: document.getElementById('nsbiCond').value,
+        rooms: Number(document.getElementById('nsbiRooms').value) || 0,
+        gripo: Number(document.getElementById('nsbiGripo').value) || 0,
+        cr: Number(document.getElementById('nsbiCR').value) || 0,
+        silya: Number(document.getElementById('nsbiSilya').value) || 0,
+        lamesa: Number(document.getElementById('nsbiLamesa').value) || 0,
+        board: Number(document.getElementById('nsbiBoard').value) || 0,
+        fans: Number(document.getElementById('nsbiFans').value) || 0,
+        remarks: document.getElementById('nsbiRemarks').value.trim()
+      });
+      saveDistrictDB();
+      renderNSBITab();
+      e.target.reset();
+    }
+
+    function delNSBI(idx) {
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      target.nsbi.splice(idx, 1);
+      saveDistrictDB();
+      renderNSBITab();
+    }
+
+    // =========================================================================
+    // TAB 10: FINANCIAL MANAGEMENT & 3D GLASS PIE CHART
+    // =========================================================================
+    function getAggregatedFinancial(specificSchool = null) {
+      const target = specificSchool || getTargetSchoolRecord();
+      const matrix = {};
+      FINANCIAL_CATEGORIES.forEach(cat => {
+        matrix[cat.key] = { mooe: 0, canteen: 0, adopt_local: 0, adopt_intl: 0, sef: 0 };
+      });
+      let customItems = [];
+
+      if (target) {
+        FINANCIAL_CATEGORIES.forEach(cat => {
+          FINANCIAL_FUNDS.forEach(f => {
+            matrix[cat.key][f.key] = Number(target.financial?.matrix?.[cat.key]?.[f.key]) || 0;
+          });
+        });
+        customItems = (target.financial?.customItems || []).map((item, idx) => ({
+          ...item,
+          _idx: idx,
+          _schoolName: target.schoolName
+        }));
+      } else {
+        getAllSchoolRecordsList().forEach(sc => {
+          FINANCIAL_CATEGORIES.forEach(cat => {
+            FINANCIAL_FUNDS.forEach(f => {
+              matrix[cat.key][f.key] += Number(sc.financial?.matrix?.[cat.key]?.[f.key]) || 0;
+            });
+          });
+          (sc.financial?.customItems || []).forEach((item, idx) => {
+            customItems.push({ ...item, _idx: idx, _schoolName: sc.schoolName });
+          });
+        });
+      }
+
+      return { matrix, customItems };
+    }
+
+    function renderFinancialTab() {
+      const target = getTargetSchoolRecord();
+      const canEdit = Boolean(target && isEditMode);
+      const selectedFund = document.getElementById('finFundSel')?.value || 'ALL';
+      const { matrix, customItems } = getAggregatedFinancial();
+
+      document.getElementById('finScopeSubtitle').innerText = target
+        ? `Financial Expenses para sa: ${target.schoolName} (${target.schoolId})`
+        : `Consolidated District Financial Expenses — Rosario West Sub-Office (${getAllSchoolRecordsList().length} Schools)`;
+
+      document.getElementById('formAddCustomExpense').classList.toggle('hidden', !canEdit);
+      document.getElementById('thDelCustomFin').classList.toggle('hidden', !canEdit);
+
+      const fundTotals = { mooe: 0, canteen: 0, adopt_local: 0, adopt_intl: 0, sef: 0 };
+      const catTotals = {};
+      FINANCIAL_CATEGORIES.forEach(c => { catTotals[c.key] = 0; });
+
+      document.getElementById('tbodyFinancial').innerHTML = FINANCIAL_CATEGORIES.map(cat => {
+        let rowTot = 0;
+        const fundCells = FINANCIAL_FUNDS.map(f => {
+          const val = Number(matrix[cat.key][f.key]) || 0;
+          fundTotals[f.key] += val;
+          if (selectedFund === 'ALL' || selectedFund === f.key) {
+            rowTot += val;
+            catTotals[cat.key] += val;
+          }
+
+          if (canEdit) {
+            return `<td class="p-1.5 text-right border-l">
+              <input type="number" step="0.01" min="0" value="${val}"
+                onchange="updFinancialCell('${cat.key}','${f.key}',this.value)"
+                class="w-24 px-2 py-1 border border-blue-500 rounded text-right font-bold">
+            </td>`;
+          }
+          return `<td class="p-2.5 text-right border-l font-semibold ${selectedFund !== 'ALL' && selectedFund !== f.key ? 'text-slate-300' : 'text-slate-800'}">${formatPeso(val)}</td>`;
+        }).join('');
+
+        return `<tr class="hover:bg-slate-50">
+          <td class="p-2.5 font-extrabold text-slate-900">${cat.label}</td>
+          ${fundCells}
+          <td class="p-2.5 text-right font-extrabold bg-orange-50 text-orange-950 border-l">${formatPeso(rowTot)}</td>
+        </tr>`;
+      }).join('');
+
+      customItems.forEach(item => {
+        const amt = Number(item.amount) || 0;
+        if (fundTotals[item.fund] !== undefined) fundTotals[item.fund] += amt;
+        if (selectedFund === 'ALL' || selectedFund === item.fund) {
+          catTotals.other += amt;
+        }
+      });
+
+      const grandTotalAll = Object.values(fundTotals).reduce((a, b) => a + b, 0);
+      const displayedGrand = selectedFund === 'ALL' ? grandTotalAll : (fundTotals[selectedFund] || 0);
+      document.getElementById('finGrandTotalBadge').innerText = formatPeso(displayedGrand);
+
+      document.getElementById('tfootFinancial').innerHTML = `
+        <tr>
+          <td class="p-3 text-left">GRAND TOTAL EXPENSES (INCLUDING CUSTOM ITEMS)</td>
+          ${FINANCIAL_FUNDS.map(f => `<td class="p-3 text-right border-l border-slate-700">${formatPeso(fundTotals[f.key])}</td>`).join('')}
+          <td class="p-3 text-right text-orange-400 border-l border-slate-700">${formatPeso(displayedGrand)}</td>
+        </tr>
+      `;
+
+      document.getElementById('finFundCardsGrid').innerHTML = FINANCIAL_FUNDS.map(f => `
+        <div onclick="document.getElementById('finFundSel').value='${f.key}'; renderFinancialTab();"
+          class="cursor-pointer rounded-2xl p-3.5 text-white shadow-md border-b-4 transition hover:scale-[1.01]"
+          style="background:${f.dark}; border-color:${f.light}">
+          <span class="text-[10px] font-extrabold uppercase opacity-85 block">${f.label}</span>
+          <span class="text-lg font-extrabold block mt-0.5">${formatPeso(fundTotals[f.key])}</span>
+          <span class="text-[10px] opacity-75 block mt-0.5">${grandTotalAll > 0 ? ((fundTotals[f.key] / grandTotalAll) * 100).toFixed(1) : '0.0'}% of Total Funds</span>
+        </div>
+      `).join('');
+
+      const filteredCustom = customItems.filter(it => selectedFund === 'ALL' || it.fund === selectedFund);
+      document.getElementById('customFinItemsBox').classList.toggle('hidden', filteredCustom.length === 0);
+      document.getElementById('tbodyCustomFin').innerHTML = filteredCustom.map(it => {
+        const fObj = FINANCIAL_FUNDS.find(x => x.key === it.fund);
+        return `<tr class="hover:bg-slate-50">
+          <td class="p-2.5 font-extrabold text-blue-900">${fObj ? fObj.label : it.fund} ${!target ? `(${it._schoolName})` : ''}</td>
+          <td class="p-2.5 font-bold">${it.label}</td>
+          <td class="p-2.5 text-right font-extrabold text-slate-900">${formatPeso(it.amount)}</td>
+          ${canEdit ? `<td class="p-2.5 text-center"><button type="button" onclick="delCustomFinancialItem(${it._idx})" class="text-red-600 font-bold">🗑️</button></td>` : ''}
+        </tr>`;
+      }).join('');
+
+      const fundTitle = selectedFund === 'ALL' ? 'All Funds Consolidated' : (FINANCIAL_FUNDS.find(x => x.key === selectedFund)?.label || selectedFund);
+      render3DGlassPieChart('financial3DPieChartBox', {
+        title: `3D Glass Pie Chart: Expenses by Category (${fundTitle})`,
+        subtitle: 'Porsyento at halaga (₱) ng bawat uri ng kagastusan.',
+        slices: FINANCIAL_CATEGORIES.map(c => ({
+          label: c.label.split(' (')[0],
+          value: catTotals[c.key] || 0,
+          color: c.color,
+          light: c.light,
+          dark: c.dark
+        }))
+      });
+
+      render3DGlassPieChart('financialFund3DPieBox', {
+        title: '3D Glass Pie Chart: Distribution by Fund Source',
+        subtitle: 'MOOE, Canteen Fund, Adopt-a-School (Local & Int\'l) at SEF.',
+        slices: FINANCIAL_FUNDS.map(f => ({
+          label: f.label,
+          value: fundTotals[f.key] || 0,
+          color: f.color,
+          light: f.light,
+          dark: f.dark
+        }))
+      });
+    }
+
+    function updFinancialCell(catKey, fundKey, val) {
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      if (!target.financial) target.financial = { matrix: {}, customItems: [] };
+      if (!target.financial.matrix[catKey]) target.financial.matrix[catKey] = { mooe: 0, canteen: 0, adopt_local: 0, adopt_intl: 0, sef: 0 };
+      target.financial.matrix[catKey][fundKey] = Number(val) || 0;
+      saveDistrictDB();
+      renderFinancialTab();
+    }
+
+    function addCustomFinancialItem(e) {
+      e.preventDefault();
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      if (!target.financial) target.financial = { matrix: {}, customItems: [] };
+      if (!Array.isArray(target.financial.customItems)) target.financial.customItems = [];
+      target.financial.customItems.push({
+        fund: document.getElementById('newFinFund').value,
+        label: document.getElementById('newFinLabel').value.trim(),
+        amount: Number(document.getElementById('newFinAmount').value) || 0
+      });
+      saveDistrictDB();
+      renderFinancialTab();
+      e.target.reset();
+    }
+
+    function delCustomFinancialItem(idx) {
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      target.financial.customItems.splice(idx, 1);
+      saveDistrictDB();
+      renderFinancialTab();
+    }
+
+    // =========================================================================
+    // TAB 11: 3D GRAPHICAL ANALYTICS
+    // =========================================================================
+    function selectAnalyticsCat(cat) {
+      activeAnalyticsCat = cat;
+      renderAnalyticsTab();
+    }
+
+    function renderAnalyticsTab() {
+      const cats = ['school_compare', 'financial', 'personnel', 'mps', 'enr', 'crla', 'philiri', 'rma', 'reading', 'nat'];
+      cats.forEach(c => {
+        const btn = document.getElementById('gCatBtn_' + c);
+        if (btn) {
+          btn.className = c === activeAnalyticsCat
+            ? (c === 'school_compare' ? '' : 'px-3 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-blue-600 via-red-600 to-orange-500 text-white shadow')
+            : (c === 'school_compare' && (!currentSession || currentSession.role !== 'admin') ? 'hidden' : 'px-3 py-2 rounded-xl text-xs font-extrabold bg-slate-800 text-slate-300 hover:bg-slate-700');
+          if (c === 'school_compare' && currentSession && currentSession.role === 'admin') {
+            btn.className = c === activeAnalyticsCat
+              ? 'px-3 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-blue-600 via-red-600 to-orange-500 text-white shadow'
+              : 'px-3 py-2 rounded-xl text-xs font-extrabold bg-slate-800 text-slate-300 hover:bg-slate-700';
+          }
+        }
+      });
+
+      const ctrl = document.getElementById('analyticsControlsBar');
+      const subBox = document.getElementById('analyticsSubChartBox');
+      subBox.innerHTML = '';
+
+      if (activeAnalyticsCat === 'school_compare') {
+        ctrl.innerHTML = `
+          <span class="text-xs font-extrabold text-orange-300">🏫 School-by-School Comparison Metric (Rosario West Sub-Office):</span>
+          <select id="anaCompareMetricSel" onchange="schoolCompareMetric=this.value; renderAnalyticsTab();" class="bg-slate-900 text-white border border-orange-500 px-3 py-1.5 rounded-xl text-xs font-extrabold">
+            <option value="enrollment" ${schoolCompareMetric==='enrollment'?'selected':''}>Total Enrollment (K–G12)</option>
+            <option value="personnel" ${schoolCompareMetric==='personnel'?'selected':''}>Total Personnel (Teaching & Non-Teaching)</option>
+            <option value="financial" ${schoolCompareMetric==='financial'?'selected':''}>Total Financial Expenses (₱)</option>
+            <option value="mps" ${schoolCompareMetric==='mps'?'selected':''}>General Average MPS (%)</option>
+            <option value="classrooms" ${schoolCompareMetric==='classrooms'?'selected':''}>Total Classrooms (NSBI)</option>
+          </select>
+        `;
+        const schools = getAllSchoolRecordsList();
+        const items = schools.map(sc => {
+          let val = 0;
+          if (schoolCompareMetric === 'enrollment') {
+            const enr = getEnrData('y4', 'enrollment', sc);
+            GRADES.forEach(g => { const arr = enr[g]; val += (arr[0]?.m || 0) + (arr[0]?.f || 0); });
+          } else if (schoolCompareMetric === 'personnel') {
+            const p = getAggregatedPersonnel(sc);
+            Object.values(p).forEach(x => val += (x.m + x.f));
+          } else if (schoolCompareMetric === 'financial') {
+            const fin = getAggregatedFinancial(sc);
+            FINANCIAL_CATEGORIES.forEach(c => FINANCIAL_FUNDS.forEach(f => val += (fin.matrix[c.key]?.[f.key] || 0)));
+            fin.customItems.forEach(it => val += (Number(it.amount) || 0));
+          } else if (schoolCompareMetric === 'mps') {
+            const m = getMPSData('y4', 'all_avg', sc);
+            let s = 0, c = 0;
+            G1_TO_G6.forEach(g => m[g].forEach(p => { if (p.m > 0) { s += p.m; c++; } }));
+            val = c ? Number((s / c).toFixed(2)) : 0;
+          } else if (schoolCompareMetric === 'classrooms') {
+            (sc.nsbi || []).forEach(b => val += Number(b.rooms) || 0);
+          }
+          return { label: sc.schoolName, value: val };
+        });
+
+        render3DGlassBarChart('analyticsMainChartBox', {
+          title: `School-by-School Comparison: ${schoolCompareMetric.toUpperCase()}`,
+          items,
+          suffix: schoolCompareMetric === 'mps' ? '%' : '',
+          maxVal: schoolCompareMetric === 'mps' ? 100 : null
+        });
+      } else if (activeAnalyticsCat === 'financial') {
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">💰 Financial Utilization 3D Glass Pie Charts (All Funds & Expense Categories)</span>`;
+        const { matrix, customItems } = getAggregatedFinancial();
+        const fundTotals = { mooe: 0, canteen: 0, adopt_local: 0, adopt_intl: 0, sef: 0 };
+        const catTotals = {};
+        FINANCIAL_CATEGORIES.forEach(c => {
+          catTotals[c.key] = 0;
+          FINANCIAL_FUNDS.forEach(f => {
+            const v = Number(matrix[c.key][f.key]) || 0;
+            catTotals[c.key] += v;
+            fundTotals[f.key] += v;
+          });
+        });
+        customItems.forEach(it => {
+          const amt = Number(it.amount) || 0;
+          if (fundTotals[it.fund] !== undefined) fundTotals[it.fund] += amt;
+          catTotals.other += amt;
+        });
+
+        render3DGlassPieChart('analyticsMainChartBox', {
+          title: '3D Glass Pie Chart: Expenses by Category (₱)',
+          subtitle: 'Supplies, Repair & Maintenance, Electricity, Water, Services, Labor & Others',
+          slices: FINANCIAL_CATEGORIES.map(c => ({ label: c.label.split(' (')[0], value: catTotals[c.key], color: c.color, light: c.light, dark: c.dark }))
+        });
+        render3DGlassPieChart('analyticsSubChartBox', {
+          title: '3D Glass Pie Chart: Distribution by Fund Source (₱)',
+          subtitle: 'MOOE, Canteen Fund, Adopt-a-School (Local & International) & SEF',
+          slices: FINANCIAL_FUNDS.map(f => ({ label: f.label, value: fundTotals[f.key], color: f.color, light: f.light, dark: f.dark }))
+        });
+      } else if (activeAnalyticsCat === 'personnel') {
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">👩‍🏫 Teaching & Non-Teaching Personnel Distribution</span>`;
+        const p = getAggregatedPersonnel();
+        render3DGlassBarChart('analyticsMainChartBox', {
+          title: '3D Personnel Distribution per Position',
+          items: [
+            ...['t1','t2','t3','t4','t5','t6','t7'].map(k => ({ label: k.toUpperCase(), value: (p[k]?.m || 0) + (p[k]?.f || 0), color: '#2563eb' })),
+            ...['mt1','mt2','mt3','mt4'].map(k => ({ label: k.toUpperCase(), value: (p[k]?.m || 0) + (p[k]?.f || 0), color: '#ea580c' })),
+            ...['ht1','ht2','ht3','ht4'].map(k => ({ label: k.toUpperCase(), value: (p[k]?.m || 0) + (p[k]?.f || 0), color: '#dc2626' })),
+            ...['p1','p2','p3','p4'].map(k => ({ label: k.toUpperCase(), value: (p[k]?.m || 0) + (p[k]?.f || 0), color: '#475569' }))
+          ]
+        });
+      } else if (activeAnalyticsCat === 'mps') {
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">📈 MATATAG General Average MPS (%)</span>`;
+        const mpsData = getMPSData('y4', 'all_avg');
+        render3DGlassBarChart('analyticsMainChartBox', {
+          title: '3D Glass Bar Graph: General Average MPS (SY 2026–2027)',
+          items: G1_TO_G6.map(g => {
+            const arr = mpsData[g];
+            let s = 0; arr.forEach(p => { s += Number(p.m) || 0; });
+            return { label: g, value: Number((s / arr.length).toFixed(2)) };
+          }),
+          suffix: '%',
+          maxVal: 100
+        });
+      } else if (activeAnalyticsCat === 'enr') {
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">👥 Enrollment per Grade Level (Kinder to Grade 12 SHS)</span>`;
+        const enr = getEnrData('y4', 'enrollment');
+        render3DGlassBarChart('analyticsMainChartBox', {
+          title: '3D Glass Bar Graph: Total Enrollment (K–G12)',
+          items: GRADES.map(g => ({ label: g.replace('Grade ', 'G'), value: (enr[g][0]?.m || 0) + (enr[g][0]?.f || 0) }))
+        });
+      } else if (activeAnalyticsCat === 'nat') {
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">🏆 ELLNA & NAT Overall MPS (%)</span>`;
+        const rows = getNATRows();
+        render3DGlassBarChart('analyticsMainChartBox', {
+          title: '3D Glass Bar Graph: ELLNA & NAT 3-Year Overall MPS (%)',
+          items: rows.map(r => {
+            const g = ((Number(r.y1m) || 0) + (Number(r.y2m) || 0) + (Number(r.y3m) || 0)) / 3;
+            return { label: r.area.replace(' (Grade 3)', '').replace(' (Grade 6)', ''), value: Number(g.toFixed(2)) };
+          }),
+          suffix: '%',
+          maxVal: 100
+        });
+      } else {
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-300">📚 Buksan ang Tab 5 (CRLA, Phil-IRI, RMA & Reading) para sa detalyadong 3D charts.</span>`;
+      }
+    }
+
+    // =========================================================================
+    // TAB 12: ADMIN SUBMISSION TRACKER & SECURITY
+    // =========================================================================
+    function computeSchoolSubmissionStatus(sc) {
+      const hasPers = Object.values(sc.personnel || {}).some(p => (Number(p?.m) || 0) + (Number(p?.f) || 0) > 0);
+      const hasSec = (sc.sectionsList || []).length > 0;
+      let hasMPS = false;
+      ALL_MPS_SUBJECTS.forEach(s => G1_TO_G6.forEach(g => (sc.mpsMatrix?.y4?.[s]?.[g] || []).forEach(p => { if ((Number(p?.m) || 0) > 0) hasMPS = true; })));
+      let hasEnr = false;
+      GRADES.forEach(g => (sc.enrMatrix?.y4?.enrollment?.[g] || []).forEach(p => { if ((Number(p?.m) || 0) + (Number(p?.f) || 0) > 0) hasEnr = true; }));
+      let hasLit = false;
+      Object.values(sc.crlaV2?.y3 || {}).forEach(arr => (arr || []).forEach(v => { if (Number(v) > 0) hasLit = true; }));
+      Object.values(sc.philiri || {}).forEach(arr => (arr || []).forEach(v => { if (Number(v) > 0) hasLit = true; }));
+      const hasNAT = (sc.nat || []).some(r => (Number(r.y1m) || 0) + (Number(r.y2m) || 0) + (Number(r.y3m) || 0) > 0);
+      let hasNut = false;
+      Object.values(sc.nutrition || {}).forEach(d => Object.values(d || {}).forEach(v => { if (Number(v) > 0) hasNut = true; }));
+      const hasSBM = Object.values(sc.sbm || {}).some(x => Boolean(x?.level));
+      const hasNSBI = (sc.nsbi || []).length > 0;
+      let hasFin = (sc.financial?.customItems || []).length > 0;
+      FINANCIAL_CATEGORIES.forEach(c => FINANCIAL_FUNDS.forEach(f => { if ((Number(sc.financial?.matrix?.[c.key]?.[f.key]) || 0) > 0) hasFin = true; }));
+
+      const checks = [hasPers, hasSec, hasMPS, hasEnr, hasLit, hasNAT, hasNut, hasSBM, hasNSBI, hasFin];
+      const done = checks.filter(Boolean).length;
+      const pct = Math.round((done / checks.length) * 100);
+      return { hasPers, hasSec, hasMPS, hasEnr, hasLit, hasNAT, hasNut, hasSBM, hasNSBI, hasFin, done, pct };
+    }
+
+    function renderAdminSchoolsTab() {
+      if (!currentSession || currentSession.role !== 'admin') return;
+      applyGlobalLockUI();
+      const accs = Object.values(districtDB.accounts || {});
+      document.getElementById('adminTotalSchoolsBadge').innerText = `${accs.length} Registered School${accs.length !== 1 ? 's' : ''}`;
+
+      const badge = (ok) => ok ? '<span class="text-emerald-600 font-extrabold">✅</span>' : '<span class="text-slate-400">⏳</span>';
+
+      document.getElementById('tbodyAdminSchools').innerHTML = accs.length ? accs.map(a => {
+        const sc = districtDB.schoolsData?.[a.schoolId] || createEmptySchoolRecord(a.schoolId, a.schoolName, a.headName);
+        const st = computeSchoolSubmissionStatus(sc);
+        const barColor = st.pct === 100 ? 'bg-emerald-600' : st.pct >= 50 ? 'bg-blue-600' : 'bg-orange-500';
+
+        return `<tr class="hover:bg-slate-50">
+          <td class="p-3">
+            <span class="font-mono font-extrabold text-blue-900 block">${a.schoolId}</span>
+            <span class="font-extrabold text-slate-950">${a.schoolName}</span>
+          </td>
+          <td class="p-3">
+            <span class="font-semibold block">${a.headName || '-'}</span>
+            <span class="text-[10px] font-mono bg-orange-100 text-orange-900 px-1.5 py-0.5 rounded font-extrabold">PIN: ${a.pin || 'N/A'}</span>
+          </td>
+          <td class="p-2 text-center">${badge(st.hasPers)}</td>
+          <td class="p-2 text-center">${badge(st.hasSec)}</td>
+          <td class="p-2 text-center">${badge(st.hasMPS)}</td>
+          <td class="p-2 text-center">${badge(st.hasEnr)}</td>
+          <td class="p-2 text-center">${badge(st.hasLit)}</td>
+          <td class="p-2 text-center">${badge(st.hasNAT)}</td>
+          <td class="p-2 text-center">${badge(st.hasNut)}</td>
+          <td class="p-2 text-center">${badge(st.hasSBM)}</td>
+          <td class="p-2 text-center">${badge(st.hasNSBI)}</td>
+          <td class="p-2 text-center">${badge(st.hasFin)}</td>
+          <td class="p-3 text-center">
+            <div class="w-24 mx-auto bg-slate-200 rounded-full h-2 overflow-hidden">
+              <div class="${barColor} h-2" style="width:${st.pct}%"></div>
+            </div>
+            <span class="text-[10px] font-extrabold text-slate-800">${st.done}/10 (${st.pct}%)</span>
+          </td>
+          <td class="p-3 text-center space-x-1 whitespace-nowrap">
+            <button type="button" onclick="adminViewSchool('${a.schoolId}')" class="bg-blue-900 text-white text-[11px] font-extrabold px-2 py-1 rounded-lg">👁️ View</button>
+            <button type="button" onclick="adminResetSchoolPass('${a.schoolId}')" class="bg-orange-600 text-white text-[11px] font-extrabold px-2 py-1 rounded-lg">🔑 Pass</button>
+            <button type="button" onclick="adminDeleteSchool('${a.schoolId}')" class="bg-red-700 text-white text-[11px] font-extrabold px-2 py-1 rounded-lg">🗑️</button>
+          </td>
+        </tr>`;
+      }).join('') : `<tr><td colspan="14" class="p-6 text-center text-slate-400 font-bold">Wala pang naka-register na paaralan.</td></tr>`;
+    }
+
+    function changeAdminPassword() {
+      const inp = document.getElementById('newAdminPassInput');
+      const val = inp.value.trim();
+      if (val.length < 4) { alert('❌ Dapat hindi bababa sa 4 na characters ang bagong Admin Password.'); return; }
+      districtDB.adminPass = val;
+      saveDistrictDB();
+      inp.value = '';
+      alert('✅ Matagumpay na napalitan ang Sub-Office Admin Password!');
+    }
+
+    function toggleGlobalSubmissionLock() {
+      districtDB.submissionsLocked = !districtDB.submissionsLocked;
+      saveDistrictDB();
+      applyGlobalLockUI();
+      alert(districtDB.submissionsLocked
+        ? '🔒 Naka-LOCK na ngayon ang lahat ng school submissions.'
+        : '🔓 Naka-UNLOCK na ngayon ang pag-edit ng mga paaralan.');
+    }
+
+    function downloadFullDistrictJSONBackup() {
+      const stamp = new Date().toISOString().slice(0, 10);
+      const blob = new Blob([JSON.stringify(districtDB, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Rosario_West_SubOffice_Backup_${stamp}.json`;
+      a.click();
+    }
+
+    function adminViewSchool(schoolId) {
+      document.getElementById('adminSchoolFilter').value = schoolId;
+      onAdminScopeChange();
+      switchPortalTab('personnel');
+    }
+
+    function adminResetSchoolPass(schoolId) {
+      const acc = districtDB.accounts[schoolId];
+      if (!acc) return;
+      const newP = prompt(`Ilagay ang bagong password para sa ${acc.schoolName} (${schoolId}):`);
+      if (newP && newP.trim().length >= 4) {
+        acc.password = newP.trim();
+        saveDistrictDB();
+        alert(`✅ Napalitan na ang password ng ${acc.schoolName}!`);
+      }
+    }
+
+    function adminDeleteSchool(schoolId) {
+      const acc = districtDB.accounts[schoolId];
+      if (!acc) return;
+      if (!confirm(`Sigurado ka bang buburahin ang account at lahat ng datos ng ${acc.schoolName}?`)) return;
+      delete districtDB.accounts[schoolId];
+      delete districtDB.schoolsData[schoolId];
+      saveDistrictDB();
+      refreshAdminSchoolDropdown();
+      renderAdminSchoolsTab();
+    }
+
+    // =========================================================================
+    // EXECUTIVE SUMMARY & CSV EXPORT
+    // =========================================================================
+    function openExecutiveSummaryModal() {
+      const target = getTargetSchoolRecord();
+      const scopeName = target ? `${target.schoolName} (School ID: ${target.schoolId})` : `ALL SCHOOLS CONSOLIDATED (${getAllSchoolRecordsList().length} Schools)`;
+      document.getElementById('execReportScopeTitle').innerText = `EXECUTIVE SUMMARY • ${scopeName.toUpperCase()}`;
+
+      const pers = getAggregatedPersonnel();
+      let pM = 0, pF = 0;
+      Object.values(pers).forEach(x => { pM += x.m; pF += x.f; });
+
+      const enr = getEnrData('y4', 'enrollment');
+      let eM = 0, eF = 0;
+      GRADES.forEach(g => { eM += enr[g][0]?.m || 0; eF += enr[g][0]?.f || 0; });
+
+      const mps = getMPSData('y4', 'all_avg');
+      let mSum = 0, mCnt = 0;
+      G1_TO_G6.forEach(g => mps[g].forEach(p => { if (p.m > 0) { mSum += p.m; mCnt++; } }));
+      const mpsAve = mCnt ? (mSum / mCnt).toFixed(2) : '0.00';
+
+      const { matrix, customItems } = getAggregatedFinancial();
+      const fTot = { mooe: 0, canteen: 0, adopt_local: 0, adopt_intl: 0, sef: 0 };
+      FINANCIAL_CATEGORIES.forEach(c => FINANCIAL_FUNDS.forEach(f => fTot[f.key] += Number(matrix[c.key]?.[f.key]) || 0));
+      customItems.forEach(it => { if (fTot[it.fund] !== undefined) fTot[it.fund] += Number(it.amount) || 0; });
+      const finGrand = Object.values(fTot).reduce((a, b) => a + b, 0);
+
+      document.getElementById('execSummaryBody').innerHTML = `
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="border border-slate-300 rounded-xl p-3 bg-blue-50/50">
+            <span class="text-[10px] font-extrabold text-blue-900 uppercase block">Total Enrollment (K–G12)</span>
+            <span class="text-xl font-extrabold text-slate-950">${eM + eF}</span>
+            <span class="text-[10px] text-slate-600 block">Male: ${eM} • Female: ${eF}</span>
+          </div>
+          <div class="border border-slate-300 rounded-xl p-3 bg-orange-50/50">
+            <span class="text-[10px] font-extrabold text-orange-900 uppercase block">Total Personnel</span>
+            <span class="text-xl font-extrabold text-slate-950">${pM + pF}</span>
+            <span class="text-[10px] text-slate-600 block">Male: ${pM} • Female: ${pF}</span>
+          </div>
+          <div class="border border-slate-300 rounded-xl p-3 bg-emerald-50/50">
+            <span class="text-[10px] font-extrabold text-emerald-900 uppercase block">General Average MPS</span>
+            <span class="text-xl font-extrabold text-slate-950">${mpsAve}%</span>
+            <span class="text-[10px] text-slate-600 block">MATATAG Curriculum</span>
+          </div>
+          <div class="border border-slate-300 rounded-xl p-3 bg-red-50/50">
+            <span class="text-[10px] font-extrabold text-red-900 uppercase block">Total Financial Expenses</span>
+            <span class="text-base font-extrabold text-slate-950">${formatPeso(finGrand)}</span>
+            <span class="text-[10px] text-slate-600 block">All Funds Consolidated</span>
+          </div>
+        </div>
+
+        <table class="w-full border-collapse border border-slate-300 text-[11px]">
+          <thead>
+            <tr class="bg-slate-950 text-white">
+              <th class="p-2 border border-slate-700 text-left">Fund Source</th>
+              <th class="p-2 border border-slate-700 text-right">Total Utilized / Expense (₱)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${FINANCIAL_FUNDS.map(f => `
+              <tr>
+                <td class="p-2 border border-slate-300 font-bold">${f.full}</td>
+                <td class="p-2 border border-slate-300 text-right font-extrabold">${formatPeso(fTot[f.key])}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+
+      document.getElementById('execSummaryPrintModal').classList.remove('hidden');
+    }
+
+    function closeExecutiveSummaryModal() {
+      document.getElementById('execSummaryPrintModal').classList.add('hidden');
+      document.body.classList.remove('exec-print-mode');
+    }
+
+    function printExecutiveSummary() {
+      document.body.classList.add('exec-print-mode');
+      window.print();
+      setTimeout(() => document.body.classList.remove('exec-print-mode'), 500);
+    }
+
+    function exportCurrentCSV() {
+      const target = getTargetSchoolRecord();
+      const label = target ? target.schoolName.replace(/\s+/g, '_') : 'Rosario_West_Consolidated';
+      const rows = [['Rosario West Sub-Office DataHub Export', label], ['Generated', new Date().toLocaleString()], []];
+
+      const { matrix } = getAggregatedFinancial();
+      rows.push(['FINANCIAL EXPENSES SUMMARY'], ['Category', 'MOOE', 'Canteen', 'Adopt Local', 'Adopt Intl', 'SEF']);
+      FINANCIAL_CATEGORIES.forEach(c => {
+        const m = matrix[c.key];
+        rows.push([c.label, m.mooe, m.canteen, m.adopt_local, m.adopt_intl, m.sef]);
+      });
+
+      const csv = rows.map(r => r.map(x => `"${String(x ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+      a.download = `${label}_DataHub.csv`;
+      a.click();
+    }
+  </script>
+</body>
+</html>
