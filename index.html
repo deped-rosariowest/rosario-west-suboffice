@@ -409,7 +409,7 @@
         </div>
       </section>
 
-      <!-- ==================== TAB 3: MPS (MATATAG — OVERALL MPS ONLY) & SENIOR HIGH SCHOOL CORE SUBJECTS ==================== -->
+      <!-- ==================== TAB 3: MPS (MATATAG) & SENIOR HIGH SCHOOL CORE SUBJECTS ==================== -->
       <section id="sec_mps" class="hidden bg-white rounded-3xl shadow-md border border-slate-200 p-6 space-y-6">
         <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
           <div class="space-y-1">
@@ -759,22 +759,27 @@
         </div>
       </section>
 
-      <!-- ==================== TAB 6: NAT & ELLNA (OVERALL MPS ONLY) ==================== -->
+      <!-- ==================== TAB 6: NAT & ELLNA ==================== -->
       <section id="sec_nat" class="hidden bg-white rounded-3xl shadow-md border border-slate-200 p-6 space-y-6">
         <div>
           <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-800 block">NATIONAL ASSESSMENT RESULTS • 3-YEAR COMPARATIVE TREND</span>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">🏆 ELLNA (Grade 3) & NAT (Grade 6) — Overall MPS (%)</h2>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-950">🏆 ELLNA (Grade 3) & NAT (Grade 6) — Male, Female & Overall MPS (%)</h2>
         </div>
 
         <div class="overflow-x-auto rounded-2xl border border-slate-300">
           <table class="w-full text-xs border-collapse">
             <thead>
               <tr class="bg-slate-950 text-white">
-                <th class="p-3 text-left min-w-[230px]">Assessment & Learning Area</th>
-                <th class="p-3 text-center bg-blue-950 border-l border-white/20">SY 2023–2024 MPS (%)</th>
-                <th class="p-3 text-center bg-red-900 border-l border-white/20">SY 2024–2025 MPS (%)</th>
-                <th class="p-3 text-center bg-orange-700 border-l border-white/20">SY 2025–2026 MPS (%)</th>
-                <th class="p-3 text-center bg-slate-900 text-orange-400 border-l border-white/20">3-Yr Ave (%)</th>
+                <th rowspan="2" class="p-3 text-left min-w-[210px]">Assessment & Learning Area</th>
+                <th colspan="3" class="p-2.5 text-center bg-blue-950 border-l border-white/20">SY 2023–2024 (%)</th>
+                <th colspan="3" class="p-2.5 text-center bg-red-900 border-l border-white/20">SY 2024–2025 (%)</th>
+                <th colspan="3" class="p-2.5 text-center bg-orange-700 border-l border-white/20">SY 2025–2026 (%)</th>
+                <th rowspan="2" class="p-3 text-center bg-slate-900 text-orange-400 border-l border-white/20">3-Yr Ave (%)</th>
+              </tr>
+              <tr class="bg-slate-100 text-slate-800 font-extrabold text-[10px]">
+                <th class="p-1.5 text-center border-l">Male</th><th class="p-1.5 text-center">Female</th><th class="p-1.5 text-center bg-blue-50">Ave</th>
+                <th class="p-1.5 text-center border-l">Male</th><th class="p-1.5 text-center">Female</th><th class="p-1.5 text-center bg-red-50">Ave</th>
+                <th class="p-1.5 text-center border-l">Male</th><th class="p-1.5 text-center">Female</th><th class="p-1.5 text-center bg-orange-50">Ave</th>
               </tr>
             </thead>
             <tbody id="tbodyNAT" class="divide-y"></tbody>
@@ -1194,6 +1199,7 @@
       { key: 'nt_jo', title: 'Job Order / LGU-Paid Personnel', cat: 'Non-Teaching' }
     ];
 
+    // KASAMA NA ANG SENIOR HIGH SCHOOL (GRADE 11 & GRADE 12 STRANDS)
     const GRADES = [
       'Kinder', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6',
       'Grade 11 - STEM', 'Grade 11 - ABM', 'Grade 11 - HUMSS', 'Grade 11 - GAS', 'Grade 11 - TVL',
@@ -1203,6 +1209,7 @@
     const G3_TO_G6 = ['Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
     const G4_TO_G6 = ['Grade 4', 'Grade 5', 'Grade 6'];
 
+    // SENIOR HIGH SCHOOL CORE SUBJECTS
     const SHS_CORE_SUBJECTS = [
       { key: 'shs_oralcomm', title: 'Oral Communication in Context', grade: 'Grade 11' },
       { key: 'shs_readwrite', title: 'Reading and Writing Skills', grade: 'Grade 11' },
@@ -1223,6 +1230,7 @@
       { key: 'shs_pracres', title: 'Practical Research 1 & 2 / Inquiries, Investigation & Immersion', grade: 'Grade 11/12' }
     ];
 
+    // FINANCIAL FUNDS & EXPENSE CATEGORIES
     const FINANCIAL_FUNDS = [
       { key: 'mooe', label: 'MOOE', full: 'Maintenance & Other Operating Expenses (MOOE)', color: '#2563eb', light: '#60a5fa', dark: '#1e3a8a' },
       { key: 'canteen', label: 'Canteen Fund', full: 'School Canteen Operating Fund', color: '#ea580c', light: '#fb923c', dark: '#9a3412' },
@@ -1925,6 +1933,7 @@
         return sliceObj;
       });
 
+      // Draw 3D extruded wall (bottom + side skirts) first for realistic 3D glass depth
       let sideWallsSvg = '';
       let topFacesSvg = '';
       let glassHighlightSvg = '';
@@ -1938,6 +1947,7 @@
         const y2 = cy + ry * Math.sin(a2);
         const largeArc = (a2 - a1) > Math.PI ? 1 : 0;
 
+        // 3D Outer Rim Extrusion (visible cylinder skirt)
         const skirtPath = `
           M ${x1} ${y1}
           A ${rx} ${ry} 0 ${largeArc} 1 ${x2} ${y2}
@@ -1947,11 +1957,13 @@
         `;
         sideWallsSvg += `<path d="${skirtPath}" fill="${dark}" fill-opacity="0.82" stroke="#ffffff" stroke-opacity="0.28" stroke-width="0.9"/>`;
 
+        // Radial inner cut walls for translucent glass depth
         const wall1 = `M ${cx} ${cy} L ${x1} ${y1} L ${x1} ${y1 + depth} L ${cx} ${cy + depth} Z`;
         const wall2 = `M ${cx} ${cy} L ${x2} ${y2} L ${x2} ${y2 + depth} L ${cx} ${cy + depth} Z`;
         sideWallsSvg += `<path d="${wall1}" fill="${dark}" fill-opacity="0.45"/>`;
         sideWallsSvg += `<path d="${wall2}" fill="${dark}" fill-opacity="0.45"/>`;
 
+        // Top Translucent Glass Wedge
         const topPath = (computed.length === 1)
           ? `M ${cx - rx} ${cy} A ${rx} ${ry} 0 1 0 ${cx + rx} ${cy} A ${rx} ${ry} 0 1 0 ${cx - rx} ${cy} Z`
           : `M ${cx} ${cy} L ${x1} ${y1} A ${rx} ${ry} 0 ${largeArc} 1 ${x2} ${y2} Z`;
@@ -1961,6 +1973,7 @@
             stroke="#ffffff" stroke-opacity="0.65" stroke-width="1.3"/>
         `;
 
+        // Percentage badge on slice if >= 5%
         if (sl.frac >= 0.05) {
           const lx = cx + (rx * 0.64) * Math.cos(midAngle);
           const ly = cy + (ry * 0.64) * Math.sin(midAngle);
@@ -1971,6 +1984,7 @@
         }
       });
 
+      // Glossy Glass Specular Reflection Overlay
       glassHighlightSvg = `
         <ellipse cx="${cx - 25}" cy="${cy - 28}" rx="${rx * 0.68}" ry="${ry * 0.42}"
           fill="url(#specularGlass_${containerId})" pointer-events="none"/>
@@ -2164,7 +2178,7 @@
           <div class="bg-orange-50/70 border border-orange-200 rounded-2xl p-3 space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-extrabold uppercase text-orange-950">⭐ Master Teachers</span>
-              <span class="text-[11px] font-extrabold bg-orange-600 text-white px-2.5 py-0.5 rounded-full">Sub-Total: ${cMT}</span>
+              <span class="text-[11px] font-extrabold bg-orange-600 text-white px-2 py-0.5 rounded-full">Sub-Total: ${cMT}</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
               ${makeMiniCards(['mt1','mt2','mt3','mt4'], 'bg-orange-700', 'border-orange-300', 'text-orange-100', 'text-orange-200')}
@@ -2173,7 +2187,7 @@
           <div class="bg-red-50/70 border border-red-200 rounded-2xl p-3 space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-extrabold uppercase text-red-950">🏫 Head Teachers</span>
-              <span class="text-[11px] font-extrabold bg-red-800 text-white px-2.5 py-0.5 rounded-full">Sub-Total: ${cHT}</span>
+              <span class="text-[11px] font-extrabold bg-red-800 text-white px-2 py-0.5 rounded-full">Sub-Total: ${cHT}</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
               ${makeMiniCards(['ht1','ht2','ht3','ht4'], 'bg-red-900', 'border-red-400', 'text-red-100', 'text-red-200')}
@@ -2182,7 +2196,7 @@
           <div class="bg-slate-100 border border-slate-300 rounded-2xl p-3 space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-extrabold uppercase text-slate-950">🎓 School Principals</span>
-              <span class="text-[11px] font-extrabold bg-slate-900 text-orange-400 px-2.5 py-0.5 rounded-full">Sub-Total: ${cPrin}</span>
+              <span class="text-[11px] font-extrabold bg-slate-900 text-orange-400 px-2 py-0.5 rounded-full">Sub-Total: ${cPrin}</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
               ${makeMiniCards(['p1','p2','p3','p4'], 'bg-slate-950', 'border-orange-500', 'text-orange-300', 'text-slate-400')}
@@ -2400,7 +2414,7 @@
     }
 
     // =========================================================================
-    // TAB 3: MPS (MATATAG — OVERALL MPS ONLY) & SENIOR HIGH SCHOOL CORE SUBJECTS
+    // TAB 3: MPS (MATATAG) & SENIOR HIGH SCHOOL CORE SUBJECTS
     // =========================================================================
     function getMPSData(sy, subj, specificSchool = null) {
       const target = specificSchool || getTargetSchoolRecord();
@@ -2412,11 +2426,8 @@
         G1_TO_G6.forEach(g => {
           const arr = target.mpsMatrix?.[sy]?.[subj]?.[g] || [];
           for (let i = 0; i < pCount; i++) {
-            const mVal = Number(arr[i]?.m) || 0;
-            const fVal = Number(arr[i]?.f) || 0;
-            const combined = (mVal > 0 && fVal > 0 && mVal !== fVal) ? Number(((mVal + fVal) / 2).toFixed(2)) : (mVal || fVal);
-            res[g][i].m = combined;
-            res[g][i].f = combined;
+            res[g][i].m = Number(arr[i]?.m) || 0;
+            res[g][i].f = Number(arr[i]?.f) || 0;
           }
         });
       } else {
@@ -2424,16 +2435,14 @@
         if (schools.length > 0) {
           G1_TO_G6.forEach(g => {
             for (let i = 0; i < pCount; i++) {
-              let sum = 0, cnt = 0;
+              let sm = 0, sf = 0, cnt = 0;
               schools.forEach(sc => {
                 const mVal = Number(sc.mpsMatrix?.[sy]?.[subj]?.[g]?.[i]?.m) || 0;
                 const fVal = Number(sc.mpsMatrix?.[sy]?.[subj]?.[g]?.[i]?.f) || 0;
-                const val = (mVal > 0 && fVal > 0 && mVal !== fVal) ? (mVal + fVal) / 2 : (mVal || fVal);
-                if (val > 0) { sum += val; cnt++; }
+                if (mVal > 0 || fVal > 0) { sm += mVal; sf += fVal; cnt++; }
               });
-              const avg = cnt ? Number((sum / cnt).toFixed(2)) : 0;
-              res[g][i].m = avg;
-              res[g][i].f = avg;
+              res[g][i].m = cnt ? Number((sm / cnt).toFixed(2)) : 0;
+              res[g][i].f = cnt ? Number((sf / cnt).toFixed(2)) : 0;
             }
           });
         }
@@ -2457,69 +2466,52 @@
       const mpsData = getMPSData(sy, subj);
       document.getElementById('mpsBannerTitle').innerText = `📌 ${MPS_SUBJECT_LABELS[subj]} — ${target ? target.schoolName : 'District Average'}`;
 
-      let r1 = `<th class="p-3 bg-slate-950 text-white text-left font-extrabold">Grade Level</th>`;
+      let r1 = `<th rowspan="2" class="p-3 bg-slate-950 text-white text-left font-extrabold">Grade Level</th>`;
+      let r2 = '';
       periods.forEach((p, idx) => {
-        r1 += `<th class="p-3 ${colors[idx]} text-white text-center font-extrabold border-l border-white/20">${p} MPS (%)</th>`;
+        r1 += `<th colspan="3" class="p-2.5 ${colors[idx]} text-white text-center font-extrabold border-l border-white/20">${p}</th>`;
+        r2 += `<th class="p-2 bg-slate-100 text-slate-700 text-center border-l">Male %</th><th class="p-2 bg-slate-100 text-slate-700 text-center">Female %</th><th class="p-2 bg-orange-50 text-orange-950 text-center font-extrabold">Ave %</th>`;
       });
-      r1 += `<th class="p-3 bg-slate-900 text-orange-400 text-center font-extrabold border-l border-white/20">Overall Ave (%)</th>`;
-      document.getElementById('mpsThead').innerHTML = `<tr>${r1}</tr>`;
+      document.getElementById('mpsThead').innerHTML = `<tr>${r1}</tr><tr>${r2}</tr>`;
 
-      const sumPeriod = Array(periods.length).fill(0);
+      const sumM = Array(periods.length).fill(0);
+      const sumF = Array(periods.length).fill(0);
 
       document.getElementById('mpsTbody').innerHTML = targetGrades.map(g => {
         const arr = mpsData[g];
-        let rowSum = 0;
         const tds = periods.map((_, i) => {
-          const val = Number(arr[i].m) || 0;
-          sumPeriod[i] += val;
-          rowSum += val;
+          const m = arr[i].m, f = arr[i].f, ave = ((m + f) / 2).toFixed(2);
+          sumM[i] += m; sumF[i] += f;
 
           if (canEdit) {
             return `
-              <td class="p-2 text-center border-l">
-                <input type="number" step="0.1" min="0" max="100" value="${val}"
-                  onchange="updMPSCell('${sy}','${subj}','${g}',${i},this.value)"
-                  class="w-24 px-2 py-1 border border-blue-500 rounded text-center font-extrabold">
-              </td>
+              <td class="p-1.5 text-center border-l"><input type="number" step="0.1" min="0" max="100" value="${m}" onchange="updMPSCell('${sy}','${subj}','${g}',${i},'m',this.value)" class="w-16 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+              <td class="p-1.5 text-center"><input type="number" step="0.1" min="0" max="100" value="${f}" onchange="updMPSCell('${sy}','${subj}','${g}',${i},'f',this.value)" class="w-16 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+              <td class="p-2.5 text-center font-extrabold bg-orange-50/70">${ave}%</td>
             `;
           }
-          return `<td class="p-3 text-center border-l font-bold text-slate-900">${val.toFixed(2)}%</td>`;
+          return `<td class="p-3 text-center border-l">${m}%</td><td class="p-3 text-center">${f}%</td><td class="p-3 text-center font-extrabold bg-orange-50/70">${ave}%</td>`;
         }).join('');
-
-        const rowAve = (rowSum / periods.length).toFixed(2);
-        return `<tr class="hover:bg-slate-50">
-          <td class="p-3 font-extrabold text-slate-900">${g}</td>
-          ${tds}
-          <td class="p-3 text-center font-extrabold bg-orange-50 text-orange-950 border-l">${rowAve}%</td>
-        </tr>`;
+        return `<tr class="hover:bg-slate-50"><td class="p-3 font-extrabold text-slate-900">${g}</td>${tds}</tr>`;
       }).join('');
 
-      let grandSum = 0;
-      const footCells = periods.map((_, i) => {
-        const pAvg = sumPeriod[i] / targetGrades.length;
-        grandSum += pAvg;
-        return `<td class="p-3 text-center border-l border-slate-700 text-orange-300">${pAvg.toFixed(2)}%</td>`;
-      }).join('');
-      const grandAve = (grandSum / periods.length).toFixed(2);
-
-      document.getElementById('mpsTfoot').innerHTML = `
-        <tr>
-          <td class="p-3 text-left">OVERALL MPS</td>
-          ${footCells}
-          <td class="p-3 text-center border-l border-slate-700 text-orange-400">${grandAve}%</td>
-        </tr>
-      `;
+      document.getElementById('mpsTfoot').innerHTML = `<tr><td class="p-3 text-left">OVERALL MPS</td>${periods.map((_, i) => {
+        const mAvg = (sumM[i] / targetGrades.length).toFixed(2);
+        const fAvg = (sumF[i] / targetGrades.length).toFixed(2);
+        const gAvg = ((Number(mAvg) + Number(fAvg)) / 2).toFixed(2);
+        return `<td class="p-3 text-center border-l border-slate-700">${mAvg}%</td><td class="p-3 text-center">${fAvg}%</td><td class="p-3 text-center text-orange-400">${gAvg}%</td>`;
+      }).join('')}</tr>`;
 
       const chartItems = targetGrades.map(g => {
         const arr = mpsData[g];
         let s = 0;
-        arr.forEach(p => { s += Number(p.m) || 0; });
+        arr.forEach(p => { s += (p.m + p.f) / 2; });
         return { label: g, value: Number((s / periods.length).toFixed(2)) };
       });
 
       render3DGlassBarChart('inlineGraph_mps', {
         title: `3D Glass Bar Graph: ${MPS_SUBJECT_LABELS[subj]}`,
-        subtitle: 'Overall Mean Percentage Score (%) bawat baitang.',
+        subtitle: 'Mean Percentage Score (%) bawat baitang.',
         items: chartItems,
         suffix: '%',
         maxVal: 100
@@ -2528,12 +2520,10 @@
       renderSHSCoreSubjectsTable();
     }
 
-    function updMPSCell(sy, subj, g, i, val) {
+    function updMPSCell(sy, subj, g, i, sex, val) {
       const target = getTargetSchoolRecord();
       if (!target) return;
-      const numVal = Number(val) || 0;
-      target.mpsMatrix[sy][subj][g][i].m = numVal;
-      target.mpsMatrix[sy][subj][g][i].f = numVal;
+      target.mpsMatrix[sy][subj][g][i][sex] = Number(val) || 0;
       saveDistrictDB();
       renderMPSTab();
     }
@@ -3002,39 +2992,24 @@
     }
 
     // =========================================================================
-    // TAB 6: NAT & ELLNA (OVERALL MPS ONLY)
+    // TAB 6: NAT & ELLNA
     // =========================================================================
     function getNATRows() {
       const target = getTargetSchoolRecord();
-      if (target) {
-        return (target.nat || []).map(r => {
-          const out = { area: r.area };
-          ['y1', 'y2', 'y3'].forEach(yk => {
-            const m = Number(r[yk + 'm']) || 0;
-            const f = Number(r[yk + 'f']) || 0;
-            const val = (m > 0 && f > 0 && m !== f) ? Number(((m + f) / 2).toFixed(2)) : (m || f);
-            out[yk + 'm'] = val;
-            out[yk + 'f'] = val;
-          });
-          return out;
-        });
-      }
+      if (target) return target.nat || [];
       const base = createEmptySchoolRecord('TMP', '', '').nat;
       const schools = getAllSchoolRecordsList();
       if (!schools.length) return base;
       return base.map((row, idx) => {
+        const keys = ['y1m', 'y1f', 'y2m', 'y2f', 'y3m', 'y3f'];
         const out = { area: row.area };
-        ['y1', 'y2', 'y3'].forEach(yk => {
+        keys.forEach(k => {
           let s = 0, c = 0;
           schools.forEach(sc => {
-            const m = Number(sc.nat?.[idx]?.[yk + 'm']) || 0;
-            const f = Number(sc.nat?.[idx]?.[yk + 'f']) || 0;
-            const v = (m > 0 && f > 0 && m !== f) ? (m + f) / 2 : (m || f);
+            const v = Number(sc.nat?.[idx]?.[k]) || 0;
             if (v > 0) { s += v; c++; }
           });
-          const avg = c ? Number((s / c).toFixed(2)) : 0;
-          out[yk + 'm'] = avg;
-          out[yk + 'f'] = avg;
+          out[k] = c ? Number((s / c).toFixed(2)) : 0;
         });
         return out;
       });
@@ -3046,33 +3021,39 @@
       const rows = getNATRows();
 
       document.getElementById('tbodyNAT').innerHTML = rows.map((row, idx) => {
-        const v1 = Number(row.y1m) || 0;
-        const v2 = Number(row.y2m) || 0;
-        const v3 = Number(row.y3m) || 0;
-        const grand = ((v1 + v2 + v3) / 3).toFixed(2);
+        const a1 = ((Number(row.y1m) + Number(row.y1f)) / 2).toFixed(2);
+        const a2 = ((Number(row.y2m) + Number(row.y2f)) / 2).toFixed(2);
+        const a3 = ((Number(row.y3m) + Number(row.y3f)) / 2).toFixed(2);
+        const grand = ((Number(a1) + Number(a2) + Number(a3)) / 3).toFixed(2);
 
         if (canEdit) {
           return `<tr class="hover:bg-slate-50">
-            <td class="p-3 font-extrabold text-slate-900">${row.area}</td>
-            <td class="p-2 text-center border-l"><input type="number" step="0.1" min="0" max="100" value="${v1}" onchange="updNAT(${idx},'y1',this.value)" class="w-24 px-2 py-1 border border-blue-500 rounded text-center font-extrabold"></td>
-            <td class="p-2 text-center border-l"><input type="number" step="0.1" min="0" max="100" value="${v2}" onchange="updNAT(${idx},'y2',this.value)" class="w-24 px-2 py-1 border border-red-500 rounded text-center font-extrabold"></td>
-            <td class="p-2 text-center border-l"><input type="number" step="0.1" min="0" max="100" value="${v3}" onchange="updNAT(${idx},'y3',this.value)" class="w-24 px-2 py-1 border border-orange-500 rounded text-center font-extrabold"></td>
-            <td class="p-3 text-center font-extrabold bg-slate-900 text-orange-400 border-l">${grand}%</td>
+            <td class="p-2.5 font-extrabold">${row.area}</td>
+            <td class="p-1 text-center border-l"><input type="number" step="0.1" value="${row.y1m}" onchange="updNAT(${idx},'y1m',this.value)" class="w-14 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+            <td class="p-1 text-center"><input type="number" step="0.1" value="${row.y1f}" onchange="updNAT(${idx},'y1f',this.value)" class="w-14 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+            <td class="p-2 text-center font-extrabold bg-blue-50">${a1}%</td>
+            <td class="p-1 text-center border-l"><input type="number" step="0.1" value="${row.y2m}" onchange="updNAT(${idx},'y2m',this.value)" class="w-14 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+            <td class="p-1 text-center"><input type="number" step="0.1" value="${row.y2f}" onchange="updNAT(${idx},'y2f',this.value)" class="w-14 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+            <td class="p-2 text-center font-extrabold bg-red-50">${a2}%</td>
+            <td class="p-1 text-center border-l"><input type="number" step="0.1" value="${row.y3m}" onchange="updNAT(${idx},'y3m',this.value)" class="w-14 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+            <td class="p-1 text-center"><input type="number" step="0.1" value="${row.y3f}" onchange="updNAT(${idx},'y3f',this.value)" class="w-14 px-1 py-1 border border-blue-500 rounded text-center font-bold"></td>
+            <td class="p-2 text-center font-extrabold bg-orange-50">${a3}%</td>
+            <td class="p-2 text-center font-extrabold bg-slate-900 text-orange-400 border-l">${grand}%</td>
           </tr>`;
         }
         return `<tr class="hover:bg-slate-50">
-          <td class="p-3 font-extrabold text-slate-900">${row.area}</td>
-          <td class="p-3 text-center border-l font-bold">${v1.toFixed(2)}%</td>
-          <td class="p-3 text-center border-l font-bold">${v2.toFixed(2)}%</td>
-          <td class="p-3 text-center border-l font-bold">${v3.toFixed(2)}%</td>
-          <td class="p-3 text-center font-extrabold bg-slate-900 text-orange-400 border-l">${grand}%</td>
+          <td class="p-2.5 font-extrabold">${row.area}</td>
+          <td class="p-2.5 text-center border-l">${row.y1m}%</td><td class="p-2.5 text-center">${row.y1f}%</td><td class="p-2.5 text-center font-extrabold bg-blue-50">${a1}%</td>
+          <td class="p-2.5 text-center border-l">${row.y2m}%</td><td class="p-2.5 text-center">${row.y2f}%</td><td class="p-2.5 text-center font-extrabold bg-red-50">${a2}%</td>
+          <td class="p-2.5 text-center border-l">${row.y3m}%</td><td class="p-2.5 text-center">${row.y3f}%</td><td class="p-2.5 text-center font-extrabold bg-orange-50">${a3}%</td>
+          <td class="p-2.5 text-center font-extrabold bg-slate-900 text-orange-400 border-l">${grand}%</td>
         </tr>`;
       }).join('');
 
       render3DGlassBarChart('inlineGraph_nat', {
         title: '3D Glass Bar Graph: ELLNA & NAT 3-Year Overall Average MPS (%)',
         items: rows.map(r => {
-          const g = ((Number(r.y1m) || 0) + (Number(r.y2m) || 0) + (Number(r.y3m) || 0)) / 3;
+          const g = (((Number(r.y1m) + Number(r.y1f)) / 2 + (Number(r.y2m) + Number(r.y2f)) / 2 + (Number(r.y3m) + Number(r.y3f)) / 2) / 3);
           return { label: r.area.replace(' (Grade 3)', '').replace(' (Grade 6)', ''), value: Number(g.toFixed(2)) };
         }),
         suffix: '%',
@@ -3080,12 +3061,10 @@
       });
     }
 
-    function updNAT(idx, yKey, val) {
+    function updNAT(idx, k, val) {
       const target = getTargetSchoolRecord();
       if (!target) return;
-      const numVal = Number(val) || 0;
-      target.nat[idx][yKey + 'm'] = numVal;
-      target.nat[idx][yKey + 'f'] = numVal;
+      target.nat[idx][k] = Number(val) || 0;
       saveDistrictDB();
       renderNATTab();
     }
@@ -3245,4 +3224,700 @@
       const target = getTargetSchoolRecord();
       if (!target) return;
       if (!target.sbm) target.sbm = {};
-      if (!target.sbm[num])
+      if (!target.sbm[num]) target.sbm[num] = { level: '', remark: val };
+      else target.sbm[num].remark = val;
+      saveDistrictDB();
+    }
+
+    // =========================================================================
+    // TAB 9: NSBI INVENTORY
+    // =========================================================================
+    function renderNSBITab() {
+      const target = getTargetSchoolRecord();
+      const canEdit = Boolean(target && isEditMode);
+      const isConsolidated = !target;
+
+      document.getElementById('nsbiAddForm').classList.toggle('hidden', !canEdit);
+      document.getElementById('thNsbiAction').classList.toggle('hidden', !canEdit);
+      document.getElementById('thNsbiSchoolCol').classList.toggle('hidden', !isConsolidated);
+
+      let rows = [];
+      if (target) {
+        rows = (target.nsbi || []).map((b, idx) => ({ ...b, _idx: idx, _schoolName: target.schoolName }));
+      } else {
+        getAllSchoolRecordsList().forEach(sc => {
+          (sc.nsbi || []).forEach((b, idx) => rows.push({ ...b, _idx: idx, _schoolName: sc.schoolName }));
+        });
+      }
+
+      let tR = 0, tG = 0, tC = 0, tS = 0, tL = 0, tB = 0, tF = 0;
+      document.getElementById('nsbiTableBody').innerHTML = rows.length ? rows.map(b => {
+        tR += Number(b.rooms); tG += Number(b.gripo); tC += Number(b.cr);
+        tS += Number(b.silya); tL += Number(b.lamesa); tB += Number(b.board); tF += Number(b.fans);
+        return `<tr class="hover:bg-slate-50">
+          ${isConsolidated ? `<td class="p-2.5 border font-extrabold text-blue-900">${b._schoolName}</td>` : ''}
+          <td class="p-2.5 border font-extrabold">${b.name}</td>
+          <td class="p-2.5 border">${b.type}</td>
+          <td class="p-2.5 border font-bold text-blue-900">${b.condition}</td>
+          <td class="p-2.5 border text-center font-extrabold">${b.rooms}</td>
+          <td class="p-2.5 border text-center font-bold bg-blue-50/40">${b.gripo}</td>
+          <td class="p-2.5 border text-center font-bold bg-blue-50/40">${b.cr}</td>
+          <td class="p-2.5 border text-center font-bold bg-orange-50/40">${b.silya}</td>
+          <td class="p-2.5 border text-center font-bold bg-orange-50/40">${b.lamesa}</td>
+          <td class="p-2.5 border text-center">${b.board}</td>
+          <td class="p-2.5 border text-center">${b.fans}</td>
+          <td class="p-2.5 border text-slate-600">${b.remarks || '-'}</td>
+          ${canEdit ? `<td class="p-2.5 border text-center"><button type="button" onclick="delNSBI(${b._idx})" class="text-red-600 font-bold">🗑️</button></td>` : ''}
+        </tr>`;
+      }).join('') : `<tr><td colspan="13" class="p-6 text-center text-slate-400 font-bold">Walang nakalistang school building.</td></tr>`;
+
+      document.getElementById('nsbiTableFoot').innerHTML = `
+        <tr>
+          <td colspan="${isConsolidated ? 4 : 3}" class="p-3 text-left">GRAND TOTAL (${rows.length} Buildings)</td>
+          <td class="p-3 text-center text-orange-400">${tR}</td>
+          <td class="p-3 text-center text-blue-300">${tG}</td>
+          <td class="p-3 text-center text-blue-300">${tC}</td>
+          <td class="p-3 text-center text-orange-300">${tS}</td>
+          <td class="p-3 text-center text-orange-300">${tL}</td>
+          <td class="p-3 text-center">${tB}</td>
+          <td class="p-3 text-center">${tF}</td>
+          <td colspan="${canEdit ? 2 : 1}" class="p-3"></td>
+        </tr>
+      `;
+    }
+
+    function addNSBIBuilding(e) {
+      e.preventDefault();
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      if (!target.nsbi) target.nsbi = [];
+      target.nsbi.push({
+        name: document.getElementById('nsbiName').value.trim(),
+        type: document.getElementById('nsbiType').value,
+        condition: document.getElementById('nsbiCond').value,
+        rooms: Number(document.getElementById('nsbiRooms').value) || 0,
+        gripo: Number(document.getElementById('nsbiGripo').value) || 0,
+        cr: Number(document.getElementById('nsbiCR').value) || 0,
+        silya: Number(document.getElementById('nsbiSilya').value) || 0,
+        lamesa: Number(document.getElementById('nsbiLamesa').value) || 0,
+        board: Number(document.getElementById('nsbiBoard').value) || 0,
+        fans: Number(document.getElementById('nsbiFans').value) || 0,
+        remarks: document.getElementById('nsbiRemarks').value.trim()
+      });
+      saveDistrictDB();
+      renderNSBITab();
+      e.target.reset();
+    }
+
+    function delNSBI(idx) {
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      target.nsbi.splice(idx, 1);
+      saveDistrictDB();
+      renderNSBITab();
+    }
+
+    // =========================================================================
+    // TAB 10: FINANCIAL MANAGEMENT & 3D GLASS PIE CHART
+    // =========================================================================
+    function getAggregatedFinancial(specificSchool = null) {
+      const target = specificSchool || getTargetSchoolRecord();
+      const matrix = {};
+      FINANCIAL_CATEGORIES.forEach(cat => {
+        matrix[cat.key] = { mooe: 0, canteen: 0, adopt_local: 0, adopt_intl: 0, sef: 0 };
+      });
+      let customItems = [];
+
+      if (target) {
+        FINANCIAL_CATEGORIES.forEach(cat => {
+          FINANCIAL_FUNDS.forEach(f => {
+            matrix[cat.key][f.key] = Number(target.financial?.matrix?.[cat.key]?.[f.key]) || 0;
+          });
+        });
+        customItems = (target.financial?.customItems || []).map((item, idx) => ({
+          ...item,
+          _idx: idx,
+          _schoolName: target.schoolName
+        }));
+      } else {
+        getAllSchoolRecordsList().forEach(sc => {
+          FINANCIAL_CATEGORIES.forEach(cat => {
+            FINANCIAL_FUNDS.forEach(f => {
+              matrix[cat.key][f.key] += Number(sc.financial?.matrix?.[cat.key]?.[f.key]) || 0;
+            });
+          });
+          (sc.financial?.customItems || []).forEach((item, idx) => {
+            customItems.push({ ...item, _idx: idx, _schoolName: sc.schoolName });
+          });
+        });
+      }
+
+      return { matrix, customItems };
+    }
+
+    function renderFinancialTab() {
+      const target = getTargetSchoolRecord();
+      const canEdit = Boolean(target && isEditMode);
+      const selectedFund = document.getElementById('finFundSel')?.value || 'ALL';
+      const { matrix, customItems } = getAggregatedFinancial();
+
+      document.getElementById('finScopeSubtitle').innerText = target
+        ? `Financial Expenses para sa: ${target.schoolName} (${target.schoolId})`
+        : `Consolidated District Financial Expenses — Rosario West Sub-Office (${getAllSchoolRecordsList().length} Schools)`;
+
+      document.getElementById('formAddCustomExpense').classList.toggle('hidden', !canEdit);
+      document.getElementById('thDelCustomFin').classList.toggle('hidden', !canEdit);
+
+      const fundTotals = { mooe: 0, canteen: 0, adopt_local: 0, adopt_intl: 0, sef: 0 };
+      const catTotals = {};
+      FINANCIAL_CATEGORIES.forEach(c => { catTotals[c.key] = 0; });
+
+      document.getElementById('tbodyFinancial').innerHTML = FINANCIAL_CATEGORIES.map(cat => {
+        let rowTot = 0;
+        const fundCells = FINANCIAL_FUNDS.map(f => {
+          const val = Number(matrix[cat.key][f.key]) || 0;
+          fundTotals[f.key] += val;
+          if (selectedFund === 'ALL' || selectedFund === f.key) {
+            rowTot += val;
+            catTotals[cat.key] += val;
+          }
+
+          if (canEdit) {
+            return `<td class="p-1.5 text-right border-l">
+              <input type="number" step="0.01" min="0" value="${val}"
+                onchange="updFinancialCell('${cat.key}','${f.key}',this.value)"
+                class="w-24 px-2 py-1 border border-blue-500 rounded text-right font-bold">
+            </td>`;
+          }
+          return `<td class="p-2.5 text-right border-l font-semibold ${selectedFund !== 'ALL' && selectedFund !== f.key ? 'text-slate-300' : 'text-slate-800'}">${formatPeso(val)}</td>`;
+        }).join('');
+
+        return `<tr class="hover:bg-slate-50">
+          <td class="p-2.5 font-extrabold text-slate-900">${cat.label}</td>
+          ${fundCells}
+          <td class="p-2.5 text-right font-extrabold bg-orange-50 text-orange-950 border-l">${formatPeso(rowTot)}</td>
+        </tr>`;
+      }).join('');
+
+      // Add custom items into fundTotals and category totals
+      customItems.forEach(item => {
+        const amt = Number(item.amount) || 0;
+        if (fundTotals[item.fund] !== undefined) fundTotals[item.fund] += amt;
+        if (selectedFund === 'ALL' || selectedFund === item.fund) {
+          catTotals.other += amt;
+        }
+      });
+
+      const grandTotalAll = Object.values(fundTotals).reduce((a, b) => a + b, 0);
+      const displayedGrand = selectedFund === 'ALL' ? grandTotalAll : (fundTotals[selectedFund] || 0);
+      document.getElementById('finGrandTotalBadge').innerText = formatPeso(displayedGrand);
+
+      document.getElementById('tfootFinancial').innerHTML = `
+        <tr>
+          <td class="p-3 text-left">GRAND TOTAL EXPENSES (INCLUDING CUSTOM ITEMS)</td>
+          ${FINANCIAL_FUNDS.map(f => `<td class="p-3 text-right border-l border-slate-700">${formatPeso(fundTotals[f.key])}</td>`).join('')}
+          <td class="p-3 text-right text-orange-400 border-l border-slate-700">${formatPeso(displayedGrand)}</td>
+        </tr>
+      `;
+
+      // Fund Cards Grid
+      document.getElementById('finFundCardsGrid').innerHTML = FINANCIAL_FUNDS.map(f => `
+        <div onclick="document.getElementById('finFundSel').value='${f.key}'; renderFinancialTab();"
+          class="cursor-pointer rounded-2xl p-3.5 text-white shadow-md border-b-4 transition hover:scale-[1.01]"
+          style="background:${f.dark}; border-color:${f.light}">
+          <span class="text-[10px] font-extrabold uppercase opacity-85 block">${f.label}</span>
+          <span class="text-lg font-extrabold block mt-0.5">${formatPeso(fundTotals[f.key])}</span>
+          <span class="text-[10px] opacity-75 block mt-0.5">${grandTotalAll > 0 ? ((fundTotals[f.key] / grandTotalAll) * 100).toFixed(1) : '0.0'}% of Total Funds</span>
+        </div>
+      `).join('');
+
+      // Custom Items Table
+      const filteredCustom = customItems.filter(it => selectedFund === 'ALL' || it.fund === selectedFund);
+      document.getElementById('customFinItemsBox').classList.toggle('hidden', filteredCustom.length === 0);
+      document.getElementById('tbodyCustomFin').innerHTML = filteredCustom.map(it => {
+        const fObj = FINANCIAL_FUNDS.find(x => x.key === it.fund);
+        return `<tr class="hover:bg-slate-50">
+          <td class="p-2.5 font-extrabold text-blue-900">${fObj ? fObj.label : it.fund} ${!target ? `(${it._schoolName})` : ''}</td>
+          <td class="p-2.5 font-bold">${it.label}</td>
+          <td class="p-2.5 text-right font-extrabold text-slate-900">${formatPeso(it.amount)}</td>
+          ${canEdit ? `<td class="p-2.5 text-center"><button type="button" onclick="delCustomFinancialItem(${it._idx})" class="text-red-600 font-bold">🗑️</button></td>` : ''}
+        </tr>`;
+      }).join('');
+
+      // 1. 3D GLASS PIE CHART BY EXPENSE CATEGORY
+      const fundTitle = selectedFund === 'ALL' ? 'All Funds Consolidated' : (FINANCIAL_FUNDS.find(x => x.key === selectedFund)?.label || selectedFund);
+      render3DGlassPieChart('financial3DPieChartBox', {
+        title: `3D Glass Pie Chart: Expenses by Category (${fundTitle})`,
+        subtitle: 'Porsyento at halaga (₱) ng bawat uri ng kagastusan.',
+        slices: FINANCIAL_CATEGORIES.map(c => ({
+          label: c.label.split(' (')[0],
+          value: catTotals[c.key] || 0,
+          color: c.color,
+          light: c.light,
+          dark: c.dark
+        }))
+      });
+
+      // 2. 3D GLASS PIE CHART BY FUND SOURCE
+      render3DGlassPieChart('financialFund3DPieBox', {
+        title: '3D Glass Pie Chart: Distribution by Fund Source',
+        subtitle: 'MOOE, Canteen Fund, Adopt-a-School (Local & Int\'l) at SEF.',
+        slices: FINANCIAL_FUNDS.map(f => ({
+          label: f.label,
+          value: fundTotals[f.key] || 0,
+          color: f.color,
+          light: f.light,
+          dark: f.dark
+        }))
+      });
+    }
+
+    function updFinancialCell(catKey, fundKey, val) {
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      if (!target.financial) target.financial = { matrix: {}, customItems: [] };
+      if (!target.financial.matrix[catKey]) target.financial.matrix[catKey] = { mooe: 0, canteen: 0, adopt_local: 0, adopt_intl: 0, sef: 0 };
+      target.financial.matrix[catKey][fundKey] = Number(val) || 0;
+      saveDistrictDB();
+      renderFinancialTab();
+    }
+
+    function addCustomFinancialItem(e) {
+      e.preventDefault();
+      const target = getTargetSchoolRecord();
+      if (!target) return;
+      if (!target.financial) target.financial = { matrix: {}, customItems: [] };
+      if (!Array.isArray(target.financial.customItems)) target.financial.customItems = [];
+      target.financial.customItems.push({
+        fund: document.getElementById('newFinFund').value,
+        label: document.getElementById('newFinLabel').value.trim(),
+        amount: Number(document.getElementById('newFinAmount').value) || 0
+      });
+      saveDistrictDB();
+      renderFinancialTab();
+      e.target.reset();
+    }
+
+    function delCustomFinancialItem(idx) {
+      const target = getTargetSchoolRecord();
+      if (!target || !target.financial?.customItems) return;
+      target.financial.customItems.splice(idx, 1);
+      saveDistrictDB();
+      renderFinancialTab();
+    }
+
+    // =========================================================================
+    // TAB 11: 3D TRANSLUCENT GRAPHICAL ANALYTICS
+    // =========================================================================
+    function selectAnalyticsCat(cat) {
+      activeAnalyticsCat = cat;
+      ['school_compare', 'financial', 'personnel', 'mps', 'enr', 'crla', 'philiri', 'rma', 'reading', 'nat'].forEach(k => {
+        const btn = document.getElementById('gCatBtn_' + k);
+        if (btn) {
+          btn.className = k === cat
+            ? 'px-3 py-2 rounded-xl text-xs font-extrabold bg-orange-600 text-white shadow transition'
+            : 'px-3 py-2 rounded-xl text-xs font-extrabold bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+        }
+      });
+      renderAnalyticsTab();
+    }
+
+    function renderAnalyticsTab() {
+      const ctrl = document.getElementById('analyticsControlsBar');
+      const target = getTargetSchoolRecord();
+      const scopeName = target ? target.schoolName : 'Rosario West Sub-Office (Consolidated)';
+
+      if (activeAnalyticsCat === 'school_compare') {
+        const schools = getAllSchoolRecordsList();
+        ctrl.innerHTML = `
+          <span class="text-xs font-extrabold text-orange-400">🏫 School-by-School District Comparison (${schools.length} Schools)</span>
+          <select id="anaCompareMetric" onchange="schoolCompareMetric=this.value; renderAnalyticsTab()" class="bg-slate-950 text-white border border-orange-500 text-xs font-extrabold px-3 py-1.5 rounded-xl">
+            <option value="enrollment" ${schoolCompareMetric==='enrollment'?'selected':''}>Total Enrollment (K–G12)</option>
+            <option value="financial" ${schoolCompareMetric==='financial'?'selected':''}>Total Financial Expenses (₱)</option>
+            <option value="personnel" ${schoolCompareMetric==='personnel'?'selected':''}>Total Teaching & Non-Teaching Personnel</option>
+            <option value="mps" ${schoolCompareMetric==='mps'?'selected':''}>General Average MPS (%)</option>
+          </select>
+        `;
+
+        const compItems = schools.map(sc => {
+          let val = 0;
+          if (schoolCompareMetric === 'enrollment') {
+            const enr = getEnrData('y4', 'enrollment', sc);
+            GRADES.forEach(g => {
+              const arr = enr[g];
+              for (let i = arr.length - 1; i >= 0; i--) {
+                const t = arr[i].m + arr[i].f;
+                if (t > 0 || i === 0) { val += t; break; }
+              }
+            });
+          } else if (schoolCompareMetric === 'financial') {
+            const { matrix, customItems } = getAggregatedFinancial(sc);
+            FINANCIAL_CATEGORIES.forEach(c => {
+              FINANCIAL_FUNDS.forEach(f => { val += Number(matrix[c.key][f.key]) || 0; });
+            });
+            customItems.forEach(it => { val += Number(it.amount) || 0; });
+          } else if (schoolCompareMetric === 'personnel') {
+            const pers = getAggregatedPersonnel(sc);
+            PERSONNEL_POSITIONS.forEach(p => { val += (pers[p.key].m + pers[p.key].f); });
+          } else if (schoolCompareMetric === 'mps') {
+            const mps = getMPSData('y4', 'all_avg', sc);
+            let s = 0, c = 0;
+            G1_TO_G6.forEach(g => mps[g].forEach(p => {
+              const a = (p.m + p.f) / 2;
+              if (a > 0) { s += a; c++; }
+            }));
+            val = c ? Number((s / c).toFixed(2)) : 0;
+          }
+          return { label: sc.schoolName, value: val };
+        });
+
+        render3DGlassBarChart('analyticsMainChartBox', {
+          title: `School-by-School Comparison: ${schoolCompareMetric.toUpperCase()}`,
+          subtitle: 'Paghahambing ng lahat ng nakarehistrong paaralan sa Rosario West Sub-Office.',
+          items: compItems,
+          suffix: schoolCompareMetric === 'mps' ? '%' : '',
+          maxVal: schoolCompareMetric === 'mps' ? 100 : null
+        });
+        document.getElementById('analyticsSubChartBox').innerHTML = '';
+        return;
+      }
+
+      if (activeAnalyticsCat === 'financial') {
+        const { matrix, customItems } = getAggregatedFinancial();
+        const fundTotals = { mooe: 0, canteen: 0, adopt_local: 0, adopt_intl: 0, sef: 0 };
+        const catTotals = {};
+        FINANCIAL_CATEGORIES.forEach(c => { catTotals[c.key] = 0; });
+
+        FINANCIAL_CATEGORIES.forEach(cat => {
+          FINANCIAL_FUNDS.forEach(f => {
+            const v = Number(matrix[cat.key][f.key]) || 0;
+            fundTotals[f.key] += v;
+            catTotals[cat.key] += v;
+          });
+        });
+        customItems.forEach(it => {
+          const amt = Number(it.amount) || 0;
+          if (fundTotals[it.fund] !== undefined) fundTotals[it.fund] += amt;
+          catTotals.other += amt;
+        });
+
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-400">💰 Financial 3D Glass Pie Charts — ${scopeName}</span>`;
+        render3DGlassPieChart('analyticsMainChartBox', {
+          title: '3D Glass Pie Chart: Expenses by Category (All Funds)',
+          subtitle: 'Supplies, Repair, Electricity, Water, Services, Labor & Other Expenses.',
+          slices: FINANCIAL_CATEGORIES.map(c => ({ label: c.label.split(' (')[0], value: catTotals[c.key], color: c.color, light: c.light, dark: c.dark }))
+        });
+        render3DGlassPieChart('analyticsSubChartBox', {
+          title: '3D Glass Pie Chart: Distribution by Fund Source',
+          subtitle: 'MOOE, Canteen Fund, Adopt-a-School (Local & Int\'l) at SEF.',
+          slices: FINANCIAL_FUNDS.map(f => ({ label: f.label, value: fundTotals[f.key], color: f.color, light: f.light, dark: f.dark }))
+        });
+        return;
+      }
+
+      if (activeAnalyticsCat === 'personnel') {
+        const data = getAggregatedPersonnel();
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-400">👩‍🏫 Personnel Distribution — ${scopeName}</span>`;
+        render3DGlassBarChart('analyticsMainChartBox', {
+          title: 'Teaching & Non-Teaching Personnel per Individual Position',
+          items: PERSONNEL_POSITIONS.map(p => ({ label: p.title, value: (data[p.key]?.m || 0) + (data[p.key]?.f || 0) }))
+        });
+        document.getElementById('analyticsSubChartBox').innerHTML = '';
+        return;
+      }
+
+      if (activeAnalyticsCat === 'mps') {
+        const mps = getMPSData('y4', 'all_avg');
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-400">📈 MATATAG MPS & SHS Core Subjects — ${scopeName}</span>`;
+        render3DGlassBarChart('analyticsMainChartBox', {
+          title: 'Elementary General Average MPS per Grade Level',
+          items: G1_TO_G6.map(g => {
+            let s = 0; mps[g].forEach(p => { s += (p.m + p.f) / 2; });
+            return { label: g, value: Number((s / mps[g].length).toFixed(2)) };
+          }),
+          suffix: '%',
+          maxVal: 100
+        });
+        document.getElementById('analyticsSubChartBox').innerHTML = '';
+        return;
+      }
+
+      if (activeAnalyticsCat === 'enr') {
+        const enr = getEnrData('y4', 'enrollment');
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-400">👥 Enrollment Profile (Kinder to Grade 12 SHS) — ${scopeName}</span>`;
+        render3DGlassBarChart('analyticsMainChartBox', {
+          title: 'Current Enrollment per Grade Level & SHS Strand (Kinder–Grade 12)',
+          items: GRADES.map(g => {
+            const arr = enr[g];
+            let val = 0;
+            for (let i = arr.length - 1; i >= 0; i--) {
+              const t = arr[i].m + arr[i].f;
+              if (t > 0 || i === 0) { val = t; break; }
+            }
+            return { label: g.replace('Grade ', 'G'), value: val };
+          })
+        });
+        document.getElementById('analyticsSubChartBox').innerHTML = '';
+        return;
+      }
+
+      if (activeAnalyticsCat === 'nat') {
+        const rows = getNATRows();
+        ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-400">🏆 ELLNA & NAT 3-Year Trend — ${scopeName}</span>`;
+        render3DGlassBarChart('analyticsMainChartBox', {
+          title: 'ELLNA & NAT 3-Year Average MPS (%)',
+          items: rows.map(r => {
+            const g = (((Number(r.y1m) + Number(r.y1f)) / 2 + (Number(r.y2m) + Number(r.y2f)) / 2 + (Number(r.y3m) + Number(r.y3f)) / 2) / 3);
+            return { label: r.area, value: Number(g.toFixed(2)) };
+          }),
+          suffix: '%',
+          maxVal: 100
+        });
+        document.getElementById('analyticsSubChartBox').innerHTML = '';
+        return;
+      }
+
+      // Literacy categories fallback
+      ctrl.innerHTML = `<span class="text-xs font-extrabold text-orange-400">📚 Literacy & Numeracy Analytics — ${scopeName}</span>`;
+      document.getElementById('analyticsMainChartBox').innerHTML = `<p class="text-xs text-slate-300 text-center py-6">Buksan ang Tab 5 (CRLA, Phil-IRI, RMA & Reading) upang makita ang detalyadong talahanayan at 3D Glass Bar Graph ng bawat assessment.</p>`;
+      document.getElementById('analyticsSubChartBox').innerHTML = '';
+    }
+
+    // =========================================================================
+    // TAB 12: ADMIN CONTROL PANEL & SUBMISSION TRACKER
+    // =========================================================================
+    function checkSchoolModuleCompletion(sc) {
+      if (!sc) return { pers: false, sec: false, mps: false, enr: false, lit: false, nat: false, nutr: false, sbm: false, nsbi: false, fin: false, pct: 0 };
+
+      const pers = PERSONNEL_POSITIONS.some(p => (Number(sc.personnel?.[p.key]?.m) || 0) + (Number(sc.personnel?.[p.key]?.f) || 0) > 0);
+      const sec = Array.isArray(sc.sectionsList) && sc.sectionsList.length > 0;
+      const mps = G1_TO_G6.some(g => (sc.mpsMatrix?.y4?.all_avg?.[g] || []).some(p => (Number(p.m) || 0) + (Number(p.f) || 0) > 0)) ||
+                  SHS_CORE_SUBJECTS.some(sub => (Number(sc.shsCoreSubjects?.sem1?.[sub.key]?.m) || 0) + (Number(sc.shsCoreSubjects?.sem1?.[sub.key]?.f) || 0) > 0);
+      const enr = GRADES.some(g => (sc.enrMatrix?.y4?.enrollment?.[g] || []).some(p => (Number(p.m) || 0) + (Number(p.f) || 0) > 0));
+      const lit = CRLA_COVERAGE.some(c => (sc.crlaV2?.y3?.[c.key] || []).some(v => Number(v) > 0)) ||
+                  G1_TO_G6.some(g => (sc.rmaV2?.y3?.[g] || []).some(v => Number(v) > 0));
+      const nat = (sc.nat || []).some(r => (Number(r.y1m) || 0) + (Number(r.y2m) || 0) + (Number(r.y3m) || 0) > 0);
+      const nutr = GRADES.some(g => {
+        const n = sc.nutrition?.[g];
+        return n && ((Number(n.nm) || 0) + (Number(n.nf) || 0) + (Number(n.wm) || 0) + (Number(n.wf) || 0) > 0);
+      });
+      const sbm = Object.values(sc.sbm || {}).some(v => v && v.level !== '');
+      const nsbi = Array.isArray(sc.nsbi) && sc.nsbi.length > 0;
+      const fin = FINANCIAL_CATEGORIES.some(c => FINANCIAL_FUNDS.some(f => (Number(sc.financial?.matrix?.[c.key]?.[f.key]) || 0) > 0)) ||
+                  (Array.isArray(sc.financial?.customItems) && sc.financial.customItems.length > 0);
+
+      const flags = [pers, sec, mps, enr, lit, nat, nutr, sbm, nsbi, fin];
+      const done = flags.filter(Boolean).length;
+      const pct = Math.round((done / flags.length) * 100);
+      return { pers, sec, mps, enr, lit, nat, nutr, sbm, nsbi, fin, pct };
+    }
+
+    function renderAdminSchoolsTab() {
+      if (!currentSession || currentSession.role !== 'admin') return;
+      applyGlobalLockUI();
+      const accs = Object.values(districtDB.accounts || {});
+      document.getElementById('adminTotalSchoolsBadge').innerText = `${accs.length} Registered School${accs.length !== 1 ? 's' : ''}`;
+
+      const badge = ok => ok ? '<span class="text-emerald-600 font-extrabold">✅</span>' : '<span class="text-slate-300 font-bold">⏳</span>';
+
+      document.getElementById('tbodyAdminSchools').innerHTML = accs.length ? accs.map(a => {
+        const sc = districtDB.schoolsData?.[a.schoolId];
+        const st = checkSchoolModuleCompletion(sc);
+        const barCol = st.pct === 100 ? 'bg-emerald-600' : st.pct >= 50 ? 'bg-blue-600' : 'bg-orange-500';
+
+        return `<tr class="hover:bg-slate-50">
+          <td class="p-2.5">
+            <span class="font-mono font-extrabold text-blue-900 block">${a.schoolId}</span>
+            <span class="font-extrabold text-slate-950">${a.schoolName}</span>
+          </td>
+          <td class="p-2.5">
+            <span class="font-semibold block">${a.headName}</span>
+            <span class="font-mono text-[10px] text-orange-700">PIN: ${a.pin}</span>
+          </td>
+          <td class="p-2 text-center">${badge(st.pers)}</td>
+          <td class="p-2 text-center">${badge(st.sec)}</td>
+          <td class="p-2 text-center">${badge(st.mps)}</td>
+          <td class="p-2 text-center">${badge(st.enr)}</td>
+          <td class="p-2 text-center">${badge(st.lit)}</td>
+          <td class="p-2 text-center">${badge(st.nat)}</td>
+          <td class="p-2 text-center">${badge(st.nutr)}</td>
+          <td class="p-2 text-center">${badge(st.sbm)}</td>
+          <td class="p-2 text-center">${badge(st.nsbi)}</td>
+          <td class="p-2 text-center">${badge(st.fin)}</td>
+          <td class="p-2.5 text-center">
+            <div class="w-full bg-slate-200 rounded-full h-2 mb-1 overflow-hidden">
+              <div class="${barCol} h-2 rounded-full" style="width:${st.pct}%"></div>
+            </div>
+            <span class="text-[10px] font-extrabold text-slate-800">${st.pct}%</span>
+          </td>
+          <td class="p-2.5 text-center space-x-1 whitespace-nowrap">
+            <button type="button" onclick="inspectSchoolAsAdmin('${a.schoolId}')" class="bg-blue-900 text-white px-2.5 py-1 rounded-lg font-extrabold text-[11px]">👁️ View/Edit</button>
+            <button type="button" onclick="deleteSchoolAccount('${a.schoolId}')" class="bg-red-700 text-white px-2.5 py-1 rounded-lg font-extrabold text-[11px]">🗑️</button>
+          </td>
+        </tr>`;
+      }).join('') : `<tr><td colspan="14" class="p-6 text-center text-slate-400 font-bold">Wala pang nakarehistrong paaralan.</td></tr>`;
+    }
+
+    function changeAdminPassword() {
+      const inp = document.getElementById('newAdminPassInput');
+      const val = inp.value.trim();
+      if (val.length < 4) { alert('❌ Ang bagong Admin Password ay dapat hindi bababa sa 4 characters.'); return; }
+      districtDB.adminPass = val;
+      saveDistrictDB();
+      inp.value = '';
+      alert('✅ Matagumpay na napalitan ang Sub-Office Admin Password!');
+    }
+
+    function toggleGlobalSubmissionLock() {
+      districtDB.submissionsLocked = !districtDB.submissionsLocked;
+      saveDistrictDB();
+      applyGlobalLockUI();
+      alert(districtDB.submissionsLocked
+        ? '🔒 Naka-LOCK na ngayon ang lahat ng school submissions.'
+        : '🔓 Binuksan na muli ang school submissions.');
+    }
+
+    function downloadFullDistrictJSONBackup() {
+      const payload = JSON.stringify(districtDB, null, 2);
+      const blob = new Blob([payload], { type: 'application/json;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      const dateStr = new Date().toISOString().slice(0, 10);
+      a.download = `RosarioWest_SubOffice_FullBackup_${dateStr}.json`;
+      a.click();
+    }
+
+    function inspectSchoolAsAdmin(schoolId) {
+      document.getElementById('adminSchoolFilter').value = schoolId;
+      onAdminScopeChange();
+      switchPortalTab('personnel');
+    }
+
+    function deleteSchoolAccount(schoolId) {
+      if (!confirm(`Sigurado ka bang tatanggalin ang account at lahat ng datos ng School ID ${schoolId}?`)) return;
+      delete districtDB.accounts[schoolId];
+      delete districtDB.schoolsData[schoolId];
+      saveDistrictDB();
+      refreshAdminSchoolDropdown();
+      renderAdminSchoolsTab();
+    }
+
+    // =========================================================================
+    // PRINT-READY 1-PAGE EXECUTIVE SUMMARY REPORT
+    // =========================================================================
+    function openExecutiveSummaryModal() {
+      const target = getTargetSchoolRecord();
+      const scopeTitle = target
+        ? `${target.schoolName.toUpperCase()} (ID: ${target.schoolId}) — SCHOOL EXECUTIVE SUMMARY`
+        : `ROSARIO WEST SUB-OFFICE (${getAllSchoolRecordsList().length} SCHOOLS) — DISTRICT CONSOLIDATED SUMMARY`;
+
+      document.getElementById('execReportScopeTitle').innerText = scopeTitle;
+
+      const pers = getAggregatedPersonnel();
+      let pTeach = 0, pMT = 0, pHT = 0, pPrin = 0, pNon = 0;
+      PERSONNEL_POSITIONS.forEach(p => {
+        const tot = (pers[p.key]?.m || 0) + (pers[p.key]?.f || 0);
+        if (p.cat === 'Teaching') pTeach += tot;
+        else if (p.cat === 'Master Teacher') pMT += tot;
+        else if (p.cat === 'Head Teacher') pHT += tot;
+        else if (p.cat === 'School Principal') pPrin += tot;
+        else if (p.cat === 'Non-Teaching') pNon += tot;
+      });
+      const pGrand = pTeach + pMT + pHT + pPrin + pNon;
+
+      const enr = getEnrData('y4', 'enrollment');
+      let eM = 0, eF = 0;
+      GRADES.forEach(g => {
+        const arr = enr[g];
+        for (let i = arr.length - 1; i >= 0; i--) {
+          if (arr[i].m + arr[i].f > 0 || i === 0) { eM += arr[i].m; eF += arr[i].f; break; }
+        }
+      });
+
+      const { matrix, customItems } = getAggregatedFinancial();
+      const fundTotals = { mooe: 0, canteen: 0, adopt_local: 0, adopt_intl: 0, sef: 0 };
+      FINANCIAL_CATEGORIES.forEach(c => FINANCIAL_FUNDS.forEach(f => { fundTotals[f.key] += Number(matrix[c.key][f.key]) || 0; }));
+      customItems.forEach(it => { if (fundTotals[it.fund] !== undefined) fundTotals[it.fund] += Number(it.amount) || 0; });
+      const finGrand = Object.values(fundTotals).reduce((a, b) => a + b, 0);
+
+      document.getElementById('execSummaryBody').innerHTML = `
+        <div class="grid grid-cols-4 gap-2.5 text-center">
+          <div class="border-2 border-slate-900 rounded-xl p-2.5 bg-slate-50">
+            <span class="text-[10px] font-bold uppercase text-slate-600 block">Total Enrollment (K–G12)</span>
+            <span class="text-xl font-extrabold text-blue-950">${eM + eF}</span>
+            <span class="text-[10px] font-bold text-slate-600 block">M: ${eM} • F: ${eF}</span>
+          </div>
+          <div class="border-2 border-slate-900 rounded-xl p-2.5 bg-slate-50">
+            <span class="text-[10px] font-bold uppercase text-slate-600 block">Total Personnel</span>
+            <span class="text-xl font-extrabold text-red-900">${pGrand}</span>
+            <span class="text-[10px] font-bold text-slate-600 block">Teach: ${pTeach + pMT} • Non-Teach: ${pNon}</span>
+          </div>
+          <div class="border-2 border-slate-900 rounded-xl p-2.5 bg-slate-50">
+            <span class="text-[10px] font-bold uppercase text-slate-600 block">Total Financial Expenses</span>
+            <span class="text-base font-extrabold text-emerald-900">${formatPeso(finGrand)}</span>
+            <span class="text-[10px] font-bold text-slate-600 block">MOOE + Canteen + Adopt + SEF</span>
+          </div>
+          <div class="border-2 border-slate-900 rounded-xl p-2.5 bg-slate-50">
+            <span class="text-[10px] font-bold uppercase text-slate-600 block">MOOE Utilization</span>
+            <span class="text-base font-extrabold text-orange-700">${formatPeso(fundTotals.mooe)}</span>
+            <span class="text-[10px] font-bold text-slate-600 block">SEF: ${formatPeso(fundTotals.sef)}</span>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('execSummaryPrintModal').classList.remove('hidden');
+    }
+
+    function closeExecutiveSummaryModal() {
+      document.getElementById('execSummaryPrintModal').classList.add('hidden');
+      document.body.classList.remove('exec-print-mode');
+    }
+
+    function printExecutiveSummary() {
+      document.body.classList.add('exec-print-mode');
+      window.print();
+      setTimeout(() => document.body.classList.remove('exec-print-mode'), 500);
+    }
+
+    // =========================================================================
+    // CSV EXPORT
+    // =========================================================================
+    function exportCurrentCSV() {
+      const target = getTargetSchoolRecord();
+      const label = target ? target.schoolName.replace(/\s+/g, '_') : 'RosarioWest_SubOffice_Consolidated';
+      const rows = [['Rosario West Sub-Office DataHub Report', label]];
+
+      if (activeTab === 'financial') {
+        const { matrix, customItems } = getAggregatedFinancial();
+        rows.push(['Category', 'MOOE', 'Canteen Fund', 'Adopt-a-School Local', 'Adopt-a-School Intl', 'SEF']);
+        FINANCIAL_CATEGORIES.forEach(c => {
+          const m = matrix[c.key];
+          rows.push([c.label, m.mooe, m.canteen, m.adopt_local, m.adopt_intl, m.sef]);
+        });
+        customItems.forEach(it => rows.push([`Custom (${it.fund}): ${it.label}`, it.amount]));
+      } else if (activeTab === 'personnel') {
+        const data = getAggregatedPersonnel();
+        rows.push(['Position', 'Category', 'Male', 'Female', 'Total']);
+        PERSONNEL_POSITIONS.forEach(p => {
+          const m = data[p.key].m, f = data[p.key].f;
+          rows.push([p.title, p.cat, m, f, m + f]);
+        });
+      } else {
+        const enr = getEnrData('y4', 'enrollment');
+        rows.push(['Grade Level / Strand', 'T1 Male', 'T1 Female', 'T2 Male', 'T2 Female', 'T3 Male', 'T3 Female']);
+        GRADES.forEach(g => {
+          const a = enr[g];
+          rows.push([g, a[0].m, a[0].f, a[1].m, a[1].f, a[2].m, a[2].f]);
+        });
+      }
+
+      const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${label}_${activeTab}.csv`;
+      a.click();
+    }
+  </script>
+</body>
+</html>
