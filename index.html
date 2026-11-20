@@ -1499,22 +1499,41 @@
         districtDB.districtLogo = evt.target.result;
         safeSetStorage('localStorage', 'rwest_district_logo', evt.target.result);
         applySavedDistrictLogo();
-        saveDistrictDB();
+        saveDistrictDB(true);
         alert('✅ Na-update na ang opisyal na Logo ng Rosario West Sub-Office!');
       };
       reader.readAsDataURL(file);
     }
 
-    async function loadDistrictCloudDB() {
+    let isSavingInProgress = false;
+    let hasUnsavedChanges = false;
+    let saveDebounceTimer = null;
+
+    window.addEventListener('beforeunload', (e) => {
+      if (isSavingInProgress || hasUnsavedChanges || isEditMode) {
+        e.preventDefault();
+        e.returnValue = 'May mga pagbabago pang hindi nase-save sa Cloud. Sigurado ka bang isasara mo na ang tab?';
+        return e.returnValue;
+      }
+    });
+
+    async function loadDistrictCloudDB(forceOverwrite = false) {
+      if (!forceOverwrite && (isEditMode || isSavingInProgress || hasUnsavedChanges)) {
+        return;
+      }
       try {
         setSyncStatus("🔄 Syncing...");
         const res = await fetch(`${FIREBASE_DB_URL}/${SUBOFFICE_NODE}.json`);
         if (!res.ok) throw new Error("HTTP " + res.status);
         const cloud = await res.json();
         if (cloud) {
+          const localSchools = districtDB.schoolsData || {};
           districtDB = { ...districtDB, ...cloud };
           if (!districtDB.accounts) districtDB.accounts = {};
           if (!districtDB.schoolsData) districtDB.schoolsData = {};
+          if (!forceOverwrite && currentSession && currentSession.role === 'school' && localSchools[currentSession.schoolId] && hasUnsavedChanges) {
+            districtDB.schoolsData[currentSession.schoolId] = localSchools[currentSession.schoolId];
+          }
           safeSetStorage('localStorage', 'rwest_suboffice_v1', JSON.stringify(districtDB));
           applySavedDistrictLogo();
           if (currentSession) {
@@ -1523,7 +1542,7 @@
             renderActiveTab();
           }
         } else {
-          await saveDistrictDB();
+          await saveDistrictDB(true);
         }
         const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
         setSyncStatus(`☁️ Synced (${now})`);
@@ -1532,26 +1551,45 @@
       }
     }
 
-    async function saveDistrictDB() {
+    async function saveDistrictDB(forceFull = false) {
       safeSetStorage('localStorage', 'rwest_suboffice_v1', JSON.stringify(districtDB));
+      isSavingInProgress = true;
+      hasUnsavedChanges = true;
+      setSyncStatus("💾 Saving...");
+
       try {
-        setSyncStatus("💾 Saving...");
-        const res = await fetch(`${FIREBASE_DB_URL}/${SUBOFFICE_NODE}.json`, {
-          method: 'PUT',
+        const target = getTargetSchoolRecord();
+        let url = `${FIREBASE_DB_URL}/${SUBOFFICE_NODE}.json`;
+        let method = 'PUT';
+        let payload = districtDB;
+
+        if (!forceFull && target && target.schoolId && currentSession) {
+          url = `${FIREBASE_DB_URL}/${SUBOFFICE_NODE}/schoolsData/${encodeURIComponent(target.schoolId)}.json`;
+          method = 'PUT';
+          payload = target;
+        }
+
+        const res = await fetch(url, {
+          method,
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(districtDB)
+          body: JSON.stringify(payload)
         });
         if (!res.ok) throw new Error("HTTP " + res.status);
+        hasUnsavedChanges = false;
         const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
         setSyncStatus(`☁️ Saved (${now})`);
       } catch (err) {
         setSyncStatus("⚠️ Save Error", true);
+      } finally {
+        isSavingInProgress = false;
       }
     }
 
     setInterval(() => {
-      if (!isEditMode && currentSession) loadDistrictCloudDB();
-    }, 12000);
+      if (!isEditMode && !isSavingInProgress && !hasUnsavedChanges && currentSession) {
+        loadDistrictCloudDB(false);
+      }
+    }, 15000);
 
     // =========================================================================
     // AUTHENTICATION
@@ -1595,7 +1633,7 @@
       if (acc && acc.password === pass) {
         if (!districtDB.schoolsData[uid]) {
           districtDB.schoolsData[uid] = createEmptySchoolRecord(uid, acc.schoolName, acc.headName);
-          await saveDistrictDB();
+          await saveDistrictDB(true);
         }
         currentSession = { role: 'school', schoolId: uid, schoolName: acc.schoolName };
         safeSetStorage('sessionStorage', 'rwest_session', JSON.stringify(currentSession));
@@ -1627,7 +1665,7 @@
 
       districtDB.accounts[schoolId] = { schoolId, schoolName, headName, password, pin, createdAt: new Date().toISOString() };
       districtDB.schoolsData[schoolId] = createEmptySchoolRecord(schoolId, schoolName, headName);
-      await saveDistrictDB();
+      await saveDistrictDB(true);
 
       currentSession = { role: 'school', schoolId, schoolName };
       safeSetStorage('sessionStorage', 'rwest_session', JSON.stringify(currentSession));
@@ -1652,7 +1690,7 @@
       }
 
       acc.password = newPass;
-      await saveDistrictDB();
+      await saveDistrictDB(true);
 
       msgEl.innerText = '✅ Matagumpay na napalitan ang password! Maaari ka nang mag-login.';
       msgEl.className = 'text-xs font-bold text-center py-2 px-3 rounded-xl bg-blue-100 text-blue-900';
@@ -1744,7 +1782,7 @@
       return Object.values(districtDB.schoolsData || {});
     }
 
-    function toggleEditMode() {
+    async function toggleEditMode() {
       if (currentSession.role === 'school' && districtDB.submissionsLocked) {
         alert('🔒 Naka-LOCK na ang pag-edit ng datos ng Sub-Office Admin.');
         return;
@@ -1753,8 +1791,13 @@
         alert('ℹ️ Pumili muna ng isang partikular na paaralan sa "Scope" dropdown sa itaas kung nais mong mag-edit ng datos.');
         return;
       }
+      if (isEditMode && document.activeElement && typeof document.activeElement.blur === 'function') {
+        document.activeElement.blur();
+      }
       isEditMode = !isEditMode;
-      if (!isEditMode) saveDistrictDB();
+      if (!isEditMode) {
+        await saveDistrictDB(false);
+      }
       updateEditBtnUI();
       renderActiveTab();
     }
@@ -3765,14 +3808,14 @@
       const val = inp.value.trim();
       if (val.length < 4) { alert('❌ Dapat hindi bababa sa 4 na characters ang bagong Admin Password.'); return; }
       districtDB.adminPass = val;
-      saveDistrictDB();
+      saveDistrictDB(true);
       inp.value = '';
       alert('✅ Matagumpay na napalitan ang Sub-Office Admin Password!');
     }
 
     function toggleGlobalSubmissionLock() {
       districtDB.submissionsLocked = !districtDB.submissionsLocked;
-      saveDistrictDB();
+      saveDistrictDB(true);
       applyGlobalLockUI();
       alert(districtDB.submissionsLocked
         ? '🔒 Naka-LOCK na ngayon ang lahat ng school submissions.'
@@ -3801,7 +3844,7 @@
       const newP = prompt(`Ilagay ang bagong password para sa ${acc.schoolName} (${schoolId}):`);
       if (newP && newP.trim().length >= 4) {
         acc.password = newP.trim();
-        saveDistrictDB();
+        saveDistrictDB(true);
         alert(`✅ Napalitan na ang password ng ${acc.schoolName}!`);
       }
     }
@@ -3812,7 +3855,7 @@
       if (!confirm(`Sigurado ka bang buburahin ang account at lahat ng datos ng ${acc.schoolName}?`)) return;
       delete districtDB.accounts[schoolId];
       delete districtDB.schoolsData[schoolId];
-      saveDistrictDB();
+      saveDistrictDB(true);
       refreshAdminSchoolDropdown();
       renderAdminSchoolsTab();
     }
