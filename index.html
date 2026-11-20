@@ -2035,16 +2035,30 @@
     // PILL TAB NAVIGATION
     // =========================================================================
     function switchPortalTab(tabKey) {
+      const isAdmin = currentSession && currentSession.role === 'admin';
+      if (tabKey === 'admin' && !isAdmin) {
+        tabKey = 'personnel';
+      }
       activeTab = tabKey;
       const allTabs = ['personnel', 'masterlist', 'mps', 'enrollment', 'literacy', 'nat', 'nutrition', 'sbm', 'nsbi', 'financial', 'analytics', 'admin'];
       allTabs.forEach(k => {
         const sec = document.getElementById('sec_' + k);
-        if (sec) sec.classList.toggle('hidden', k !== tabKey);
+        if (sec) {
+          if (k === 'admin' && !isAdmin) {
+            sec.classList.add('hidden');
+          } else {
+            sec.classList.toggle('hidden', k !== tabKey);
+          }
+        }
         const btn = document.getElementById('tabBtn_' + k);
         if (btn) {
-          btn.className = k === tabKey
-            ? 'px-3 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-blue-700 to-red-700 text-white shadow transition'
-            : 'px-3 py-2 rounded-xl text-xs font-extrabold bg-slate-800 text-slate-200 hover:bg-slate-700 transition';
+          if (k === 'admin' && !isAdmin) {
+            btn.className = 'hidden px-3 py-2 rounded-xl text-xs font-extrabold transition';
+          } else {
+            btn.className = k === tabKey
+              ? 'px-3 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-blue-700 to-red-700 text-white shadow transition'
+              : 'px-3 py-2 rounded-xl text-xs font-extrabold bg-slate-800 text-slate-200 hover:bg-slate-700 transition';
+          }
         }
       });
       renderActiveTab();
@@ -3699,6 +3713,7 @@
     }
 
     function renderAdminSchoolsTab() {
+      if (!currentSession || currentSession.role !== 'admin') return;
       if (!currentSession || currentSession.role !== 'admin') return;
       applyGlobalLockUI();
       const accs = Object.values(districtDB.accounts || {});
